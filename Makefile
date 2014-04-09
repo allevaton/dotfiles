@@ -2,13 +2,15 @@
 #
 
 dir = src
+vimrc =
+xinitrc =
 
 # Check OS
 ifeq ($(shell uname -s), Linux)
-	file_name = "Linux"
+	echo "Linux"
 else
-	file_name = "Windows"
+	echo "Windows"
 endif
 
 all:
-	@echo $(file_name)
+
