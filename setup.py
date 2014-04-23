@@ -4,24 +4,26 @@
 #
 
 import os
+from scripts.Dotfile import Dotfile
 
 # directory where all the files TO COPY are located
-src = 'src'
-
-file_list = {}
+file_list = []
 
 # Linux
 if os.name == 'posix':
-    file_list = {
-        'vimrc': '~/.vimrc',
-        'xinitrc': '~/.xinitrc',
-        'vim': '~/.vim',
-        'i3': '~/.i3'
-    }
+    file_list = [
+        Dotfile('vimrc', '~/.vimrc'),
+        Dotfile('xinitrc', '~/.xinitrc'),
+        Dotfile('vim', '~/.vim'),
+        Dotfile('i3', '~/.i3', confirm=True),
+    ]
 
 # Windows
 elif os.name == 'nt':
-    file_list = {
-        'vimrc': '~/_vimrc',
-        'vim': '~/vimfiles'
-    }
+    # u = user profile string in Windows
+    u = '%USERPROFILE'
+
+    file_list = [
+        Dotfile('vimrc', '%s/_vimrc' % u),
+        Dotfile('vim', '%s/vimfiles' % u),
+    ]
