@@ -1,4 +1,3 @@
-dotfiles
-========
+# dotfiles
 
-My personal dotfiles. The makefile is for cross-platformality
+My personal dotfiles. Uses a python system for great customizability
