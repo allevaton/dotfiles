@@ -5,6 +5,11 @@
 import os
 import shutil
 
+# This is the default directory to use when copying files.
+# You can safely change this, as long as you reflect the same
+# changes in the directory.
+src_dir = 'src'
+
 
 class Dotfile(object):
     """This class is an encapsulation of the dotfile setup utility for easily
@@ -14,22 +19,19 @@ class Dotfile(object):
     location is correct, or if they don't even want this config.
     """
 
-    # This is the default directory to use when copying files.
-    # You can safely change this, as long as you reflect the same
-    # changes in the directory.
-    self.src_dir = 'src'
-
     def __init__(self, src, dest, confirm=False, ask_location=False,
-                 add_func=None):
+                 add_func=None, ignores=[]):
         """Creates the Dotfile object with the specified parameters.
 
         Keyword arguments:
-        src -- str: the source destination of the file. This is typically
-                located in the src/ directory tree.
+        src -- str: the source destination of the file or directory. This is
+                typically located in the src/ directory tree.
         dest -- str: the regular destination of this file/directory from src
         confirm -- bool: ask the user whether or not they want to copy this
         ask_location -- bool: ask the user whether or not they want to change
                 the location of this dotfile
+        ignores -- array: an array of files or folders to ignore in a
+                directory
         """
 
         self.src = src
@@ -37,6 +39,9 @@ class Dotfile(object):
 
         self.confirm = confirm
         self.ask_location = ask_location
+
+    def __str__(self):
+        return self.src
 
     def copy(self, lst):
         """Goes ahead and copies over the files with the specified file list
@@ -53,6 +58,12 @@ class Dotfile(object):
                 return
 
         source = os.path.join(self.src_dir, self.src)
+
+        # start copying files
+
+    def reverse_copy(self, lst):
+        # copy from dest to src
+        pass
 
     def input_path(self, prompt='a new path'):
         """Takes the user's input for a path and checks if the location
