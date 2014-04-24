@@ -7,7 +7,7 @@ import argparse
 import os
 import sys
 
-from scripts.dotfile import Dotfile, DotfileList
+from scripts.dotfile import Dotfile
 
 
 def get_list():
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     file_list = get_list()
 
     for df in file_list:
-        print(df)
+        print(df, df.dest)
