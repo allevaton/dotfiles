@@ -98,10 +98,10 @@ set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 " Dictionary
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
-" YCM Configuration:
+" YCM YouCompleteMe Configuration:
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
 
 " Column Color Change:
 "let &colorcolumn=join( range( 80, 255 ), ',' )
@@ -243,7 +243,6 @@ vmap <C-c> y
 "nmap <C-v> pa
 
 " Select all
-nnoremap <C-a> ggVG
 inoremap <C-a> <esc>ggVG
 
 " Switching tabs
@@ -347,7 +346,7 @@ if &t_Co > 2 && has("gui_running")
     syntax on
     set hlsearch
 
-    set foldcolumn=2    " add a fold column
+    "set foldcolumn=2    " add a fold column
 
     " Line highlight
     set cul
