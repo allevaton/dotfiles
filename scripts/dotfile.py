@@ -2,6 +2,7 @@
 # Dotfile object class
 #
 
+from ipdb import set_trace
 import os
 import shutil
 
@@ -34,7 +35,7 @@ class Dotfile(object):
         """
 
         self.src = src
-        self.dest = dest
+        self.dest = os.path.expanduser(dest)
         self.ignore = ignore
 
         self.confirm = confirm
@@ -59,15 +60,76 @@ class Dotfile(object):
 
         # let's make sure we should be continuing anyways
         if self.confirm:
-            if not input_confirm():
+            if not self.input_confirm():
                 return
 
+        source = ''
+        dest = ''
+        new_name = ''
+
         if not reverse:
-            source = os.path.join(self.src_dir, self.src)
-            shutil.copytree(source, self.dest, ignore=self.ignore)
+            source = os.path.join(src_dir, self.src)
+            dest = self.dest
         else:
-            # we may need to join with pwd
+            source = self.dest
+            dest = os.path.join(os.getcwd(), src_dir)
+            new_name = self.src
+
+            new_dir = os.path.join(dest, new_name)
+            dest = new_dir
+
+        self.copytree(source, dest, ignore=self.ignore)
+
+    def copytree(self, src, dst, symlinks=False, ignore=None):
+        try:
+            names = os.listdir(src)
+        except NotADirectoryError:
+            shutil.copy2(src, dst)
+            return
+
+        if ignore is not None:
+            ignored_names = set(ignore)
+        else:
+            ignored_names = set()
+
+        try:
+            os.makedirs(dst)
+        except Exception:
             pass
+
+        errors = []
+        for name in names:
+            if name in ignored_names:
+                continue
+
+            srcname = os.path.join(src, name)
+            dstname = os.path.join(dst, name)
+
+            try:
+                if symlinks and os.path.islink(srcname):
+                    linkto = os.readlink(srcname)
+                    os.symlink(linkto, dstname)
+                elif os.path.isdir(srcname):
+                    self.copytree(srcname, dstname, symlinks, ignore)
+                else:
+                    shutil.copy2(srcname, dst)
+
+            except (IOError, os.error) as why:
+                errors.append((srcname, dstname, str(why)))
+            # catch the Error from the recursive copytree so that we can
+            # continue with other files
+            except Error as err:
+                errors.extend(err.args[0])
+        try:
+            shutil.copystat(src, dst)
+        except WindowsError:
+            # can't copy file access times on Windows
+            pass
+        except OSError as why:
+            errors.extend((src, dst, str(why)))
+
+        if errors:
+            raise Error(errors)
 
     def input_path(self):
         """Takes the user's input for a path and checks if the location

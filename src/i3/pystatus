@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+#
+# A python version of i3status.
+# It's also custom, so totally awesome.
+#
+
+import time, json
+from subprocess import Popen
+
+def Wireless():
+	pass
+
+def Time():
+	pass
+
+def Volume():
+	return Popen( 'amixer get Master | awk -F\'[][]\' \'/%/ {if ($7 == \"off\") { print \"MM\" } else { print $2 }}\'', shell=True )
+
+def Test():
+	return json.dumps( { "full_text": "\e[33mCats" } )
+
+data = '{ "version": 1 }[[], [ '
+
+data += Test()
+#data += Wireless()
+#data += Time()
+#data += Volume()
+
+data += ' ]'
+
+while True:
+	print( data )

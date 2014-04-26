@@ -18,18 +18,15 @@ def get_list():
         file_list = [
             Dotfile('vimrc', '~/.vimrc'),
             Dotfile('xinitrc', '~/.xinitrc'),
-            Dotfile('vim', '~/.vim', ignore={'bundle', 'tags'}),
+            Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
             Dotfile('i3', '~/.i3', confirm=True),
         ]
 
     # Windows
     elif os.name == 'nt':
-        # u = user profile string in Windows
-        u = '%USERPROFILE%'
-
         file_list = [
-            Dotfile('vimrc', '%s/_vimrc' % u),
-            Dotfile('vim', '%s/vimfiles' % u),
+            Dotfile('vimrc', '~/_vimrc'),
+            Dotfile('vim', '~/vimfiles'),
         ]
 
     return file_list
@@ -51,4 +48,5 @@ if __name__ == '__main__':
     file_list = get_list()
 
     for df in file_list:
-        print(df, df.dest)
+        # this is where copying logic goes
+        df.copy(reverse=True)

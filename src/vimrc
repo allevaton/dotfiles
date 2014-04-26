@@ -1,0 +1,366 @@
+" My vimrc
+"
+" Maintainer:   Nick Allevato
+" Last Change:  2013 Dec 10
+"
+" When started as "evim", evim.Vim will already have done these settings.
+if v:progname =~? "evim"
+    finish
+endif
+
+" NICK IS COOL
+
+" Let's begin
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Begin Plugins:
+Plugin 'gmarik/vundle'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'chrisbra/csv.vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-afterimage'
+Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'dag/vim-fish'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'tfnico/vim-gradle'
+Plugin 'gerw/vim-latex-suite'
+Plugin 'dbakker/vim-lint'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tkztmk/vim-vala'
+Plugin 'Valloric/YouCompleteMe'
+
+filetype plugin indent on
+syntax on
+
+" Handle for fish
+set shell=bash\ --norc
+
+" Use Vim settings, rather than Vi settings (much better!)
+
+" This is the key that will define how remaps essentially work.
+let mapleader=','
+
+""" BULK CONFIGURATION: """
+set autochdir       " Automatically adjust the current directory for the file
+set backspace=indent,eol,start " Backspace over everything
+set expandtab       " Much easier when everything's a space
+set tabstop=4       " Tab size of 4 is better
+set softtabstop=4   " Treats 4 spaces as tabs
+set shiftwidth=4    " Auto indenting spaces
+set shiftround      " Only multiples of 4 for shifting
+set smarttab        " Go by shift width, not tab stop
+set autoindent      " Always
+set copyindent      " Copy the previous indentation
+set nobackup        " don't keep a backup file
+set history=2000    " keep 2000 lines of command line history
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+set incsearch       " do incremental searching
+set ignorecase      " ignore case sensitivity when searching
+set smartcase       " ignore case if pattern is all lower
+set showmatch       " Parenthetical matching
+set showmode        " Always show the mode we're in
+set scrolloff=4     " Use a 4 line buffer when scrolling
+set hlsearch        " Highlight search terms (:noh stops highlight)
+set gdefault        " search/replace globally on a line by default
+set laststatus=2    " Always show the status bar
+set noswapfile      " Who uses these, anyways?
+set hidden          " Hide buffers instead of closing them.
+                    " Use `<leader>be` to open buffer list
+set foldenable      " enable folding
+set foldmethod=marker " user markers for folding
+set foldlevelstart=99 " start with everything folded
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+                    " which comments trigger auto-unfold
+
+set wildmenu        " make tab completion work like bash
+set wildmode=list:full " show a list when pressing tab complete
+
+set wrap            " word wrapping
+set linebreak       " disable line breaks for better word wrapping
+set nolist          " no lists also disable line breaks
+
+" Set up C-family tags
+set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
+
+" Dictionary
+set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
+" YCM Configuration:
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_invoke_completion = '<C-x><C-o>'
+let g:ycm_auto_trigger = 0
+
+" Column Color Change:
+"let &colorcolumn=join( range( 80, 255 ), ',' )
+
+" Syntastic Config:
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_python_checkers = ['python', 'pep8']
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
+" Eclim:
+let g:EclimCompletionMethod = 'omnifunc'
+
+" Omni Cpp Config:
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ['std', '_GLIBCXX_STD']
+
+set completeopt=menu,menuone,longest ",preview
+
+" LaTeX:
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = 'latex'
+let g:Tex_CompileRule_dvi = "latex --interaction=nonstopmode \"$*\""
+let g:Tex_CompileRule_pdf = "pdflatex --interaction=nonstopmode \"$*\""
+let g:Tex_DefaultTargetFormat = "pdf"
+let g:Tex_ViewRule_pdf = "evince \"$*.pdf\" \&"
+let g:Tex_ViewRuleComplete_pdf = "evince \"$*.pdf\" \&"
+
+" Airline:
+let g:airline_theme = 'luna'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" Powerline Fonts:  " TODO delete?
+let g:Powerline_symbols = 'fancy'
+
+" Python Syntax Config:
+let g:python_highlight_builtin_funcs = 1
+let g:python_highlight_string_templates = 1
+let g:python_highlight_builtin_objs = 1
+let g:python_highlight_exceptions = 1
+let g:python_highlight_string_formatting = 1
+let g:python_highlight_string_format = 1
+
+" NERDTree:
+"let NERDTreeQuitOnOpen = 1 " caused bugs
+let g:nerdtree_tabs_focus_on_files = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
+" QuickFix Window:
+let g:quickfix_is_open = 0
+
+" Quick fix window solution {{{
+function! s:QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+" }}}
+
+" Set it so enter on a menu item doesn't insert return
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" Generate implicit tags (NOT RECOMMENDED)
+nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
+
+
+" Navigate through words way better
+"inoremap <C-l> <C-o>w
+"inoremap <C-h> <C-o>b
+
+" Better cursor searching
+nnoremap # *
+nnoremap * #
+
+" Easier window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Significantly better navigation
+nnoremap j gj
+nnoremap k gk
+nnoremap 0 g0
+nnoremap $ g$
+
+" Go right to command mode from insert mode
+inoremap <C-;> <esc>:
+
+" Faster spell checking suggestions
+nnoremap zz z=
+
+" What an awesome idea
+nnoremap ; :
+nnoremap <leader>; ;
+
+" Spelling is useful
+nnoremap <leader>s :set spell!<CR>
+
+" Trimming whitespace
+"nnoremap <leader>ws :%s/\s\+$<CR>
+
+" jj changes insert->normal
+inoremap jj <esc>
+
+" Easy :noh
+nnoremap <leader>h :noh<CR>
+
+" Start NERDTree in the current directory
+nmap <leader>n :NERDTreeTabsToggle<CR>
+
+" Open the taglist
+nnoremap <leader>t :TagbarToggle<CR>
+
+" Copy
+vmap <C-c> y
+
+" Paste
+" C-v is block selection
+"imap <C-v> <esc>pa
+"nmap <C-v> pa
+
+" Select all
+nnoremap <C-a> ggVG
+inoremap <C-a> <esc>ggVG
+
+" Switching tabs
+nnoremap <C-tab> :tabn<return>
+nnoremap <C-S-tab> :tabp<return>
+inoremap <C-tab> <esc>:tabn<return>
+inoremap <C-S-tab> <esc>:tabp<return>
+
+" Allow switching windows in edit mode
+inoremap <C-w> <esc><C-w>
+
+" And some nice page up and down remakes
+nnoremap <S-k> <C-u>
+nnoremap <S-j> <C-d>
+
+" Space opens folds
+nnoremap <Space> a <esc>
+vnoremap <Space> a <esc>
+nnoremap <S-Space> i <esc>
+vnoremap <S-Space> i <esc>
+
+" Deleting words easily
+inoremap <C-backspace> <C-w>
+
+" Awesomely navigate warnings
+nnoremap <leader>wn :lnext<CR>
+nnoremap <leader>wp :lprevious<CR>
+
+" Copying and pasting
+set cb=unnamedplus
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+    set mouse=a
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has('autocmd')
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+    au!
+
+    " Go to the first line of a git commit message
+    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+    augroup END
+
+    " Java:
+    augroup java
+        autocmd Filetype java nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
+        autocmd Filetype java nnoremap <silent> <buffer> <leader>d
+            \ :JavaDocSearch -x declarations<cr>
+        autocmd Filetype java nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
+    augroup END
+
+    " Cleaning whitespace on save
+    autocmd BufWritePre * :%s/\s\+$//e
+
+    "au FileType python set omnifunc=pythoncomplete#Complete
+
+    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+    " Always have rainbow parentheses on
+    "au BufNewFile,BufRead * RainbowParenthesesLoadRound
+    "au BufNewFile,BufRead * RainbowParenthesesActivate
+
+endif
+
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" For GUI:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if &t_Co > 2 && has("gui_running")
+    syntax on
+    set hlsearch
+
+    set foldcolumn=2    " add a fold column
+
+    " Line highlight
+    set cul
+    set nu
+
+    " GUI Font
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+    "set guifont=Liberation\ Mono\ for\ Powerline\ 12
+
+    " Colorscheme:
+    set background=dark
+    colorscheme lucius
+    "colorscheme solarized
+
+    set guioptions -=T      " No toolbar
+endif

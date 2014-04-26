@@ -1,0 +1,12 @@
+-----------------------------------------------
+What are these?
+-----------------------------------------------
+'config' and 'status' are two files that
+contain configuration settings for i3.
+
+'status' is the statusbar that is located at
+the top of i3.
+
+'config' is the general i3 configuration. This
+contains keybinds, colors, bar positions,
+windowing systems, etc.
