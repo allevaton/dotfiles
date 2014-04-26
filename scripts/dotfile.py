@@ -2,6 +2,7 @@
 # Dotfile object class
 #
 
+import ipdb
 import os
 import shutil
 
@@ -33,12 +34,17 @@ class Dotfile(object):
         ignore -- set: a set of files or folders to ignore in a directory
         """
 
-        self.src = src
+        if src is None or src == '':
+            self.src = dest
+        else:
+            self.src = os.path.split(src)[1]
+
         self.dest = os.path.expanduser(dest)
         self.ignore = ignore
 
         self.confirm = confirm
         self.ask_location = ask_location
+        self.add_func = add_func
 
     def __str__(self):
         """Some magic for print handling, mainly
@@ -78,6 +84,9 @@ class Dotfile(object):
             dest = new_dir
 
         self.copytree(source, dest, ignore=self.ignore)
+
+        if self.add_func is not None:
+            self.add_func()
 
     def copytree(self, src, dst, symlinks=False, ignore=None):
         try:
