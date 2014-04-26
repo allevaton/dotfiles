@@ -2,7 +2,6 @@
 # Dotfile object class
 #
 
-from ipdb import set_trace
 import os
 import shutil
 
