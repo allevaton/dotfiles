@@ -113,6 +113,7 @@ class Dotfile(object):
                     self.copytree(srcname, dstname, symlinks, ignore)
                 else:
                     shutil.copy2(srcname, dst)
+                    pass
 
             except (IOError, os.error) as why:
                 errors.append((srcname, dstname, str(why)))

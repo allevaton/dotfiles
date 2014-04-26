@@ -4,6 +4,7 @@
 #
 
 import argparse
+from ipdb import set_trace
 import os
 import sys
 
@@ -39,14 +40,9 @@ if __name__ == '__main__':
                         'your computer to the repository', action='count')
     arguments = parser.parse_args()
 
-    # if copy argument found
-    if arguments.copy is not None:
-        # reverse copy the list
-        print('reverse copy time, team!\n')
-
     # If we're this far, we'll need the list anyways
     file_list = get_list()
 
     for df in file_list:
         # this is where copying logic goes
-        df.copy(reverse=True)
+        df.copy(reverse=arguments.copy is not None)
