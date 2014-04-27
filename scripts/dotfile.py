@@ -34,8 +34,9 @@ class Dotfile(object):
         ignore -- set: a set of files or folders to ignore in a directory
         """
 
+        ipdb.set_trace()
         if src is None or src == '':
-            self.src = os.path.split(src)[1]
+            self.src = os.path.split(dest)[1]
         else:
             self.src = src
 
