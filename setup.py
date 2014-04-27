@@ -57,11 +57,11 @@ def get_list():
     # Linux
     if os.name == 'posix':
         file_list = [
-            Dotfile('vimrc', '~/.vimrc', add_func=add_vim),
-            Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
-            Dotfile('xinitrc', '~/.xinitrc'),
-            Dotfile('l/fonts.conf', '~/.fonts.conf'),
-            Dotfile('i3', '~/.i3', confirm=True),
+            Dotfile('', '~/.vimrc', add_func=add_vim)
+            #Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
+            #Dotfile('xinitrc', '~/.xinitrc'),
+            #Dotfile('l/fonts.conf', '~/.fonts.conf'),
+            #Dotfile('i3', '~/.i3', confirm=True),
         ]
 
     # Windows

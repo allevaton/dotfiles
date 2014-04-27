@@ -35,9 +35,9 @@ class Dotfile(object):
         """
 
         if src is None or src == '':
-            self.src = dest
-        else:
             self.src = os.path.split(src)[1]
+        else:
+            self.src = src
 
         self.dest = os.path.expanduser(dest)
         self.ignore = ignore
