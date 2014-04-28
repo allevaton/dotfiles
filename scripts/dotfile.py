@@ -32,11 +32,30 @@ class Dotfile(object):
         ask_location -- bool: ask the user whether or not they want to change
                 the location of this dotfile
         ignore -- set: a set of files or folders to ignore in a directory
+
+        Additional information:
+        Passing None or empty string '' for src makes the program choose the
+        name of the file in the dest parameter so there's no need for
+        repeating of information.
+        Passing None or empty string for both src AND dest, simply does not
+        copy anything. The reason this may be beneficial is if you want to run
+        a function after everything has been copied. So having an empty Dotfile
+        entry at the end of the list with an add_func method can allow you to
+        do virtually anything.
         """
 
-        ipdb.set_trace()
+        self.copy_nothing = False
+
         if src is None or src == '':
-            self.src = os.path.split(dest)[1]
+            if dest is None or dest is '':
+                # This is for handling both of them being empty.
+                # I didn't want to make it a class member, but luckily
+                # it's conditional and won't exist otherwise.
+                self.copy_nothing = True
+                self.add_func = add_func
+                return
+            else:
+                self.src = os.path.split(dest)[1]
         else:
             self.src = src
 
@@ -61,6 +80,9 @@ class Dotfile(object):
             argument is supplied. It reverses the order of the source and
             destination parameters supplied by the user.
         """
+
+        if self.copy_nothing:
+            return self.add_func()
 
         # let's make sure we should be continuing anyways
         if self.confirm:
@@ -91,7 +113,20 @@ class Dotfile(object):
         try:
             names = os.listdir(src)
         except NotADirectoryError:
-            shutil.copy2(src, dst)
+            try:
+                # try to copy the file
+                shutil.copy2(src, dst)
+            except FileNotFoundError:
+                # BUT! If it's copying to a directory that doesn't exist...
+                # then make the directories
+                # BUT NOT THE LAST ONE!
+                # we don't want to make a directory instead of copying the
+                # file.
+                dst_dir = os.path.split(dst)[0]
+                os.makedirs(dst_dir)
+
+                # paste it to the new directory
+                shutil.copy2(src, os.path.join(dst_dir, dst))
             return
 
         if ignore is not None:
@@ -169,10 +204,6 @@ class Dotfile(object):
         """Confirms if the user wants to copy this file.
         Called based on the self.confirm attribute passed through the
         constructor
-
-        Why doesn't this have a prompt?
-        It serves basically one purpose, hence why it's named after
-        the constructor argument.
 
         Returns:
         True if the user confirmed

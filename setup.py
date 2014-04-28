@@ -40,6 +40,10 @@ def add_vim():
             print('https://github.com/gmarik/Vundle.vim')
 
 
+def reminders():
+    pass
+
+
 def get_list():
     """THIS IS THE FUNCTION YOU WANT TO EDIT
 
@@ -57,11 +61,12 @@ def get_list():
     # Linux
     if os.name == 'posix':
         file_list = [
-            Dotfile('', '~/.vimrc', add_func=add_vim)
-            #Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
-            #Dotfile('xinitrc', '~/.xinitrc'),
-            #Dotfile('l/fonts.conf', '~/.fonts.conf'),
-            #Dotfile('i3', '~/.i3', confirm=True),
+            Dotfile('vimrc', '~/.vimrc', add_func=add_vim),
+            Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
+            Dotfile('xinitrc', '~/.xinitrc'),
+            Dotfile('fonts.conf', '~/.fonts.conf'),
+            Dotfile('i3', '~/.i3', confirm=True)
+            # Dotfile(None, None, add_func=reminders)
         ]
 
     # Windows

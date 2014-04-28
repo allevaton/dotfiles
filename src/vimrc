@@ -8,8 +8,6 @@ if v:progname =~? "evim"
     finish
 endif
 
-" NICK IS COOL
-
 " Let's begin
 set nocompatible
 filetype off
