@@ -57,11 +57,9 @@ class Dotfile(object):
         """Goes ahead and copies over the files with the specified file list
 
         Keyword arguments:
-
-        ** TODO change this so it's NOT AN ARRAY
-
-        lst -- array of Dotfiles: this is the list created from the main
-                setup.py file.
+        reverse -- bool?: this is called automatically when the -c
+            argument is supplied. It reverses the order of the source and
+            destination parameters supplied by the user.
         """
 
         # let's make sure we should be continuing anyways
