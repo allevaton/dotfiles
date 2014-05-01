@@ -20,6 +20,7 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'chrisbra/csv.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
+Plugin 'oblitum/rainbow'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-afterimage'
@@ -32,6 +33,7 @@ Plugin 'tfnico/vim-gradle'
 Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
+Plugin 'Pychimp/vim-luna'
 Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-repeat'
@@ -65,14 +67,14 @@ set nobackup        " don't keep a backup file
 set history=2000    " keep 2000 lines of command line history
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
-set incsearch       " do incremental searching
 set ignorecase      " ignore case sensitivity when searching
 set smartcase       " ignore case if pattern is all lower
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set hlsearch        " Highlight search terms (:noh stops highlight)
+set nohlsearch        " Highlight search terms (:noh stops highlight)
 set gdefault        " search/replace globally on a line by default
+set incsearch       " do incremental searching
 set laststatus=2    " Always show the status bar
 set noswapfile      " Who uses these, anyways?
 set hidden          " Hide buffers instead of closing them.
@@ -85,16 +87,36 @@ set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 set wildmenu        " make tab completion work like bash
 set wildmode=list:full " show a list when pressing tab complete
+set formatoptions=tcroqnj " see :help fo-table
 
 set wrap            " word wrapping
 set linebreak       " disable line breaks for better word wrapping
 set nolist          " no lists also disable line breaks
 
-" Set up C-family tags
+" this could add a major typing latency, so be careful.
+" if it does, remove THIS LINE
+set regexpengine=1
+
+
+" C Family Tags:
 set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 
-" Dictionary
+" Dictionary:
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
+" Rainbow Parentheses:
+let g:rainbow_active = 1
+" 458748 was cc241d
+let g:rainbow_guifgs = [
+    \ '#458588',
+    \ '#b16286',
+    \ '#d65d0e',
+    \ '#458748',
+    \ '#458588',
+    \ '#b16286',
+    \ '#d65d0e',
+    \ '#458748'
+    \ ]
 
 " YCM YouCompleteMe Configuration:
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -102,11 +124,15 @@ let g:ycm_key_invoke_completion = '<C-x><C-o>'
 let g:ycm_auto_trigger = 1
 
 " Column Color Change:
-"let &colorcolumn=join( range( 80, 255 ), ',' )
+"let &colorcolumn=join(range(80, 255 ), ',')
 
 " Syntastic Config:
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_python_checkers = ['python', 'pep8']
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
+
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
@@ -114,16 +140,7 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " Eclim:
 let g:EclimCompletionMethod = 'omnifunc'
 
-" Omni Cpp Config:
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-"let OmniCpp_DefaultNamespaces = ['std', '_GLIBCXX_STD']
-
+" Omnicompletion:
 set completeopt=menu,menuone,longest ",preview
 
 " LaTeX:
@@ -142,6 +159,10 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Powerline Fonts:  " TODO delete?
 let g:Powerline_symbols = 'fancy'
+
+" Tagbar:
+let g:tagbar_left = 1
+let g:tagbar_sort = 0
 
 " Python Syntax Config:
 let g:python_highlight_builtin_funcs = 1
@@ -174,6 +195,10 @@ function! s:QuickfixToggle()
 endfunction
 " }}}
 
+" Ycm bindings:
+nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>e :YcmCompleter GoToDefinition<CR>
+
 " Set it so enter on a menu item doesn't insert return
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
@@ -181,16 +206,18 @@ inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
+" Quickfix
 nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
-
-
-" Navigate through words way better
-"inoremap <C-l> <C-o>w
-"inoremap <C-h> <C-o>b
 
 " Better cursor searching
 nnoremap # *
 nnoremap * #
+
+" Swap implementations of ` and ' jump to markers
+" By default, ' jumps to the marked line, ` jumps to the marked line and
+" column, so swap them
+nnoremap ' `
+nnoremap ` '
 
 " Easier window navigation
 nnoremap <C-h> <C-w>h
@@ -229,16 +256,11 @@ nnoremap <leader>h :noh<CR>
 " Start NERDTree in the current directory
 nmap <leader>n :NERDTreeTabsToggle<CR>
 
-" Open the taglist
+" Open tagbar
 nnoremap <leader>t :TagbarToggle<CR>
 
 " Copy
 vmap <C-c> y
-
-" Paste
-" C-v is block selection
-"imap <C-v> <esc>pa
-"nmap <C-v> pa
 
 " Select all
 inoremap <C-a> <esc>ggVG
@@ -269,6 +291,12 @@ inoremap <C-backspace> <C-w>
 nnoremap <leader>wn :lnext<CR>
 nnoremap <leader>wp :lprevious<CR>
 
+" Using '<' and '>' in visual mode to shift code by a tab-width left/right by
+" default exits visual mode. With this mapping we remain in visual mode after
+" such an operation.
+vnoremap < <gv
+vnoremap > >gv
+
 " Copying and pasting
 set cb=unnamedplus
 
@@ -290,11 +318,17 @@ if has('autocmd')
     augroup vimrcEx
     au!
 
-    " Go to the first line of a git commit message
-    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    if has('gui_win32')
+        " maximizes on windows
+        au vimrc GUIEnter * simalt ~x
+    endif
+
 
     " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
+    autocmd FileType text setlocal textwidth=79
+
+    " i3 config
+    autocmd BufNewFile,BufRead ~/.i3/config set ft=i3
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
@@ -306,6 +340,14 @@ if has('autocmd')
         \   exe "normal! g`\"" |
         \ endif
     augroup END
+
+    " Go to the first line of a git commit message
+    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+    " Go to the first line of a diff
+    if &diff == 1
+        call setpos('.', [0, 1, 1, 0])
+    endif
 
     " Java:
     augroup java
@@ -343,21 +385,35 @@ endif
 if &t_Co > 2 && has("gui_running")
     syntax on
     set hlsearch
-
-    "set foldcolumn=2    " add a fold column
+    " add a fold column
+    "set foldcolumn=2
 
     " Line highlight
     set cul
     set nu
 
     " GUI Font
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-    "set guifont=Liberation\ Mono\ for\ Powerline\ 12
+    if has("gui_win32")
+        " maximizes on windows
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+    else
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+    endif
 
     " Colorscheme:
     set background=dark
-    colorscheme lucius
+    "colorscheme lucius
+    colorscheme luna
     "colorscheme solarized
 
-    set guioptions -=T      " No toolbar
+    " With this, the gui (gvim and macvim) now doesn't have the toolbar,
+    " left and right scrollbars, and the menu.
+    " From Valloric's vimrc
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=m
+    set guioptions-=M
 endif
