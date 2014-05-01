@@ -4,9 +4,8 @@
 #
 
 import argparse
-import ipdb
+#import ipdb
 import os
-import sys
 
 from subprocess import call, check_output
 from scripts.dotfile import Dotfile
@@ -15,7 +14,7 @@ from scripts.dotfile import Dotfile
 def add_vim():
     """This is run after the ~/.vim folder is copied
 
-    TODO Just think how nicely this would look if it was object oriented.
+    TODO: Just think how nicely this would look if it was object oriented.
     No more need to go re-search the vim directory
     """
 
@@ -31,7 +30,7 @@ def add_vim():
     if not os.path.exists(vim_path):
         try:
             os.makedirs(vim_path)
-            out = check_output('git')
+            check_output('git')
             call('git clone https://github.com/gmarik/Vundle.vim.git %s' % vim,
                  shell=True)
         except FileNotFoundError:
@@ -54,7 +53,7 @@ def get_list():
     The second parameter is the actual location of the dotfile to copy.
         This can be a directory or file. It will know how to handle either.
 
-    For option parameters check scripts/dotfile.py
+    For optional parameters check scripts/dotfile.py
     """
     file_list = []
 
@@ -65,8 +64,8 @@ def get_list():
             Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
             Dotfile('xinitrc', '~/.xinitrc'),
             Dotfile('fonts.conf', '~/.fonts.conf'),
-            Dotfile('i3', '~/.i3', confirm=True)
-            # Dotfile(None, None, add_func=reminders)
+            Dotfile('i3', '~/.i3', confirm=True),
+            Dotfile(None, None, add_func=reminders)
         ]
 
     # Windows

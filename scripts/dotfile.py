@@ -2,7 +2,7 @@
 # Dotfile object class
 #
 
-import ipdb
+#import ipdb
 import os
 import shutil
 
@@ -25,8 +25,8 @@ class Dotfile(object):
         """Creates the Dotfile object with the specified parameters.
 
         Keyword arguments:
-        src -- str: the source destination of the file or directory. This is
-                typically located in the src/ directory tree.
+        src -- str: the source destination of the file or directory.
+                This is typically located in the src/ directory tree.
         dest -- str: the regular destination of this file/directory from src
         confirm -- bool: ask the user whether or not they want to copy this
         ask_location -- bool: ask the user whether or not they want to change
@@ -39,9 +39,9 @@ class Dotfile(object):
         repeating of information.
         Passing None or empty string for both src AND dest, simply does not
         copy anything. The reason this may be beneficial is if you want to run
-        a function after everything has been copied. So having an empty Dotfile
-        entry at the end of the list with an add_func method can allow you to
-        do virtually anything.
+        a function after everything has been copied. So having an empty
+        Dotfile entry at the end of the list with an add_func method can
+        allow you to do virtually anything.
         """
 
         self.copy_nothing = False
@@ -161,7 +161,7 @@ class Dotfile(object):
                 errors.append((srcname, dstname, str(why)))
             # catch the Error from the recursive copytree so that we can
             # continue with other files
-            except Error as err:
+            except Exception as err:
                 errors.extend(err.args[0])
         try:
             shutil.copystat(src, dst)
@@ -172,7 +172,7 @@ class Dotfile(object):
             errors.extend((src, dst, str(why)))
 
         if errors:
-            raise Error(errors)
+            raise Exception(errors)
 
     def input_path(self):
         """Takes the user's input for a path and checks if the location
