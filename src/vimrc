@@ -26,6 +26,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-afterimage'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'dag/vim-fish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jtratner/vim-flavored-markdown'
@@ -38,6 +39,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
 Plugin 'Valloric/YouCompleteMe'
 
@@ -72,9 +74,9 @@ set smartcase       " ignore case if pattern is all lower
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set nohlsearch        " Highlight search terms (:noh stops highlight)
 set gdefault        " search/replace globally on a line by default
 set incsearch       " do incremental searching
+set nohlsearch      " Highlight search terms (:noh stops highlight)
 set laststatus=2    " Always show the status bar
 set noswapfile      " Who uses these, anyways?
 set hidden          " Hide buffers instead of closing them.
@@ -161,7 +163,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:Powerline_symbols = 'fancy'
 
 " Tagbar:
-let g:tagbar_left = 1
+"let g:tagbar_left = 0
 let g:tagbar_sort = 0
 
 " Python Syntax Config:
@@ -194,6 +196,31 @@ function! s:QuickfixToggle()
     endif
 endfunction
 " }}}
+
+" ---------------
+"
+" EasyMotion Settings:
+nnoremap ? /
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+map <Space> <Plug>(easymotion-prefix)
+
+" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
+" Without these mappings, 'n' & 'N' works fine. (These mappings just provide
+" different highlight method and have some other features)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
+
+" Repeat the last motion
+map <Space>. <Plug>(easymotion-repeat)
+
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_smartcase = 1
+" ---------------
 
 " Ycm bindings:
 nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
@@ -232,6 +259,7 @@ nnoremap 0 g0
 nnoremap $ g$
 
 " Go right to command mode from insert mode
+" TODO doesn't work?
 inoremap <C-;> <esc>:
 
 " Faster spell checking suggestions
@@ -242,7 +270,7 @@ nnoremap ; :
 nnoremap <leader>; ;
 
 " Spelling is useful
-nnoremap <leader>s :set spell!<CR>
+nnoremap <leader>sp :set spell!<CR>
 
 " Trimming whitespace
 "nnoremap <leader>ws :%s/\s\+$<CR>
@@ -250,8 +278,8 @@ nnoremap <leader>s :set spell!<CR>
 " jj changes insert->normal
 inoremap jj <esc>
 
-" Easy :noh
-nnoremap <leader>h :noh<CR>
+" Easy :set nohls!
+nnoremap <leader>2 :set nohls!
 
 " Start NERDTree in the current directory
 nmap <leader>n :NERDTreeTabsToggle<CR>
@@ -279,10 +307,10 @@ nnoremap <S-k> <C-u>
 nnoremap <S-j> <C-d>
 
 " Space opens folds
-nnoremap <Space> a <esc>
-vnoremap <Space> a <esc>
-nnoremap <S-Space> i <esc>
-vnoremap <S-Space> i <esc>
+"nnoremap <Space> a <esc>
+"vnoremap <Space> a <esc>
+"nnoremap <S-Space> i <esc>
+"vnoremap <S-Space> i <esc>
 
 " Deleting words easily
 inoremap <C-backspace> <C-w>
@@ -384,7 +412,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if &t_Co > 2 && has("gui_running")
     syntax on
-    set hlsearch
     " add a fold column
     "set foldcolumn=2
 
@@ -394,7 +421,6 @@ if &t_Co > 2 && has("gui_running")
 
     " GUI Font
     if has("gui_win32")
-        " maximizes on windows
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
     else
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
