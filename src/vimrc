@@ -52,6 +52,7 @@ if !has('win32')
     Plugin 'Valloric/YouCompleteMe'
 endif
 
+call vundle#end()
 filetype plugin indent on
 syntax on
 
@@ -222,6 +223,8 @@ map N <Plug>(easymotion-prev)
 
 " Repeat the last motion
 map <Space>. <Plug>(easymotion-repeat)
+
+map s <Plug>(easymotion-s)
 
 map <Space>l <Plug>(easymotion-lineforward)
 map <Space>h <Plug>(easymotion-linebackward)
@@ -447,4 +450,3 @@ if has("gui_running")
     set guioptions-=M
 endif
 
-call vundle#end()
