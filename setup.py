@@ -67,6 +67,7 @@ def get_list():
             Dotfile('xinitrc', '~/.xinitrc'),
             Dotfile('fonts.conf', '~/.fonts.conf'),
             Dotfile('i3', '~/.i3', confirm=True),
+            Dotfile('fish', '~/.config/fish', confirm=True),
             Dotfile(None, None, add_func=reminders)
         ]
 

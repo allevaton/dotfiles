@@ -96,10 +96,10 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+n exec nautilus
 
 # Volume key
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute
+bindsym XF86AudioRaiseVolume exec amixer -qD pulse set Master 2%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -qD pulse set Master 2%- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master toggle
-bindsym XF86AudioMicMute exec amixer -q set Capter toggle
+bindsym XF86AudioMicMute exec amixer -qD pulse set Capture toggle
 
 # Focus the parent container
 bindsym $mod+a focus parent
