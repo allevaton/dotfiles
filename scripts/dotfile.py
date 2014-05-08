@@ -104,6 +104,7 @@ class Dotfile(object):
             new_dir = os.path.join(dest, new_name)
             dest = new_dir
 
+        print('Copying %s' % os.path.split(source)[1])
         self.copytree(source, dest, ignore=self.ignore)
 
         if self.add_func is not None:
@@ -112,11 +113,11 @@ class Dotfile(object):
     def copytree(self, src, dst, symlinks=False, ignore=None):
         try:
             names = os.listdir(src)
-        except NotADirectoryError:
+        except Exception:
             try:
                 # try to copy the file
                 shutil.copy2(src, dst)
-            except FileNotFoundError:
+            except Exception:
                 # BUT! If it's copying to a directory that doesn't exist...
                 # then make the directories
                 # BUT NOT THE LAST ONE!

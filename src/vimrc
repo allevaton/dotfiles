@@ -11,11 +11,18 @@ endif
 " Let's begin
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+
+if has('win32')
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+    let vundle_path='~/vimfiles/bundle'
+    call vundle#begin(vundle_path)
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+endif
 
 " Begin Plugins:
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'chrisbra/csv.vim'
 Plugin 'tmhedberg/matchit'
@@ -40,7 +47,10 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
-Plugin 'Valloric/YouCompleteMe'
+
+if !has('win32')
+    Plugin 'Valloric/YouCompleteMe'
+endif
 
 filetype plugin indent on
 syntax on
@@ -100,10 +110,10 @@ set regexpengine=1
 
 
 " C Family Tags:
-set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
+"set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 
 " Dictionary:
-set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+"set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
 " Rainbow Parentheses:
 let g:rainbow_active = 1
@@ -128,8 +138,8 @@ let g:ycm_auto_trigger = 1
 "let &colorcolumn=join(range(80, 255 ), ',')
 
 " Syntastic Config:
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_error_symbol = 'E '
+let g:syntastic_warning_symbol = 'W�'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -157,9 +167,6 @@ let g:Tex_ViewRuleComplete_pdf = "evince \"$*.pdf\" \&"
 let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-
-" Powerline Fonts:  " TODO delete?
-let g:Powerline_symbols = 'fancy'
 
 " Tagbar:
 "let g:tagbar_left = 0
@@ -205,7 +212,7 @@ omap / <Plug>(easymotion-tn)
 
 " define custom leader here
 " defaults to <leader><leader>
-"map <Space> <Plug>(easymotion-prefix)
+map <Space> <Plug>(easymotion-prefix)
 
 " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
 " Without these mappings, 'n' & 'N' works fine. (These mappings just provide
@@ -214,10 +221,10 @@ map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
 " Repeat the last motion
-map <leader><leader>. <Plug>(easymotion-repeat)
+map <Space>. <Plug>(easymotion-repeat)
 
-map <leader><leader>l <Plug>(easymotion-lineforward)
-map <leader><leader>h <Plug>(easymotion-linebackward)
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
@@ -347,11 +354,6 @@ if has('autocmd')
     augroup vimrcEx
     au!
 
-    if has('gui_win32')
-        " maximizes on windows
-        au vimrc GUIEnter * simalt ~x
-    endif
-
 
     " For all text files set 'textwidth' to 78 characters.
     autocmd FileType text setlocal textwidth=79
@@ -411,7 +413,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For GUI:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if &t_Co > 2 && has("gui_running")
+if has("gui_running")
     syntax on
     " add a fold column
     "set foldcolumn=2
@@ -442,6 +444,7 @@ if &t_Co > 2 && has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set guioptions-=R
-    set guioptions-=m
     set guioptions-=M
 endif
+
+call vundle#end()

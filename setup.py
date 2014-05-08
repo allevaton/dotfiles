@@ -18,6 +18,7 @@ def add_vim():
     No more need to go re-search the vim directory
     """
 
+    print('yep, being called')
     user = os.path.expanduser('~')
     vim = ''
 
@@ -57,11 +58,12 @@ def get_list():
     """
     file_list = []
 
+    vim_ignore = {'bundle', 'tags', 'view'}
     # Linux
     if os.name == 'posix':
         file_list = [
             Dotfile('vimrc', '~/.vimrc', add_func=add_vim),
-            Dotfile('vim', '~/.vim', ignore={'bundle', 'tags', 'view'}),
+            Dotfile('vim', '~/.vim', ignore=vim_ignore),
             Dotfile('xinitrc', '~/.xinitrc'),
             Dotfile('fonts.conf', '~/.fonts.conf'),
             Dotfile('i3', '~/.i3', confirm=True),
@@ -72,7 +74,7 @@ def get_list():
     elif os.name == 'nt':
         file_list = [
             Dotfile('vimrc', '~/_vimrc'),
-            Dotfile('vim', '~/vimfiles'),
+            Dotfile('vim', '~/vimfiles', ignore=vim_ignore),
         ]
 
     return file_list
