@@ -157,12 +157,6 @@ mode "resize"
     bindsym k resize grow height 10 px or 10 ppt
     bindsym l resize shrink width 10 px or 10 ppt
 
-    # Same bindings, but for the arrow keys
-    bindsym Left resize grow width 10 px or 10 ppt
-    bindsym Down resize shrink height 10 px or 10 ppt
-    bindsym Up resize grow height 10 px or 10 ppt
-    bindsym Right resize shrink width 10 px or 10 ppt
-
     # Back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -183,6 +177,7 @@ font pango:DejaVu Sans Mono 10
 
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
+for_window [class="[s|S]team"] border none
 #for_window [class="[e|E]volution"] floating enable
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable

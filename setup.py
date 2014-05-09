@@ -43,6 +43,14 @@ def reminders():
     pass
 
 
+def remove_all_i3():
+    """Removes all the files from i3 before copying, just in case I had
+    something in there before that I no longer want.
+    """
+    for d in os.listdir(os.path.expanduser('~/.i3/')):
+        os.remove(d)
+
+
 def get_list():
     """THIS IS THE FUNCTION YOU WANT TO EDIT
 

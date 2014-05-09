@@ -34,6 +34,7 @@
 
 
 # Create the trash here
+mkdir /tmp/trash
 create_trash
 
 # This is kind of useful
@@ -96,7 +97,6 @@ case "$1" in
 
 		# Launch i3
 		exec i3
-
 		;;
 esac
 

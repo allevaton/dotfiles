@@ -21,7 +21,7 @@ class Dotfile(object):
     """
 
     def __init__(self, src, dest, confirm=False, ask_location=False,
-                 add_func=None, ignore=None):
+                 add_func=None, pre_func=None, ignore=None):
         """Creates the Dotfile object with the specified parameters.
 
         Keyword arguments:
@@ -32,6 +32,8 @@ class Dotfile(object):
         ask_location -- bool: ask the user whether or not they want to change
                 the location of this dotfile
         ignore -- set: a set of files or folders to ignore in a directory
+        add_func -- function: a function to run after the files are copied
+        pre_func -- function: a function to run before the files are copied
 
         Additional information:
         Passing None or empty string '' for src makes the program choose the
@@ -62,6 +64,7 @@ class Dotfile(object):
         self.confirm = confirm
         self.ask_location = ask_location
         self.add_func = add_func
+        self.pre_func = pre_func
 
     def __str__(self):
         """Some magic for print handling, mainly
@@ -85,6 +88,9 @@ class Dotfile(object):
         if self.confirm:
             if not self.input_confirm():
                 return
+
+        if self.pre_func is not None:
+            self.pre_func()
 
         source = ''
         dest = ''
