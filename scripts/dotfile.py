@@ -48,9 +48,6 @@ class Dotfile(object):
 
         if src is None or src == '':
             if dest is None or dest is '':
-                # This is for handling both of them being empty.
-                # I didn't want to make it a class member, but luckily
-                # it's conditional and won't exist otherwise.
                 self.copy_nothing = True
                 self.add_func = add_func
                 return
