@@ -59,8 +59,6 @@ syntax on
 " Handle for fish
 set shell=bash\ --norc
 
-" Use Vim settings, rather than Vi settings (much better!)
-
 " This is the key that will define how remaps essentially work.
 let mapleader=','
 
@@ -131,16 +129,15 @@ let g:rainbow_guifgs = [
     \ ]
 
 " YCM YouCompleteMe Configuration:
-let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_invoke_completion = '<C-x><C-o>'
+let g:ycm_key_detailed_diagnostics = '<leader>D'
 let g:ycm_auto_trigger = 1
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
 
 " Syntastic Config:
-let g:syntastic_error_symbol = 'E '
-let g:syntastic_warning_symbol = 'W '
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -221,10 +218,11 @@ map <Space> <Plug>(easymotion-prefix)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
+map s <Plug>(easymotion-s)
+map f <Plug>(easymotion-f)
+
 " Repeat the last motion
 map <Space>. <Plug>(easymotion-repeat)
-
-map s <Plug>(easymotion-s)
 
 map <Space>l <Plug>(easymotion-lineforward)
 map <Space>h <Plug>(easymotion-linebackward)
@@ -449,4 +447,3 @@ if has("gui_running")
     set guioptions-=R
     set guioptions-=M
 endif
-

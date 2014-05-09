@@ -18,7 +18,6 @@ def add_vim():
     No more need to go re-search the vim directory
     """
 
-    print('yep, being called')
     user = os.path.expanduser('~')
     vim = ''
 
@@ -27,15 +26,15 @@ def add_vim():
     elif os.name == 'nt':
         vim = os.path.join(user, 'vimfiles')
 
-    vim_path = os.path.join(vim, 'bundle/vundle')
+    vim_path = os.path.join(vim, 'bundle/Vundle.vim')
     if not os.path.exists(vim_path):
         try:
             os.makedirs(vim_path)
             check_output('git')
             call('git clone https://github.com/gmarik/Vundle.vim.git %s' % vim,
                  shell=True)
-        except FileNotFoundError:
-            print('You don\'t seem to have git installed')
+        except Exception:
+            print('You don\'t seem to have git installed...')
             print('Don\'t forget to clone vundle from')
             print('https://github.com/gmarik/Vundle.vim')
 
@@ -67,7 +66,8 @@ def get_list():
             Dotfile('xinitrc', '~/.xinitrc'),
             Dotfile('fonts.conf', '~/.fonts.conf'),
             Dotfile('i3', '~/.i3', confirm=True),
-            Dotfile('fish', '~/.config/fish', confirm=True),
+            Dotfile('fish', '~/.config/fish', confirm=True,
+                    ignore={'fish_history', 'fish_read_history'}),
             Dotfile(None, None, add_func=reminders)
         ]
 
