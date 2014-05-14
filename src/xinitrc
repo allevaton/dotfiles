@@ -35,7 +35,6 @@
 
 # Create the trash here
 mkdir /tmp/trash
-create_trash
 
 # This is kind of useful
 export WORKSPACE="$HOME/workspace"
