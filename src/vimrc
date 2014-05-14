@@ -41,12 +41,13 @@ Plugin 'tfnico/vim-gradle'
 Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'Pychimp/vim-luna'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
+
+Plugin 'allevaton/vim-luna'
 
 if !has('win32')
     Plugin 'Valloric/YouCompleteMe'
@@ -219,7 +220,7 @@ map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
 map s <Plug>(easymotion-s)
-map f <Plug>(easymotion-f)
+nmap f <Plug>(easymotion-f)
 
 " Repeat the last motion
 map <Space>. <Plug>(easymotion-repeat)
@@ -279,7 +280,7 @@ nnoremap ; :
 nnoremap <leader>; ;
 
 " Spelling is useful
-nnoremap <leader>sp :set spell!<CR>
+nnoremap <leader>s :set spell!<CR>
 
 " Trimming whitespace
 "nnoremap <leader>ws :%s/\s\+$<CR>
@@ -355,6 +356,11 @@ if has('autocmd')
     augroup vimrcEx
     au!
 
+    " autoreload my vimrc without having to do anything
+    augroup reload_vimrc
+        autocmd!
+        autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    augroup END
 
     " For all text files set 'textwidth' to 78 characters.
     autocmd FileType text setlocal textwidth=79

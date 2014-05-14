@@ -50,7 +50,6 @@ bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+p exec dmenu_run
 
 # Change focus
-# TODO This conflicts with change mode to horizontal
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -178,6 +177,8 @@ font pango:DejaVu Sans Mono 10
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
 for_window [class="[s|S]team"] border none
+#for_window [class="[f|F]irefox"] border none
+#for_window [class="[s|S]kype"] workspace 7
 #for_window [class="[e|E]volution"] floating enable
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
@@ -190,5 +191,6 @@ bar
     position top
     status_command i3status -c ~/.i3/status
     #status_command i3status | i3-wsbar -c "dzen2 -x %x -dock"
-    #status_command i3status | dzconky
+    #status_command i3status -c ~/.i3/status | dzen2
+    #status_command dzconky
 }
