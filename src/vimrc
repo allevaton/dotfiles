@@ -51,6 +51,10 @@ Plugin 'allevaton/vim-luna'
 
 if !has('win32')
     Plugin 'Valloric/YouCompleteMe'
+else
+    " Use Jedi if we're on Windows; we still want python semantic
+    " completion
+    Plugin 'davidhalter/jedi-vim'
 endif
 
 call vundle#end()
@@ -131,9 +135,21 @@ let g:rainbow_guifgs = [
 
 " YCM YouCompleteMe Configuration:
 "let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_key_detailed_diagnostics = '<leader>D'
-let g:ycm_auto_trigger = 1
+if !has('win32')
+    let g:ycm_key_invoke_completion = '<C-x><C-o>'
+    let g:ycm_key_detailed_diagnostics = '<leader>D'
+    let g:ycm_auto_trigger = 1
+else
+" Jedi Configuration:
+    let g:jedi#popup_select_first = 0
+    let g:jedi#goto_assignments_command = ""
+    let g:jedi#goto_definitions_command = "<leader>d"
+    let g:jedi#documentation_command = ""
+    let g:jedi#usages_command = ""
+    let g:jedi#completions_command = "<C-x><C-o"
+    let g:jedi#rename_command = "<leader>r"
+    let g:jedi#show_call_signatures = "0"
+endif
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -398,7 +414,11 @@ if has('autocmd')
     " Cleaning whitespace on save
     autocmd BufWritePre * :%s/\s\+$//e
 
-    "au FileType python set omnifunc=pythoncomplete#Complete
+    au FileType python set omnifunc=pythoncomplete#Complete
+
+    if has('win32')
+        autocmd FileType python setlocal completeopt-=preview
+    endif
 
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
