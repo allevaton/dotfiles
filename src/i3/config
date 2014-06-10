@@ -50,7 +50,6 @@ bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+p exec dmenu_run
 
 # Change focus
-# TODO This conflicts with change mode to horizontal
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -157,12 +156,6 @@ mode "resize"
     bindsym k resize grow height 10 px or 10 ppt
     bindsym l resize shrink width 10 px or 10 ppt
 
-    # Same bindings, but for the arrow keys
-    bindsym Left resize grow width 10 px or 10 ppt
-    bindsym Down resize shrink height 10 px or 10 ppt
-    bindsym Up resize grow height 10 px or 10 ppt
-    bindsym Right resize shrink width 10 px or 10 ppt
-
     # Back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -183,6 +176,9 @@ font pango:DejaVu Sans Mono 10
 
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
+for_window [class="[s|S]team"] border none
+#for_window [class="[f|F]irefox"] border none
+#for_window [class="[s|S]kype"] workspace 7
 #for_window [class="[e|E]volution"] floating enable
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
@@ -195,5 +191,6 @@ bar
     position top
     status_command i3status -c ~/.i3/status
     #status_command i3status | i3-wsbar -c "dzen2 -x %x -dock"
-    #status_command i3status | dzconky
+    #status_command i3status -c ~/.i3/status | dzen2
+    #status_command dzconky
 }

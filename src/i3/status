@@ -57,7 +57,7 @@ tztime local
 
 load
 {
-    format = "CPU %1min"
+    format = "CPU %1sec"
 }
 
 cpu_usage

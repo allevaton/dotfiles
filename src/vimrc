@@ -41,15 +41,20 @@ Plugin 'tfnico/vim-gradle'
 Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'Pychimp/vim-luna'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
 
+Plugin 'allevaton/vim-luna'
+
 if !has('win32')
     Plugin 'Valloric/YouCompleteMe'
+else
+    " Use Jedi if we're on Windows; we still want python semantic
+    " completion
+    Plugin 'davidhalter/jedi-vim'
 endif
 
 call vundle#end()
@@ -130,9 +135,21 @@ let g:rainbow_guifgs = [
 
 " YCM YouCompleteMe Configuration:
 "let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_key_detailed_diagnostics = '<leader>D'
-let g:ycm_auto_trigger = 1
+if !has('win32')
+    let g:ycm_key_invoke_completion = '<C-x><C-o>'
+    let g:ycm_key_detailed_diagnostics = '<leader>D'
+    let g:ycm_auto_trigger = 1
+else
+" Jedi Configuration:
+    let g:jedi#popup_select_first = 0
+    let g:jedi#goto_assignments_command = ""
+    let g:jedi#goto_definitions_command = "<leader>d"
+    let g:jedi#documentation_command = ""
+    let g:jedi#usages_command = ""
+    let g:jedi#completions_command = "<C-x><C-o"
+    let g:jedi#rename_command = "<leader>r"
+    let g:jedi#show_call_signatures = "0"
+endif
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -219,7 +236,7 @@ map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
 
 map s <Plug>(easymotion-s)
-map f <Plug>(easymotion-f)
+nmap f <Plug>(easymotion-f)
 
 " Repeat the last motion
 map <Space>. <Plug>(easymotion-repeat)
@@ -286,7 +303,7 @@ nnoremap ; :
 nnoremap <leader>; ;
 
 " Spelling is useful
-nnoremap <leader>sp :set spell!<CR>
+nnoremap <leader>s :set spell!<CR>
 
 " Trimming whitespace
 "nnoremap <leader>ws :%s/\s\+$<CR>
@@ -362,6 +379,11 @@ if has('autocmd')
     augroup vimrcEx
     au!
 
+    " autoreload my vimrc without having to do anything
+    augroup reload_vimrc
+        autocmd!
+        autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    augroup END
 
     " For all text files set 'textwidth' to 78 characters.
     autocmd FileType text setlocal textwidth=79
@@ -399,7 +421,11 @@ if has('autocmd')
     " Cleaning whitespace on save
     autocmd BufWritePre * :%s/\s\+$//e
 
-    "au FileType python set omnifunc=pythoncomplete#Complete
+    au FileType python set omnifunc=pythoncomplete#Complete
+
+    if has('win32')
+        autocmd FileType python setlocal completeopt-=preview
+    endif
 
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 

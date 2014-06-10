@@ -34,7 +34,7 @@
 
 
 # Create the trash here
-create_trash
+mkdir /tmp/trash
 
 # This is kind of useful
 export WORKSPACE="$HOME/workspace"
@@ -96,7 +96,6 @@ case "$1" in
 
 		# Launch i3
 		exec i3
-
 		;;
 esac
 
