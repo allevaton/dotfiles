@@ -46,8 +46,8 @@ alias gvimrc='gvim ~/.vimrc'
 alias cp='cp -r'
 
 # My useful trash command
-alias rm='mv -t /tmp/trash'
-alias rmf='rmf -r'
+alias rm='rm -i'
+alias mv='mv -i'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
