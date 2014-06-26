@@ -38,7 +38,7 @@ Plugin 'dag/vim-fish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'tfnico/vim-gradle'
-Plugin 'gerw/vim-latex-suite'
+"Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -48,14 +48,7 @@ Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
 
 Plugin 'allevaton/vim-luna'
-
-if !has('win32')
-    Plugin 'Valloric/YouCompleteMe'
-else
-    " Use Jedi if we're on Windows; we still want python semantic
-    " completion
-    Plugin 'davidhalter/jedi-vim'
-endif
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -89,7 +82,7 @@ set showmode        " Always show the mode we're in
 set scrolloff=4     " Use a 4 line buffer when scrolling
 set gdefault        " search/replace globally on a line by default
 set incsearch       " do incremental searching
-set nohlsearch      " Highlight search terms (:noh stops highlight)
+set hlsearch        " Highlight search terms (:noh stops highlight)
 set laststatus=2    " Always show the status bar
 set noswapfile      " Who uses these, anyways?
 set hidden          " Hide buffers instead of closing them.
@@ -111,7 +104,8 @@ set nolist          " no lists also disable line breaks
 " this could add a major typing latency, so be careful.
 " if it does, remove THIS LINE
 set regexpengine=1
-
+set encoding=utf-8
+set fileencoding=utf-8
 
 " C Family Tags:
 "set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
@@ -135,28 +129,19 @@ let g:rainbow_guifgs = [
 
 " YCM YouCompleteMe Configuration:
 "let g:ycm_collect_identifiers_from_tags_files = 1
-if !has('win32')
-    let g:ycm_key_invoke_completion = '<C-x><C-o>'
-    let g:ycm_key_detailed_diagnostics = '<leader>D'
-    let g:ycm_auto_trigger = 1
-else
-" Jedi Configuration:
-    let g:jedi#popup_select_first = 0
-    let g:jedi#goto_assignments_command = ""
-    let g:jedi#goto_definitions_command = "<leader>d"
-    let g:jedi#documentation_command = ""
-    let g:jedi#usages_command = ""
-    let g:jedi#completions_command = "<C-x><C-o"
-    let g:jedi#rename_command = "<leader>r"
-    let g:jedi#show_call_signatures = "0"
-endif
+let g:ycm_key_invoke_completion = '<C-x><C-o>'
+let g:ycm_key_detailed_diagnostics = '<leader>D'
+let g:ycm_auto_trigger = 1
+
+nnoremap <leader>e :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
 
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 
 let g:syntastic_cpp_check_header = 1
@@ -222,8 +207,8 @@ endfunction
 "
 " EasyMotion Settings:
 nnoremap ? /
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+map  <Space>/ <Plug>(easymotion-sn)
+omap <Space>/ <Plug>(easymotion-tn)
 
 " define custom leader here
 " defaults to <leader><leader>
@@ -247,10 +232,6 @@ map <Space>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 " ---------------
-
-" Ycm bindings:
-nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>e :YcmCompleter GoToDefinition<CR>
 
 " Set it so enter on a menu item doesn't insert return
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -305,7 +286,7 @@ nnoremap <leader>s :set spell!<CR>
 inoremap jj <esc>
 
 " Easy :set nohls!
-nnoremap <leader>2 :set nohls!
+nnoremap <leader>2 :set nohls!<CR>
 
 " Start NERDTree in the current directory
 nmap <leader>n :NERDTreeTabsToggle<CR>
@@ -451,7 +432,7 @@ if has("gui_running")
 
     " GUI Font
     if has("gui_win32")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+        set guifont=DejaVu_Sans_Mono_for_Powerline:h12
     else
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
         "set guifont=Liberation\ Mono\ for\ Powerline\ 13
