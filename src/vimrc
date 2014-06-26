@@ -229,6 +229,13 @@ map <Space>. <Plug>(easymotion-repeat)
 map <Space>l <Plug>(easymotion-lineforward)
 map <Space>h <Plug>(easymotion-linebackward)
 
+" Insert the date
+if has('win32')
+    map <F2> :.! date /T<CR>
+else
+    map <F2> :.! date<CR>
+endif
+
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 " ---------------
