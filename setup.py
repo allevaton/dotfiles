@@ -97,9 +97,6 @@ if __name__ == '__main__':
                         ' uploading', action='count')
     arguments = parser.parse_args()
 
-    # If we're this far, we'll need the list anyways
-    file_list = get_list()
-
-    for df in file_list:
+    for df in get_list():
         # this is where copying logic goes
         df.copy(reverse=arguments.copy is not None)

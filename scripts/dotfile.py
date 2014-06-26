@@ -18,8 +18,8 @@ class Dotfile(object):
     a given config. The reason this is object oriented instead of just a
     basic list system is so we can conditionally ask the user if this
     location is correct, or if they don't even want this config.
-    """
 
+    """
     def __init__(self, src, dest, confirm=False, ask_location=False,
                  add_func=None, pre_func=None, ignore=None):
         """Creates the Dotfile object with the specified parameters.
@@ -44,8 +44,8 @@ class Dotfile(object):
         a function after everything has been copied. So having an empty
         Dotfile entry at the end of the list with an add_func method can
         allow you to do virtually anything.
-        """
 
+        """
         self.copy_nothing = False
 
         if src is None or src == '':
@@ -68,8 +68,8 @@ class Dotfile(object):
 
     def __str__(self):
         """Some magic for print handling, mainly
-        """
 
+        """
         return self.src
 
     def copy(self, reverse=False):
@@ -79,8 +79,8 @@ class Dotfile(object):
         reverse -- bool?: this is called automatically when the -c
             argument is supplied. It reverses the order of the source and
             destination parameters supplied by the user.
-        """
 
+        """
         if self.copy_nothing:
             return self.add_func()
 
@@ -187,8 +187,8 @@ class Dotfile(object):
         True if the user allowed the program to create directories, or the
             directory existed already.
         False if the user denied to create a directory that didn't exist
-        """
 
+        """
         while True:
             s = input('Enter a new path: ')
 
@@ -212,8 +212,8 @@ class Dotfile(object):
         Returns:
         True if the user confirmed
         False if the user denied
-        """
 
+        """
         while True:
             s = input('Are you sure you want to copy the file \"%s\"? [Y/n] '
                       % (self.src))
