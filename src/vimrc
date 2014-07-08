@@ -63,7 +63,7 @@ set shell=bash\ --norc
 let mapleader=','
 
 """ BULK CONFIGURATION: """
-set autochdir       " Automatically adjust the current directory for the file
+set noautochdir     " Automatically adjust the current directory for the file
 set autoindent      " Always
 set backspace=indent,eol,start " Backspace over everything
 set copyindent      " Copy the previous indentation
