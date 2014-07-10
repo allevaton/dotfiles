@@ -116,11 +116,11 @@ class Dotfile(object):
     def copytree(self, src, dst, symlinks=False, ignore=None):
         try:
             names = os.listdir(src)
-        except Exception:
+        except:
             try:
                 # try to copy the file
                 shutil.copy2(src, dst)
-            except Exception:
+            except:
                 # BUT! If it's copying to a directory that doesn't exist...
                 # then make the directories
                 # BUT NOT THE LAST ONE!
