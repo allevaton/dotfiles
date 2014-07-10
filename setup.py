@@ -16,8 +16,8 @@ def add_vim():
 
     TODO: Just think how nicely this would look if it was object oriented.
     No more need to go re-search the vim directory
+    
     """
-
     user = os.path.expanduser('~')
     vim = ''
 
@@ -46,6 +46,7 @@ def reminders():
 def remove_all_i3():
     """Removes all the files from i3 before copying, just in case I had
     something in there before that I no longer want.
+    
     """
     for d in os.listdir(os.path.expanduser('~/.i3/')):
         os.remove(d)
@@ -62,9 +63,8 @@ def get_list():
         This can be a directory or file. It will know how to handle either.
 
     For optional parameters check scripts/dotfile.py
+    
     """
-    file_list = []
-
     vim_ignore = {'bundle', 'tags', 'view'}
     # Linux
     if os.name == 'posix':
@@ -86,12 +86,11 @@ def get_list():
             Dotfile('vim', '~/vimfiles', ignore=vim_ignore),
         ]
 
-    return file_list
+    return file_list if file_list else raise OSError('not supported on "%s"' % os.name)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Copies dotfiles',
                                      prog='dotfiles')
-
     parser.add_argument('-c', '--copy', help='copy arguments from '
                         'your computer to the src/ directory for easy'
                         ' uploading', action='count')
