@@ -43,7 +43,7 @@ class Dotfile(object):
         copy anything. The reason this may be beneficial is if you want to run
         a function after everything has been copied. So having an empty
         Dotfile entry at the end of the list with an add_func method can
-        allow you to do virtually anything.
+        allow you to run a function after everything's been copied.
 
         """
         self.copy_nothing = False
