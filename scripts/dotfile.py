@@ -197,7 +197,7 @@ class Dotfile(object):
                           ' it? [Y/n]' % (s))
 
                 if a.lower() == 'y' or a == '':
-                    os.mkdir(s)
+                    os.makedirs(s)
                     return True
                 else:
                     return False
