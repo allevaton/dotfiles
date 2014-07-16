@@ -28,7 +28,6 @@ Plugin 'chrisbra/csv.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
 Plugin 'oblitum/rainbow'
-Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-afterimage'
 Plugin 'bling/vim-airline'
@@ -51,6 +50,8 @@ Plugin 'kien/ctrlp.vim'
 
 Plugin 'allevaton/vim-luna'
 Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on
@@ -150,6 +151,8 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
+nnoremap <leader>S :SyntasticCheck flake8<CR>
+
 " Eclim:
 let g:EclimCompletionMethod = 'omnifunc'
 
@@ -200,6 +203,30 @@ function! s:QuickfixToggle()
         let g:quickfix_return_to_window = winnr()
         copen
         let g:quickfix_is_open = 1
+    endif
+endfunction
+" }}}
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off. {{{
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+    let @/ = ''
+    if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=4000
+        echo 'Highlight current word: OFF'
+        return 0
+    else
+        augroup auto_highlight
+            au!
+            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=800
+        echo 'Highlight current word: ON'
+        return 1
     endif
 endfunction
 " }}}
