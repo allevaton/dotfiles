@@ -4,33 +4,20 @@
 #
 
 import argparse
-#import ipdb
 import os
 
 from subprocess import call, check_output
 from scripts.dotfile import Dotfile
 
 
-def add_vim():
+def add_vim(dotfile):
     """This is run after the ~/.vim folder is copied
 
-    TODO: Just think how nicely this would look if it was object oriented.
-    No more need to go re-search the vim directory
-
     """
-    user = os.path.expanduser('~')
-    vim = ''
-
-    if os.name == 'posix':
-        vim = os.path.join(user, '.vim')
-    elif os.name == 'nt':
-        vim = os.path.join(user, 'vimfiles')
-
-    vim_path = os.path.join(vim, 'bundle/Vundle.vim')
-    if not os.path.exists(vim_path):
+    bundle_path = os.path.join(dotfile.dest, 'bundle', 'Vundle.vim')
+    if not os.path.exists(bundle_path):
         try:
-            os.makedirs(vim_path)
-            check_output('git')
+            os.makedirs(bundle_path)
             call('git clone https://github.com/gmarik/Vundle.vim.git %s' % vim,
                  shell=True)
         except Exception:
@@ -39,11 +26,11 @@ def add_vim():
             print('https://github.com/gmarik/Vundle.vim')
 
 
-def reminders():
+def reminders(dotfile):
     pass
 
 
-def remove_all_i3():
+def remove_all_i3(dotfile):
     """Removes all the files from i3 before copying, just in case I had
     something in there before that I no longer want.
 
@@ -81,15 +68,24 @@ def get_list():
 
     # Windows
     elif os.name == 'nt':
-        file_list = [
-            Dotfile('vimrc', '~/_vimrc'),
-            Dotfile('vim', '~/vimfiles', ignore=vim_ignore),
-        ]
+        # work computer
+        if '-D7' in os.environ['COMPUTERNAME']:
+            file_list = [
+                Dotfile('vimrc', r'M:\_vimrc'),
+                Dotfile('vim', r'M:\vimfiles', ignore=vim_ignore,
+                        add_func=add_vim),
+            ]
+        else:
+            file_list = [
+                Dotfile('vimrc', r'~/_vimrc'),
+                Dotfile('vim', r'~/vimfiles', ignore=vim_ignore,
+                        add_func=add_vim)
+            ]
 
     if file_list:
         return file_list
     else:
-        raise OSError('not supported on "%s"' % os.name)
+        raise OSError('Not supported on "%s"' % os.name)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Copies dotfiles',
@@ -99,6 +95,7 @@ if __name__ == '__main__':
                         ' uploading', action='count')
     arguments = parser.parse_args()
 
+    # df = dotfile
     for df in get_list():
         # this is where copying logic goes
         df.copy(reverse=arguments.copy is not None)

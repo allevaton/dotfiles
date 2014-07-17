@@ -82,7 +82,7 @@ class Dotfile(object):
 
         """
         if self.copy_nothing:
-            return self.add_func()
+            return self.add_func(self)
 
         # let's make sure we should be continuing anyways
         if self.confirm:
@@ -90,7 +90,7 @@ class Dotfile(object):
                 return
 
         if self.pre_func is not None:
-            self.pre_func()
+            self.pre_func(self)
 
         source = ''
         dest = ''
@@ -111,7 +111,7 @@ class Dotfile(object):
         self.copytree(source, dest, ignore=self.ignore)
 
         if self.add_func is not None:
-            self.add_func()
+            self.add_func(self)
 
     def copytree(self, src, dst, symlinks=False, ignore=None):
         try:
@@ -194,7 +194,7 @@ class Dotfile(object):
 
             if not os.path.exists(s):
                 a = input('The path \"%s\" does not exist, want me to create'
-                          ' it? [Y/n]' % (s))
+                          ' it? [Y/n] ' % (s))
 
                 if a.lower() == 'y' or a == '':
                     os.makedirs(s)
