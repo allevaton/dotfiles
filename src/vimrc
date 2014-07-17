@@ -420,10 +420,6 @@ if has('autocmd')
 
     au FileType python set omnifunc=pythoncomplete#Complete
 
-    if has('win32')
-        autocmd FileType python setlocal completeopt-=preview
-    endif
-
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
     " Always have rainbow parentheses on
