@@ -330,10 +330,12 @@ vmap <C-c> y
 inoremap <C-a> <esc>ggVG
 
 " Switching tabs
-nnoremap <C-tab> :tabn<return>
-nnoremap <C-S-tab> :tabp<return>
-inoremap <C-tab> <esc>:tabn<return>
-inoremap <C-S-tab> <esc>:tabp<return>
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-S-tab> :bp<CR>
+inoremap <C-tab> <esc>:bn<CR>
+inoremap <C-S-tab> <esc>:bp<CR>
+
+nnoremap <Tab> <C-6>
 
 " Allow switching windows in edit mode
 inoremap <C-w> <esc><C-w>
@@ -418,8 +420,10 @@ if has('autocmd')
     " Cleaning whitespace on save
     autocmd BufWritePre * :%s/\s\+$//e
 
+    " TODO necessary?
     au FileType python set omnifunc=pythoncomplete#Complete
 
+    " Close the preview window when we move
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
     " Always have rainbow parentheses on
