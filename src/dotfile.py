@@ -236,4 +236,4 @@ def _copy(config, location, user_functions, quiet, reverse):
 
     reminders = config.get('Reminders')
     if reminders:
-        print(open('reminders.rst').read().decode('ascii', 'ignore'))
+        print(open('reminders.rst').read())
