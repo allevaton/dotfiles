@@ -1,0 +1,41 @@
+#
+# Configuration containing file lists
+#
+
+SaveToLocation: ./files/
+
+# Print the contents of the `reminders.rst` file after
+# everything's copied
+Reminders: True
+
+# Remember: if SaveAs is not specified, it will use the
+# name of the parent element
+#
+vimrc:
+    LocationLinux: ~/.vimrc
+    LocationWin: ~/_vimrc
+    LocationWork: M:/_vimrc
+
+vim:
+    Location: ~/.vim
+    LocationWin: ~/vimfiles
+    LocationWork: M:/vimfiles
+    Ignore:
+        - bundle
+        - tags
+        - view
+    AdditionalFunction: vim
+
+xinitrc:
+    LocationLinux: ~/.xinitrc
+
+fonts.conf:
+    LocationLinux: ~/.fonts.conf
+
+i3:
+    LocationLinux: ~/.i3
+    Confirm: True
+
+fish:
+    LocationLinux: ~/.config/fish
+    Confirm: True

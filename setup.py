@@ -11,36 +11,32 @@ from scripts.dotfile import Dotfile
 
 
 def add_vim(dotfile):
-    """This is run after the ~/.vim folder is copied
+    '''This is run after the ~/.vim folder is copied
 
-    """
+    '''
     bundle_path = os.path.join(dotfile.dest, 'bundle', 'Vundle.vim')
     if not os.path.exists(bundle_path):
         try:
             os.makedirs(bundle_path)
             call('git clone https://github.com/gmarik/Vundle.vim.git %s' % vim,
                  shell=True)
-        except Exception:
+        except:
             print('You don\'t seem to have git installed...')
             print('Don\'t forget to clone vundle from')
             print('https://github.com/gmarik/Vundle.vim')
 
 
-def reminders(dotfile):
-    pass
-
-
 def remove_all_i3(dotfile):
-    """Removes all the files from i3 before copying, just in case I had
+    '''Removes all the files from i3 before copying, just in case I had
     something in there before that I no longer want.
 
-    """
+    '''
     for d in os.listdir(os.path.expanduser('~/.i3/')):
         os.remove(d)
 
 
 def get_list():
-    """THIS IS THE FUNCTION YOU WANT TO EDIT
+    '''THIS IS THE FUNCTION YOU WANT TO EDIT
 
     The Dotfile class takes a few parameters
     First is a path string to what you want to name the file in the
@@ -51,7 +47,7 @@ def get_list():
 
     For optional parameters check scripts/dotfile.py
 
-    """
+    '''
     vim_ignore = {'bundle', 'tags', 'view'}
     # Linux
     if os.name == 'posix':
@@ -90,9 +86,9 @@ def get_list():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Copies dotfiles',
                                      prog='dotfiles')
-    parser.add_argument('-c', '--copy', help='copy arguments from '
-                        'your computer to the src/ directory for easy'
-                        ' uploading', action='count')
+    parser.add_argument('-c', '--copy', help='copy files from your computer '
+                        'to the files/ directory for easy '
+                        'uploading', action='count')
     arguments = parser.parse_args()
 
     # df = dotfile
