@@ -2,6 +2,7 @@
 # Configuration containing file lists
 #
 
+# REQUIRED, but can be changed
 SaveToLocation: ./files/
 
 # Print the contents of the `reminders.rst` file after
@@ -14,12 +15,13 @@ Reminders: True
 vimrc:
     LocationLinux: ~/.vimrc
     LocationWin: ~/_vimrc
-    LocationWork: M:/_vimrc
+    LocationWork: M:/_vimrc_testing
+    AdditionalFunction: vimrc
 
 vim:
     Location: ~/.vim
     LocationWin: ~/vimfiles
-    LocationWork: M:/vimfiles
+    LocationWork: M:/vimfiles_testing
     Ignore:
         - bundle
         - tags

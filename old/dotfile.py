@@ -96,16 +96,16 @@ class Dotfile(object):
         dest = ''
         new_name = ''
 
-        if not reverse:
-            source = os.path.join(src_dir, self.src)
-            dest = self.dest
-        else:
+        if reverse:
             source = self.dest
             dest = os.path.join(os.getcwd(), src_dir)
             new_name = self.src
 
             new_dir = os.path.join(dest, new_name)
             dest = new_dir
+        else:
+            source = os.path.join(src_dir, self.src)
+            dest = self.dest
 
         print('Copying %s' % os.path.split(source)[1])
         self.copytree(source, dest, ignore=self.ignore)
@@ -141,6 +141,7 @@ class Dotfile(object):
         try:
             os.makedirs(dst)
         except Exception:
+            # Directory exists
             pass
 
         errors = []
@@ -159,7 +160,6 @@ class Dotfile(object):
                     self.copytree(srcname, dstname, symlinks, ignore)
                 else:
                     shutil.copy2(srcname, dst)
-                    pass
 
             except (IOError, os.error) as why:
                 errors.append((srcname, dstname, str(why)))
