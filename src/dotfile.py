@@ -123,21 +123,13 @@ def pull(config_path, location, user_functions, do_pull, quiet):
 
     if do_pull:
         if '.hg' in cwd:
-            result = call(['hg', 'pull'])
+            safe_call(['hg', 'pull'])
 
         elif '.git' in cwd:
-            result = call(['git', 'pull'])
+            safe_call(['git', 'pull'])
 
         elif '.svn' in cwd:
-            result = call(['svn', 'up'])
-
-        else:
-            result = None
-
-        if result != 0:
-            print('Pulling returned a non 0 status code.')
-            print('Manual intervention for pulling is required.')
-            return result
+            safe_call(['svn', 'up'])
 
     _copy(config, location, user_functions, quiet, reverse=False)
 
