@@ -19,4 +19,4 @@ def decide_location():
 
 
 def vimrc(dotfile):
-    print('cats')
+    pass

@@ -18,8 +18,7 @@ parser.add_argument('-q', '--quiet', action='count',
 arguments = parser.parse_args()
 
 # if the -n argument was passed...
-if arguments.pull > 1:
-    arguments.pull = False
+arguments.pull = True if arguments.pull == 1 else False
 
 dotfile.pull('config.yml',
              location=functions.decide_location(),

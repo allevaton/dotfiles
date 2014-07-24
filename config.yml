@@ -7,7 +7,7 @@ SaveToLocation: ./files/
 
 # Print the contents of the `reminders.rst` file after
 # everything's copied
-Reminders: True
+Reminders: False
 
 # Remember: if SaveAs is not specified, it will use the
 # name of the parent element

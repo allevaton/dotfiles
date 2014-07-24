@@ -24,11 +24,8 @@ parser.add_argument('-q', '--quiet', action='count',
 arguments = parser.parse_args()
 
 # negate arguments to turn them off
-if arguments.push > 1:
-    arguments.push = False
-
-if arguments.add > 1:
-    arguments.add = False
+arguments.push = True if arguments.push == 1 else False
+arguments.add = True if arguments.add == 1 else False
 
 dotfile.push('config.yml',
              location=functions.decide_location(),
