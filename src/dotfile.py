@@ -92,7 +92,7 @@ def input_confirm(name):
     '''
     while True:
         s = input('Are you sure you want to copy the file \"%s\"? [Y/n] '
-                    % (name))
+                  % (name))
 
         if s.lower() == 'y' or s == '':
             return True
@@ -109,7 +109,8 @@ def safe_call(command):
     result = call(command)
 
     if result != 0:
-        print('Command returned a non 0 status code.')
+        print('Command returned a non 0 status code:')
+        print('\t%s' % ' '.join(command))
         print('Manual intervention is required.')
         sys.exit(result)
     else:
@@ -161,13 +162,13 @@ def push(config_path, location, user_functions, do_push, add_files,
 
         elif '.svn' in cwd:
             # TODO svn pushing support
-            result = call(['svn', 'up'])
+            call(['svn', 'up'])
 
     _copy(config, location, user_functions, quiet, reverse=True)
 
 
 def _copy(config, location, user_functions, quiet, reverse):
-    files_dir = config.get('SaveToLocation', None)
+    files_dir = config.get('SaveToLocation')
     if files_dir is None:
         raise ValueError('SaveToLocation was not found in the config. '
                          'This is required.')
@@ -210,10 +211,11 @@ def _copy(config, location, user_functions, quiet, reverse):
                 else:
                     do_copy = True
 
-                if reverse:
-                    copytree(fs_loc, saved_loc, ignore=ignore)
-                else:
-                    copytree(saved_loc, fs_loc, ignore=ignore)
+                if do_copy:
+                    if reverse:
+                        copytree(fs_loc, saved_loc, ignore=ignore)
+                    else:
+                        copytree(saved_loc, fs_loc, ignore=ignore)
 
                 if not quiet:
                     print('Copied %s to %s' % (key, fs_loc))
