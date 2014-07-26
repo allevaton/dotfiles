@@ -37,9 +37,6 @@ def copytree(src, dst, symlinks=False, ignore=None):
             shutil.copy2(src, os.path.join(dst_dir, dst))
         return
 
-    if ignore is not None:
-        ignored_names = set(ignore)
-
     try:
         os.makedirs(dst)
     except:
@@ -48,8 +45,16 @@ def copytree(src, dst, symlinks=False, ignore=None):
 
     errors = []
     for name in names:
-        if name in ignored_names:
-            continue
+        # if the regex finds a match, don't copy it
+        ignore_this = False
+        if ignore:
+            for i in ignore:
+                if i.match(name):
+                    ignore_this = True
+                    break
+
+            if ignore_this:
+                continue
 
         srcname = os.path.join(src, name)
         dstname = os.path.join(dst, name)
@@ -206,10 +211,11 @@ def _copy(config, location, user_functions, quiet, reverse):
                 fs_loc = os.path.abspath(os.path.expanduser(
                          os.path.expandvars(value[location])))
 
-                #ignore = set(value.get('Ignore', set()))
-                set_trace()
-                ignore = [re.compile(x) for x in value.get('Ignore')
-                          if x is not None]
+                ignore_list = value.get('Ignore')
+                if ignore_list:
+                    ignore = {re.compile(x) for x in value.get('Ignore')}
+                else:
+                    ignore = None
 
                 do_copy = False
 

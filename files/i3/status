@@ -52,7 +52,7 @@ run_watch VPN
 
 tztime local
 {
-    format = ":: %Y-%m-%d  %H:%M:%S ::"
+    format = ":: %A %B %d, %Y  %I:%M:%S %p ::"
 }
 
 load
@@ -73,7 +73,7 @@ disk "/home"
 cpu_temperature 0
 {
     format = "%degrees°C"
-    path = "/sys/devices/platform/coretemp.0/temp1_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
 }
 
 volume master
