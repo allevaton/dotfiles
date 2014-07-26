@@ -24,11 +24,11 @@ vim:
     Location: ~/.vim
     LocationWin: ~/vimfiles
     LocationWork: M:/vimfiles_testing
-    Ignore:
-        - bundle
-        - tags
-        - view
     #AdditionalFunction: vim
+    Ignore:
+        - 'bundle'
+        - 'tags'
+        - 'view'
 
 xinitrc:
     LocationLinux: ~/.xinitrc

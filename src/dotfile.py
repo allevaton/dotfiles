@@ -5,6 +5,7 @@
 from subprocess import call, check_output
 
 import os
+import re
 import shutil
 import sys
 
@@ -205,7 +206,9 @@ def _copy(config, location, user_functions, quiet, reverse):
                 fs_loc = os.path.abspath(os.path.expanduser(
                          os.path.expandvars(value[location])))
 
-                ignore = set(value.get('Ignore', set()))
+                #ignore = set(value.get('Ignore', set()))
+                ignore = [re.compile(x) for x in value.get('Ignore')
+                          if x is not None]
 
                 do_copy = False
 
