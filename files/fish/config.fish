@@ -2,12 +2,6 @@
 #   fish config
 #
 
-# variables {{{
-# global path
-set -e PATH
-set -Ux PATH /usr/bin /usr/local/bin
-# }}}
-
 # aliases {{{
 # A much easier ls statement
 #alias ls="if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}""
