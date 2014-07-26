@@ -207,6 +207,7 @@ def _copy(config, location, user_functions, quiet, reverse):
                          os.path.expandvars(value[location])))
 
                 #ignore = set(value.get('Ignore', set()))
+                set_trace()
                 ignore = [re.compile(x) for x in value.get('Ignore')
                           if x is not None]
 
