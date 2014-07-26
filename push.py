@@ -25,7 +25,7 @@ arguments = parser.parse_args()
 
 # negate arguments to turn them off
 arguments.push = False if arguments.push > 1 else True
-arguments.add = False if arguments.add > 1 else True
+arguments.add = True if arguments.add > 1 else False
 
 dotfile.push('config.yml',
              location=functions.decide_location(),

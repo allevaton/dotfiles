@@ -43,3 +43,6 @@ i3:
 fish:
     LocationLinux: ~/.config/fish
     Confirm: True
+    Ignore:
+        - 'fish_history'
+        - 'fish_read_history'
