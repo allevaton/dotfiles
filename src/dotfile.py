@@ -148,6 +148,8 @@ def push(config_path, location, user_functions, do_push, add_files,
 
     cwd = set(os.listdir('.'))
 
+    _copy(config, location, user_functions, quiet, reverse=True)
+
     if do_push:
         if '.hg' in cwd:
             if add_files:
@@ -169,8 +171,6 @@ def push(config_path, location, user_functions, do_push, add_files,
         elif '.svn' in cwd:
             # TODO svn pushing support
             call(['svn', 'up'])
-
-    _copy(config, location, user_functions, quiet, reverse=True)
 
 
 def _copy(config, location, user_functions, quiet, reverse):
