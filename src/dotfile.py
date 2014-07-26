@@ -176,7 +176,13 @@ def _copy(config, location, user_functions, quiet, reverse):
         if not os.path.exists(files_dir):
             os.makedirs(files_dir)
 
-    for key, value in config.iteritems():
+    if sys.version_info < (3, 0):
+        dictionary = config.iteritems()
+    else:
+        dictionary = config.items()
+
+    # TODO python3 compatibility
+    for key, value in dictionary:
         if type(value) == dict:
             # if this dotfile has a location for the current system
             if location in value:
