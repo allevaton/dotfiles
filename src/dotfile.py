@@ -131,6 +131,7 @@ def pull(config_path, location, user_functions, do_pull, quiet):
     if do_pull:
         if '.hg' in cwd:
             safe_call(['hg', 'pull'])
+            safe_call(['hg', 'up'])
 
         elif '.git' in cwd:
             safe_call(['git', 'pull'])
