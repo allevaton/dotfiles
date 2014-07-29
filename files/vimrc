@@ -80,6 +80,7 @@ set nobackup        " don't keep a backup file
 set noswapfile      " Who uses these, anyways?
 set ruler           " show the cursor position all the time
 set scrolloff=4     " Use a 4 line buffer when scrolling
+set sidescrolloff=2 " Side scrolling
 set shiftround      " Only multiples of 4 for shifting
 set shiftwidth=4    " Auto indenting spaces
 set showcmd         " display incomplete commands
@@ -100,6 +101,9 @@ set formatoptions=tcroqnj " see :help fo-table
 set wildmenu        " make tab completion work like bash
 set wildmode=list:full " show a list when pressing tab complete
 
+" wildcard ignores
+set wildignore=*.pyc,*.pyo,*.so,*.swp
+
 set linebreak       " disable line breaks for better word wrapping
 set nolist          " no lists also disable line breaks
 set wrap            " word wrapping
@@ -107,6 +111,7 @@ set wrap            " word wrapping
 " this could add a major typing latency, so be careful.
 " if it does, remove THIS LINE
 set regexpengine=1
+
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -248,7 +253,7 @@ map <Space> <Plug>(easymotion-prefix)
 map <Space>n <Plug>(easymotion-next)
 map <Space>N <Plug>(easymotion-prev)
 
-map s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s)
 nmap <Space>f <Plug>(easymotion-f)
 
 " Repeat the last motion
@@ -364,11 +369,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Copying and pasting
-if has('win32')
-    set clipboard=unnamed
-else
-    set clipboard=unnamedplus
-endif
+set clipboard=unnamed
 
 " Don't use Ex mode, use Q for formatting
 map Q gq

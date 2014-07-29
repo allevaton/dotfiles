@@ -17,13 +17,13 @@ Reminders: False
 vimrc:
     LocationLinux: ~/.vimrc
     LocationWin: ~/_vimrc
-    LocationWork: M:/_vimrc_testing
+    LocationWork: M:/_vimrc
     AdditionalFunction: vimrc
 
 vim:
     Location: ~/.vim
     LocationWin: ~/vimfiles
-    LocationWork: M:/vimfiles_testing
+    LocationWork: M:/vimfiles
     #AdditionalFunction: vim
     Ignore:
         - 'bundle'
