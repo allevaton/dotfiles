@@ -144,6 +144,9 @@ let g:ycm_auto_trigger = 1
 nnoremap <leader>e :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
+" Bufexplorer:
+let g:bufExplorerShowNoName = 1
+
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
 
@@ -429,7 +432,7 @@ if has('autocmd')
     au FileType python set omnifunc=pythoncomplete#Complete
 
     " Close the preview window when we move
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    au CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 
     " Always have rainbow parentheses on
     "au BufNewFile,BufRead * RainbowParenthesesLoadRound
