@@ -46,3 +46,8 @@ fish:
     Ignore:
         - 'fish_history'
         - 'fish_read_history'
+
+hgrc:
+    LocationLinux: &hgrc ~/.hgrc
+    LocationWin: *hgrc
+    LocationWork: *hgrc
