@@ -165,7 +165,7 @@ nnoremap <leader>S :SyntasticCheck flake8<CR>
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Omnicompletion:
-set completeopt=menu,menuone,longest ",preview
+set completeopt=menu,menuone,longest,preview
 
 " LaTeX:
 set grepprg=grep\ -nH\ $*
