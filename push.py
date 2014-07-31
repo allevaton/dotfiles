@@ -12,10 +12,10 @@ from src import dotfile
 
 parser = ArgumentParser()
 parser.add_argument('-n', '--no-push', dest='push', action='count',
-                    help='Do not push to the repository', default=1)
+                    help='Do not push to the repository', default=0)
 parser.add_argument('-a', '--no-add', dest='add', action='count',
                     help='Do not add additional files, only commit existing '
-                    'files', default=1)
+                    'files', default=0)
 parser.add_argument('-m', '--message', action='store',
                     help='Specify a message to commit',
                     default='Updated dotfiles')
@@ -24,8 +24,8 @@ parser.add_argument('-q', '--quiet', action='count',
 arguments = parser.parse_args()
 
 # negate arguments to turn them off
-arguments.push = False if arguments.push > 1 else True
-arguments.add = True if arguments.add > 1 else False
+arguments.push = not arguments.push
+arguments.add = not arguments.add
 
 dotfile.push('config.yml',
              location=functions.decide_location(),

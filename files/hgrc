@@ -1,0 +1,11 @@
+[ui]
+username = Nick Allevato <nicholas.allevato@gmail.com>
+
+[auth]
+github.prefix = git+https://github.com
+github.username = allevaton
+
+[extensions]
+bookmarks =
+hggit = ~/workspace/hg-git/hggit
+color =
