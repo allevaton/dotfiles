@@ -9,3 +9,4 @@ github.username = allevaton
 bookmarks =
 hggit = ~/workspace/hg-git/hggit
 color =
+mercurial_keyring =
