@@ -9,7 +9,10 @@ import re
 import shutil
 import sys
 
-from ipdb import set_trace
+try:
+	from ipdb import set_trace
+except:
+	pass
 
 import yaml
 
