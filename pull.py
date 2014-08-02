@@ -14,7 +14,7 @@ parser = ArgumentParser()
 parser.add_argument('-n', '--no-pull', dest='pull', action='count',
                     help='Do not pull from the repository', default=0)
 parser.add_argument('-q', '--quiet', action='count',
-                    help='Do not print anything', default=False)
+                    help='Do not print anything', default=0)
 arguments = parser.parse_args()
 
 # if the -n argument was passed...
