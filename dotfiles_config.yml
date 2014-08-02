@@ -1,0 +1,12 @@
+#
+# Configuration containing file lists
+#
+
+.vimrc:
+    Windows:
+        MoveTo: ~/_vimrc
+    Work:
+        MoveTo: M:/_vimrc
+
+vim$:
+
