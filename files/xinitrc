@@ -75,13 +75,6 @@ case "$1" in
 	#kde)
 	#	exec startkde;;
 
-	# Subtle was fun for awhile, now it's not.
-	# i3 is far superior.
-	# TODO: Remove i3?
-	subtle)
-		nitrogen --restore &
-		exec subtle;;
-
 	# Default is i3
 	*)
 		# Looks like Skype actually works in i3
