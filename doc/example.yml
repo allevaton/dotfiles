@@ -43,4 +43,6 @@ Windows:
         Keep: False
 
 Linux:
+    # Without this setting, it will still copy all files, but
+    # explicit is better than implicit, am I right?
     KeepAll: True
