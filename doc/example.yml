@@ -18,11 +18,12 @@ Windows:
     # files AFTER it sorts through these.
     KeepAll: False
 
-    # This should match a file.
+    # This should match a file exactly. It can also be a file
+    # path if you choose.
     .vimrc:
         Keep: True
 
-        # Make a note that CopyTo settings take precedence.
+        # Note: CopyTo settings take precedence over MoveTo.
         # If both are specified, it will copy the file to the
         # specified location, then move the original one
         # to the destined location.
@@ -31,18 +32,18 @@ Windows:
 
     # Putting a '/' as the first character signifies that this
     # will be treated as a regular expressions object and will
-    # look for a match.
+    # look for a match at any part of the file.
     /vim$:
         # Even though Keep isn't specified here, it's still
-        # going to keep it, because it is listed here.
+        # going to keep it.
         MoveTo: ~/vimfiles
 
-    /.config:
+    .config:
         # Even though this file is specified in this list, if
         # the Keep setting is set to False, it will still delete it.
         Keep: False
 
 Linux:
-    # Without this setting, it will still copy all files, but
+    # Without this setting, it will still keep all files, but
     # explicit is better than implicit, am I right?
     KeepAll: True

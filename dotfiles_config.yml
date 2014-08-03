@@ -16,7 +16,7 @@ Windows:
         Keep: True
         MoveTo: ~/_vimrc
 
-    /vim$:
+    .vim:
         Keep: True
         MoveTo: ~/vimfiles
 
@@ -27,7 +27,7 @@ Work:
         Keep: True
         MoveTo: M:/_vimrc
 
-    .vim:
+    /.vim$:
         Keep: True
         MoveTo: M:/vimfiles
 
