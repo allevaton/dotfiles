@@ -1,0 +1,46 @@
+#
+# This is a YAML configuration example that contains every
+# available option, used in some way, and documented lightly
+# here. You can check the README located at ../README.rst
+#
+
+# Unconditionally delete these files. If no absolute path is
+# specified, relative path to the synced directory is implied:
+Delete:
+    - 'README.rst'
+    - 'dotfiles_config.yml'
+    - 'fix_dotfiles.py'
+    - 'doc'
+
+Windows:
+    # KeepAll will delete everything that is not contained
+    # in the following sections. It will delete the other
+    # files AFTER it sorts through these.
+    KeepAll: False
+
+    # This should match a file.
+    .vimrc:
+        Keep: True
+
+        # Make a note that CopyTo settings take precedence.
+        # If both are specified, it will copy the file to the
+        # specified location, then move the original one
+        # to the destined location.
+        MoveTo: ~/_vimrc
+        CopyTo: C:/Users/John/_vimrc
+
+    # Putting a '/' as the first character signifies that this
+    # will be treated as a regular expressions object and will
+    # look for a match.
+    /vim$:
+        # Even though Keep isn't specified here, it's still
+        # going to keep it, because it is listed here.
+        MoveTo: ~/vimfiles
+
+    /.config:
+        # Even though this file is specified in this list, if
+        # the Keep setting is set to False, it will still delete it.
+        Keep: False
+
+Linux:
+    KeepAll: True

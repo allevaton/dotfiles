@@ -2,12 +2,36 @@
 # Configuration containing file lists
 #
 
-.vimrc:
-    Windows:
+# Unconditionally delete these:
+Delete:
+    - 'README.rst'
+    - 'dotfiles_config.yml'
+    - 'fix_dotfiles.py'
+    - 'doc'
+
+Windows:
+    KeepAll: False
+
+    .vimrc:
+        Keep: True
         MoveTo: ~/_vimrc
-    Work:
+
+    /vim$:
+        Keep: True
+        MoveTo: ~/vimfiles
+
+Work:
+    KeepAll: False
+
+    .vimrc:
+        Keep: True
         MoveTo: M:/_vimrc
 
-.vim:
-    Windows:
-        MoveTo: ~/vimfiles
+    .vim:
+        Keep: True
+        MoveTo: M:/vimfiles
+
+Linux:
+    KeepAll: True
+
+
