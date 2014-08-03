@@ -119,7 +119,9 @@ set fileencoding=utf-8
 "set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 
 " Dictionary:
-"set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+if !has('win32')
+    set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+endif
 
 " Rainbow Parentheses:
 let g:rainbow_active = 1
