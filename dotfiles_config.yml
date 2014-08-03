@@ -8,5 +8,6 @@
     Work:
         MoveTo: M:/_vimrc
 
-vim$:
-
+.vim:
+    Windows:
+        MoveTo: ~/vimfiles
