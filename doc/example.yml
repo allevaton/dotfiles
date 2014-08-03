@@ -9,7 +9,7 @@
 Delete:
     - 'README.rst'
     - 'dotfiles_config.yml'
-    - 'fix_dotfiles.py'
+    - 'fix.py'
     - 'doc'
 
 Windows:
