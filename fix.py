@@ -62,12 +62,20 @@ def parse_config(file):
                         found_file = f
                         break
 
+            set_trace()
             if found_file:
                 # Do we want to keep it?
                 keep = fvalue.get('Keep', True)
+
                 if keep:
                     if found_file in delete_list:
                         delete_list.remove(found_file)
+                else:
+                    if found_file not in delete_list:
+                        delete_list.append(found_file)
+
+                if 'CopyTo' in os_conf:
+                    pass
 
 
 def determine_os():
@@ -81,7 +89,7 @@ def determine_os():
         return 'Linux'
 
     else:
-        print('Not supported OS %s' % os.name)
+        print('Not supported OS: %s' % os.name)
 
 
 def ls():
