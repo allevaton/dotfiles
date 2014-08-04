@@ -13,7 +13,7 @@ Delete:
     - 'doc'
 
 Windows:
-    # KeepAll will delete everything that is not contained
+    # KeepAll as False will delete everything that is not contained
     # in the following sections. It will delete the other
     # files AFTER it sorts through these.
     KeepAll: False
