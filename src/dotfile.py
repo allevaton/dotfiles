@@ -16,7 +16,6 @@ except:
 
 import yaml
 
-
 __all__ = ['pull', 'push']
 
 
