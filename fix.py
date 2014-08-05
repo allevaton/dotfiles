@@ -64,7 +64,6 @@ def parse_config(file):
                         found_file = f
                         break
 
-            set_trace()
             if found_file:
                 # Do we want to keep it?
                 keep = fvalue.get('Keep', True)
