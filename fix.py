@@ -10,6 +10,7 @@ from subprocess import check_output
 
 import os
 import re
+import shutil
 import sys
 
 try:
@@ -45,6 +46,7 @@ def parse_config(file):
         for fkey, fvalue in os_conf.iteritems():
             found_file = ''
 
+            set_trace()
             # is this a regex string?
             if fkey[0] == '/':
                 # compile from the second char to the end to ignore
@@ -52,13 +54,13 @@ def parse_config(file):
                 reg = re.compile(fkey[1:])
 
                 for f in file_list:
-                    set_trace()
-                    if reg.match(f):
+                    if reg.search(f):
+                        set_trace()
                         found_file = f
                         break
             else:
                 for f in file_list:
-                    if fkey == f:
+                    if fkey.startswith(f):
                         found_file = f
                         break
 
@@ -74,7 +76,13 @@ def parse_config(file):
                     if found_file not in delete_list:
                         delete_list.append(found_file)
 
+                if 'CopyTo' in os_conf:
+                    shutil.copytree(found_file, os_conf['CopyTo'])
+
+                if 'MoveTo' in os_conf:
+                    shutil.move(found_file, os_conf['MoveTo'])
         # end for
+
         for f in delete_list:
             os.remove(f)
 
