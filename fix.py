@@ -84,6 +84,7 @@ def parse_config(file):
         # end for
 
         for f in delete_list:
+            # Remove the files
             os.remove(f)
 
 
