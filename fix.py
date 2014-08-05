@@ -74,8 +74,9 @@ def parse_config(file):
                     if found_file not in delete_list:
                         delete_list.append(found_file)
 
-                if 'CopyTo' in os_conf:
-                    pass
+        # end for
+        for f in delete_list:
+            os.remove(f)
 
 
 def determine_os():
