@@ -1,3 +1,13 @@
-*.pyc
+*.py[cdo]
 __pycache__
-open
+
+.vim/bundle
+Desktop
+Documents
+Downloads
+Pictures
+Public
+Videos
+workspace
+
+workbench.*
