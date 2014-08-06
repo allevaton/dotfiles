@@ -20,6 +20,6 @@ if __name__ == '__main__':
             fp.write('source ~/.vimrc', 'w')
 
     if os.path.exists('README.rst'):
-        os.remove('./doc')
+        os.remove('README.rst')
 
     os.remove(__name__)
