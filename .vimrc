@@ -11,14 +11,12 @@ endif
 set nocompatible
 filetype off
 
-if has('win32')
-    set rtp+=~/vimfiles/bundle/Vundle.vim
-    let vundle_path='~/vimfiles/bundle'
-    call vundle#begin(vundle_path)
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
+set rtp=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+set rtp+=$HOME/.vim/bundle/Vundle.vim
+
+let $MYVIMRC='$HOME/.vimrc'
+
+call vundle#begin()
 
 " Begin Plugins:
 Plugin 'gmarik/Vundle.vim'
