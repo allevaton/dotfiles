@@ -14,6 +14,7 @@ filetype off
 set rtp=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 
+" In case we're on Windows
 let $MYVIMRC='$HOME/.vimrc'
 
 call vundle#begin()
