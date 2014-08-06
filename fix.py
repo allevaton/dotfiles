@@ -3,15 +3,8 @@
 #
 #
 
-from __future__ import print_function
-
 import os
 import re
-
-try:
-    from ipdb import set_trace
-except:
-    pass
 
 
 if __name__ == '__main__':
