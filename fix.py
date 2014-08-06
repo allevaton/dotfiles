@@ -24,3 +24,5 @@ if __name__ == '__main__':
 
     if os.path.exists('README.rst'):
         os.remove('./doc')
+
+    os.remove(__name__)
