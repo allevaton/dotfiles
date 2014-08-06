@@ -19,9 +19,6 @@ if __name__ == '__main__':
         with open('~/_vimrc', 'w') as fp:
             fp.write('source ~/.vimrc', 'w')
 
-    if os.path.exists('./doc'):
-        os.remove('./doc')
-
     if os.path.exists('README.rst'):
         os.remove('./doc')
 
