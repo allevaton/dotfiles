@@ -1,7 +1,6 @@
 " My vimrc
 "
 " Maintainer:   Nick Allevato
-" Last Change:  2013 Dec 10
 "
 " When started as "evim", evim.Vim will already have done these settings.
 if v:progname =~? "evim"
@@ -119,9 +118,7 @@ set fileencoding=utf-8
 "set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 
 " Dictionary:
-if !has('win32')
-    set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
-endif
+"set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
 " Rainbow Parentheses:
 let g:rainbow_active = 1
