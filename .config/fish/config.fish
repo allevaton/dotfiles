@@ -142,12 +142,7 @@ function get_host
 end
 
 function fish_prompt
-    if test -d .git
-        printf '%s@%s %s%s%s (%s)%s ' (whoami) (hostname)\
-            (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) (parse_git_branch) (echo $prompt_sym)
-    else
-        printf '%s@%s %s%s%s%s ' (whoami) (hostname)\
-            (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) (echo $prompt_sym)
-    end
+    printf '%s@%s %s%s%s%s ' (whoami) (hostname)\
+        (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) (echo $prompt_sym)
 end
 #}}}
