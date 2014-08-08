@@ -12,10 +12,10 @@
 
 [core]
     editor = vim
-    autocrlf = true
+	autocrlf = false
 
 #[credential]
 #   helper = !\"C:/Program Files (x86)/GitExtensions/GitCredentialWinStore/git-credential-winstore.exe\"
 
 [difftool "gvimdiff"]
-    path = gvim.exe -d
+    path = gvim -d
