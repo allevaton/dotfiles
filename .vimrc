@@ -116,6 +116,9 @@ set fileencoding=utf-8
 " C Family Tags:
 "set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
 
+" CtrlP Setup:
+let g:ctrlp_extensions = ['tag', 'line']
+
 " Dictionary:
 "set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
