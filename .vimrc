@@ -247,6 +247,9 @@ nnoremap ? /
 map  <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
 
+" Better pasting
+xnoremap p "_dP
+
 " define custom leader here
 " defaults to <leader><leader>
 map <Space> <Plug>(easymotion-prefix)
