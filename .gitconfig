@@ -12,7 +12,7 @@
 
 [core]
     editor = vim
-	autocrlf = input
+    autocrlf = true
 
 #[credential]
 #   helper = !\"C:/Program Files (x86)/GitExtensions/GitCredentialWinStore/git-credential-winstore.exe\"
