@@ -8,14 +8,14 @@
 
 [diff]
     guitool = gvimdiff
-    tool = vimdiff
+    tool = gvimdiff
 
 [core]
     editor = vim
-    autocrlf = false
+    autocrlf = true
 
 #[credential]
 #   helper = !\"C:/Program Files (x86)/GitExtensions/GitCredentialWinStore/git-credential-winstore.exe\"
 
-#[difftool "gvimdiff"]
-#    path = gvim -d
+[difftool "gvimdiff"]
+    path = gvim
