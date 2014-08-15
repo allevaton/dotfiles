@@ -12,7 +12,4 @@ if __name__ == '__main__':
         with open('_vimrc', 'w') as fp:
             fp.write('source $HOME/.vimrc')
 
-    if os.path.exists('README.rst'):
-        os.remove('README.rst')
-
     os.remove(__file__)
