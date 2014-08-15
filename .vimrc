@@ -62,7 +62,6 @@ set shell=bash\ --norc
 let mapleader=','
 
 """ BULK CONFIGURATION: """
-set noautochdir     " Automatically adjust the current directory for the file
 set autoindent      " Always
 set backspace=indent,eol,start " Backspace over everything
 set copyindent      " Copy the previous indentation
@@ -74,16 +73,17 @@ set hlsearch        " Highlight search terms (:noh stops highlight)
 set ignorecase      " ignore case sensitivity when searching
 set incsearch       " do incremental searching
 set laststatus=2    " Always show the status bar
+set noautochdir     " DO NOT automatically adjust the current directory for the file
 set nobackup        " don't keep a backup file
 set noswapfile      " Who uses these, anyways?
 set ruler           " show the cursor position all the time
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set sidescrolloff=2 " Side scrolling
 set shiftround      " Only multiples of 4 for shifting
 set shiftwidth=4    " Auto indenting spaces
 set showcmd         " display incomplete commands
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
+set sidescrolloff=2 " Side scrolling
 set smartcase       " ignore case if pattern is all lower
 set smarttab        " Go by shift width, not tab stop
 set softtabstop=4   " Treats 4 spaces as tabs
