@@ -147,6 +147,7 @@ nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
+let g:bufExplorerSortBy = 'number'
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -470,7 +471,6 @@ if has("gui_running")
         set guifont=DejaVu_Sans_Mono_for_Powerline:h12
     else
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-        "set guifont=Liberation\ Mono\ for\ Powerline\ 13
     endif
 
     " Colorscheme:
