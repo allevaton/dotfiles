@@ -108,7 +108,7 @@ set wrap            " word wrapping
 
 " this could add a major typing latency, so be careful.
 " if it does, remove THIS LINE
-set regexpengine=1
+"set regexpengine=1
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -234,7 +234,7 @@ function! AutoHighlightToggle()
             au!
             au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
         augroup end
-        setl updatetime=800
+        setl updatetime=1
         echo 'Highlight current word: ON'
         return 1
     endif

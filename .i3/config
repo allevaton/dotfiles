@@ -70,7 +70,6 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Control+h split h
 bindsym $mod+Control+l split h
 
-
 # Split in vertical orientation
 #bindsym $mod+v split v
 bindsym $mod+Control+k split v
@@ -99,6 +98,10 @@ bindsym XF86AudioRaiseVolume exec amixer -qD pulse set Master 2%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -qD pulse set Master 2%- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioMicMute exec amixer -qD pulse set Capture toggle
+
+# Brightness
+bindsym XF86MonBrightnessDown exec sudo brightness -d
+bindsym XF86MonBrightnessUp exec sudo brightness -u
 
 # Focus the parent container
 bindsym $mod+a focus parent
