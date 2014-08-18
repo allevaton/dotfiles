@@ -92,10 +92,6 @@ alias cdwo="cd $HOME/workspace"
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color auto'
 
-# This alias is for going into my currently active project
-# Note that this will change periodically.
-alias activeproj='. activeproj'
-
 # Hardly ever used, but still nice.
 alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
 
