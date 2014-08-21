@@ -95,7 +95,7 @@ alias cdwo='cd $HOME/workspace'
 alias pacman='sudo pacman --color auto'
 
 # Hardly ever used, but still nice.
-alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
+#alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
 
 # A lot nicer
 alias journal='journalctl'
