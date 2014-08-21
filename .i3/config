@@ -70,7 +70,6 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Control+h split h
 bindsym $mod+Control+l split h
 
-
 # Split in vertical orientation
 #bindsym $mod+v split v
 bindsym $mod+Control+k split v
@@ -99,6 +98,13 @@ bindsym XF86AudioRaiseVolume exec amixer -qD pulse set Master 2%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -qD pulse set Master 2%- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioMicMute exec amixer -qD pulse set Capture toggle
+
+# Brightness
+bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
+bindsym $mod+XF86MonBrightnessUp exec sudo _brightness
+
+bindsym XF86MonBrightnessDown exec sudo _brightness -d
+bindsym XF86MonBrightnessUp exec sudo _brightness -u
 
 # Focus the parent container
 bindsym $mod+a focus parent
@@ -166,6 +172,14 @@ bindsym $mod+r mode "resize"
 
 # General styling here. Colors, fonts, etc.
 font pango:DejaVu Sans Mono 10
+
+# Colors
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000
 
 # Next are the configurations for which windows should float.
 # Sadly, until I figure out a dynamic way to do this, we'll have to enter tham all in

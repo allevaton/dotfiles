@@ -1,0 +1,70 @@
+!
+! Complete X configuration
+!
+
+! Setting the cursor
+! Adwaita is a good theme, despite GNOME
+Xcursor.theme:      Adwaita
+Xcursor.size:       16
+
+!
+! Configuring URxvt
+URxvt*.depth:       32
+URxvt*.foreground:  [95]#EEEEEE
+URxvt*.background:  [95]#000000
+URxvt*.font:        xft:DejaVu Sans Mono:size=11:antialias=true:hinting=true
+URxvt*.scrollBar_right:true
+URxvt*.letterSpace: -1
+URxvt*.transparent: true
+URxvt*.shading:     15
+
+!
+! dzen2
+dzen2.font:         xft:DejaVu Sans Mono:size=11:antialias=true:hinting=true
+dzen2.foreground:   #22EE11
+dzen2.background:   black
+
+!
+! We like anti-aliasing
+Xft.autohint:       0
+Xft.lcdfilter:      lcddefault
+Xft.hintstyle:      hintfull
+Xft.hinting:        1
+Xft.antialias:      1
+Xft.rgba:           rgb
+
+!
+! New terminal colors!
+!
+! Black / Gray
+*color0:  #000000
+*color8:  #333333
+
+! Red / Light Red
+*color1:  #CC5552
+*color9:  #F28987
+
+! Green / Light Green
+*color2:  #73CE7F
+*color10: #83EA91
+
+! Yellow / Light Yellow
+*color3:  #E6EA7C
+*color11: #F5F975
+
+! Blue / Light Blue
+*color4:  #729FCF
+*color12: #80B6ED
+
+! Magenta / Light Magenta
+*color5:  #75507B
+*color13: #AD7FA8
+
+! Cyan / Light Cyan
+*color6:  #92D2E5
+*color14: #8EE0F9
+
+! Light Gray / White
+*color7:  #CCCCCC
+*color15: #ECEDEE
+

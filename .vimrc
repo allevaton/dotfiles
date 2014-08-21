@@ -62,7 +62,6 @@ set shell=bash\ --norc
 let mapleader=','
 
 """ BULK CONFIGURATION: """
-set noautochdir     " Automatically adjust the current directory for the file
 set autoindent      " Always
 set backspace=indent,eol,start " Backspace over everything
 set copyindent      " Copy the previous indentation
@@ -74,16 +73,17 @@ set hlsearch        " Highlight search terms (:noh stops highlight)
 set ignorecase      " ignore case sensitivity when searching
 set incsearch       " do incremental searching
 set laststatus=2    " Always show the status bar
+set noautochdir     " DO NOT automatically adjust the current directory for the file
 set nobackup        " don't keep a backup file
 set noswapfile      " Who uses these, anyways?
 set ruler           " show the cursor position all the time
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set sidescrolloff=2 " Side scrolling
 set shiftround      " Only multiples of 4 for shifting
 set shiftwidth=4    " Auto indenting spaces
 set showcmd         " display incomplete commands
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
+set sidescrolloff=2 " Side scrolling
 set smartcase       " ignore case if pattern is all lower
 set smarttab        " Go by shift width, not tab stop
 set softtabstop=4   " Treats 4 spaces as tabs
@@ -108,7 +108,7 @@ set wrap            " word wrapping
 
 " this could add a major typing latency, so be careful.
 " if it does, remove THIS LINE
-set regexpengine=1
+"set regexpengine=1
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -147,6 +147,7 @@ nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
+let g:bufExplorerSortBy = 'number'
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -233,7 +234,7 @@ function! AutoHighlightToggle()
             au!
             au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
         augroup end
-        setl updatetime=800
+        setl updatetime=1
         echo 'Highlight current word: ON'
         return 1
     endif
@@ -246,6 +247,9 @@ endfunction
 nnoremap ? /
 map  <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
+
+" Better pasting
+xnoremap p "_dP
 
 " define custom leader here
 " defaults to <leader><leader>
@@ -344,7 +348,7 @@ nnoremap <C-S-tab> :bp<CR>
 inoremap <C-tab> <esc>:bn<CR>
 inoremap <C-S-tab> <esc>:bp<CR>
 
-nnoremap <Tab> <C-6>
+"nnoremap <Tab> <C-6>
 
 " Allow switching windows in edit mode
 inoremap <C-w> <esc><C-w>
@@ -369,11 +373,15 @@ nnoremap <leader>wp :lprevious<CR>
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
 " such an operation.
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " Copying and pasting
-set clipboard=unnamed
+if has('win32')
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -401,7 +409,7 @@ if has('autocmd')
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
+    " (happens when dropping a file on gVim).
     " Also don't do it when the mark is in the first line, that is the default
     " position when opening a file.
     autocmd BufReadPost *
@@ -432,6 +440,9 @@ if has('autocmd')
     " TODO necessary?
     au FileType python set omnifunc=pythoncomplete#Complete
 
+    " Probably using NASM in Vim
+    au BufRead,BufNewFile *.asm set filetype=nasm
+
     " Close the preview window when we move
     au CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 
@@ -447,7 +458,7 @@ endif
 " Only define it when not defined already.
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-        \ | wincmd p | diffthis
+                \ | wincmd p | diffthis
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -467,7 +478,6 @@ if has("gui_running")
         set guifont=DejaVu_Sans_Mono_for_Powerline:h12
     else
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-        "set guifont=Liberation\ Mono\ for\ Powerline\ 13
     endif
 
     " Colorscheme:
@@ -476,7 +486,7 @@ if has("gui_running")
     colorscheme luna
     "colorscheme solarized
 
-    " With this, the gui (gvim and macvim) now doesn't have the toolbar,
+    " With this, the gui (gVim and macVim) now doesn't have the toolbar,
     " left and right scrollbars, and the menu.
     " From Valloric's vimrc
     set guioptions-=T

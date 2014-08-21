@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+#
+#
+#
+
+# In terms of battery percent
+THRESHOLD=10
+
+IFS=', ' read -a batterystatus <<< "`acpi`"
+
+if [ "${batterystatus[2]}" == "Discharging" ]
+then
+    if [ `echo "${batterystatus[3]}" | sed 's/%//'` -le $THRESHOLD ]
+    then
+        notify-send -u critical 'Battery Low' "Your battery is at ${batterystatus[3]}"
+    fi
+fi
