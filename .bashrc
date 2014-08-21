@@ -1,24 +1,26 @@
 #
-#   fish config
+# ~/.bashrc
 #
 
-# variables {{{
-# global path
-set -e PATH
-set -Ux PATH /usr/bin /usr/local/bin
-# }}}
+# This is what the general appearance of the prompt looks like
+#export PS1="\[\e[1;34m\u\e[0m@\h \W\]\$ "
+
+export PS1="\[\e[1;34m\]\u\[\e[m\]@\h \W\$ "
+
+# TODO: $PATH
 
 # aliases {{{
+
 # A much easier ls statement
-#alias ls="if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}""
-alias ls='ls -v --color=auto'
+#alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
+alias ls='ls -vh --color=auto'
 
 # Handy
 alias l='ls'
+alias ll='ls -l'
 
 # An easier more detailed list command
 alias la='ls -lha'
-
 
 # Ranger is nice, so shortcut it.
 alias ra='ranger'
@@ -40,9 +42,9 @@ alias rn='mv'
 alias less='less -r'
 
 # Good stuff
-alias vim='vim -p'
+alias vim='vim'
 alias vimrc='vim ~/.vimrc'
-alias gvim='gvim -p'
+alias gvim='gvim'
 alias gvimrc='gvim ~/.vimrc'
 
 # Better way to type `clear`
@@ -59,7 +61,7 @@ alias mv='mv -i'
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd="ifconfig wlp3s0 down; netctl stop-all"
+alias ifwd='ifconfig wlp3s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
@@ -68,7 +70,7 @@ alias duh='du -hsc'
 
 # Interesting... in case of accidents
 # cd's into the previous directory
-alias cdp="cd $OLDPWD"
+alias cdp='cd $OLDPWD'
 
 # cd's into the parent directory
 alias cdd='cd ..'
@@ -87,7 +89,7 @@ alias iegrep='egrep -i'
 alias find='sudo find'
 
 # Much better
-alias cdwo="cd $HOME/workspace"
+alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color auto'
@@ -104,41 +106,39 @@ alias sys='systemctl'
 
 # Use vim as a pager
 #alias less='vimpager'
+
 # }}}
+##
+#
+# Function redefinitions go here.
+#
+# I like colored manual pages.
+#
+# Colored man pages
+export LESS_TERMCAP_mb=$'\e[01;31m'
+export LESS_TERMCAP_md=$'\e[01;38;5;74m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[38;33;246m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[04;38;5;146m'
 
-
-# fish prompt{{{
-set fish_git_dirty_color red
-set fish_git_not_dirty_color green
-
-# prompt symbol
-set prompt_sym ''
-
-function parse_git_branch
-    set -l branch (git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
-    set -l git_diff (git diff)
-
-    if test -n "$git_diff"
-        echo (set_color $fish_git_dirty_color)$branch(set_color normal)
-    else
-        echo (set_color $fish_git_not_dirty_color)$branch(set_color normal)
-    end
-end
-
-if contains 'root' $USER
-    set prompt_sym '#'
-    set fish_color_cwd red
-else
-    set prompt_sym '$'
-    set fish_color_cwd green
-end
-
-function get_host
-    eval hostname|cut -d . -f 1
-end
-
-function fish_prompt
-    printf '%s@%s %s%s%s%s ' (whoami) (hostname)\
-        (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) (echo $prompt_sym)
-end
-#}}}
+# A new copy
+cp_p()
+{
+   strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+      | awk '{
+        count += $NF
+            if (count % 10 == 0) {
+               percent = count / total_size * 100
+               printf "%3d%% [", percent
+               for (i=0;i<=percent;i++)
+                  printf "="
+               printf ">"
+               for (i=percent;i<100;i++)
+                  printf " "
+               printf "]\r"
+            }
+         }
+         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
