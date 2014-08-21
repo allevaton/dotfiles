@@ -122,23 +122,3 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
-
-# A new copy
-cp_p()
-{
-   strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
-      | awk '{
-        count += $NF
-            if (count % 10 == 0) {
-               percent = count / total_size * 100
-               printf "%3d%% [", percent
-               for (i=0;i<=percent;i++)
-                  printf "="
-               printf ">"
-               for (i=percent;i<100;i++)
-                  printf " "
-               printf "]\r"
-            }
-         }
-         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
-}
