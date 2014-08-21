@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # ~/.xinitrc
 #
@@ -6,35 +6,32 @@
 #
 ## Initial X settings that we like
 
-	# Mouse speed
-	#synclient AccelFactor=0.06
-	#synclient MinSpeed=0.5
-	#xset m 20 5
+    # Mouse speed
+    #synclient AccelFactor=0.06
+    #synclient MinSpeed=0.5
+    #xset m 20 5
 
-	# Never really liked touchpad tap
-	#synclient TapButton1=0
+    # Never really liked touchpad tap
+    synclient TapButton1=0
 
-	# Makes more sense for 2 finger tap to be right click
-	#synclient TapButton3=2
-	#synclient TapButton2=3
+    # Makes more sense for 2 finger tap to be right click
+    #synclient TapButton3=2
+    #synclient TapButton2=3
 
-	# Keyboard rates should be faster
-	xset r rate 210 30
+    # Keyboard rates should be faster
+    xset r rate 210 30
 
-	# Honestly, not liking the screen blanking
-	xset -dpms
-	xset s off
+    # Honestly, not liking the screen blanking
+    xset -dpms
+    xset s off
 
-	# Don't like being blinded all the time
-	# Sometimes f.lux isn't enough, y'know?
-	xbacklight -set 60
+    # Don't like being blinded all the time
+    # Sometimes f.lux isn't enough, y'know?
+    xbacklight -set 60
 
-	# We like Ctrl+Alt+Backspace, right?
-	#setxkbmap -option terminate:ctrl_alt_bksp
+    # We like Ctrl+Alt+Backspace, right?
+    #setxkbmap -option terminate:ctrl_alt_bksp
 
-
-# Create the trash here
-mkdir /tmp/trash
 
 # This is kind of useful
 export WORKSPACE="$HOME/workspace"
@@ -53,43 +50,43 @@ xflux -z 02038
 
 # Lastly, start the DE/WM specified, or not specified
 case "$1" in
-	gnome)
-		exec gnome-session;;
+    gnome)
+        exec gnome-session;;
 
-	# TODO: Is this installed?
-	xfce)
-		exec startxfce4;;
+    # TODO: Is this installed?
+    xfce)
+        exec startxfce4;;
 
-	# TODO: Remove OpenBox?
-	openbox)
-		# Just so openbox can have a cool background, too
-		nitrogen --restore &
+    # TODO: Remove OpenBox?
+    openbox)
+        # Just so openbox can have a cool background, too
+        nitrogen --restore &
 
-		exec openbox;;
+        exec openbox;;
 
-	# Not installed
-	#razor)
-	#	exec razor-session;;
+    # Not installed
+    #razor)
+    #   exec razor-session;;
 
-	# Not installed
-	#kde)
-	#	exec startkde;;
+    # Not installed
+    #kde)
+    #   exec startkde;;
 
-	# Default is i3
-	*)
-		# Looks like Skype actually works in i3
-		# No harm in starting it.
-		skype &
+    # Default is i3
+    *)
+        # Looks like Skype actually works in i3
+        # No harm in starting it.
+        skype &
 
-		# Start irc. Luckily, this is minimal
-		#hexchat --minimize=2 &
+        # Start irc. Luckily, this is minimal
+        #hexchat --minimize=2 &
 
-		# Wallpapers are sexy.
-		nitrogen --restore &
+        # Wallpapers are sexy.
+        nitrogen --restore &
 
-		# Launch i3
-		exec i3
-		;;
+        # Launch i3
+        exec i3
+        ;;
 esac
 
 # vim:ts=4

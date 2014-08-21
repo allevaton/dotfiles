@@ -348,7 +348,7 @@ nnoremap <C-S-tab> :bp<CR>
 inoremap <C-tab> <esc>:bn<CR>
 inoremap <C-S-tab> <esc>:bp<CR>
 
-nnoremap <Tab> <C-6>
+"nnoremap <Tab> <C-6>
 
 " Allow switching windows in edit mode
 inoremap <C-w> <esc><C-w>
@@ -373,11 +373,15 @@ nnoremap <leader>wp :lprevious<CR>
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
 " such an operation.
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 " Copying and pasting
-set clipboard=unnamed
+if has('win32')
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -405,7 +409,7 @@ if has('autocmd')
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
+    " (happens when dropping a file on gVim).
     " Also don't do it when the mark is in the first line, that is the default
     " position when opening a file.
     autocmd BufReadPost *
@@ -436,6 +440,9 @@ if has('autocmd')
     " TODO necessary?
     au FileType python set omnifunc=pythoncomplete#Complete
 
+    " Probably using NASM in Vim
+    au BufRead,BufNewFile *.asm set filetype=nasm
+
     " Close the preview window when we move
     au CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 
@@ -451,7 +458,7 @@ endif
 " Only define it when not defined already.
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-        \ | wincmd p | diffthis
+                \ | wincmd p | diffthis
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -479,7 +486,7 @@ if has("gui_running")
     colorscheme luna
     "colorscheme solarized
 
-    " With this, the gui (gvim and macvim) now doesn't have the toolbar,
+    " With this, the gui (gVim and macVim) now doesn't have the toolbar,
     " left and right scrollbars, and the menu.
     " From Valloric's vimrc
     set guioptions-=T
