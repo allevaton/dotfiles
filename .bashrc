@@ -105,7 +105,7 @@ alias j='journal'
 alias sys='systemctl'
 
 # Use vim as a pager
-#alias less='vimpager'
+alias less='less -R'
 
 # }}}
 ##
@@ -122,3 +122,4 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+
