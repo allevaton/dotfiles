@@ -6,12 +6,19 @@
 # In terms of battery percent
 THRESHOLD=10
 
-IFS=', ' read -a batterystatus <<< "`acpi`"
+dir=/sys/class/power_supply/BAT0
 
-if [ "${batterystatus[2]}" == "Discharging" ]
+batstat=`cat $dir/status`
+
+max=`cat $dir/energy_full_design`
+cur=`cat $dir/energy_now`
+
+percent=`echo "$cur / $max * 100" | bc -l | sed 's/\..*//'`
+
+if [ $batstat == 'Discharging' ]
 then
-    if [ `echo "${batterystatus[3]}" | sed 's/%//'` -le $THRESHOLD ]
+    if [ $percent -le $THRESHOLD ]
     then
-        notify-send -u critical 'Battery Low' "Your battery is at ${batterystatus[3]}"
+        notify-send -u critical "Battery Low" "Your battery is at $percent"
     fi
 fi
