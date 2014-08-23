@@ -102,10 +102,6 @@ alias df='df -h'
 # Just in case you forgot...
 alias rn='mv'
 
-# Colorful less
-# `-R' is reading raw ASCII characters
-alias less='less -r'
-
 # Good stuff
 alias vim='vim'
 alias vimrc='vim ~/.vimrc'
@@ -119,8 +115,9 @@ alias gvimrc='gvim ~/.vimrc'
 alias cp='cp -r'
 
 # My useful trash command
-alias rm='mv -t /tmp/trash'
-alias rmf='rmf -r'
+#alias rm='mv -t /tmp/trash'
+#alias rmf='rmf -r'
+alias rm='rm -ir'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
