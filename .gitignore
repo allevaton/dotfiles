@@ -9,6 +9,6 @@ Pictures
 Public
 Videos
 
-.gitconfig
+*.gitconfig
 
 workbench.*
