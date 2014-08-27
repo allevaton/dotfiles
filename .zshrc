@@ -1,7 +1,6 @@
 #
 # ~/.zshrc
 #
-# Lines configured by zsh-newuser-install {{{
 autoload -U colors && colors
 export PS1="%{%(#~$fg_bold[red]~$fg_bold[blue])%}%n%{$reset_color%}@%M %c%(#~%{#%}~%{$%}%}) "
 
@@ -18,10 +17,24 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/nick/.zshrc'
 
+# PLUGINS {{{
+
 autoload -Uz compinit
 compinit
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
+function loadplugin
+{
+    if [ -e "$1" ]
+    then
+        source "$1"
+    else
+        echo "Plugin not loaded: $1"
+    fi
+}
+
+loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
+
+loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 
 setopt correct_all
 # }}}
@@ -72,9 +85,9 @@ fi
 # aliases {{{
 
 # Make the trash folder
-mkdir -p /tmp/trash
-sudo ln -sf /usr/bin/rm /usr/bin/rmf
-sudo chown $USER /tmp/trash
+#mkdir -p /tmp/trash
+#sudo ln -sf /usr/bin/rm /usr/bin/rmf
+#sudo chown $USER /tmp/trash
 
 # A much easier ls statement
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
@@ -88,7 +101,7 @@ alias ll='ls -l'
 alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
-alias ra='ranger'
+alias ra='. ranger'
 
 # Sudo fix
 #alias sudo="sudo $@"
@@ -155,6 +168,7 @@ alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color auto'
+alias yaourt='yaourt --color=auto'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
@@ -179,4 +193,5 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+
 
