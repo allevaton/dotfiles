@@ -4,7 +4,7 @@
 #
 
 # In terms of battery percent
-THRESHOLD=10
+THRESHOLD=90
 
 dir=/sys/class/power_supply/BAT0
 
@@ -19,6 +19,8 @@ if [ $batstat == 'Discharging' ]
 then
     if [ $percent -le $THRESHOLD ]
     then
-        notify-send -u critical "Battery Low" "Your battery is at $percent"
+        notify-send -u critical "Battery Low" "Your battery is at $percent%"
     fi
 fi
+
+echo "Y" >> /home/nick/test.log

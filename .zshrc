@@ -88,7 +88,7 @@ alias ll='ls -l'
 alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
-alias ra='ranger'
+alias ra='. ranger'
 
 # Sudo fix
 #alias sudo="sudo $@"
@@ -118,6 +118,7 @@ alias cp='cp -r'
 #alias rm='mv -t /tmp/trash'
 #alias rmf='rmf -r'
 alias rm='rm -ir'
+alias mv='mv -ir'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'

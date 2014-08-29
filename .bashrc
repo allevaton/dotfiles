@@ -23,7 +23,7 @@ alias ll='ls -l'
 alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
-alias ra='ranger'
+alias ra='. ranger'
 
 # Sudo fix
 #alias sudo="sudo $@"
@@ -36,10 +36,6 @@ alias df='df -h'
 
 # Just in case you forgot...
 alias rn='mv'
-
-# Colorful less
-# `-R' is reading raw ASCII characters
-alias less='less -r'
 
 # Good stuff
 alias vim='vim'
