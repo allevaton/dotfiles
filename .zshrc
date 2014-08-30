@@ -169,7 +169,7 @@ alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color auto'
-alias yaourt='yaourt --color=auto'
+alias yaourt='yaourt --color auto'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
