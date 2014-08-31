@@ -203,8 +203,10 @@ for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
 bar
 {
     position top
+    workspace_buttons yes
     status_command i3status -c ~/.i3/status
+    #status_command /home/nick/.i3/bash
+    #status_command i3-wsbar -c "dzconky -x %x"
     #status_command i3status | i3-wsbar -c "dzen2 -x %x -dock"
-    #status_command i3status -c ~/.i3/status | dzen2
-    #status_command dzconky
+    #status_command i3-wsbar -c "dzen2 -x %x"
 }

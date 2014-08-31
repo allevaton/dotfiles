@@ -1,0 +1,98 @@
+#!/bin/bash
+#
+#
+#
+
+# CONFIGURATION #
+#
+# Wireless yellow threshold
+conf_wyt=60
+
+# Output date format
+conf_date_format='%A, %B %d, %Y  %I:%M:%S %p'
+
+# Partition to watch remaining space
+# This just searches the output of `df` for this text
+conf_devremain='home'
+
+color_good=#00FF00
+color_med=#FFFF00
+color_bad=#FF0000
+
+# BEGIN #
+
+echo '{"version":1}'
+echo '['
+echo '[],'
+
+function module_time
+{
+    printf '{"full_text": ":: %s ::"}' "`date +"$conf_date_format"`"
+}
+
+function module_internet
+{
+    # Commands:
+    # Gets device and IP:
+    # ip route | tail -n 1 | awk '{print $3,$9}'
+    # Could also use hostname -i for IP, but it's proven to be slow
+    #
+    # Gets currently connected wireless device
+    # iwconfig $device | awk -F\" '/\"/{print $2}'
+    device=`ip route | tail -n 1 | awk '{print $3}'`
+    ip=`hostname -i`
+
+    if [ "`cut -c -1 <<< $device`" == 'w' ]
+    then
+        percent=`echo 'scale=4;'$(iwconfig wlp3s0 | awk '/Quality/{print $2"*100"}' | sed 's/.*=//') | bc -l | sed 's/\.[0-9]*/%/'`
+
+        router=`iwconfig $device | awk -F\" '/\"/{print $2}'`
+
+        color="$color_good"
+
+        if [ ${percent%?} -le $conf_wyt ]
+        then
+            color="$color_med"
+        fi
+
+        printf '{"full_text": "W: (%s at %s) %s", "color": "%s"}' \
+            "$percent" "$router" "$ip" "$color"
+    else
+        printf '{"full_text": "E: %s", "color": "%s"}' "$ip" "$color_good"
+    fi
+
+}
+
+function module_partition
+{
+    avail=`df | awk '/\/home/{print $4/1048576}' | cut -c -4`
+
+    printf '{"full_text": "%s: %s GB free"}' "$conf_devremain" "$avail"
+}
+
+function module_volume
+{
+    read -a vol <<< `amixer get Master | grep -Eo '([0-9]+%)|(on|off)]'`
+
+    # Yes, the bracket is important
+    if [ "${vol[1]}" == "on]" ]
+    then
+        printf '{"full_text": "♪%s"}' "${vol[0]}"
+    else
+        printf '{"full_text": "♪mm%%", "color": "%s"}' "$color_med"
+    fi
+}
+
+while true
+do
+    out+='['
+    out+=`module_internet`,
+    out+=`module_partition`,
+    out+=`module_volume`,
+    out+=`module_time`
+    out+='],'
+
+    echo $out
+    out=
+    sleep 1s
+done
