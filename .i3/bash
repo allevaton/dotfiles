@@ -42,9 +42,11 @@ function module_internet
     device=`ip route | tail -n 1 | awk '{print $3}'`
     ip=`hostname -i`
 
-    if [ "`cut -c -1 <<< $device`" == 'w' ]
+    conn_type=`cut -c -1 <<< $device`
+
+    if [ "$conn_type" == 'w' ]
     then
-        percent=`echo 'scale=4;'$(iwconfig wlp3s0 | awk '/Quality/{print $2"*100"}' | sed 's/.*=//') | bc -l | sed 's/\.[0-9]*/%/'`
+        percent=`echo 'scale=4;'$(iwconfig $device | awk '/Quality/{print $2"*100"}' | sed 's/.*=//') | bc -l | sed 's/\.[0-9]*/%/'`
 
         router=`iwconfig $device | awk -F\" '/\"/{print $2}'`
 
@@ -57,15 +59,17 @@ function module_internet
 
         printf '{"full_text": "W: (%s at %s) %s", "color": "%s"}' \
             "$percent" "$router" "$ip" "$color"
-    else
+    elif [ "$conn_type" == 'e' ]
+    then
         printf '{"full_text": "E: %s", "color": "%s"}' "$ip" "$color_good"
+    else
+        printf '{"full_text": "No connection", "color": "%s"}' "$color_bad"
     fi
-
 }
 
 function module_partition
 {
-    avail=`df | awk '/\/home/{print $4/1048576}' | cut -c -4`
+    avail=`df | awk '/$conf_wdev/{print $4/1048576}' | cut -c -4`
 
     printf '{"full_text": "%s: %s GB free"}' "$conf_devremain" "$avail"
 }
@@ -74,7 +78,6 @@ function module_volume
 {
     read -a vol <<< `amixer get Master | grep -Eo '([0-9]+%)|(on|off)]'`
 
-    # Yes, the bracket is important
     if [ "${vol[1]}" == "on]" ]
     then
         printf '{"full_text": "♪%s"}' "${vol[0]}"

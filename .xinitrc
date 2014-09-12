@@ -9,7 +9,7 @@
     # Mouse speed
     #synclient AccelFactor=0.06
     #synclient MinSpeed=0.5
-    #xset m 20 5
+    xset m 20 5
 
     # Never really liked touchpad tap
     #synclient TapButton1=0
@@ -30,7 +30,7 @@
     xbacklight -set 60
 
     # We like Ctrl+Alt+Backspace, right?
-    #setxkbmap -option terminate:ctrl_alt_bksp
+    setxkbmap -option terminate:ctrl_alt_bksp
 
 
 # This is kind of useful

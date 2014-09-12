@@ -36,7 +36,11 @@ loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
 
 loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 
+# corrections
 setopt correct_all
+
+# don't kill child processes
+setopt NO_HUP
 # }}}
 
 # Getting some keys to work {{{
@@ -137,7 +141,7 @@ alias mv='mv -ir'
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd='ifconfig wlp3s0 down && netctl stop-all'
+alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
