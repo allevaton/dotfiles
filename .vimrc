@@ -43,13 +43,10 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Matt-Stevens/vim-systemd-syntax'
 Plugin 'tkztmk/vim-vala'
-
+Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
-
 Plugin 'allevaton/vim-luna'
 Plugin 'Valloric/YouCompleteMe'
-
-Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on

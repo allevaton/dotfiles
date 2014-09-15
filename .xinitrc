@@ -7,17 +7,8 @@
 ## Initial X settings that we like
 
     # Mouse speed
-    #synclient AccelFactor=0.06
-    #synclient MinSpeed=0.5
-    xset m 20 5
-
-    # Never really liked touchpad tap
-    #synclient TapButton1=0
-
-    # Makes more sense for 2 finger tap to be right click
-    #synclient TapButton3=2
-    #synclient TapButton2=3
-
+    # These settings are now set in /etc/X11/xorg.conf.d/50-synaptics.conf
+    # Please edit mouse-related settings there.
     # Keyboard rates should be faster
     xset r rate 210 30
 

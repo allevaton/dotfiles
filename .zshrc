@@ -134,8 +134,8 @@ alias cp='cp -r'
 # My useful trash command
 #alias rm='mv -t /tmp/trash'
 #alias rmf='rmf -r'
-alias rm='rm -ir'
-alias mv='mv -ir'
+alias rm='rm -r'
+alias mv='mv -r'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
@@ -172,8 +172,7 @@ alias find='sudo find'
 alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color auto'
-alias yaourt='yaourt --color auto'
+alias pacman='sudo pacman --color=auto'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
