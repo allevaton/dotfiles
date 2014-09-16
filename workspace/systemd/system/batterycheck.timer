@@ -1,0 +1,6 @@
+[Unit]
+Description=battery checker
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min

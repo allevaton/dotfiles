@@ -1,7 +1,6 @@
 #
 # ~/.zshrc
 #
-# Lines configured by zsh-newuser-install {{{
 autoload -U colors && colors
 export PS1="%{%(#~$fg_bold[red]~$fg_bold[blue])%}%n%{$reset_color%}@%M %c%(#~%{#%}~%{$%}%}) "
 
@@ -18,12 +17,30 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/nick/.zshrc'
 
+# PLUGINS {{{
+
 autoload -Uz compinit
 compinit
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
+function loadplugin
+{
+    if [ -e "$1" ]
+    then
+        source "$1"
+    else
+        echo "Plugin not loaded: $1"
+    fi
+}
 
+loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
+
+loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+
+# corrections
 setopt correct_all
+
+# don't kill child processes
+setopt NO_HUP
 # }}}
 
 # Getting some keys to work {{{
@@ -72,9 +89,9 @@ fi
 # aliases {{{
 
 # Make the trash folder
-mkdir -p /tmp/trash
-sudo ln -sf /usr/bin/rm /usr/bin/rmf
-sudo chown $USER /tmp/trash
+#mkdir -p /tmp/trash
+#sudo ln -sf /usr/bin/rm /usr/bin/rmf
+#sudo chown $USER /tmp/trash
 
 # A much easier ls statement
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
@@ -88,7 +105,7 @@ alias ll='ls -l'
 alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
-alias ra='ranger'
+alias ra='. ranger'
 
 # Sudo fix
 #alias sudo="sudo $@"
@@ -101,10 +118,6 @@ alias df='df -h'
 
 # Just in case you forgot...
 alias rn='mv'
-
-# Colorful less
-# `-R' is reading raw ASCII characters
-alias less='less -r'
 
 # Good stuff
 alias vim='vim'
@@ -119,14 +132,16 @@ alias gvimrc='gvim ~/.vimrc'
 alias cp='cp -r'
 
 # My useful trash command
-alias rm='mv -t /tmp/trash'
-alias rmf='rmf -r'
+#alias rm='mv -t /tmp/trash'
+#alias rmf='rmf -r'
+alias rm='rm -r'
+alias mv='mv -r'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd='ifconfig wlp3s0 down && netctl stop-all'
+alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
@@ -157,7 +172,7 @@ alias find='sudo find'
 alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color auto'
+alias pacman='sudo pacman --color=auto'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
@@ -182,4 +197,5 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+
 

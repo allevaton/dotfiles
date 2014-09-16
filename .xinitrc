@@ -7,17 +7,8 @@
 ## Initial X settings that we like
 
     # Mouse speed
-    #synclient AccelFactor=0.06
-    #synclient MinSpeed=0.5
-    #xset m 20 5
-
-    # Never really liked touchpad tap
-    synclient TapButton1=0
-
-    # Makes more sense for 2 finger tap to be right click
-    #synclient TapButton3=2
-    #synclient TapButton2=3
-
+    # These settings are now set in /etc/X11/xorg.conf.d/50-synaptics.conf
+    # Please edit mouse-related settings there.
     # Keyboard rates should be faster
     xset r rate 210 30
 
@@ -30,12 +21,12 @@
     xbacklight -set 60
 
     # We like Ctrl+Alt+Backspace, right?
-    #setxkbmap -option terminate:ctrl_alt_bksp
+    setxkbmap -option terminate:ctrl_alt_bksp
 
 
 # This is kind of useful
 export WORKSPACE="$HOME/workspace"
-export WS="$HOME/workspace"
+export WS="$WORKSPACE"
 export EDITOR="vim"
 
 # Load the general X configuration
@@ -52,25 +43,6 @@ xflux -z 02038
 case "$1" in
     gnome)
         exec gnome-session;;
-
-    # TODO: Is this installed?
-    xfce)
-        exec startxfce4;;
-
-    # TODO: Remove OpenBox?
-    openbox)
-        # Just so openbox can have a cool background, too
-        nitrogen --restore &
-
-        exec openbox;;
-
-    # Not installed
-    #razor)
-    #   exec razor-session;;
-
-    # Not installed
-    #kde)
-    #   exec startkde;;
 
     # Default is i3
     *)
