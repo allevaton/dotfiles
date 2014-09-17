@@ -106,6 +106,8 @@ bindsym $mod+XF86MonBrightnessUp exec sudo _brightness
 bindsym XF86MonBrightnessDown exec sudo _brightness -d
 bindsym XF86MonBrightnessUp exec sudo _brightness -u
 
+bindsym XF86Display exec arandr
+
 # Focus the parent container
 bindsym $mod+a focus parent
 

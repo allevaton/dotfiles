@@ -135,7 +135,7 @@ alias cp='cp -r'
 #alias rm='mv -t /tmp/trash'
 #alias rmf='rmf -r'
 alias rm='rm -r'
-alias mv='mv -r'
+alias mv='mv'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
