@@ -1,5 +1,10 @@
-if [ -d "$HOME/.local/bin" ]; then
+if [ -d "$HOME/.local/bin" ]
+then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
 PATH="$PATH:/usr/local/bin"
+
+WORKSPACE="$HOME/workspace"
+WS="$WORKSPACE"
+EDITOR="vim"

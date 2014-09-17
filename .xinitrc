@@ -22,9 +22,10 @@ xset s off
 
 # Mouse specific setup
 # Find the G9x
-id=`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}' | tail -n 1`
+id=`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}' | head -n 1`
 xinput set-prop $id 'Device Accel Profile' 2
 xinput set-prop $id 'Device Accel Constant Deceleration' 3
+xinput set-ptr-feedback $id 0 18 10
 xset m 10/6 0
 
 # Don't like being blinded all the time
@@ -37,15 +38,6 @@ setxkbmap -option terminate:ctrl_alt_bksp
 
 # Load the general X configuration
 xrdb $HOME/.Xresources
-
-###########################################################
-# Global environmental variables
-###########################################################
-
-# This is kind of useful
-export WORKSPACE="$HOME/workspace"
-export WS="$WORKSPACE"
-export EDITOR="vim"
 
 ###########################################################
 # Startup programs and start the WM
@@ -71,6 +63,8 @@ case "$1" in
 
         # Wallpapers are sexy.
         nitrogen --restore &
+
+        steam &
 
         # Launch i3
         exec i3
