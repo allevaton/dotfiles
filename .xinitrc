@@ -10,8 +10,8 @@
 ###########################################################
 
 # Mouse speed
-# XXX: These settings are now set in /etc/X11/xorg.conf.d/50-synaptics.conf
-# Please edit mouse-related settings there.
+# TODO: move all mosue settings from /etc/X11/xorg.conf.d/50-synaptics.conf to here
+# I don't like them there.
 
 # Keyboard rates should be faster
 xset r rate 210 30
@@ -21,12 +21,15 @@ xset -dpms
 xset s off
 
 # Mouse specific setup
-# Find the G9x
-id=`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}' | head -n 1`
-xinput set-prop $id 'Device Accel Profile' 2
-xinput set-prop $id 'Device Accel Constant Deceleration' 3
-xinput set-ptr-feedback $id 0 18 10
+#
 xset m 10/6 0
+# Find the G9x
+while read id
+do
+    xinput set-prop $id 'Device Accel Profile' 2
+    xinput set-prop $id 'Device Accel Constant Deceleration' 3
+    xinput set-ptr-feedback $id 0 18 10
+done <<< "`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}'`"
 
 # Don't like being blinded all the time
 # Sometimes f.lux isn't enough, y'know?
