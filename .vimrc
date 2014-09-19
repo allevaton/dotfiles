@@ -46,7 +46,10 @@ Plugin 'tkztmk/vim-vala'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
-Plugin 'Valloric/YouCompleteMe'
+
+if !has('win32')
+    Plugin 'Valloric/YouCompleteMe'
+end
 
 call vundle#end()
 filetype plugin indent on
