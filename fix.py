@@ -21,4 +21,6 @@ if __name__ == '__main__':
         call(['git', 'clone', 'https://github.com/gmarik/Vundle.vim.git',
               '.vim/bundle'])
 
+    call(['git', 'config', 'status.showuntrackedfiles', 'no'])
+
     os.remove(__file__)

@@ -27,7 +27,7 @@ xset m 10/6 0
 while read id
 do
     xinput set-prop $id 'Device Accel Profile' 2
-    xinput set-prop $id 'Device Accel Constant Deceleration' 3
+    xinput set-prop $id 'Device Accel Constant Deceleration' 2.85
     xinput set-ptr-feedback $id 0 18 10
 done <<< "`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}'`"
 
@@ -67,7 +67,8 @@ case "$1" in
         # Wallpapers are sexy.
         nitrogen --restore &
 
-        steam &
+        # Yes, steam.
+        steam -silent &
 
         # Launch i3
         exec i3
