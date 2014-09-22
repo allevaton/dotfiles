@@ -1,0 +1,39 @@
+#!/usr/bin/bash
+#
+#
+#
+
+if [ "$EUID" != "0" ]
+then
+    echo 'updatemirrors: must be run as root'
+    exit 1
+fi
+
+tee=0
+num=6
+
+while [[ $1 ]]
+do
+    case "$1" in
+        -v|--verbose) tee=1 ;;
+        -n|--num) shift; num=$1 ;;
+    esac
+    shift
+done
+
+echo -n 'updating mirrorlist... '
+
+if [ "$tee" == "1" ]
+then
+    $(which rankmirrors) -n $num /etc/pacman.d/mirrorlist | tee /tmp/mirrorlist
+else
+    $(which rankmirrors) -n $num /etc/pacman.d/mirrorlist > /tmp/mirrorlist
+fi
+
+# lock pacman to move the file
+echo $$ > /var/lib/pacman/db.lck
+mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
+chmod 644 /etc/pacman.d/mirrorlist
+rm /var/lib/pacman/db.lck
+
+echo 'done'
