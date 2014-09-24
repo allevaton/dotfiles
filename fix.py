@@ -5,7 +5,7 @@
 
 import os
 import re
-from subprocess import call
+import subprocess
 
 
 # This is only python for the cross-platformality.
@@ -16,11 +16,12 @@ if __name__ == '__main__':
         with open('_vimrc', 'w') as fp:
             fp.write('source $HOME/.vimrc')
 
-    if not os.path.exists('.vim/bundle'):
-        os.makedirs('.vim/bundle')
-        call(['git', 'clone', 'https://github.com/gmarik/Vundle.vim.git',
-              '.vim/bundle'])
+    if subprocess.check_call(['git', '--version']):
+        if not os.path.exists('.vim/bundle'):
+            os.makedirs('.vim/bundle')
+            call(['git', 'clone', 'https://github.com/gmarik/Vundle.vim.git',
+                  '.vim/bundle'])
 
-    call(['git', 'config', 'status.showuntrackedfiles', 'no'])
+        call(['git', 'config', 'status.showuntrackedfiles', 'no'])
 
     os.remove(__file__)

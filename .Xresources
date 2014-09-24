@@ -10,17 +10,19 @@ Xcursor.size:       16
 !
 ! Configuring URxvt
 URxvt*.depth:       32
-URxvt*.foreground:  [95]#EEEEEE
+URxvt*.foreground:  [95]#D3D7CF
 URxvt*.background:  [95]#000000
-URxvt*.font:        xft:DejaVu Sans Mono:size=11:antialias=true:hinting=true
-URxvt*.scrollBar_right:true
+URxvt*.font:        xft:DejaVu Sans Mono for Powerline:size=11:antialias=true:hinting=true
+URxvt*.scrollBar:   false
 URxvt*.letterSpace: -1
 URxvt*.transparent: true
-URxvt*.shading:     15
+URxvt*.shading:     10
+
+URxvt.iso14755 :    false
 
 !
 ! dzen2
-dzen2.font:         xft:DejaVu Sans Mono:size=11:antialias=true:hinting=true
+dzen2.font:         xft:DejaVu Sans Mono for Powerline:size=11:antialias=true:hinting=true
 dzen2.foreground:   #22EE11
 dzen2.background:   black
 
@@ -65,6 +67,6 @@ Xft.rgba:           rgb
 *color14: #8EE0F9
 
 ! Light Gray / White
-*color7:  #CCCCCC
-*color15: #ECEDEE
+*color7:  #D3D7CF
+*color15: #EEEEEC
 

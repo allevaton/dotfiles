@@ -35,7 +35,7 @@ Plugin 'dag/vim-fish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'tfnico/vim-gradle'
-"Plugin 'gerw/vim-latex-suite'
+Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -295,10 +295,10 @@ nnoremap ' `
 nnoremap ` '
 
 " Easier window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 " Significantly better navigation
 nnoremap j gj

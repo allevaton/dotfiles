@@ -1,11 +1,10 @@
 if [ -d "$HOME/.local/bin" ]
 then
-    PATH="$PATH:$HOME/.local/bin"
+    export PATH="$PATH:$HOME/.local/bin"
 fi
 
-PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/local/bin"
 
-WORKSPACE="$HOME/workspace"
-WS="$WORKSPACE"
-
-EDITOR="vim"
+export WORKSPACE="$HOME/workspace"
+export WS="$WORKSPACE"
+export EDITOR="vim"

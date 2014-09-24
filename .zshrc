@@ -4,6 +4,9 @@
 autoload -U colors && colors
 export PS1="%{%(#~$fg_bold[red]~$fg_bold[blue])%}%n%{$reset_color%}@%M %c%(#~%{#%}~%{$%}%}) "
 
+# Load the old bash profile for environmental variables.
+emulate sh -c '. ~/.profile'
+
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
