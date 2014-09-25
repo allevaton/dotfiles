@@ -1,0 +1,32 @@
+background no
+out_to_x no
+out_to_console yes
+update_interval 1
+
+TEXT
+,[
+
+# Wireless or ethernet
+#
+
+{"full_text":
+${if_match "$gw_iface" == "(null)"}
+"No Connection", "color":"\#FF0000"}
+${endif}
+
+${if_match "$gw_iface" == "wlp4s0"}
+    "W: (${wireless_link_qual_perc wlp4s0}% at ${wireless_essid wlp4s0}) ${addr wlp4s0}"
+    ,"color":"
+    ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
+        \#00FF00"}
+    ${else}
+        \#FFFF00"}
+    ${endif}
+${endif}
+${if_match "$gw_iface" == "enp0s25"}
+    "E: ${addr enp0s25}","color":"\#00FF00"}
+${endif}
+,
+
+{"full_text":"${time :: %A, %B %d, %Y  %I:%M:%S %p ::}"}
+]
