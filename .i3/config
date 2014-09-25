@@ -196,8 +196,10 @@ for_window [class="[s|S]team"] border none
 #for_window [class="[f|F]irefox"] border none
 #for_window [class="[s|S]kype"] workspace 7
 #for_window [class="[e|E]volution"] floating enable
+for_window [title="Friends" class="Steam"] floating enable
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
+
 
 ###
 # Start i3bar to display a workspace bar (plus the system information i3status
