@@ -190,15 +190,21 @@ client.urgent           #2f343a #900000 #ffffff #900000
 # The line, for regex parsing looked like:
 #   WM_CLASS(STRING) = "name", "Name"
 
+for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
+
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
 for_window [class="[s|S]team"] border none
 #for_window [class="[f|F]irefox"] border none
 #for_window [class="[s|S]kype"] workspace 7
 #for_window [class="[e|E]volution"] floating enable
-for_window [title="Friends" class="Steam"] floating enable
 
-for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
+# Games and Steam
+for_window [title="Friends" class="Steam"] floating enable
+for_window [class="^dota"] move container to workspace game
+for_window [class="^csgo"] move container to workspace game
+
+for_window [class="dolphin-emu"] move container to workspace game
 
 
 ###
