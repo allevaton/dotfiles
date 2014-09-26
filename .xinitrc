@@ -57,6 +57,9 @@ case "$1" in
 
     # Default is i3
     *)
+        # We like sound
+        start-pulseaudio-x11 &
+
         # Looks like Skype actually works in i3
         # No harm in starting it.
         skype &
