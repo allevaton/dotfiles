@@ -18,6 +18,9 @@ URxvt*.letterSpace: -1
 URxvt*.transparent: true
 URxvt*.shading:     10
 
+URxvt.keysym.Control-Shift-C: perl:clipboard:copy
+URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+
 URxvt.iso14755 :    false
 
 !

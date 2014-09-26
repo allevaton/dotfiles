@@ -24,4 +24,5 @@ if __name__ == '__main__':
 
         call(['git', 'config', 'status.showuntrackedfiles', 'no'])
 
+    # Remove the current file
     os.remove(__file__)
