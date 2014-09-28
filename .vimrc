@@ -98,6 +98,7 @@ set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 set formatoptions=tcroqnj " see :help fo-table
 set wildmenu        " make tab completion work like bash
 set wildmode=list:full " show a list when pressing tab complete
+set modeline
 
 " wildcard ignores
 set wildignore=*.pyc,*.pyo,*.so,*.swp

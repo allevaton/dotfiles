@@ -50,9 +50,23 @@ xrdb $HOME/.Xresources
 # But don't start it if it's already started
 xflux -z 02038
 
+gvfs-mime --set x-scheme-handler/http chromium.desktop &
+
+# We like sound
+start-pulseaudio-x11 &
+
 # Lastly, start the DE/WM specified, or not specified
 case "$1" in
+    kde5)
+        export KF5=/opt/kf5
+        export QML2_IMPORT_PATH=$KF5/lib/qt/qml:/usr/lib/qt/qml
+        export QT_PLUGIN_PATH=$KF5/lib/qt/plugins:/usr/lib/qt/plugins
+        export XDG_CONFIG_DIRS=$KF5/etc/xdg:/etc/xdg
+        export PATH=$KF5/bin:$PATH
+        kwin_x11 --replace;;
+
     gnome)
+
         exec gnome-session;;
 
     # Default is i3
@@ -62,7 +76,7 @@ case "$1" in
         skype &
 
         # Start irc. Luckily, this is minimal
-        #hexchat --minimize=2 &
+        hexchat --minimize=2 &
 
         # Wallpapers are sexy.
         nitrogen --restore &

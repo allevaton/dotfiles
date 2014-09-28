@@ -73,7 +73,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing windowmanager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 0
+    transparency = 10
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -148,7 +148,7 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 3
+    width = 2
     color = "#4c7899"
 
 [shortcuts]
@@ -182,7 +182,7 @@
 [urgency_normal]
     background = "#ffa800"
     foreground = "#444444"
-    timeout = 0
+    timeout = 45
 
 [urgency_critical]
     background = "#900000"
@@ -241,4 +241,4 @@
 #    summary = *twitter.com*
 #    urgency = normal
 #
-# vim: ft=conf
+# vim:ft=conf
