@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+#
+#
+#
+
+if [[ "`cat /etc/hostname`" == "archdesktop" ]]
+then
+    compton --config $HOME/.compton.conf
+fi

@@ -255,4 +255,4 @@ bar
     #status_command i3-wsbar -c "dzen2 -x %x"
 }
 
-exec --no-startup-id compton --config /home/nick/.compton.conf
+exec --no-startup-id /usr/bin/_check_compton

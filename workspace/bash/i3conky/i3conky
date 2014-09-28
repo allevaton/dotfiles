@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+#
+#
+#
+
+echo '{"version": 1}'
+echo '['
+echo '[]'
+
+compiled=~/._conkyrc
+
+python <<< "
+import os
+
+compiled = open(os.path.expanduser('$compiled'), 'w')
+
+ignore_lf = False
+for line in open(os.path.expanduser('~/.conkyrc')):
+    line = line.lstrip()
+
+    # ignore comments
+    if line.startswith('#'):
+        continue
+
+    compiled.write(line.strip() if ignore_lf else line)
+
+    if line.startswith('TEXT'):
+        ignore_lf = True
+
+"
+
+conky -c $compiled
+rm $compiled
