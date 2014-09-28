@@ -216,7 +216,7 @@ client.urgent           #2f343a #900000 #ffffff #900000
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
 
-for_window [class="[C|c]hromium"] border none
+for_window [class="[C|c]hromium"] border none, move container to workspace $WS1
 
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
