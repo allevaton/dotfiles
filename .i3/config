@@ -108,8 +108,11 @@ bindsym XF86AudioMicMute exec amixer -qD pulse set Capture toggle
 bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
 bindsym $mod+XF86MonBrightnessUp exec sudo _brightness
 
-bindsym XF86MonBrightnessDown exec sudo xbacklight -inc 5
-bindsym XF86MonBrightnessUp exec sudo xbacklight -dec 5
+#bindsym XF86MonBrightnessDown exec sudo xbacklight -inc 5
+#bindsym XF86MonBrightnessUp exec sudo xbacklight -dec 5
+
+bindsym XF86MonBrightnessDown exec sudo _brightness -u 200
+bindsym XF86MonBrightnessUp exec sudo_brightness -d 200
 
 bindsym XF86Display exec arandr
 
