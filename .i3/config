@@ -12,7 +12,7 @@
 set $mod Mod4
 set $alt Mod1
 
-set $terminal urxvt
+set $terminal termite
 
 # TODO: Clean this up
 # Font for window titles. Will also be used by the bar unless a different font
@@ -31,6 +31,11 @@ floating_modifier $mod
 # I've found that the other ones aren't so great
 workspace_layout stacking
 
+# see: http://i3wm.org/docs/userguide.html#_automatic_back_and_forth_when_switching_to_the_current_workspace
+workspace_auto_back_and_forth yes
+
+hide_edge_borders none
+
 # Start a terminal
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+Return exec $terminal
@@ -40,7 +45,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 
 # Easier screenshot taking
-bindsym $mod+Print exec scrot
+bindsym $mod+Print exec --no-startup-id scrot
 
 # Start dmenu (a program launcher)
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -114,17 +119,28 @@ bindsym $mod+a focus parent
 # Focus the child container
 bindsym $mod+d focus child
 
+set $WS1 1
+set $WS2 2
+set $WS3 3
+set $WS4 4
+set $WS5 5
+set $WS6 6:irc
+set $WS7 7:skype
+set $WS8 8
+set $WS9 9:game
+set $WS0 0
+
 # Switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
 
 # Switching workspaces with tab
 bindsym $mod+Tab workspace next
@@ -135,16 +151,16 @@ bindsym $mod+$alt+Right workspace next
 bindsym $mod+$alt+Left workspace prev
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1; workspace 1
-bindsym $mod+Shift+2 move container to workspace 2; workspace 2
-bindsym $mod+Shift+3 move container to workspace 3; workspace 3
-bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Shift+5 move container to workspace 5; workspace 5
-bindsym $mod+Shift+6 move container to workspace 6; workspace 6
-bindsym $mod+Shift+7 move container to workspace 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace 8; workspace 8
-bindsym $mod+Shift+9 move container to workspace 9; workspace 9
-bindsym $mod+Shift+0 move container to workspace 10;workspace 10
+bindsym $mod+Shift+1 move container to workspace $WS1; workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2; workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3; workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4; workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5; workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6; workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7; workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8; workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9; workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS0; workspace $WS0
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -169,6 +185,15 @@ mode "resize"
     bindsym Escape mode "default"
 }
 
+
+bindsym $mod+Shift+M mode "power"
+
+mode "power"
+{
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # Resize mode is nice
 bindsym $mod+r mode "resize"
 
@@ -181,7 +206,6 @@ client.focused          #4c7899 #285577 #ffffff #2e9ef4
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
-#client.placeholder      #000000 #0c0c0c #ffffff #000000
 
 # Next are the configurations for which windows should float.
 # Sadly, until I figure out a dynamic way to do this, we'll have to enter tham all in
@@ -192,19 +216,24 @@ client.urgent           #2f343a #900000 #ffffff #900000
 
 for_window [title="^[T|t][E|e][S|s][T|t][I|i][N|n][G|g]$"] floating enable
 
+for_window [class="[C|c]hromium"] border none
+
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
-for_window [class="[s|S]team"] border none
-#for_window [class="[f|F]irefox"] border none
-#for_window [class="[s|S]kype"] workspace 7
-#for_window [class="[e|E]volution"] floating enable
 
 # Games and Steam
-for_window [title="Friends" class="Steam"] floating enable
-for_window [class="^dota"] move container to workspace game
-for_window [class="^csgo"] move container to workspace game
+for_window [class="[s|S]team"] border none
+for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
+assign [class="^dota"] $WS9
+assign [class="^csgo"] $WS9
+assign [class="^hl2_linux"] $WS9
+assign [class="[d|D]olphin-emu"] $WS9
 
-for_window [class="dolphin-emu"] move container to workspace game
+assign [class="[s|S]kype"] $WS7
+
+assign [class="[H|h]exchat"] $WS6
+
+assign [class="[G|g]nome-system-monitor"] "10:monitor"
 
 
 ###
@@ -212,11 +241,15 @@ for_window [class="dolphin-emu"] move container to workspace game
 # finds out, if available)
 bar
 {
+    strip_workspace_numbers yes
     position top
     workspace_buttons yes
     status_command i3status -c ~/.i3/status
+    mode dock
     #status_command /home/nick/.i3/bash
     #status_command i3-wsbar -c "dzconky -x %x"
     #status_command i3status | i3-wsbar -c "dzen2 -x %x -dock"
     #status_command i3-wsbar -c "dzen2 -x %x"
 }
+
+exec --no-startup-id compton --config /home/nick/.compton.conf

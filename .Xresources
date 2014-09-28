@@ -12,7 +12,7 @@ Xcursor.size:       16
 URxvt*.depth:       32
 URxvt*.foreground:  [95]#D3D7CF
 URxvt*.background:  [95]#000000
-URxvt*.font:        xft:DejaVu Sans Mono for Powerline:size=11:antialias=true:hinting=true
+URxvt*.font:        xft:DejaVu Sans Mono for Powerline:size=12:antialias=true:hinting=true
 URxvt*.scrollBar:   false
 URxvt*.letterSpace: -1
 URxvt*.transparent: true
