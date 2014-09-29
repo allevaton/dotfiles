@@ -4,7 +4,7 @@
 #
 
 # In terms of battery percent
-THRESHOLD=90
+THRESHOLD=10
 
 dir=/sys/class/power_supply/BAT0
 
