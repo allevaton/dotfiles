@@ -1,1 +1,1 @@
- */5 * * * * env DISPLAY=:0 /home/nick/.local/bin/_batterycheck
+ */5 * * * * env DISPLAY=:0 `which _batterycheck`

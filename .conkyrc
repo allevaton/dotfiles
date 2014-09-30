@@ -29,4 +29,5 @@ ${endif}
 ,
 
 {"full_text":"${time :: %A, %B %d, %Y  %I:%M:%S %p ::}"}
+
 ]

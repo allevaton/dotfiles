@@ -8,6 +8,11 @@ THRESHOLD=10
 
 dir=/sys/class/power_supply/BAT0
 
+if [ ! -d "$dir" ]
+then
+    exit 0
+fi
+
 batstat=`cat $dir/status`
 
 max=`cat $dir/energy_full_design`
