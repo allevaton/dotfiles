@@ -1,0 +1,1 @@
+ */5 * * * * env DISPLAY=:0 /home/nick/.local/bin/_batterycheck

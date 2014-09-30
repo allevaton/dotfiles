@@ -23,9 +23,6 @@ if __name__ == '__main__':
                         help='display version info and exit')
     arguments = parser.parse_args()
 
-    logging.basicConfig(level=logging.DEBUG)
-    logging.debug('hello team')
-
     #set_trace()
     if arguments.version:
         print('limage: v1.0')
@@ -35,9 +32,7 @@ if __name__ == '__main__':
 
     # initialize logger
     logging.basicConfig(format='limage: %(levelname)s: %(message)s',
-                        filename='limage.log', filemode='w',
-                        level=logging.DEBUG)
-                        #level=getattr(logging, loglevel))
+                        level=getattr(logging, loglevel))
 
     # if not given an input file, and told to parse...
     if not arguments.file:
