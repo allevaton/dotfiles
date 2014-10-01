@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-# limage image translator.
+# limage image translator
 #
 
 
@@ -10,36 +10,46 @@ import sys
 
 from argparse import ArgumentParser
 
-from ipdb import set_trace
-from PIL import Image
+# Careful, this overrides the Python module `parser`
+import parser
+
+#from ipdb import set_trace
 
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description='Limage interpreter')
-    parser.add_argument('file', nargs='?', help='input file')
-    parser.add_argument('-d', '--debug', action='count',
-                        help='show debug output')
-    parser.add_argument('-v', '--version', action='count',
-                        help='display version info and exit')
-    arguments = parser.parse_args()
+    aparser = ArgumentParser(description='Limage interpreter')
+    aparser.add_argument('file', nargs='?', help='input file')
+    aparser.add_argument('-d', '--debug', action='count',
+                         help='show debug output')
+    aparser.add_argument('-v', '--version', action='count',
+                         help='display version info and exit')
+    aparser.add_argument('-t', '--tokens', action='count',
+                         help='only print out tokens, do not evaluate '
+                         'any expressions in the language')
+    arguments = aparser.parse_args()
 
-    #set_trace()
     if arguments.version:
         print('limage: v1.0')
-        sys.exit()
+        sys.exit(0)
 
-    loglevel = 'DEBUG' if arguments.debug else 'INFO'
+    loglevel = 'DEBUG' if arguments.debug else 'WARNING'
 
     # initialize logger
-    logging.basicConfig(format='limage: %(levelname)s: %(message)s',
+    logging.basicConfig(format='limage: %(levelname)s%(message)s',
                         level=getattr(logging, loglevel))
+
+    logging.addLevelName(logging.WARNING, 'warning: ')
+    logging.addLevelName(logging.ERROR, 'error: ')
+    logging.addLevelName(logging.DEBUG, 'debug: ')
+    logging.addLevelName(logging.INFO, 'info: ')
+
+    logging.debug('logging configured')
+    logging.debug('arguments parsed:\n\t%s' % arguments)
 
     # if not given an input file, and told to parse...
     if not arguments.file:
         logging.error('no input file')
         sys.exit(-1)
 
-
-    im = Image.open('./test/4.png')
-
-    pixels = list(im.getdata())
+    result = parser.parse(arguments.file,
+                          evaluate=False if arguments.tokens else True)
