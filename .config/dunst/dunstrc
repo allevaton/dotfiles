@@ -142,7 +142,7 @@
     browser = /usr/bin/chromium
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Paths to default icons.
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
@@ -177,12 +177,12 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#2e9ef4"
     foreground = "#eeeeee"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     background = "#ffa800"
     foreground = "#444444"
-    timeout = 45
+    timeout = 30
 
 [urgency_critical]
     background = "#900000"

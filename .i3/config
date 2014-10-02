@@ -130,8 +130,9 @@ set $WS5 5
 set $WS6 6:irc
 set $WS7 7:skype
 set $WS8 8
-set $WS9 9:game
+set $WS9 9
 set $WS0 0
+set $WSgame 20:game
 
 # Switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -234,10 +235,11 @@ for_window [class="[s|S]kype" title="Options"] floating enable
 # Games and Steam
 for_window [class="[s|S]team"] border none
 for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
-assign [class="^dota"] $WS9
-assign [class="^csgo"] $WS9
-assign [class="^hl2_linux"] $WS9
-assign [class="[d|D]olphin-emu"] $WS9
+assign [class="[s|S]team"] "8:steam"
+assign [class="^dota"] $WSgame
+assign [class="^csgo"] $WSgame
+assign [class="^hl2_linux"] $WSgame
+assign [class="[d|D]olphin-emu"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
 assign [class="[H|h]exchat"] $WS6
