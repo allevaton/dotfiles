@@ -76,7 +76,7 @@ case "$1" in
         skype &
 
         # Start irc. Luckily, this is minimal
-        hexchat --minimize=2 &
+        #hexchat --minimize=2 &
 
         # Wallpapers are sexy.
         nitrogen --restore &
