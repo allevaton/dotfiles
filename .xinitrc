@@ -9,10 +9,6 @@
 # Initial X settings that we like
 ###########################################################
 
-# Mouse speed
-# TODO: move all mosue settings from /etc/X11/xorg.conf.d/50-synaptics.conf to here
-# I don't like them there.
-
 # Keyboard rates should be faster
 xset r rate 210 30
 
@@ -23,6 +19,7 @@ xset s off
 # Mouse specific setup
 #
 xset m 10/6 0
+
 # Find the G9x
 while read id
 do
