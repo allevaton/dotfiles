@@ -3,6 +3,7 @@
 #
 
 
+import itertools
 import logging
 import os
 import sys
@@ -37,11 +38,62 @@ VARIABLES = {}
 # Program counter; where we currently are
 PC = 0
 
-STACK = []
+stack = []
 
 # a list of pixels (4-tuple) in the format:
 #   (R, G, B, A)
 PIXELS = []
+
+
+def push(value):
+    stack.append(value)
+
+
+def pop():
+    try:
+        return stack.pop()
+    except:
+        return []
+
+
+def peek():
+    return stack[-1]
+
+
+def next():
+    try:
+        return PIXELS[PC+1]
+    except:
+        return -1
+
+
+def scope():
+    '''This function cleans up the current scope, and goes
+    as far backwards in the stack as possible, evaluating statements,
+    such as arithmetic.
+    '''
+    # Go through the stack backwards
+    for i in itertools.count(-1, step=-1):
+        if len(stack) == 0:
+            break
+
+        if stack[i][0] == 'OP_ADD':
+            if stack[i-1][0] == 'OP_EQUALS':
+                # set the variable equal to this value
+                VARIABLES[stack[i-2]][1] = stack[i][1]
+                pop()
+                pop()
+                pop()
+                break
+            elif stack[i-1][0] == 'VARIABLE':
+                # add to this variable
+                VARIABLES[stack[i-1][1]] += stack[i][1]
+                pop()
+                pop()
+                break
+            else:
+                logging.error('expected variable or equals, got %s' %
+                              stack[i-1][0])
 
 
 def parse(path, evaluate=True):
@@ -87,21 +139,51 @@ def translate(pixel):
 
 # OPERATOR STATE CHAINING
 def state_var():
-    '''State for when a variable is defined
+    '''State for when a variable is called
 
     '''
     global PC
 
-    variable = PIXELS[PC]
-    VARIABLES[variable] = 0
+    pixel = PIXELS[PC]
 
+    # If the variable isn't defined...
+    if not pixel in VARIABLES:
+        VARIABLES[pixel] = 0
+
+    var = VARIABLES[pixel]
+
+    push(['VARIABLE', pixel, var])
+
+    # first, immediately check if the next op is a VARIABLE to print it out
+    if translate(next()) == 'VARIABLE':
+        if PIXELS[PC+1] == pixel:
+            print(chr(var))
+            PC += 1
+            pop()
+            return
+
+    while True:
+        n = translate(next())
+        if n == 'OP_ADD':
+            state_add()
+            PC += 1
+        else:
+            scope()
+            break
 
 def state_add():
     '''State for when an addition operator is found
 
     '''
     global PC
-    pass
+
+    if peek()[0] == 'OP_ADD':
+        # If there's an add on the stack, just add 1 to it
+        v = pop()
+        v[1] += 1
+        push(v)
+    else:
+        push(['OP_ADD', 1])
 
 
 def handle(op):
@@ -111,7 +193,7 @@ def handle(op):
         if EVALUATE:
             state_var()
         else:
-            TOKENS.append('Define variable %s = 0' % str(PIXELS[PC]))
+            TOKENS.append('Variable %s' % str(PIXELS[PC]))
     elif op == 'OP_ADD':
         if EVALUATE:
             state_add()
@@ -134,10 +216,14 @@ def loop():
         # Get the pixel for our current PC
         if PC == len(PIXELS):
             logging.info('finished loop')
+            scope()
             break
 
         translated = translate(PIXELS[PC])
         logging.info('got translated expr %s' % translated)
+
+        if translated == 'NOP':
+            break
 
         # After we translate the pixel into an op code, we need to
         # handle it
