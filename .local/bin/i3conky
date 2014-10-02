@@ -7,27 +7,30 @@ echo '{"version": 1}'
 echo '['
 echo '[]'
 
-compiled=~/._conkyrc
+compiled=$HOME/.conkyrc_
 
 python <<< "
 import os
 
-compiled = open(os.path.expanduser('$compiled'), 'w')
+compiled = open('$compiled', 'w')
 
 ignore_lf = False
-for line in open(os.path.expanduser('~/.conkyrc')):
-    line = line.lstrip()
 
-    # ignore comments
-    if line.startswith('#'):
-        continue
+with open('$compiled'[:-1]) as source:
+    for line in source:
+        line = line.lstrip()
 
-    compiled.write(line.strip() if ignore_lf else line)
+        # ignore comments
+        if line.startswith('#'):
+            continue
 
-    if line.startswith('TEXT'):
-        ignore_lf = True
+        compiled.write(line.strip() if ignore_lf else line)
 
+        if line.startswith('TEXT'):
+            ignore_lf = True
+
+compiled.close()
 "
 
-conky -c $compiled
-rm $compiled
+conky -c "$compiled"
+rm "$compiled"
