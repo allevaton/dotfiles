@@ -155,14 +155,15 @@ let g:bufExplorerSortBy = 'number'
 
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['']
+let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
-nnoremap <leader>S :SyntasticCheck flake8<CR>
+" Use pylint for non-saving checking because it's much slower
+nnoremap <leader>S :SyntasticCheck pylint<CR>
 
 " Eclim:
 let g:EclimCompletionMethod = 'omnifunc'
