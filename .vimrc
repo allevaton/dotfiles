@@ -297,6 +297,8 @@ nnoremap ' `
 nnoremap ` '
 
 " Easier window navigation
+" Using this weirdo block will stop vim-latex from remapping C-j
+nmap <SID>I_won’t_ever_type_this <Plug>IMAP_JumpForward
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
