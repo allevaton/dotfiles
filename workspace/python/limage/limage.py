@@ -5,7 +5,6 @@
 
 
 import logging
-import os
 import sys
 
 from argparse import ArgumentParser
@@ -51,5 +50,5 @@ if __name__ == '__main__':
         logging.error('no input file')
         sys.exit(-1)
 
-    result = parser.parse(arguments.file,
-                          evaluate=False if arguments.tokens else True)
+    parser.parse(arguments.file,
+                 evaluate=False if arguments.tokens else True)

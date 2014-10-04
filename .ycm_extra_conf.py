@@ -37,11 +37,14 @@ import ycm_core
 flags = [
     '-Wall',
     '-Wextra',
+
     # REQUIRES -std
     '-std=c99',
+
     # magic -x
     '-x',
     'c',
+
     # project specific flags
     '-I',
     '.'
@@ -62,7 +65,7 @@ else:
     database = None
 
 SOURCE_EXTENSIONS = {'.cpp', '.cxx', '.cc', '.c'}
-HEADER_EXTENIONS = {'.h', '.hxx', '.hpp', '.hh'}
+HEADER_EXTENSIONS = {'.h', '.hxx', '.hpp', '.hh'}
 
 def DirectoryOfThisScript():
     return os.path.dirname(os.path.abspath(__file__))
@@ -71,6 +74,7 @@ def DirectoryOfThisScript():
 def MakeRelativePathsInFlagsAbsolute(flags, working_directory):
     if not working_directory:
         return list(flags)
+
     new_flags = []
     make_next_absolute = False
     path_flags = ['-isystem', '-I', '-iquote', '--sysroot=']

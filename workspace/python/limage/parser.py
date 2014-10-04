@@ -5,10 +5,9 @@
 
 import itertools
 import logging
-import os
 import sys
 
-from ipdb import set_trace
+#from ipdb import set_trace
 from PIL import Image
 
 
@@ -92,7 +91,7 @@ def scope():
                 pop()
                 break
             else:
-                logging.error('expected variable or equals, got %s' %
+                logging.error('expected variable or equals, got %s',
                               stack[i-1][0])
 
 
@@ -119,7 +118,6 @@ def parse(path, evaluate=True):
 
 def translate(pixel):
     # Slow...
-    code = ''
     reserved = 0
     for key in iter(RESERVED):
         for i, color in enumerate(key):
@@ -133,6 +131,8 @@ def translate(pixel):
 
         reserved = 0
     else:
+        # Yes, this is a for:else loop. The else: block is triggered if
+        # the iterator is exhausted.
         # If it's not a registered color, it has to be a variable
         return 'VARIABLE'
 
@@ -157,7 +157,8 @@ def state_var():
     # first, immediately check if the next op is a VARIABLE to print it out
     if translate(next()) == 'VARIABLE':
         if PIXELS[PC+1] == pixel:
-            print(chr(var))
+            # No LF
+            print(chr(var), end='')
             PC += 1
             pop()
             return
@@ -179,9 +180,9 @@ def state_add():
 
     if peek()[0] == 'OP_ADD':
         # If there's an add on the stack, just add 1 to it
-        v = pop()
-        v[1] += 1
-        push(v)
+        var = pop()
+        var[1] += 1
+        push(var)
     else:
         push(['OP_ADD', 1])
 
@@ -199,13 +200,8 @@ def handle(op):
             state_add()
         else:
             TOKENS.append('Add 1')
-    elif op == 'OP_SUB':
-        if EVALUATE:
-            state_sub()
-        else:
-            TOKENS.append('Subtract 1')
     else:
-        logging.error('where did this op come from: %s' % op)
+        logging.error('where did this op come from: %s', op)
 
 
 def loop():
@@ -220,7 +216,7 @@ def loop():
             break
 
         translated = translate(PIXELS[PC])
-        logging.info('got translated expr %s' % translated)
+        logging.info('got translated expr %s', translated)
 
         if translated == 'NOP':
             break
@@ -230,21 +226,24 @@ def loop():
         handle(translated)
         PC += 1
 
-    print('Tokens:')
-    for token in TOKENS:
-        print('\t%s' % token)
+    print()
 
-    print('Variables:')
-    for key, value in VARIABLES.items():
-        print('\t%s: %s' % (key, value))
+    if EVALUATE:
+        print('Tokens:')
+        for token in TOKENS:
+            print('\t%s' % token)
+
+        print('Variables:')
+        for key, value in VARIABLES.items():
+            print('\t%s: %s' % (key, value))
 
 
 def _get_pixels(path):
     global PIXELS
     try:
-        with Image.open(path) as im:
-            logging.debug('found input file \'%s\'' % path)
-            PIXELS = list(im.getdata())
+        with Image.open(path) as image:
+            logging.debug('found input file \'%s\'', path)
+            PIXELS = list(image.getdata())
     except IOError:
-        logging.error('could not open input file \'%s\'' % path)
+        logging.error('could not open input file \'%s\'', path)
         sys.exit(2)
