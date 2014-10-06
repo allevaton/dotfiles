@@ -198,13 +198,6 @@ mode "power"
     bindsym Escape mode "default"
 }
 
-bindsym Caps_Lock mode "Caps Lock"
-
-mode "Caps Lock"
-{
-    bindsym Caps_Lock mode "default"
-}
-
 # Resize mode is nice
 bindsym $mod+r mode "resize"
 
