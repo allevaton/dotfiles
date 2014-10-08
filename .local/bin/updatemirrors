@@ -3,7 +3,7 @@
 #
 #
 
-if [ "$EUID" != "0" ]
+if [[ "$EUID" != "0" ]]
 then
     echo 'updatemirrors: must be run as root'
     exit 1
