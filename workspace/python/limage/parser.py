@@ -25,6 +25,7 @@ RESERVED = {
 
 # Do we want to evaluate the expressions, or just print tokens?
 EVALUATE = True
+DEBUG = False
 
 # Only used if EVALUATE is set to False
 TOKENS = []
@@ -95,7 +96,7 @@ def scope():
                               stack[i-1][0])
 
 
-def parse(path, evaluate=True):
+def parse(path, evaluate=True, debug=False):
     '''Begins the parsing of the given pixels
 
     Keyword arguments:
@@ -103,8 +104,10 @@ def parse(path, evaluate=True):
                       program. If chosen not to, it will simply return
                       a simplified list of tokens read left to right
     '''
-    global EVALUATE
+    global DEBUG, EVALUATE
+    DEBUG = debug
     EVALUATE = evaluate
+
 
     if evaluate:
         logging.info('evaluating expressions')
@@ -158,7 +161,8 @@ def state_var():
     if translate(next()) == 'VARIABLE':
         if PIXELS[PC+1] == pixel:
             # No LF
-            print(chr(var), end='')
+            if EVALUATE:
+                print(chr(var), end='')
             PC += 1
             pop()
             return
@@ -177,6 +181,7 @@ def state_add():
 
     '''
     global PC
+    TOKENS.append('Add 1')
 
     if peek()[0] == 'OP_ADD':
         # If there's an add on the stack, just add 1 to it
@@ -191,15 +196,11 @@ def handle(op):
     # Figure out what this pixel is, then go handle it with the correct
     # method.
     if op == 'VARIABLE':
-        if EVALUATE:
-            state_var()
-        else:
-            TOKENS.append('Variable %s' % str(PIXELS[PC]))
+        TOKENS.append('Variable %s' % str(PIXELS[PC]))
+        state_var()
     elif op == 'OP_ADD':
-        if EVALUATE:
-            state_add()
-        else:
-            TOKENS.append('Add 1')
+        TOKENS.append('Add 1')
+        state_add()
     else:
         logging.error('where did this op come from: %s', op)
 
@@ -216,7 +217,6 @@ def loop():
             break
 
         translated = translate(PIXELS[PC])
-        logging.info('got translated expr %s', translated)
 
         if translated == 'NOP':
             break
@@ -228,7 +228,7 @@ def loop():
 
     print()
 
-    if EVALUATE:
+    if DEBUG:
         print('Tokens:')
         for token in TOKENS:
             print('\t%s' % token)

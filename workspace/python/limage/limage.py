@@ -51,4 +51,5 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     parser.parse(arguments.file,
-                 evaluate=False if arguments.tokens else True)
+                 evaluate=False if arguments.tokens else True,
+                 debug=True if arguments.debug else False)
