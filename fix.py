@@ -4,12 +4,13 @@
 #
 
 import os
-import re
 import subprocess
 
 
 # This is only python for the cross-platformality.
 # Screw Batch programming.
+
+call = subprocess.call
 
 if __name__ == '__main__':
     if os.name == 'nt':
@@ -23,6 +24,7 @@ if __name__ == '__main__':
                   '.vim/bundle'])
 
         call(['git', 'config', 'status.showuntrackedfiles', 'no'])
+        call(['git', 'config', 'fetch.recurseSubmodules', 'true'])
 
     # Remove the current file
     os.remove(__file__)
