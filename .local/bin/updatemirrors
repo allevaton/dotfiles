@@ -23,7 +23,7 @@ done
 
 echo -n 'updating mirrorlist... '
 
-if [ "$tee" == "1" ]
+if [[ "$tee" == "1" ]]
 then
     $(which rankmirrors) -n $num /etc/pacman.d/mirrorlist | tee /tmp/mirrorlist
 else
