@@ -56,7 +56,7 @@ filetype plugin indent on
 syntax on
 
 " Handle for fish
-set shell=bash\ --norc
+"set shell=bash\ --norc
 
 " This is the key that will define how remaps essentially work.
 let mapleader=','

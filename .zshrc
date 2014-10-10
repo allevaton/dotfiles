@@ -191,6 +191,9 @@ alias sys='systemctl'
 # Use vim as a pager
 alias less='less -R'
 
+# arch wiki
+alias archwiki="$BROWSER /usr/share/doc/arch-wiki/html/en"
+
 # }}}
 #
 # Colored man pages
