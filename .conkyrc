@@ -6,16 +6,15 @@ update_interval 1
 TEXT
 ,[
 
-# Wireless or ethernet
+## WIRELESS OR ETHERNET ##
 #
-
 {"full_text":
 ${if_match "$gw_iface" == "(null)"}
 "No Connection", "color":"\#FF0000"}
 ${endif}
 
 ${if_match "$gw_iface" == "wlp4s0"}
-    "W: (${wireless_link_qual_perc wlp4s0}% at ${wireless_essid wlp4s0}) ${addr wlp4s0}"
+    "W: (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
     ,"color":"
     ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
         \#00FF00"}
@@ -28,6 +27,59 @@ ${if_match "$gw_iface" == "enp0s25"}
 ${endif}
 ,
 
+## MEMORY ##
+#
+
+${if_match ${memperc} > 60}
+    {"full_text": "MEM ${memperc}%","color":"\#FFFF00"},
+${endif}
+
+## DISK SPACE REMAINING ##
+#
+{"full_text": "home: ${fs_free /home} free"},
+
+## VOLUME ##
+#
+{"full_text": "♪
+${if_match "${exec amixer get Master -M | grep -oE "off" -m 1}" == "off"}
+    mm", "color": "\#FFFF00"}
+${else}
+    ${exec amixer get Master -M | grep -oE "[[:digit:]]*%" -m 1}"}
+${endif}
+,
+
+## BATTERY ##
+#
+${if_match ${battery_percent} <= 10}
+    {"color": "\#FF0000", "full_text":
+${else}
+    {"full_text":
+${endif}
+
+
+${if_empty ${battery_time}}
+    "BAT ${battery_short}"}
+${else}
+    "BAT ${battery_short} ${battery_time}"}
+${endif}
+,
+
+## CPU FREQUENCY, TEMPERATURE, PERCENT ##
+#
+{"full_text":"CPU","separator":false},
+{"full_text":"${freq_g} GHz","separator":false,
+"separator_block_width":9,"short_text":""},
+
+{"full_text":"${acpitemp}°C","separator":false
+${if_match ${acpitemp} >= 70}
+    ,"color":"\#FF0000"
+${endif}
+},
+
+{"full_text": "${cpu 0}%"},
+
+## TIME ##
+#
 {"full_text":"${time :: %A, %B %d, %Y  %I:%M:%S %p ::}"}
 
 ]
