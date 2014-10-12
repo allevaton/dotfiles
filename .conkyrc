@@ -14,7 +14,7 @@ ${if_match "$gw_iface" == "(null)"}
 ${endif}
 
 ${if_match "$gw_iface" == "wlp4s0"}
-    "W: (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
+    " (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
     ,"color":"
     ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
         \#00FF00"}
@@ -23,15 +23,17 @@ ${if_match "$gw_iface" == "wlp4s0"}
     ${endif}
 ${endif}
 ${if_match "$gw_iface" == "enp0s25"}
-    "E: ${addr enp0s25}","color":"\#00FF00"}
+    " ${addr enp0s25}","color":"\#00FF00"}
 ${endif}
 ,
 
-## MEMORY ##
+## MEMORY AND SWAP##
 #
-
 ${if_match ${memperc} > 60}
     {"full_text": "MEM ${memperc}%","color":"\#FFFF00"},
+${endif}
+${if_match ${swapperc} > 40}
+    {"full_text": "SWAP ${swapperc}","color":"\#FFFF00"},
 ${endif}
 
 ## DISK SPACE REMAINING ##
@@ -76,7 +78,14 @@ ${if_match ${acpitemp} >= 70}
 ${endif}
 },
 
-{"full_text": "${cpu 0}%"},
+{"full_text": "${cpu 0}%"
+${if_match ${cpu 0} > 80}
+    ,"color":"\#FF0000"
+${endif}
+${if_match ${cpu 0} > 50}
+    ,"color":"\#FFFF00"
+${endif}
+},
 
 ## TIME ##
 #
