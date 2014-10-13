@@ -128,11 +128,11 @@ set $WS3 3
 set $WS4 4
 set $WS5 5
 set $WS6 6
-set $WS7 7:skype
+set $WS7 7:
 set $WS8 8:
 set $WS9 9
 set $WS0 0
-set $WSgame 20:game
+set $WSgame 20:
 
 # Switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -237,7 +237,7 @@ assign [class="[d|D]olphin-emu"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
 assign [class="[H|h]exchat"] $WS6
-assign [class="[G|g]nome-system-monitor"] "10:monitor"
+assign [class="[G|g]nome-system-monitor"] "10:"
 assign [class="[C|c]hromium"] $WS1
 
 # Pop up windows and task dialogs should open floating

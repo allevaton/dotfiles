@@ -32,8 +32,10 @@ ${endif}
 ${if_match ${memperc} > 60}
     {"full_text": "MEM ${memperc}%","color":"\#FFFF00"},
 ${endif}
-${if_match ${swapperc} > 40}
-    {"full_text": "SWAP ${swapperc}","color":"\#FFFF00"},
+${if_match "${swapperc}" != "No swap"}
+    ${if_match ${swapperc} > 40}
+        {"full_text": "SWAP ${swapperc}","color":"\#FFFF00"},
+    ${endif}
 ${endif}
 
 ## DISK SPACE REMAINING ##
@@ -51,20 +53,22 @@ ${endif}
 ,
 
 ## BATTERY ##
+# Only if the status is not unknown
 #
-${if_match ${battery_percent} <= 10}
-    {"color": "\#FF0000", "full_text":
-${else}
-    {"full_text":
-${endif}
+${if_match "${battery_short}" != "U"}
+    ${if_match ${battery_percent} <= 10}
+        {"color": "\#FF0000", "full_text":
+    ${else}
+        {"full_text":
+    ${endif}
 
-
-${if_empty ${battery_time}}
-    "BAT ${battery_short}"}
-${else}
-    "BAT ${battery_short} ${battery_time}"}
+    ${if_empty ${battery_time}}
+        "${battery_short}"}
+    ${else}
+        "${battery_short} ${battery_time}"}
+    ${endif}
+    ,
 ${endif}
-,
 
 ## CPU FREQUENCY, TEMPERATURE, PERCENT ##
 #
@@ -72,11 +76,13 @@ ${endif}
 {"full_text":"${freq_g} GHz","separator":false,
 "separator_block_width":9,"short_text":""},
 
-{"full_text":"${acpitemp}°C","separator":false
-${if_match ${acpitemp} >= 70}
-    ,"color":"\#FF0000"
+${if_match "${acpitemp}" != "0"}
+    {"full_text":"${acpitemp}°C","separator":false
+    ${if_match ${acpitemp} >= 70}
+        ,"color":"\#FF0000"
+    ${endif}
+    },
 ${endif}
-},
 
 {"full_text": "${cpu 0}%"
 ${if_match ${cpu 0} > 80}
