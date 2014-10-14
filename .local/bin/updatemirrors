@@ -9,21 +9,32 @@ then
     exit 1
 fi
 
-tee=0
+verbose=0
 num=6
 
 while [[ $1 ]]
 do
     case "$1" in
-        -v|--verbose) tee=1 ;;
+        -v|--verbose) verbose=1 ;;
         -n|--num) shift; num=$1 ;;
+        -h|--help)
+            cat <<EOF
+Usage: `echo $0 | tr "/" "\n" | tail -n 1` [-v] [-n NUM] [-h]
+
+    -h|--help           show this message
+    -v|--verbose        show the output of rankmirrors
+    -n|--num NUM        use NUM number of mirrors to rank
+
+EOF
+            exit 0
+            ;;
     esac
     shift
 done
 
 echo -n 'updating mirrorlist... '
 
-if [[ "$tee" == "1" ]]
+if [[ $verbose == 1 ]]
 then
     $(which rankmirrors) -n $num /etc/pacman.d/mirrorlist | tee /tmp/mirrorlist
 else
