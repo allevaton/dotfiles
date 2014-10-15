@@ -381,11 +381,11 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Copying and pasting
-if has('win32')
-    set clipboard=unnamed
-else
-    set clipboard=unnamedplus
-endif
+"if has('win32')
+"    set clipboard=unnamed
+"else
+set clipboard=unnamedplus
+"endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq

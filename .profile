@@ -12,3 +12,5 @@ export EDITOR="vim"
 export BROWSER="chromium"
 
 eval $(dircolors ~/.dircolors)
+
+#eval $(ssh-agent)
