@@ -17,13 +17,25 @@ ${if_match "$gw_iface" == "wlp4s0"}
     " (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
     ,"color":"
     ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
-        \#00FF00"}
+        \#00FF00"
     ${else}
-        \#FFFF00"}
+        \#FFFF00"
+    ${endif}
+
+    ${if_match ${downspeedf wlp4s0} >= 30000.0}
+        ,{"full_text":" ${downspeed wlp4s0}","color":"\#FFFF00"}
+    ${else}
+        }
     ${endif}
 ${endif}
 ${if_match "$gw_iface" == "enp0s25"}
     " ${addr enp0s25}","color":"\#00FF00"}
+
+    ${if_match ${downspeedf enp0s25} >= 30000.0}
+        ,{"full_text":" ${downspeed enp0s25}","color":"\#FFFF00"}
+    ${else}
+        }
+    ${endif}
 ${endif}
 ,
 
