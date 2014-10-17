@@ -127,7 +127,7 @@ set $WS2 2
 set $WS3 3
 set $WS4 4
 set $WS5 5
-set $WS6 6
+set $WS6 6:
 set $WS7 7:
 set $WS8 8:
 set $WS9 9
@@ -229,16 +229,19 @@ for_window [class="[s|S]kype" title="Options"] floating enable
 for_window [class="[s|S]team"] border none
 for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
 
+assign [class="[H|h]exchat"] $WS6
+
 assign [class="[s|S]team"] $WS8
 assign [class="^dota"] $WSgame
 assign [class="^csgo"] $WSgame
 assign [class="^hl2_linux"] $WSgame
 assign [class="[d|D]olphin-emu"] $WSgame
+assign [class="(PathOfExile)|(Wine)"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
-assign [class="[H|h]exchat"] $WS6
 assign [class="[G|g]nome-system-monitor"] "10:"
 assign [class="[C|c]hromium"] $WS1
+
 
 # Pop up windows and task dialogs should open floating
 for_window [window_role="pop-up"] floating enable
