@@ -3,7 +3,7 @@
 #
 autoload -U colors && colors
 
-PROMPT="%{%(#~%{$fg_bold[red]%}~%{$fg_bold[blue]%})%}%n%{$reset_color%}@%M %c%(#~%{#%}~%{$%}) "
+PROMPT="%(!.%F{red}.%F{blue})%n%f@%m %1~%(!.#.\$) "
 
 # Load the old bash profile for environmental variables.
 emulate sh -c '. ~/.profile'
