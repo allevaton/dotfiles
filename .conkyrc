@@ -48,24 +48,26 @@ ${if_match "${swapperc}" != "No swap"}
     ${endif}
 ${endif}
 
+
 ## DISK SPACE REMAINING ##
 #
 {"full_text": "home: ${fs_free /home} free"},
 
+
 ## VOLUME ##
 #
 {"full_text": "♪
-${if_match "${exec amixer get Master -M | grep -oE "off" -m 1}" == "off"}
-    mm", "color": "\#FFFF00"}
+${if_match "${exec amixer get Master -M | grep -o 'off' -m 1}" == "off"}
+    mm","color":"\#FFFF00"}
 ${else}
     ${exec amixer get Master -M | grep -oE "[[:digit:]]*%" -m 1}"}
 ${endif}
 ,
 
 ## BATTERY ##
-# Only if the status is not unknown
-#
-${if_match "${battery_short}" != "U"}
+# Only if the battery exists as a power supply.
+# If the location is different for your setup, change it.
+${if_existing /sys/class/power_supply/BAT0}
     ${if_match ${battery_percent} <= 10}
         {"color": "\#FF0000", "full_text":
     ${else}
@@ -84,7 +86,7 @@ ${endif}
 #
 {"full_text":"CPU","separator":false},
 {"full_text":"${freq_g} GHz","separator":false,
-"separator_block_width":9,"short_text":""},
+"separator_block_width":9},
 
 ${if_match "${acpitemp}" != "0"}
     {"full_text":"${acpitemp}°C","separator":false
