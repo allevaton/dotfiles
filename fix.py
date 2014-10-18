@@ -4,20 +4,18 @@
 #
 
 import os
-import subprocess
 
+from subprocess import call, check_output
 
 # This is only python for the cross-platformality.
 # Screw Batch programming.
-
-call = subprocess.call
 
 if __name__ == '__main__':
     if os.name == 'nt':
         with open('_vimrc', 'w') as fp:
             fp.write('source $HOME/.vimrc')
 
-    if subprocess.check_call(['git', '--version']):
+    if check_call(['git', '--version']):
         if not os.path.exists('.vim/bundle'):
             os.makedirs('.vim/bundle')
             call(['git', 'clone', 'https://github.com/gmarik/Vundle.vim.git',
