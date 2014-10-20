@@ -236,12 +236,11 @@ assign [class="^dota"] $WSgame
 assign [class="^csgo"] $WSgame
 assign [class="^hl2_linux"] $WSgame
 assign [class="[d|D]olphin-emu"] $WSgame
-assign [class="(PathOfExile)|(Wine)"] $WSgame
+assign [title="Path of Exile"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
 assign [class="[G|g]nome-system-monitor"] "10:"
 assign [class="[C|c]hromium"] $WS1
-
 
 # Pop up windows and task dialogs should open floating
 for_window [window_role="pop-up"] floating enable
