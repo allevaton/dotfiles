@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Copies the .ycm_extra_conf.py from your home directory to the
+# current directory, if it exists.
+#
+
+f="$HOME/.ycm_extra_conf.py"
+
+if [[ -e "$f" ]]
+then
+    cp -i "$f" "$PWD"
+else
+    echo "$f not found"
+fi

@@ -29,6 +29,6 @@
 
 echo -n 'updating mirrorlist... '
 
-reflector --country 'United States' -l 200 -p rsync --sort rate --save /etc/pacman.d/mirrorlist
+reflector --country 'United States' -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist
 
 echo 'done'
