@@ -99,10 +99,11 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+n exec nautilus
 
 # Volume key
-bindsym XF86AudioRaiseVolume exec amixer -qD pulse set Master 2%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -qD pulse set Master 2%- unmute
-bindsym XF86AudioMute exec amixer -D pulse set Master toggle
-bindsym XF86AudioMicMute exec amixer -qD pulse set Capture toggle
+set $dzvol dzvol -bg '#222222' -fg '#FFFFFF' -fn 'Deja Vu Sans Mono 12' &
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -qD pulse set Master 2%+ unmute && $dzvol
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -qD pulse set Master 2%- unmute && $dzvol
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle && $dzvol
+bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle && $dzvol
 
 # Brightness
 bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
