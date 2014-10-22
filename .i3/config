@@ -251,7 +251,7 @@ for_window [window_role="task_dialog"] floating enable
 # finds out, if available)
 bar
 {
-    font pango:DejaVu Sans Mono, Icons 10
+    font pango:DejaVu Sans Mono, Icons 11
 
     strip_workspace_numbers yes
     position top
