@@ -62,10 +62,18 @@ syntax on
 let mapleader=','
 
 """ BULK CONFIGURATION: """
+
+" Indentation:
 set autoindent      " Always
-set backspace=indent,eol,start " Backspace over everything
 set copyindent      " Copy the previous indentation
 set expandtab       " Much easier when everything's a space
+set shiftround      " Only multiples of 4 for shifting
+set shiftwidth=4    " Auto indenting spaces
+set smarttab        " Go by shift width, not tab stop
+set softtabstop=4   " Treats 4 spaces as tabs
+set tabstop=4       " Tab size of 4 is better
+
+set backspace=indent,eol,start " Backspace over everything
 set gdefault        " search/replace globally on a line by default
 set hidden          " Hide buffers instead of closing them.
 set history=2000    " keep 2000 lines of command line history
@@ -78,17 +86,13 @@ set nobackup        " don't keep a backup file
 set noswapfile      " Who uses these, anyways?
 set ruler           " show the cursor position all the time
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set shiftround      " Only multiples of 4 for shifting
-set shiftwidth=4    " Auto indenting spaces
 set showcmd         " display incomplete commands
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
 set sidescrolloff=2 " Side scrolling
 set smartcase       " ignore case if pattern is all lower
-set smarttab        " Go by shift width, not tab stop
-set softtabstop=4   " Treats 4 spaces as tabs
-set tabstop=4       " Tab size of 4 is better
-                    " Use `<leader>be` to open buffer list
+
+" Folding:
 set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
 set foldmethod=marker " user markers for folding
