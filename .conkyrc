@@ -6,6 +6,13 @@ update_interval 1
 TEXT
 ,[
 
+# If you're wondering how this actually works, check ~/.local/bin/i3conky
+# I call a python script that actually strips the whitespace from
+# the beginning and end of each line after TEXT. So conky will actually
+# see this entire section as ONE LINE. It also supports comments.
+# i3 will actually be totally fine parsing the output since it's all
+# one big line.
+
 ## WIRELESS OR ETHERNET ##
 #
 {"full_text":
