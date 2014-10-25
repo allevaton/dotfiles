@@ -206,6 +206,33 @@ let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
+" EasyMotion:
+nnoremap ? /
+map  <Space>/ <Plug>(easymotion-sn)
+omap <Space>/ <Plug>(easymotion-tn)
+
+" define custom leader here
+" defaults to <leader><leader>
+map <Space> <Plug>(easymotion-prefix)
+
+" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
+" Without these mappings, 'n' & 'N' works fine. (These mappings just provide
+" different highlight method and have some other features)
+map <Space>n <Plug>(easymotion-next)
+map <Space>N <Plug>(easymotion-prev)
+
+nmap s <Plug>(easymotion-s)
+nmap <Space>f <Plug>(easymotion-f)
+
+" Repeat the last motion
+map <Space>. <Plug>(easymotion-repeat)
+
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_smartcase = 1
+
 " QuickFix Window:
 let g:quickfix_is_open = 0
 
@@ -248,41 +275,13 @@ endfunction
 " }}}
 
 " ---------------
-"
-" EasyMotion Settings:
-nnoremap ? /
-map  <Space>/ <Plug>(easymotion-sn)
-omap <Space>/ <Plug>(easymotion-tn)
-
-" Better pasting
-xnoremap p "_dP
-
-" define custom leader here
-" defaults to <leader><leader>
-map <Space> <Plug>(easymotion-prefix)
-
-" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
-" Without these mappings, 'n' & 'N' works fine. (These mappings just provide
-" different highlight method and have some other features)
-map <Space>n <Plug>(easymotion-next)
-map <Space>N <Plug>(easymotion-prev)
-
-nmap s <Plug>(easymotion-s)
-nmap <Space>f <Plug>(easymotion-f)
-
-" Repeat the last motion
-map <Space>. <Plug>(easymotion-repeat)
-
-map <Space>l <Plug>(easymotion-lineforward)
-map <Space>h <Plug>(easymotion-linebackward)
-
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_smartcase = 1
-" ---------------
 
 " Set it so enter on a menu item doesn't insert return
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" Better pasting
+xnoremap p "_dP
 
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
