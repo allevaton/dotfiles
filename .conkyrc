@@ -6,6 +6,13 @@ update_interval 1
 TEXT
 ,[
 
+# If you're wondering how this actually works, check ~/.local/bin/i3conky
+# I call a python script that actually strips the whitespace from
+# the beginning and end of each line after TEXT. So conky will actually
+# see this entire section as ONE LINE. It also supports comments.
+# i3 will actually be totally fine parsing the output since it's all
+# one big line.
+
 ## WIRELESS OR ETHERNET ##
 #
 {"full_text":
@@ -17,22 +24,29 @@ ${if_match "$gw_iface" == "wlp4s0"}
     " (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
     ,"color":"
     ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
-        \#00FF00"
+        \#00FF00"}
     ${else}
-        \#FFFF00"
+        \#FFFF00"}
     ${endif}
 
     ${if_match ${downspeedf wlp4s0} >= 10000.0}
-        },{"full_text":" ${downspeed wlp4s0}","color":"\#FFFF00"}
-    ${else}
-        }
+        ,{"full_text":" ${downspeed wlp4s0}","color":"\#FFFF00"}
+    ${endif}
+
+    ${if_match ${upspeedf wlp4s0} >= 10000.0}
+        ,{"full_text":" ${upspeed wlp4s0}","color":"\#FFFF00"}
     ${endif}
 ${endif}
+
 ${if_match "$gw_iface" == "enp0s25"}
     " ${addr enp0s25}","color":"\#00FF00"}
 
-    ${if_match ${downspeedf enp0s25} >= 10000.0}
+    ${if_match ${downspeedf enp0s25} >= 5000.0}
         ,{"full_text":" ${downspeed enp0s25}","color":"\#FFFF00"}
+    ${endif}
+
+    ${if_match ${upspeedf enp0s25} >= 5000.0}
+        ,{"full_text":" ${upspeed enp0s25}","color":"\#FFFF00"}
     ${endif}
 ${endif}
 ,

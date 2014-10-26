@@ -10,7 +10,7 @@ then
     if [[ -e $file ]]
     then
         (sleep 10s && DISPLAY=:0 nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1) &
-        compton --config $file
+        compton -b --config $file
     else
         DISPLAY=:0 notify-send 'Compton' 'Could not find config file'
     fi

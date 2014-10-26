@@ -102,7 +102,7 @@ bindsym $mod+n exec nautilus
 set $dzvol dzvol -bg '#222222' -fg '#FFFFFF' -fn 'Deja Vu Sans Mono 12' &
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -qD pulse set Master 2%+ unmute && $dzvol
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -qD pulse set Master 2%- unmute && $dzvol
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle && $dzvol
+bindsym XF86AudioMute exec --no-startup-id amixer -qD pulse set Master toggle && $dzvol
 bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle
 
 # Brightness
@@ -190,14 +190,7 @@ mode "resize"
     bindsym Escape mode "default"
 }
 
-
-bindsym $mod+Shift+M mode "power"
-
-mode "power"
-{
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Delete exec --no-startup-id $HOME/.local/bin/_lock
 
 # Resize mode is nice
 bindsym $mod+r mode "resize"
