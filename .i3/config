@@ -103,7 +103,7 @@ set $dzvol dzvol -bg '#222222' -fg '#FFFFFF' -fn 'Deja Vu Sans Mono 12' &
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -qD pulse set Master 2%+ unmute && $dzvol
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -qD pulse set Master 2%- unmute && $dzvol
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle && $dzvol
-bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle && $dzvol
+bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle
 
 # Brightness
 bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
@@ -252,7 +252,7 @@ for_window [window_role="task_dialog"] floating enable
 # finds out, if available)
 bar
 {
-    font pango:DejaVu Sans Mono, Icons 11
+    font pango:DejaVu Sans Mono, Icons 10
 
     strip_workspace_numbers yes
     position top
