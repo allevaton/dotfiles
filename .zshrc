@@ -99,6 +99,9 @@ fi
 #sudo ln -sf /usr/bin/rm /usr/bin/rmf
 #sudo chown $USER /tmp/trash
 
+# Make sure we exec startx, so the login shell doesn't stay up
+alias startx="exec startx"
+
 # A much easier ls statement
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
 alias ls='ls -vh --color=auto'

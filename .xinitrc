@@ -44,7 +44,6 @@ xrdb $HOME/.Xresources
 ###########################################################
 
 # Start f.lux for my eyes.
-# But don't start it if it's already started
 xflux -z 02038
 
 gvfs-mime --set x-scheme-handler/http chromium.desktop &
@@ -82,8 +81,7 @@ case "$1" in
         steam -silent &
 
         # Launch i3
-        exec i3
-        ;;
+        exec i3 ;;
 esac
 
 # vim:ts=4

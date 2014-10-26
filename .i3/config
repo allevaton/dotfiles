@@ -51,8 +51,8 @@ bindsym $mod+Print exec --no-startup-id scrot
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+p exec --no-startup-id dmenu_run
+bindsym $mod+p exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans Mono-10' -h 20"
+bindsym $mod+Shift+p exec --no-startup-id dmenu_run -i -fn 'DejaVu Sans Mono-10' -h 20
 
 # Change focus
 bindsym $mod+h focus left
@@ -86,7 +86,6 @@ bindsym $mod+f fullscreen
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+x layout toggle split
 bindsym $mod+e layout toggle split
 
 # Toggle tiling / floating
@@ -151,10 +150,6 @@ bindsym $mod+0 workspace $WS0
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-# Switching workspaces with the arrow keys
-bindsym $mod+$alt+Right workspace next
-bindsym $mod+$alt+Left workspace prev
-
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1; workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2; workspace $WS2
@@ -169,6 +164,9 @@ bindsym $mod+Shift+0 move container to workspace $WS0; workspace $WS0
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
+
+# Lock screen
+bindsym $mod+Delete exec --no-startup-id $HOME/.local/bin/_lock
 
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -190,10 +188,9 @@ mode "resize"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Delete exec --no-startup-id $HOME/.local/bin/_lock
-
 # Resize mode is nice
 bindsym $mod+r mode "resize"
+
 
 # General styling here. Colors, fonts, etc.
 font pango:DejaVu Sans Mono, Icons 10
@@ -245,7 +242,7 @@ for_window [window_role="task_dialog"] floating enable
 # finds out, if available)
 bar
 {
-    font pango:DejaVu Sans Mono, Icons 10
+    font pango:DejaVu Sans Mono, Icons 11
 
     strip_workspace_numbers yes
     position top

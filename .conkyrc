@@ -111,7 +111,7 @@ ${if_match "${acpitemp}" != "0"}
 ${endif}
 
 {"full_text": "${cpu 0}%"
-${if_match ${cpu 0} > 80}
+${if_match ${cpu 0} > 70}
     ,"color":"\#FF0000"
 ${endif}
 ${if_match ${cpu 0} > 50}
