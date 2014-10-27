@@ -32,5 +32,5 @@ with open('$compiled'[:-1]) as source:
 compiled.close()
 "
 
-conky -c "$compiled"
-rm "$compiled"
+exec conky -c "$compiled"
+#rm "$compiled"
