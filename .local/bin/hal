@@ -23,9 +23,10 @@ function main
 
 function clear-cache
 {
-    # remove adobe cache
-    cd ~/.adobe/Flash_Player  # go to Flash player user directory
-    rm -rf NativeCache AssetCache APSPrivateData2  # remove cache
+    adobe_cache=$HOME/.adobe/Flash_Player/
+
+    if [[ ! -d $adobe_cache ]]; then mkdir -p $adobe_cache; fi
+    rm -rf $adobe_cache/{NativeCache,AssetCache,APSPrivateData2}
 }
 
 function start-hal
@@ -34,7 +35,7 @@ function start-hal
     sudo systemctl start hal.service && (
     echo "Started hal service..."
     ) || (
-    echo "Failed to start hal service!")
+    echo "Failed to start hal service")
 }
 
 function stop-hal
@@ -43,7 +44,7 @@ function stop-hal
     sudo systemctl stop hal.service && (
     echo "Stopped hal service..."
     ) || (
-    echo "Failed to stop hal service!")
+    echo "Failed to stop hal service")
 }
 
-main  # run the main insertion function
+main
