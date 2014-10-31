@@ -97,12 +97,18 @@ bindsym $mod+space focus mode_toggle
 # Nautilus
 bindsym $mod+n exec nautilus
 
-# Volume key
+# Volume keys
 set $dzvol dzvol -bg '#222222' -fg '#FFFFFF' -fn 'Deja Vu Sans Mono 12' &
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -qD pulse set Master 2%+ unmute && $dzvol
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -qD pulse set Master 2%- unmute && $dzvol
 bindsym XF86AudioMute exec --no-startup-id amixer -qD pulse set Master toggle && $dzvol
 bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle
+
+# quickswitch.py
+set $qs_dmenu --dmenu "dmenu -i -b -l 20 -fn 'DejaVu Sans Mono-12' -x 40 -y 40 -w 512 -h 24 -p
+bindsym $mod+Shift+w exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
+bindsym $mod+Shift+o exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
+bindsym $mod+Shift+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
 
 # Brightness
 bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
