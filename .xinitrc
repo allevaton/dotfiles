@@ -20,6 +20,8 @@ xset s off
 #
 xset m 10/6 0
 
+synclient HorizTwoFingerScroll=0
+
 # Find the G9x
 while read id
 do
