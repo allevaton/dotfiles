@@ -151,6 +151,7 @@ bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
 bindsym $mod+0 workspace $WS0
+bindsym $mod+g workspace $WSgame
 
 # Switching workspaces with tab
 bindsym $mod+Tab workspace next
@@ -167,6 +168,7 @@ bindsym $mod+Shift+7 move container to workspace $WS7
 bindsym $mod+Shift+8 move container to workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS0
+bindsym $mod+Shift+g move container to workspace $WSgame
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -234,6 +236,7 @@ assign [class="^csgo"] $WSgame
 assign [class="^hl2_linux"] $WSgame
 assign [class="[d|D]olphin-emu"] $WSgame
 assign [title="Path of Exile"] $WSgame
+assign [title="World of Warcraft"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
 assign [class="[G|g]nome-system-monitor"] "10:"
