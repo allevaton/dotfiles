@@ -8,7 +8,7 @@ THRESHOLD=10
 
 dir=/sys/class/power_supply/BAT0
 
-if [ ! -d "$dir" ]
+if [[ ! -d "$dir" ]]
 then
     exit 0
 fi
