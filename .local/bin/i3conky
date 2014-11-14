@@ -9,7 +9,7 @@ echo '[]'
 
 compiled=$HOME/.conkyrc_
 
-python <<< "
+python << PYTHON
 import os
 
 compiled = open('$compiled', 'w')
@@ -30,7 +30,7 @@ with open('$compiled'[:-1]) as source:
             ignore_lf = True
 
 compiled.close()
-"
+PYTHON
 
 exec conky -c "$compiled"
 #rm "$compiled"
