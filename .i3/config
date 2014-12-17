@@ -108,6 +108,7 @@ bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggl
 set $qs_dmenu --dmenu "dmenu -i -b -l 20 -fn 'DejaVu Sans Mono-12' -x 40 -y 40 -w 512 -h 24 -p
 bindsym $mod+Shift+w exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
 bindsym $mod+Shift+o exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
+bindsym $mod+m exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
 bindsym $mod+Shift+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
 
 # Brightness
@@ -251,7 +252,7 @@ for_window [window_role="task_dialog"] floating enable
 # finds out, if available)
 bar
 {
-    font pango:DejaVu Sans Mono, Icons 11
+    font pango:DejaVu Sans Mono, Icons 10
 
     strip_workspace_numbers yes
     position top
