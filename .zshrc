@@ -181,7 +181,8 @@ alias find='sudo find'
 alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color=auto'
+#alias pacman='sudo pacman --color=auto'
+alias pacup='sudo pacman -Syu'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
