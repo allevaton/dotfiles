@@ -182,7 +182,11 @@ alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='pacman --color=auto'
-alias pacup='sudo pacman -Syu'
+alias spacman='sudo pacman --color=auto'
+alias pacup='spacman -Syu'
+alias pac='spacman -S'
+alias pacin='pac'
+alias pacins='pac'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
