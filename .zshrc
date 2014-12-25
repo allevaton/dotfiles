@@ -185,6 +185,7 @@ alias pacman='pacman --color=auto'
 alias spacman='sudo pacman --color=auto'
 alias pacup='spacman -Syu'
 alias pac='spacman -S'
+alias pacs='pac -s'
 alias pacin='pac'
 alias pacins='pac'
 
