@@ -46,7 +46,7 @@ Plugin 'tkztmk/vim-vala'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
-Plugin 'marijnh/tern_for_vim'
+"Plugin 'marijnh/tern_for_vim'
 
 if !has('win32')
     Plugin 'Valloric/YouCompleteMe'

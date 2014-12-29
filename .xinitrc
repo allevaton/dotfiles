@@ -21,6 +21,9 @@ xset s off
 xset m 10/6 0
 
 synclient HorizTwoFingerScroll=0
+synclient TapButton2=3
+synclient TapButton3=2
+synclient TapButton1=0
 
 # Find the G9x
 while read id
