@@ -504,3 +504,11 @@ if has("gui_running")
     set guioptions-=R
     set guioptions-=M
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" For JetBrains IDE IdeaVim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if IDEA
+	map ,r :action RenameElement<CR>
+	map ,d :action GotoDeclaration<CR>
+endif
