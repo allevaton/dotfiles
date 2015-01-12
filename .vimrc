@@ -509,6 +509,6 @@ endif
 " For JetBrains IDE IdeaVim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if IDEA
-	map ,r :action RenameElement<CR>
-	map ,d :action GotoDeclaration<CR>
+    map ,r :action RenameElement<CR>
+    map ,d :action GotoDeclaration<CR>
 endif
