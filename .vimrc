@@ -508,7 +508,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For JetBrains IDE IdeaVim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if IDEA
+if exists("IDEA")
     map ,r :action RenameElement<CR>
     map ,d :action GotoDeclaration<CR>
 endif

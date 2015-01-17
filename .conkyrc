@@ -53,7 +53,7 @@ ${endif}
 
 ## MEMORY AND SWAP##
 #
-${if_match ${memperc} > 60}
+${if_match ${memperc} > 40}
     {"full_text": "MEM ${memperc}%","color":"\#FFFF00"},
 ${endif}
 ${if_match "${swapperc}" != "No swap"}
