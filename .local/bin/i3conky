@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+#
+#
+#
+
+echo '{"version": 1}'
+echo '['
+echo '[]'
+
+compiled=$HOME/.conkyrc_
+
+python << PYTHON
+import os
+
+compiled = open('$compiled', 'w')
+
+ignore_lf = False
+
+with open('$compiled'[:-1]) as source:
+    for line in source:
+        line = line.lstrip()
+
+        # ignore comments
+        if line.startswith('#'):
+            continue
+
+        compiled.write(line.strip() if ignore_lf else line)
+
+        if line.startswith('TEXT'):
+            ignore_lf = True
+
+compiled.close()
+PYTHON
+
+exec conky -c "$compiled"
+#rm "$compiled"

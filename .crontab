@@ -1,0 +1,2 @@
+ */5 * * * * env DISPLAY=:0 $HOME/.local/bin/_batterycheck
+ */20 * * * * crontab -l > $HOME/.crontab

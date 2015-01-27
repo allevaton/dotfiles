@@ -4,44 +4,70 @@
 #
 # This is executed when X launches (with startx).
 #
-## Initial X settings that we like
 
-    # Mouse speed
-    # These settings are now set in /etc/X11/xorg.conf.d/50-synaptics.conf
-    # Please edit mouse-related settings there.
-    # Keyboard rates should be faster
-    xset r rate 210 30
+###########################################################
+# Initial X settings that we like
+###########################################################
 
-    # Honestly, not liking the screen blanking
-    xset -dpms
-    xset s off
+# Keyboard rates should be faster
+xset r rate 210 30
 
-    # Don't like being blinded all the time
-    # Sometimes f.lux isn't enough, y'know?
-    xbacklight -set 60
+# Honestly, not liking the screen blanking
+xset -dpms
+xset s off
 
-    # We like Ctrl+Alt+Backspace, right?
-    setxkbmap -option terminate:ctrl_alt_bksp
+# Mouse specific setup
+#
+xset m 10/6 0
 
+synclient HorizTwoFingerScroll=0
+synclient TapButton2=3
+synclient TapButton3=2
+synclient TapButton1=0
 
-# This is kind of useful
-export WORKSPACE="$HOME/workspace"
-export WS="$WORKSPACE"
-export EDITOR="vim"
+# Find the G9x
+while read id
+do
+    xinput set-prop $id 'Device Accel Profile' 2
+    xinput set-prop $id 'Device Accel Constant Deceleration' 2.85
+    xinput set-ptr-feedback $id 0 18 10
+done <<< "`xinput | awk '/G9x/{print $7}' | awk -F= '{print $2}'`"
+
+# Don't like being blinded all the time
+# Sometimes f.lux isn't enough, y'know?
+# XXX: This may not work in some instances.
+xbacklight -set 60
+
+# We like Ctrl+Alt+Backspace, right?
+setxkbmap -option terminate:ctrl_alt_bksp
 
 # Load the general X configuration
 xrdb $HOME/.Xresources
 
-##
-# Startup programs go here.
+###########################################################
+# Startup programs and start the WM
+###########################################################
 
 # Start f.lux for my eyes.
-# But don't start it if it's already started
 xflux -z 02038
+
+gvfs-mime --set x-scheme-handler/http chromium.desktop &
+
+# We like sound
+start-pulseaudio-x11 &
 
 # Lastly, start the DE/WM specified, or not specified
 case "$1" in
+    kde5)
+        export KF5=/opt/kf5
+        export QML2_IMPORT_PATH=$KF5/lib/qt/qml:/usr/lib/qt/qml
+        export QT_PLUGIN_PATH=$KF5/lib/qt/plugins:/usr/lib/qt/plugins
+        export XDG_CONFIG_DIRS=$KF5/etc/xdg:/etc/xdg
+        export PATH=$KF5/bin:$PATH
+        kwin_x11 --replace;;
+
     gnome)
+
         exec gnome-session;;
 
     # Default is i3
@@ -56,9 +82,11 @@ case "$1" in
         # Wallpapers are sexy.
         nitrogen --restore &
 
+        # Yes, steam.
+        steam -silent &
+
         # Launch i3
-        exec i3
-        ;;
+        exec i3 ;;
 esac
 
 # vim:ts=4

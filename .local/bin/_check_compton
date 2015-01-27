@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+#
+#
+
+if [[ `hostname` == archdesktop ]]
+then
+    file="$HOME/.compton.conf"
+
+    if [[ -e $file ]]
+    then
+        (sleep 10s && DISPLAY=:0 nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1) &
+        compton -b --config $file
+    else
+        DISPLAY=:0 notify-send 'Compton' 'Could not find config file'
+    fi
+fi

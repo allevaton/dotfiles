@@ -2,7 +2,11 @@
 # ~/.zshrc
 #
 autoload -U colors && colors
-export PS1="%{%(#~$fg_bold[red]~$fg_bold[blue])%}%n%{$reset_color%}@%M %c%(#~%{#%}~%{$%}%}) "
+
+PROMPT="%(!.%F{red}.%F{blue})%n%f@%m %1~%(!.#.\$) "
+
+# Load the old bash profile for environmental variables.
+emulate sh -c '. ~/.profile'
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -72,6 +76,8 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
 
+bindkey "${terminfo[kent]}" accept-line
+
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -92,6 +98,9 @@ fi
 #mkdir -p /tmp/trash
 #sudo ln -sf /usr/bin/rm /usr/bin/rmf
 #sudo chown $USER /tmp/trash
+
+# Make sure we exec startx, so the login shell doesn't stay up
+alias startx="exec startx"
 
 # A much easier ls statement
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
@@ -135,7 +144,7 @@ alias cp='cp -r'
 #alias rm='mv -t /tmp/trash'
 #alias rmf='rmf -r'
 alias rm='rm -r'
-alias mv='mv -r'
+alias mv='mv'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
@@ -172,7 +181,13 @@ alias find='sudo find'
 alias cdwo='cd $HOME/workspace'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color=auto'
+alias pacman='pacman --color=auto'
+alias spacman='sudo pacman --color=auto'
+alias pacup='spacman -Syu'
+alias pac='spacman -S'
+alias pacs='pac -s'
+alias pacin='pac'
+alias pacins='pac'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
@@ -186,6 +201,9 @@ alias sys='systemctl'
 
 # Use vim as a pager
 alias less='less -R'
+
+# arch wiki
+alias archwiki="$BROWSER /usr/share/doc/arch-wiki/html/en"
 
 # }}}
 #

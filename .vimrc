@@ -35,7 +35,7 @@ Plugin 'dag/vim-fish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'tfnico/vim-gradle'
-"Plugin 'gerw/vim-latex-suite'
+Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -46,23 +46,35 @@ Plugin 'tkztmk/vim-vala'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'marijnh/tern_for_vim'
+
+if !has('win32')
+    Plugin 'Valloric/YouCompleteMe'
+end
 
 call vundle#end()
 filetype plugin indent on
 syntax on
 
 " Handle for fish
-set shell=bash\ --norc
+"set shell=bash\ --norc
 
 " This is the key that will define how remaps essentially work.
 let mapleader=','
 
 """ BULK CONFIGURATION: """
+
+" Indentation:
 set autoindent      " Always
-set backspace=indent,eol,start " Backspace over everything
 set copyindent      " Copy the previous indentation
 set expandtab       " Much easier when everything's a space
+set shiftround      " Only multiples of 4 for shifting
+set shiftwidth=4    " Auto indenting spaces
+set smarttab        " Go by shift width, not tab stop
+set softtabstop=4   " Treats 4 spaces as tabs
+set tabstop=4       " Tab size of 4 is better
+
+set backspace=indent,eol,start " Backspace over everything
 set gdefault        " search/replace globally on a line by default
 set hidden          " Hide buffers instead of closing them.
 set history=2000    " keep 2000 lines of command line history
@@ -75,17 +87,13 @@ set nobackup        " don't keep a backup file
 set noswapfile      " Who uses these, anyways?
 set ruler           " show the cursor position all the time
 set scrolloff=4     " Use a 4 line buffer when scrolling
-set shiftround      " Only multiples of 4 for shifting
-set shiftwidth=4    " Auto indenting spaces
 set showcmd         " display incomplete commands
 set showmatch       " Parenthetical matching
 set showmode        " Always show the mode we're in
 set sidescrolloff=2 " Side scrolling
 set smartcase       " ignore case if pattern is all lower
-set smarttab        " Go by shift width, not tab stop
-set softtabstop=4   " Treats 4 spaces as tabs
-set tabstop=4       " Tab size of 4 is better
-                    " Use `<leader>be` to open buffer list
+
+" Folding:
 set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
 set foldmethod=marker " user markers for folding
@@ -95,6 +103,7 @@ set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 set formatoptions=tcroqnj " see :help fo-table
 set wildmenu        " make tab completion work like bash
 set wildmode=list:full " show a list when pressing tab complete
+set modeline
 
 " wildcard ignores
 set wildignore=*.pyc,*.pyo,*.so,*.swp
@@ -151,14 +160,15 @@ let g:bufExplorerSortBy = 'number'
 
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['']
+let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
-nnoremap <leader>S :SyntasticCheck flake8<CR>
+" Use pylint for non-saving checking because it's much slower
+nnoremap <leader>S :SyntasticCheck pylint<CR>
 
 " Eclim:
 let g:EclimCompletionMethod = 'omnifunc'
@@ -196,6 +206,33 @@ let g:python_highlight_string_templates = 1
 let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
+
+" EasyMotion:
+nnoremap ? /
+map  <Space>/ <Plug>(easymotion-sn)
+omap <Space>/ <Plug>(easymotion-tn)
+
+" define custom leader here
+" defaults to <leader><leader>
+map <Space> <Plug>(easymotion-prefix)
+
+" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
+" Without these mappings, 'n' & 'N' works fine. (These mappings just provide
+" different highlight method and have some other features)
+map <Space>n <Plug>(easymotion-next)
+map <Space>N <Plug>(easymotion-prev)
+
+nmap s <Plug>(easymotion-s)
+nmap <Space>f <Plug>(easymotion-f)
+
+" Repeat the last motion
+map <Space>. <Plug>(easymotion-repeat)
+
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_smartcase = 1
 
 " QuickFix Window:
 let g:quickfix_is_open = 0
@@ -239,41 +276,13 @@ endfunction
 " }}}
 
 " ---------------
-"
-" EasyMotion Settings:
-nnoremap ? /
-map  <Space>/ <Plug>(easymotion-sn)
-omap <Space>/ <Plug>(easymotion-tn)
-
-" Better pasting
-xnoremap p "_dP
-
-" define custom leader here
-" defaults to <leader><leader>
-map <Space> <Plug>(easymotion-prefix)
-
-" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
-" Without these mappings, 'n' & 'N' works fine. (These mappings just provide
-" different highlight method and have some other features)
-map <Space>n <Plug>(easymotion-next)
-map <Space>N <Plug>(easymotion-prev)
-
-nmap s <Plug>(easymotion-s)
-nmap <Space>f <Plug>(easymotion-f)
-
-" Repeat the last motion
-map <Space>. <Plug>(easymotion-repeat)
-
-map <Space>l <Plug>(easymotion-lineforward)
-map <Space>h <Plug>(easymotion-linebackward)
-
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_smartcase = 1
-" ---------------
 
 " Set it so enter on a menu item doesn't insert return
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" Better pasting
+xnoremap p "_dP
 
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -292,10 +301,12 @@ nnoremap ' `
 nnoremap ` '
 
 " Easier window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Using this weirdo block will stop vim-latex from remapping C-j
+nmap <SID>I_won't_ever_type_this <Plug>IMAP_JumpForward
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 " Significantly better navigation
 nnoremap j gj
@@ -374,11 +385,11 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Copying and pasting
-if has('win32')
-    set clipboard=unnamed
-else
-    set clipboard=unnamedplus
-endif
+"if has('win32')
+"    set clipboard=unnamed
+"else
+set clipboard=unnamedplus
+"endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -492,4 +503,12 @@ if has("gui_running")
     set guioptions-=r
     set guioptions-=R
     set guioptions-=M
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" For JetBrains IDE IdeaVim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if exists("IDEA")
+    map ,r :action RenameElement<CR>
+    map ,d :action GotoDeclaration<CR>
 endif
