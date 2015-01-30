@@ -511,4 +511,7 @@ endif
 if exists("IDEA")
     map ,r :action RenameElement<CR>
     map ,d :action GotoDeclaration<CR>
+    map ,d :action GotoDeclaration<CR>
+    map ,s :action ShowErrorDescription<CR>
+    map / :action GotoSymbol<CR>
 endif
