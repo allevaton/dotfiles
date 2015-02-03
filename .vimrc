@@ -516,4 +516,6 @@ if exists("IDEA")
     map / :action GotoSymbol<CR>
     map <C-o> :action Back<CR>
     map <C-i> :action Forward<CR>
+    
+    map S :action SurroundWith<CR>
 endif
