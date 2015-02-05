@@ -5,7 +5,7 @@
 
 import os
 
-from subprocess import call, check_output
+from subprocess import call, check_call
 
 # This is only python for the cross-platformality.
 # Screw Batch programming.
