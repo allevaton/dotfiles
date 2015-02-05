@@ -2,4 +2,7 @@
   <Python>
     <option name="NEW_LINE_AFTER_COLON" value="true" />
   </Python>
+  <XML>
+    <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+  </XML>
 </code_scheme>
