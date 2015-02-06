@@ -1,0 +1,5 @@
+<templateSet group="Zen HTML">
+  <template name="style" value="&lt;style type=&quot;text/css&quot;&gt;&#10;    $END$&#10;&lt;/style&gt;" description="&lt;style&gt;...&lt;/style&gt;" toReformat="true" toShortenFQNames="true">
+    <context />
+  </template>
+</templateSet>
