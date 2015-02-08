@@ -1,4 +1,4 @@
-<keymap version="1" name="Default copy" parent="$default">
+<keymap version="1" name="Custom" parent="$default">
   <action id="AutoIndentLines" />
   <action id="EditorJoinLines" />
   <action id="EditorToggleCase" />
