@@ -515,8 +515,8 @@ if exists("IDEA")
     map ,s :action ShowErrorDescription<CR>
     "map / :action GotoSymbol<CR>
     
-    map [c :action GotoPreviousError<CR>
-    map ]c :action GotoNextError<CR>
+    map [c :action GotoPreviousError<CR>:action ShowErrorDescription<CR>
+    map ]c :action GotoNextError<CR>:action ShowErrorDescription<CR>
     
     map <C-o> :action Back<CR>
     map <C-i> :action Forward<CR>
