@@ -17,6 +17,7 @@
   <attributes>
     <option name="ABSTRACT_CLASS_NAME_ATTRIBUTES">
       <value>
+        <option name="FOREGROUND" value="afffc3" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
@@ -92,6 +93,7 @@
     </option>
     <option name="CLASS_NAME_ATTRIBUTES">
       <value>
+        <option name="FOREGROUND" value="86ddff" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
@@ -1150,6 +1152,7 @@
     </option>
     <option name="LOCAL_VARIABLE_ATTRIBUTES">
       <value>
+        <option name="FOREGROUND" value="64a2a2" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
@@ -1328,6 +1331,7 @@
     </option>
     <option name="PARAMETER_ATTRIBUTES">
       <value>
+        <option name="FOREGROUND" value="fd971f" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
