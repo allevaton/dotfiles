@@ -1,5 +1,9 @@
 <keymap version="1" name="Custom" parent="$default">
   <action id="AutoIndentLines" />
+  <action id="CodeCleanup">
+    <keyboard-shortcut first-keystroke="shift control C" />
+  </action>
+  <action id="CopyPaths" />
   <action id="EditorJoinLines" />
   <action id="EditorToggleCase" />
   <action id="FindUsages">
