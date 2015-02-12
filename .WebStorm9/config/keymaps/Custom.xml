@@ -3,8 +3,9 @@
   <action id="CodeCleanup">
     <keyboard-shortcut first-keystroke="shift control C" />
   </action>
-  <action id="CopyPaths" />
-  <action id="EditorJoinLines" />
+  <action id="CopyPaths" />  <action id="Debug">
+    <keyboard-shortcut first-keystroke="F5" />
+  </action>  <action id="EditorJoinLines" />
   <action id="EditorToggleCase" />
   <action id="FindUsages">
     <keyboard-shortcut first-keystroke="control U" />
@@ -31,16 +32,32 @@
   <action id="QuickJavaDoc">
     <mouse-shortcut keystroke="alt button2" />
   </action>
+  <action id="Resume">
+    <keyboard-shortcut first-keystroke="F8" />
+  </action>
   <action id="SaveAll" />
+  <action id="ShowBookmarks" />
   <action id="ShowSettingsAndFindUsages">
     <keyboard-shortcut first-keystroke="shift control alt U" />
   </action>
   <action id="ShowUsages">
     <keyboard-shortcut first-keystroke="shift control U" />
   </action>
+  <action id="StepInto">
+    <keyboard-shortcut first-keystroke="F11" />
+  </action>
+  <action id="StepOut">
+    <keyboard-shortcut first-keystroke="shift F11" />
+  </action>
+  <action id="StepOver">
+    <keyboard-shortcut first-keystroke="F10" />
+  </action>
+  <action id="Stop">
+    <keyboard-shortcut first-keystroke="shift F5" />
+  </action>
   <action id="SurroundWith">
     <keyboard-shortcut first-keystroke="control alt T" />
-    <keyboard-shortcut first-keystroke="control S" />
+    <keyboard-shortcut first-keystroke="control T" />
   </action>
   <action id="SurroundWithLiveTemplate">
     <keyboard-shortcut first-keystroke="shift control J" />
@@ -60,4 +77,9 @@
   <action id="SwitchUp">
     <keyboard-shortcut first-keystroke="shift alt UP" />
   </action>
+  <action id="ToggleBookmark" />
+  <action id="ToggleLineBreakpoint">
+    <keyboard-shortcut first-keystroke="F9" />
+  </action>
+  <action id="Vcs.UpdateProject" />
 </keymap>

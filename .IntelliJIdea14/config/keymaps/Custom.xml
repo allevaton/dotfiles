@@ -1,5 +1,9 @@
 <keymap version="1" name="Custom" parent="Default for XWin">
   <action id="AutoIndentLines" />
+  <action id="CopyElement" />
+  <action id="Debug">
+    <keyboard-shortcut first-keystroke="F5" />
+  </action>
   <action id="EditorJoinLines" />
   <action id="EditorToggleCase" />
   <action id="FindUsages">
@@ -34,6 +38,9 @@
   <action id="ShowUsages">
     <keyboard-shortcut first-keystroke="shift control U" />
   </action>
+  <action id="Stop">
+    <keyboard-shortcut first-keystroke="shift F5" />
+  </action>
   <action id="SurroundWith">
     <keyboard-shortcut first-keystroke="control alt T" />
     <keyboard-shortcut first-keystroke="control S" />
@@ -56,4 +63,5 @@
   <action id="SwitchUp">
     <keyboard-shortcut first-keystroke="shift alt UP" />
   </action>
+  <action id="UML.ApplyCurrentLayout" />
 </keymap>

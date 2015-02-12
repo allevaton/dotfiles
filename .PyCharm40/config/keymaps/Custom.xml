@@ -1,21 +1,52 @@
 <keymap version="1" name="Custom" parent="Default for XWin">
+  <action id="AutoIndentLines" />
   <action id="CopyElement" />
   <action id="Debug">
     <keyboard-shortcut first-keystroke="F5" />
   </action>
-  <action id="Resume">
-    <keyboard-shortcut first-keystroke="F9" />
-    <keyboard-shortcut first-keystroke="F5" />
+  <action id="EditorJoinLines" />
+  <action id="EditorToggleCase" />
+  <action id="FindUsages">
+    <keyboard-shortcut first-keystroke="control U" />
   </action>
-  <action id="ShowBookmarks" />
-  <action id="StepInto">
-    <keyboard-shortcut first-keystroke="F11" />
+  <action id="GotoClass">
+    <keyboard-shortcut first-keystroke="shift control N" />
   </action>
-  <action id="StepOut">
-    <keyboard-shortcut first-keystroke="shift F11" />
+  <action id="GotoFile">
+    <keyboard-shortcut first-keystroke="control alt N" />
   </action>
-  <action id="StepOver">
-    <keyboard-shortcut first-keystroke="F10" />
+  <action id="GotoSuperMethod">
+    <keyboard-shortcut first-keystroke="control alt U" />
+  </action>
+  <action id="GotoSymbol">
+    <keyboard-shortcut first-keystroke="control N" />
+  </action>
+  <action id="Inline" />
+  <action id="InspectCode">
+    <keyboard-shortcut first-keystroke="control alt I" />
+  </action>
+  <action id="QuickImplementations">
+    <keyboard-shortcut first-keystroke="control Q" />
+  </action>
+  <action id="QuickJavaDoc">
+    <mouse-shortcut keystroke="alt button2" />
+  </action>
+  <action id="SaveAll" />
+  <action id="ShowSettingsAndFindUsages">
+    <keyboard-shortcut first-keystroke="shift control alt U" />
+  </action>
+  <action id="ShowUsages">
+    <keyboard-shortcut first-keystroke="shift control U" />
+  </action>
+  <action id="Stop">
+    <keyboard-shortcut first-keystroke="shift F5" />
+  </action>
+  <action id="SurroundWith">
+    <keyboard-shortcut first-keystroke="control alt T" />
+    <keyboard-shortcut first-keystroke="control S" />
+  </action>
+  <action id="SurroundWithLiveTemplate">
+    <keyboard-shortcut first-keystroke="shift control J" />
   </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="shift alt ENTER" />
@@ -32,6 +63,5 @@
   <action id="SwitchUp">
     <keyboard-shortcut first-keystroke="shift alt UP" />
   </action>
-  <action id="ToggleBookmark" />
   <action id="UML.ApplyCurrentLayout" />
 </keymap>
