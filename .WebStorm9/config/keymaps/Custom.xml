@@ -3,9 +3,12 @@
   <action id="CodeCleanup">
     <keyboard-shortcut first-keystroke="shift control C" />
   </action>
-  <action id="CopyPaths" />  <action id="Debug">
+  <action id="CopyElement" />
+  <action id="CopyPaths" />
+  <action id="Debug">
     <keyboard-shortcut first-keystroke="F5" />
-  </action>  <action id="EditorJoinLines" />
+  </action>
+  <action id="EditorJoinLines" />
   <action id="EditorToggleCase" />
   <action id="FindUsages">
     <keyboard-shortcut first-keystroke="control U" />
