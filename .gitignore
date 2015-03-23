@@ -22,4 +22,7 @@ workbench.*
 
 .WebStorm9/system
 .WebStorm9/restart
+
 /fix.py
+/AppData
+/Application Data
