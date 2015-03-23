@@ -1,0 +1,3 @@
+#q::
+	WinClose A
+	return
