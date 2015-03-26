@@ -1,3 +1,11 @@
 #q::
-	WinClose A
+	WinKill A
+	return
+
+#n::
+	Run, notepad.exe
+	return
+
+#+n::
+	Run, notepad++.exe
 	return
