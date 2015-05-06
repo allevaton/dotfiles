@@ -9,3 +9,7 @@
 #+n::
 	Run, notepad++.exe
 	return
+    
+#return::
+    Run, cmd.exe
+    return
