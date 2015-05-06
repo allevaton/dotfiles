@@ -19,6 +19,7 @@
   <action id="GotoFile">
     <keyboard-shortcut first-keystroke="control alt N" />
   </action>
+  <action id="GotoLine" />
   <action id="GotoSuperMethod">
     <keyboard-shortcut first-keystroke="control alt U" />
   </action>
@@ -59,7 +60,6 @@
     <keyboard-shortcut first-keystroke="shift F5" />
   </action>
   <action id="SurroundWith">
-    <keyboard-shortcut first-keystroke="control alt T" />
     <keyboard-shortcut first-keystroke="control T" />
   </action>
   <action id="SurroundWithLiveTemplate">
