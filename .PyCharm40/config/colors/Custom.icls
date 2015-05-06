@@ -2,6 +2,7 @@
   <option name="LINE_SPACING" value="1.2" />
   <option name="EDITOR_FONT_SIZE" value="14" />
   <option name="CONSOLE_LINE_SPACING" value="1.0" />
+  <option name="EDITOR_QUICK_DOC_FONT_SIZE" value="MEDIUM" />
   <option name="EDITOR_FONT_NAME" value="DejaVu Sans Mono" />
   <colors>
     <option name="CARET_COLOR" value="f8f8f0" />
@@ -543,7 +544,7 @@
     </option>
     <option name="DEFAULT_DOC_COMMENT_TAG">
       <value>
-        <option name="FOREGROUND" value="75715e" />
+        <option name="FOREGROUND" value="85816d" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
@@ -1312,12 +1313,6 @@
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
-    <option name="PY.BUILTIN_NAME">
-      <value>
-        <option name="FOREGROUND" value="66d9ef" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
     <option name="PY.CLASS_DEFINITION">
       <value>
         <option name="FOREGROUND" value="a6e22e" />
@@ -1337,46 +1332,10 @@
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
-    <option name="PY.FUNC_DEFINITION">
-      <value>
-        <option name="FOREGROUND" value="a6e22e" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
     <option name="PY.INVALID_STRING_ESCAPE">
       <value>
         <option name="FOREGROUND" value="f8f8f0" />
         <option name="BACKGROUND" value="f92672" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
-    <option name="PY.KEYWORD">
-      <value>
-        <option name="FOREGROUND" value="66d9ef" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
-    <option name="PY.LINE_COMMENT">
-      <value>
-        <option name="FOREGROUND" value="75715e" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
-    <option name="PY.NUMBER">
-      <value>
-        <option name="FOREGROUND" value="ae81ff" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
-    <option name="PY.OPERATION_SIGN">
-      <value>
-        <option name="FOREGROUND" value="f92672" />
-        <option name="EFFECT_TYPE" value="0" />
-      </value>
-    </option>
-    <option name="PY.PREDEFINED_USAGE">
-      <value>
-        <option name="FOREGROUND" value="66d9ef" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
