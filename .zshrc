@@ -2,8 +2,12 @@
 # ~/.zshrc
 #
 autoload -U colors && colors
+autoload -U promptinit && promptinit
+PURE_PROMPT_SYMBOL='$'
+prompt pure
 
-PROMPT="%(!.%F{red}.%F{blue})%n%f@%m %1~%(!.#.\$) "
+#PROMPT="%(!.%F{red}.%F{blue})%n%f@%m %1~%(!.#.\$) "
+#PROMPT="\[\e[1;34m\]\u\[\e[m\]@\h \W\$ "
 
 # Load the old bash profile for environmental variables.
 emulate sh -c '. ~/.profile'
@@ -19,7 +23,7 @@ bindkey -e
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/nick/.zshrc'
+# zstyle :compinstall filename '/home/nick/.zshrc'
 
 # PLUGINS {{{
 
@@ -36,7 +40,7 @@ function loadplugin
     fi
 }
 
-loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
+#loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
 
 loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 
@@ -94,17 +98,8 @@ fi
 
 # aliases {{{
 
-# Make the trash folder
-#mkdir -p /tmp/trash
-#sudo ln -sf /usr/bin/rm /usr/bin/rmf
-#sudo chown $USER /tmp/trash
-
-# Make sure we exec startx, so the login shell doesn't stay up
-alias startx="exec startx"
-
-# A much easier ls statement
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
-alias ls='ls -vh --color=auto'
+alias ls='ls -vhG'
 
 # Handy
 alias l='ls'
@@ -115,6 +110,63 @@ alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
 alias ra='. ranger'
+
+# Git shortcuts
+alias g='git'
+alias ga='git add'
+alias gap='git add --patch'
+alias gs='git status'
+alias gd='git diff'
+alias gr='git reset'
+alias grh='git reset --hard @'
+alias grb='git rebase'
+alias gb='git branch -vv'
+alias gc='git checkout'
+alias gp='git push'
+alias gu='git pull'
+alias go='git commit'
+alias gm='git merge'
+alias gf='git fetch --all'
+alias gl='git log --graph --decorate'
+alias gt='git stash'
+alias gtp='git stash pop'
+alias gtl='git stash list'
+
+# git reset soft (resets 1 commit), also shows the commit it just reset
+grs () {
+    git show
+    git reset --soft @~1
+}
+
+# git stash apply, takes one number, which automatically configures it into
+# the stash@{NUM}
+gitstash_base () {
+    func=$1
+
+    num=0
+    if [ -n "$2" ]
+    then
+        num=$2
+        shift
+    fi
+    shift
+
+    echo "git stash $func stash@{$num} $@\n"
+    git stash $func stash@\{$num\} $@
+}
+
+gta () {
+    gitstash_base apply $@
+}
+
+# git stash show, does the same as gta above
+gts () {
+    gitstash_base show $@
+}
+
+gtd () {
+    gitstash_base drop $@
+}
 
 # Sudo fix
 #alias sudo="sudo $@"
@@ -141,28 +193,24 @@ alias gvimrc='gvim ~/.vimrc'
 alias cp='cp -r'
 
 # My useful trash command
-#alias rm='mv -t /tmp/trash'
-#alias rmf='rmf -r'
-alias rm='rm -r'
-alias mv='mv'
+alias rm='rm -i'
+alias mv='mv -i'
 
 # chmod u+x got annoying to type
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
+alias ifwd='ifconfig wlp3s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
 # Heh, duh... but really, it's better and easier
 alias duh='du -hsc'
 
-# Interesting... in case of accidents
-# cd's into the previous directory
-alias cdp='cd $OLDPWD'
-
 # cd's into the parent directory
 alias cdd='cd ..'
+alias pd='pushd'
+alias dp='popd'
 
 # No one really likes case sensitivity sometimes...
 alias grep='grep --color=auto'
@@ -178,16 +226,10 @@ alias iegrep='egrep -i'
 alias find='sudo find'
 
 # Much better
-alias cdwo='cd $HOME/workspace'
+alias cdwo='cd $HOME/work'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='pacman --color=auto'
-alias spacman='sudo pacman --color=auto'
-alias pacup='spacman -Syu'
-alias pac='spacman -S'
-alias pacs='pac -s'
-alias pacin='pac'
-alias pacins='pac'
+alias pacman='sudo pacman --color auto'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
@@ -202,10 +244,12 @@ alias sys='systemctl'
 # Use vim as a pager
 alias less='less -R'
 
-# arch wiki
-alias archwiki="$BROWSER /usr/share/doc/arch-wiki/html/en"
-
 # }}}
+##
+#
+# Function redefinitions go here.
+#
+# I like colored manual pages.
 #
 # Colored man pages
 export LESS_TERMCAP_mb=$'\e[01;31m'
@@ -215,5 +259,6 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+
 
 
