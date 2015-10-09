@@ -46,11 +46,9 @@ Plugin 'tkztmk/vim-vala'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Yggdroot/indentLine'
 "Plugin 'marijnh/tern_for_vim'
-
-if !has('win32')
-    Plugin 'Valloric/YouCompleteMe'
-end
 
 call vundle#end()
 filetype plugin indent on
@@ -100,13 +98,13 @@ set foldmethod=marker " user markers for folding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
                     " which comments trigger auto-unfold
 
-set formatoptions=tcroqnj " see :help fo-table
+set formatoptions=tcroqn " see :help fo-table
 set wildmenu        " make tab completion work like bash
 set wildmode=list:full " show a list when pressing tab complete
 set modeline
 
 " wildcard ignores
-set wildignore=*.pyc,*.pyo,*.so,*.swp
+set wildignore=*.pyc,*.pyo,*.so,*.swp,*/tmp/*
 
 set linebreak       " disable line breaks for better word wrapping
 set nolist          " no lists also disable line breaks
@@ -149,7 +147,7 @@ let g:ycm_key_detailed_diagnostics = '<leader>D'
 let g:ycm_auto_trigger = 1
 
 nnoremap <leader>e :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>d :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>DTreeFindpleter GoToDefinition<CR>
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
@@ -166,9 +164,10 @@ let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
 " Use pylint for non-saving checking because it's much slower
-nnoremap <leader>S :SyntasticCheck pylint<CR>
+nnoremap <leader>S :SyntasticCheck<CR>
 
 " Eclim:
 let g:EclimCompletionMethod = 'omnifunc'
@@ -190,6 +189,16 @@ let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+let g:airline_symbols = {}
+let g:airline_left_sep = "\u2b80" "use double quotes here
+let g:airline_left_alt_sep = "\u2b81"
+let g:airline_right_sep = "\u2b82"
+let g:airline_right_alt_sep = "\u2b83"
+let g:airline_symbols.branch = "\u2b60"
+let g:airline_symbols.readonly = "\u2b64"
+let g:airline_symbols.linenr = "\u2b61"
+
+
 " Tagbar:
 "let g:tagbar_left = 0
 let g:tagbar_sort = 0
@@ -206,6 +215,11 @@ let g:python_highlight_string_templates = 1
 let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
+map <leader>f :NERDTreeFind<cr><C-w><C-p>
+
+" Indent Guides:
+let g:indentLine_char = '¦'
+let g:indentLine_enabled = 0  " disabled until I patch the font
 
 " EasyMotion:
 nnoremap ? /
@@ -233,6 +247,18 @@ map <Space>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
+
+" Git Keys:
+let g:gitgutter_realtime = 1
+map <leader>gd :Gvdiff<CR>
+map <leader>ghd :Gdiff<CR>
+map <leader>gs :Gstatus<CR>
+map <leader>go :Gcommit<CR>
+map <leader>gu :Gpull<CR>
+map <leader>gu :Gpull<CR>
+map <leader>gap <Plug>GitGutterPreviewHunk
+map <leader>gah <Plug>GitGutterStageHunk
+map <leader>grh <Plug>GitGutterRevertHunk
 
 " QuickFix Window:
 let g:quickfix_is_open = 0
@@ -318,8 +344,8 @@ nnoremap $ g$
 " TODO doesn't work?
 inoremap <C-;> <esc>:
 
-" Faster spell checking suggestions
-nnoremap zz z=
+" This might be a good idea
+map <C-m> zz
 
 " What an awesome idea
 nnoremap ; :
@@ -385,11 +411,11 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Copying and pasting
-"if has('win32')
-"    set clipboard=unnamed
-"else
-set clipboard=unnamedplus
-"endif
+if has('mac')
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -480,12 +506,25 @@ if has("gui_running")
     " Line highlight
     set cul
     set nu
+    set rnu " Relative numbers
+
+    if has('autocmd')
+        au BufLeave,WinLeave,FocusLost * :set norelativenumber
+        au BufEnter,WinEnter,FocusGained * :set relativenumber
+
+        au InsertEnter * :set norelativenumber
+        au InsertLeave * :set relativenumber
+    endif
+
+    if has('mac')
+        set linespace=2
+    endif
 
     " GUI Font
     if has("gui_win32")
-        set guifont=DejaVu_Sans_Mono_for_Powerline:h12
+        set guifont=Consolas\ for\ Powerline:h14
     else
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+        set guifont=Consolas\ for\ Powerline:h14
     endif
 
     " Colorscheme:
@@ -514,12 +553,12 @@ if exists("IDEA")
     map ,d :action GotoDeclaration<CR>
     map ,s :action ShowErrorDescription<CR>
     "map / :action GotoSymbol<CR>
-    
+
     map [c :action GotoPreviousError<CR>:action ShowErrorDescription<CR>
     map ]c :action GotoNextError<CR>:action ShowErrorDescription<CR>
-    
+
     map <C-o> :action Back<CR>
     map <C-i> :action Forward<CR>
-    
+
     map S :action SurroundWith<CR>
 endif

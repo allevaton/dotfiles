@@ -128,8 +128,8 @@ alias go='git commit'
 alias gm='git merge'
 alias gf='git fetch --all'
 alias gl='git log --graph --decorate'
-alias gt='git stash'
-alias gtp='git stash pop'
+alias gt='git stash save'
+alias gh='git show'
 alias gtl='git stash list'
 
 # git reset soft (resets 1 commit), also shows the commit it just reset
@@ -166,6 +166,10 @@ gts () {
 
 gtd () {
     gitstash_base drop $@
+}
+
+gtp () {
+    gitstash_base pop $@
 }
 
 # Sudo fix
