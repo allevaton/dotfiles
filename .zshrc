@@ -18,6 +18,10 @@ SAVEHIST=1000
 
 setopt appendhistory autocd extendedglob nomatch
 setopt HIST_IGNORE_DUPS
+setopt correct_all
+setopt NO_HUP
+
+unsetopt nomatch
 unsetopt beep
 bindkey -e
 
@@ -43,12 +47,6 @@ function loadplugin
 #loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
 
 loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
-
-# corrections
-setopt correct_all
-
-# don't kill child processes
-setopt NO_HUP
 # }}}
 
 # Getting some keys to work {{{
@@ -186,9 +184,9 @@ alias rn='mv'
 
 # Good stuff
 alias vim='vim'
-alias vimrc='vim ~/.vimrc'
+alias vimrc='pushd ~/.vim/ftplugin >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
 alias gvim='gvim'
-alias gvimrc='gvim ~/.vimrc'
+alias gvimrc='pushd ~/.vim/ftplugin >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
 
 # Better way to type `clear`
 #alias c='clear'

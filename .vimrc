@@ -17,38 +17,48 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 " In case we're on Windows
 let $MYVIMRC='$HOME/.vimrc'
 
+"""""""""""""""""" PLUGINS: """"""""""""""""""
 call vundle#begin()
-
-" Begin Plugins:
 Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'chrisbra/csv.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
 Plugin 'oblitum/rainbow'
-Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-afterimage'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'dag/vim-fish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'tfnico/vim-gradle'
 Plugin 'gerw/vim-latex-suite'
 Plugin 'dbakker/vim-lint'
-Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'Matt-Stevens/vim-systemd-syntax'
-Plugin 'tkztmk/vim-vala'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
-"Plugin 'marijnh/tern_for_vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+"Plugin 'Valloric/YouCompleteMe'
+
+if has('win32')
+
+elseif has('mac')
+
+elseif has('linux')
+    Plugin 'Matt-Stevens/vim-systemd-syntax'
+    Plugin 'tkztmk/vim-vala'
+endif
 
 call vundle#end()
 filetype plugin indent on
@@ -60,9 +70,7 @@ syntax on
 " This is the key that will define how remaps essentially work.
 let mapleader=','
 
-""" BULK CONFIGURATION: """
-
-" Indentation:
+"""""""""""""""""" Base Settings: """"""""""""""""""
 set autoindent      " Always
 set copyindent      " Copy the previous indentation
 set expandtab       " Much easier when everything's a space
@@ -114,13 +122,7 @@ set wrap            " word wrapping
 " if it does, remove THIS LINE
 "set regexpengine=1
 
-set encoding=utf-8
-set fileencoding=utf-8
-
-" C Family Tags:
-"set tags+=~/.vim/tags/cpp,~/.vim/tags/gl,./.tags
-
-" CtrlP Setup:
+" CtrlP:
 let g:ctrlp_extensions = ['tag', 'line']
 
 " Dictionary:
@@ -151,7 +153,6 @@ nnoremap <leader>DTreeFindpleter GoToDefinition<CR>
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
-let g:bufExplorerSortBy = 'number'
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -166,7 +167,6 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
-" Use pylint for non-saving checking because it's much slower
 nnoremap <leader>S :SyntasticCheck<CR>
 
 " Eclim:
@@ -202,6 +202,7 @@ let g:airline_symbols.linenr = "\u2b61"
 " Tagbar:
 "let g:tagbar_left = 0
 let g:tagbar_sort = 0
+nnoremap <leader>t :TagbarToggle<CR>
 
 " Python Syntax Config:
 let g:python_highlight_builtin_funcs = 1
@@ -215,6 +216,7 @@ let g:python_highlight_string_templates = 1
 let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
+map <leader>n :NERDTreeTabsToggle<CR>
 map <leader>f :NERDTreeFind<cr><C-w><C-p>
 
 " Indent Guides:
@@ -226,8 +228,6 @@ nnoremap ? /
 map  <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
 
-" define custom leader here
-" defaults to <leader><leader>
 map <Space> <Plug>(easymotion-prefix)
 
 " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to EasyMotion.
@@ -248,6 +248,14 @@ map <Space>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 
+" Next Prev Navigation:
+map ]l :lnext<CR>
+map [l :lprevious<CR>
+map ]c :cnext<CR>
+map [c :cprevious<CR>
+map ]h <Plug>GitGutterNextHunk
+map [h <Plug>GitGutterPrevHunk
+
 " Git Keys:
 let g:gitgutter_realtime = 1
 map <leader>gd :Gvdiff<CR>
@@ -255,13 +263,14 @@ map <leader>ghd :Gdiff<CR>
 map <leader>gs :Gstatus<CR>
 map <leader>go :Gcommit<CR>
 map <leader>gu :Gpull<CR>
-map <leader>gu :Gpull<CR>
 map <leader>gap <Plug>GitGutterPreviewHunk
 map <leader>gah <Plug>GitGutterStageHunk
 map <leader>grh <Plug>GitGutterRevertHunk
 
 " QuickFix Window:
 let g:quickfix_is_open = 0
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
 
 " Quick fix window solution {{{
 function! s:QuickfixToggle()
@@ -364,12 +373,6 @@ inoremap jj <esc>
 nnoremap <leader>2 :set nohls!<CR>
 nnoremap <leader>h :noh<CR>
 
-" Start NERDTree in the current directory
-nmap <leader>n :NERDTreeTabsToggle<CR>
-
-" Open tagbar
-nnoremap <leader>t :TagbarToggle<CR>
-
 " Copy
 vmap <C-c> y
 
@@ -400,10 +403,6 @@ nnoremap <S-j> <C-d>
 " Deleting words easily
 inoremap <C-backspace> <C-w>
 
-" Awesomely navigate warnings
-nnoremap <leader>wn :lnext<CR>
-nnoremap <leader>wp :lprevious<CR>
-
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
 " such an operation.
@@ -429,6 +428,8 @@ if has('mouse')
     set mouse=a
 endif
 
+map <leader>ws :%s/\s\+$//e<CR>:echo "whitespace cleared"<CR>
+
 " Only do this part when compiled with support for autocommands.
 if has('autocmd')
     " Put these in an autocmd group, so that we can delete them easily.
@@ -453,23 +454,20 @@ if has('autocmd')
     augroup END
 
     " Go to the first line of a git commit message
-    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0]) | set spell
 
     " Go to the first line of a diff
-    if &diff == 1
-        call setpos('.', [0, 1, 1, 0])
-    endif
+    "if &diff == 1
+    "    call setpos('.', [0, 1, 1, 0])
+    "endif
 
-    " Java:
-    augroup java
-        autocmd Filetype java nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-        autocmd Filetype java nnoremap <silent> <buffer> <leader>d
-            \ :JavaDocSearch -x declarations<cr>
-        autocmd Filetype java nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
-    augroup END
+    " JavaScript:
+    "autocmd Filetype javascript nnoremap <silent> <buffer> <leader>d :TernDef<cr>
+    "autocmd Filetype javascript nnoremap <silent> <buffer> <leader>r :TernRename<cr>
+    "autocmd Filetype javascript nnoremap <silent> <buffer> <C-U> :TernRefs<cr>
 
     " Cleaning whitespace on save
-    autocmd BufWritePre * :%s/\s\+$//e
+    "autocmd BufWritePre * :%s/\s\+$//e
 
     " TODO necessary?
     au FileType python set omnifunc=pythoncomplete#Complete
@@ -483,9 +481,7 @@ if has('autocmd')
     " Always have rainbow parentheses on
     "au BufNewFile,BufRead * RainbowParenthesesLoadRound
     "au BufNewFile,BufRead * RainbowParenthesesActivate
-
 endif
-
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -499,21 +495,19 @@ endif
 " For GUI:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
-    syntax on
-    " add a fold column
-    "set foldcolumn=2
-
     " Line highlight
     set cul
     set nu
     set rnu " Relative numbers
 
     if has('autocmd')
-        au BufLeave,WinLeave,FocusLost * :set norelativenumber
-        au BufEnter,WinEnter,FocusGained * :set relativenumber
+        au BufLeave,WinLeave,FocusLost * set norelativenumber
+        au BufEnter,WinEnter,FocusGained * set relativenumber
 
-        au InsertEnter * :set norelativenumber
-        au InsertLeave * :set relativenumber
+        au InsertEnter * set norelativenumber
+        au InsertLeave * set relativenumber
+
+        au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
     endif
 
     if has('mac')
@@ -529,9 +523,7 @@ if has("gui_running")
 
     " Colorscheme:
     set background=dark
-    "colorscheme lucius
     colorscheme luna
-    "colorscheme solarized
 
     " With this, the gui (gVim and macVim) now doesn't have the toolbar,
     " left and right scrollbars, and the menu.
