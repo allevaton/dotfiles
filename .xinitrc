@@ -67,7 +67,6 @@ case "$1" in
         kwin_x11 --replace;;
 
     gnome)
-
         exec gnome-session;;
 
     # Default is i3

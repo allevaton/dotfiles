@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 #
 #
@@ -22,7 +22,8 @@ if __name__ == '__main__':
                   '.vim/bundle'])
 
         call(['git', 'config', 'status.showuntrackedfiles', 'no'])
-        call(['git', 'config', 'fetch.recurseSubmodules', 'true'])
+    else:
+        print('Git was not found')
 
     # Remove the current file
     os.remove(__file__)

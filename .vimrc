@@ -7,6 +7,9 @@ if v:progname =~? "evim"
     finish
 endif
 
+" Debugging to check when the vimrc was loaded
+"echo "VIMRC LOADED"
+
 " Let's begin
 set nocompatible
 filetype off
@@ -49,7 +52,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
 
@@ -75,10 +78,10 @@ set autoindent      " Always
 set copyindent      " Copy the previous indentation
 set expandtab       " Much easier when everything's a space
 set shiftround      " Only multiples of 4 for shifting
-set shiftwidth=4    " Auto indenting spaces
+set shiftwidth=2    " Auto indenting spaces
 set smarttab        " Go by shift width, not tab stop
-set softtabstop=4   " Treats 4 spaces as tabs
-set tabstop=4       " Tab size of 4 is better
+set softtabstop=2   " Treats 4 spaces as tabs
+set tabstop=2       " Tab size of 4 is better
 
 set backspace=indent,eol,start " Backspace over everything
 set gdefault        " search/replace globally on a line by default
@@ -329,6 +332,9 @@ nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
 nnoremap # *
 nnoremap * #
 
+" Clear whitespace on ,ws
+map <leader>ws mW:%s/\s\+$//e<CR>:echo "whitespace cleared"<CR>`W
+
 " Swap implementations of ` and ' jump to markers
 " By default, ' jumps to the marked line, ` jumps to the marked line and
 " column, so swap them
@@ -428,8 +434,6 @@ if has('mouse')
     set mouse=a
 endif
 
-map <leader>ws :%s/\s\+$//e<CR>:echo "whitespace cleared"<CR>
-
 " Only do this part when compiled with support for autocommands.
 if has('autocmd')
     " Put these in an autocmd group, so that we can delete them easily.
@@ -437,10 +441,7 @@ if has('autocmd')
     au!
 
     " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=79
-
-    " i3 config
-    autocmd BufNewFile,BufRead ~/.i3/config set ft=i3
+    "autocmd FileType text setlocal textwidth=79
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
@@ -453,24 +454,10 @@ if has('autocmd')
         \ endif
     augroup END
 
-    " Go to the first line of a git commit message
-    autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0]) | set spell
-
     " Go to the first line of a diff
     "if &diff == 1
     "    call setpos('.', [0, 1, 1, 0])
     "endif
-
-    " JavaScript:
-    "autocmd Filetype javascript nnoremap <silent> <buffer> <leader>d :TernDef<cr>
-    "autocmd Filetype javascript nnoremap <silent> <buffer> <leader>r :TernRename<cr>
-    "autocmd Filetype javascript nnoremap <silent> <buffer> <C-U> :TernRefs<cr>
-
-    " Cleaning whitespace on save
-    "autocmd BufWritePre * :%s/\s\+$//e
-
-    " TODO necessary?
-    au FileType python set omnifunc=pythoncomplete#Complete
 
     " Probably using NASM in Vim
     au BufRead,BufNewFile *.asm set filetype=nasm

@@ -85,6 +85,10 @@
 "    python_slow_sync                       Can be set to 0 for slow machines
 "
 
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
 " For version 5.x: Clear all syntax items
 " For versions greater than 6.x: Quit when a syntax file was already loaded
 if version < 600

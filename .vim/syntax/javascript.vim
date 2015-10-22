@@ -15,6 +15,10 @@
 " tuning parameters:
 " unlet javaScript_fold
 
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
 if !exists("main_syntax")
   if version < 600
     syntax clear
