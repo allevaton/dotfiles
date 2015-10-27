@@ -16,7 +16,10 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-setopt appendhistory autocd extendedglob nomatch
+setopt appendhistory
+setopt autocd
+setopt extendedglob
+setopt nomatch
 setopt HIST_IGNORE_DUPS
 setopt correct_all
 setopt NO_HUP
@@ -45,7 +48,6 @@ function loadplugin
 }
 
 #loadplugin '/usr/share/doc/pkgfile/command-not-found.zsh'
-
 loadplugin '/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 # }}}
 
@@ -184,9 +186,9 @@ alias rn='mv'
 
 # Good stuff
 alias vim='vim'
-alias vimrc='pushd ~/.vim/ftplugin >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
+alias vimrc='pushd ~/.vim >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
 alias gvim='gvim'
-alias gvimrc='pushd ~/.vim/ftplugin >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
+alias gvimrc='pushd ~/.vim >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
 
 # Better way to type `clear`
 #alias c='clear'

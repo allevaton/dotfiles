@@ -21,6 +21,7 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 let $MYVIMRC='$HOME/.vimrc'
 
 """""""""""""""""" PLUGINS: """"""""""""""""""
+" TODO organize by type/language
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'jlanzarotta/bufexplorer'
@@ -47,12 +48,19 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
+"Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'godlygeek/tabular'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'b3niup/numbers.vim'
+Plugin 'hdima/python-syntax'
+Plugin 'mhinz/vim-startify'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
 
@@ -151,8 +159,8 @@ let g:ycm_key_invoke_completion = '<C-x><C-o>'
 let g:ycm_key_detailed_diagnostics = '<leader>D'
 let g:ycm_auto_trigger = 1
 
-nnoremap <leader>e :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>DTreeFindpleter GoToDefinition<CR>
+"nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>DTreeFindpleter GoToDefinition<CR>
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
@@ -162,6 +170,8 @@ let g:bufExplorerShowNoName = 1
 
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
 
@@ -333,13 +343,14 @@ nnoremap # *
 nnoremap * #
 
 " Clear whitespace on ,ws
-map <leader>ws mW:%s/\s\+$//e<CR>:echo "whitespace cleared"<CR>`W
+function TrimWhitespace()
+  mark W
+  %s/\s\+$//e
+  `W
+  echo "whitespace cleared"
+endfunction
 
-" Swap implementations of ` and ' jump to markers
-" By default, ' jumps to the marked line, ` jumps to the marked line and
-" column, so swap them
-nnoremap ' `
-nnoremap ` '
+map <leader>ws :call TrimWhitespace()<CR>
 
 " Easier window navigation
 " Using this weirdo block will stop vim-latex from remapping C-j
@@ -369,18 +380,12 @@ nnoremap <leader>; ;
 " Spelling is useful
 nnoremap <leader>s :set spell!<CR>
 
-" Trimming whitespace
-"nnoremap <leader>ws :%s/\s\+$<CR>
-
 " jj changes insert->normal
 inoremap jj <esc>
 
 " Easy :set nohls!
 nnoremap <leader>2 :set nohls!<CR>
 nnoremap <leader>h :noh<CR>
-
-" Copy
-vmap <C-c> y
 
 " Select all
 inoremap <C-a> <esc>ggVG
@@ -487,15 +492,15 @@ if has("gui_running")
     set nu
     set rnu " Relative numbers
 
-    if has('autocmd')
-        au BufLeave,WinLeave,FocusLost * set norelativenumber
-        au BufEnter,WinEnter,FocusGained * set relativenumber
+    "if has('autocmd')
+        "au BufLeave,WinLeave,FocusLost * set norelativenumber
+        "au BufEnter,WinEnter,FocusGained * set relativenumber
 
-        au InsertEnter * set norelativenumber
-        au InsertLeave * set relativenumber
+        "au InsertEnter * set norelativenumber
+        "au InsertLeave * set relativenumber
 
-        au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
-    endif
+        "au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
+    "endif
 
     if has('mac')
         set linespace=2
