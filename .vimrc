@@ -4,7 +4,7 @@
 "
 " When started as "evim", evim.Vim will already have done these settings.
 if v:progname =~? "evim"
-    finish
+  finish
 endif
 
 " Debugging to check when the vimrc was loaded
@@ -21,45 +21,61 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 let $MYVIMRC='$HOME/.vimrc'
 
 """""""""""""""""" PLUGINS: """"""""""""""""""
-" TODO organize by type/language
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'chrisbra/csv.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'scrooloose/nerdtree'
-Plugin 'oblitum/rainbow'
-Plugin 'tpope/vim-afterimage'
+
+" General And Visual:
 Plugin 'bling/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'tfnico/vim-gradle'
-Plugin 'gerw/vim-latex-suite'
-Plugin 'dbakker/vim-lint'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
 Plugin 'allevaton/vim-luna'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'b3niup/numbers.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'mhinz/vim-startify'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'bronson/vim-trailing-whitespace'
+
+" DVCS:
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tfnico/vim-gradle'
+Plugin 'airblade/vim-gitgutter'
+
+" Syntax And Linters:
+Plugin 'dbakker/vim-lint'
+Plugin 'scrooloose/syntastic'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'marijnh/tern_for_vim'
+
+" Generic Language:
+Plugin 'chrisbra/csv.vim'
+Plugin 'tpope/vim-afterimage'
+Plugin 'gerw/vim-latex-suite'
+Plugin 'jiangmiao/auto-pairs'
+
+" Utility:
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'oblitum/rainbow'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
+Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'godlygeek/tabular'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'b3niup/numbers.vim'
+
+" Navigation:
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'tmhedberg/matchit'
+Plugin 'Lokaltog/vim-easymotion'
+
+" Python:
 Plugin 'hdima/python-syntax'
-Plugin 'mhinz/vim-startify'
+
+" JavaScript:
 "Plugin 'pangloss/vim-javascript'
+Plugin 'marijnh/tern_for_vim'
+
 "Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
@@ -67,8 +83,8 @@ if has('win32')
 elseif has('mac')
 
 elseif has('linux')
-    Plugin 'Matt-Stevens/vim-systemd-syntax'
-    Plugin 'tkztmk/vim-vala'
+  Plugin 'Matt-Stevens/vim-systemd-syntax'
+  Plugin 'tkztmk/vim-vala'
 endif
 
 call vundle#end()
@@ -115,7 +131,7 @@ set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
 set foldmethod=marker " user markers for folding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
-                    " which comments trigger auto-unfold
+" which comments trigger auto-unfold
 
 set formatoptions=tcroqn " see :help fo-table
 set wildmenu        " make tab completion work like bash
@@ -143,15 +159,15 @@ let g:ctrlp_extensions = ['tag', 'line']
 let g:rainbow_active = 1
 " 458748 was cc241d
 let g:rainbow_guifgs = [
-    \ '#458588',
-    \ '#b16286',
-    \ '#d65d0e',
-    \ '#458748',
-    \ '#458588',
-    \ '#b16286',
-    \ '#d65d0e',
-    \ '#458748'
-    \ ]
+      \ '#458588',
+      \ '#b16286',
+      \ '#d65d0e',
+      \ '#458748',
+      \ '#458588',
+      \ '#b16286',
+      \ '#d65d0e',
+      \ '#458748'
+      \ ]
 
 " YCM YouCompleteMe Configuration:
 "let g:ycm_collect_identifiers_from_tags_files = 1
@@ -287,41 +303,40 @@ nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
 
 " Quick fix window solution {{{
 function! s:QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
+  if g:quickfix_is_open
+    cclose
+    let g:quickfix_is_open = 0
+    execute g:quickfix_return_to_window . "wincmd w"
+  else
+    let g:quickfix_return_to_window = winnr()
+    copen
+    let g:quickfix_is_open = 1
+  endif
 endfunction
 " }}}
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
-" Type z/ to toggle highlighting on/off. {{{
+" Type z/ to toggle highlighting on/off.
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
-    let @/ = ''
-    if exists('#auto_highlight')
-        au! auto_highlight
-        augroup! auto_highlight
-        setl updatetime=4000
-        echo 'Highlight current word: OFF'
-        return 0
-    else
-        augroup auto_highlight
-            au!
-            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-        augroup end
-        setl updatetime=1
-        echo 'Highlight current word: ON'
-        return 1
-    endif
+  let @/ = ''
+  if exists('#auto_highlight')
+    augroup! auto_highlight
+      setl updatetime=4000
+      echo 'Highlight current word: OFF'
+      return 0
+    augroup END
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup END
+    setl updatetime=1
+    echo 'Highlight current word: ON'
+    return 1
+  endif
 endfunction
-" }}}
 
 " ---------------
 
@@ -405,12 +420,6 @@ inoremap <C-w> <esc><C-w>
 nnoremap <S-k> <C-u>
 nnoremap <S-j> <C-d>
 
-" Space opens folds
-"nnoremap <Space> a <esc>
-"vnoremap <Space> a <esc>
-"nnoremap <S-Space> i <esc>
-"vnoremap <S-Space> i <esc>
-
 " Deleting words easily
 inoremap <C-backspace> <C-w>
 
@@ -422,9 +431,9 @@ xnoremap > >gv
 
 " Copying and pasting
 if has('mac')
-    set clipboard=unnamed
+  set clipboard=unnamed
 else
-    set clipboard=unnamedplus
+  set clipboard=unnamedplus
 endif
 
 " Don't use Ex mode, use Q for formatting
@@ -436,13 +445,13 @@ inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-    set mouse=a
+  set mouse=a
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has('autocmd')
-    " Put these in an autocmd group, so that we can delete them easily.
-    augroup vimrcEx
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
     au!
 
     " For all text files set 'textwidth' to 78 characters.
@@ -454,95 +463,97 @@ if has('autocmd')
     " Also don't do it when the mark is in the first line, that is the default
     " position when opening a file.
     autocmd BufReadPost *
-        \ if line("'\"") > 1 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif
-    augroup END
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
+  augroup END
 
-    " Go to the first line of a diff
-    "if &diff == 1
-    "    call setpos('.', [0, 1, 1, 0])
-    "endif
+  " Go to the first line of a diff
+  "if &diff == 1
+  "    call setpos('.', [0, 1, 1, 0])
+  "endif
 
-    " Probably using NASM in Vim
-    au BufRead,BufNewFile *.asm set filetype=nasm
+  " Probably using NASM in Vim
+  au BufRead,BufNewFile *.asm set filetype=nasm
 
-    " Close the preview window when we move
-    au CursorMovedI * if pumvisible() == 0|silent! pclose|endif
+  " Close the preview window when we move
+  au CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 
-    " Always have rainbow parentheses on
-    "au BufNewFile,BufRead * RainbowParenthesesLoadRound
-    "au BufNewFile,BufRead * RainbowParenthesesActivate
+  " Always have rainbow parentheses on
+  "au BufNewFile,BufRead * RainbowParenthesesLoadRound
+  "au BufNewFile,BufRead * RainbowParenthesesActivate
 endif
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-                \ | wincmd p | diffthis
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+        \ | wincmd p | diffthis
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For GUI:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
-    " Line highlight
-    set cul
-    set nu
-    set rnu " Relative numbers
+  " Line highlight
+  set cul
+  set nu
+  set rnu " Relative numbers
 
-    "if has('autocmd')
-        "au BufLeave,WinLeave,FocusLost * set norelativenumber
-        "au BufEnter,WinEnter,FocusGained * set relativenumber
+  "if has('autocmd')
+  "au BufLeave,WinLeave,FocusLost * set norelativenumber
+  "au BufEnter,WinEnter,FocusGained * set relativenumber
 
-        "au InsertEnter * set norelativenumber
-        "au InsertLeave * set relativenumber
+  "au InsertEnter * set norelativenumber
+  "au InsertLeave * set relativenumber
 
-        "au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
-    "endif
+  "au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
+  "endif
 
-    if has('mac')
-        set linespace=2
-    endif
+  if has('mac')
+    set linespace=2
+  endif
 
-    " GUI Font
-    if has("gui_win32")
-        set guifont=Consolas\ for\ Powerline:h14
-    else
-        set guifont=Consolas\ for\ Powerline:h14
-    endif
+  " GUI Font
+  if has("win32")
+    set guifont=Consolas\ for\ Powerline:h14
+  elseif has("mac")
+    set guifont=Consolas\ for\ Powerline:h14
+  else
+    set guifont=Consolas\ for\ Powerline\ 12
+  endif
 
-    " Colorscheme:
-    set background=dark
-    colorscheme luna
+  " Colorscheme:
+  set background=dark
+  colorscheme luna
 
-    " With this, the gui (gVim and macVim) now doesn't have the toolbar,
-    " left and right scrollbars, and the menu.
-    " From Valloric's vimrc
-    set guioptions-=T
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    set guioptions-=M
+  " With this, the gui (gVim and macVim) now doesn't have the toolbar,
+  " left and right scrollbars, and the menu.
+  " From Valloric's vimrc
+  set guioptions-=T
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r
+  set guioptions-=R
+  set guioptions-=M
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For JetBrains IDE IdeaVim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if exists("IDEA")
-    map ,r :action RenameElement<CR>
-    map ,d :action GotoDeclaration<CR>
-    map ,d :action GotoDeclaration<CR>
-    map ,s :action ShowErrorDescription<CR>
-    "map / :action GotoSymbol<CR>
+  map ,r :action RenameElement<CR>
+  map ,d :action GotoDeclaration<CR>
+  map ,d :action GotoDeclaration<CR>
+  map ,s :action ShowErrorDescription<CR>
+  "map / :action GotoSymbol<CR>
 
-    map [c :action GotoPreviousError<CR>:action ShowErrorDescription<CR>
-    map ]c :action GotoNextError<CR>:action ShowErrorDescription<CR>
+  map [c :action GotoPreviousError<CR>:action ShowErrorDescription<CR>
+  map ]c :action GotoNextError<CR>:action ShowErrorDescription<CR>
 
-    map <C-o> :action Back<CR>
-    map <C-i> :action Forward<CR>
+  map <C-o> :action Back<CR>
+  map <C-i> :action Forward<CR>
 
-    map S :action SurroundWith<CR>
+  map S :action SurroundWith<CR>
 endif

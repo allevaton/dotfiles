@@ -99,7 +99,12 @@ fi
 # aliases {{{
 
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
-alias ls='ls -vhG'
+if [[ $(uname) == 'Linux' ]]
+then
+  alias ls='ls -vh --color=auto'
+else
+  alias ls='ls -vhG'
+fi
 
 # Handy
 alias l='ls'
@@ -204,7 +209,7 @@ alias mv='mv -i'
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd='ifconfig wlp3s0 down && netctl stop-all'
+alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
@@ -230,7 +235,7 @@ alias iegrep='egrep -i'
 alias find='sudo find'
 
 # Much better
-alias cdwo='cd $HOME/work'
+alias cdwo='cd $HOME/work*'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color auto'
