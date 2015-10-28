@@ -32,6 +32,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'mhinz/vim-startify'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'tpope/vim-endwise'
 
 " DVCS:
 Plugin 'jtratner/vim-flavored-markdown'
@@ -71,12 +72,17 @@ Plugin 'Lokaltog/vim-easymotion'
 
 " Python:
 Plugin 'hdima/python-syntax'
+"Plugin 'davidhalter/jedi-vim'
 
 " JavaScript:
 "Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
 
-"Plugin 'Valloric/YouCompleteMe'
+" HTML:
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'docunext/closetag.vim'
+
+Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
 
