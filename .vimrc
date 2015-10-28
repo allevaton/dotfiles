@@ -363,15 +363,8 @@ nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
 nnoremap # *
 nnoremap * #
 
-" Clear whitespace on ,ws
-function TrimWhitespace()
-  mark W
-  %s/\s\+$//e
-  `W
-  echo "whitespace cleared"
-endfunction
-
-map <leader>ws :call TrimWhitespace()<CR>
+" ,ws clears whitespace
+map <leader>ws :FixWhitespace
 
 " Easier window navigation
 " Using this weirdo block will stop vim-latex from remapping C-j
