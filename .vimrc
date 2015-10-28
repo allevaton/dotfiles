@@ -25,6 +25,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " General And Visual:
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 Plugin 'bling/vim-airline'
 Plugin 'allevaton/vim-luna'
 Plugin 'b3niup/numbers.vim'
@@ -58,9 +60,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'oblitum/rainbow'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " Navigation:
@@ -88,7 +88,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'docunext/closetag.vim'
 Plugin 'mattn/emmet-vim'
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
 
@@ -265,8 +265,13 @@ let g:indentLine_char = '¦'
 let g:indentLine_enabled = 0  " disabled until I patch the font
 
 " Emmet:
+let g:user_emmet_leader_key = '<C-z>'
 "let g:user_emmet_expandabbr_key='<Tab>'
 "imap <expr> <Tab> emmet#expandAbbrIntelligent("\<Tab>")
+
+" Session:
+let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
 
 " EasyMotion:
 nnoremap ? /
