@@ -3,7 +3,14 @@
 #
 autoload -U colors && colors
 autoload -U promptinit && promptinit
-PURE_PROMPT_SYMBOL='$'
+
+if [[ $EUID -ne 0 ]]
+then
+  PURE_PROMPT_SYMBOL='$'
+else
+  PURE_PROMPT_SYMBOL='#'
+fi
+
 prompt pure
 
 #PROMPT="%(!.%F{red}.%F{blue})%n%f@%m %1~%(!.#.\$) "
