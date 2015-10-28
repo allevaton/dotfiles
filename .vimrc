@@ -75,12 +75,18 @@ Plugin 'hdima/python-syntax'
 "Plugin 'davidhalter/jedi-vim'
 
 " JavaScript:
+Plugin 'jelera/vim-javascript-syntax'
 "Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'nono/jquery.vim'
+
+" CSS:
+Plugin 'hail2u/vim-css3-syntax'
 
 " HTML:
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'docunext/closetag.vim'
+Plugin 'mattn/emmet-vim'
 
 Plugin 'Valloric/YouCompleteMe'
 
@@ -257,6 +263,10 @@ map <leader>f :NERDTreeFind<cr><C-w><C-p>
 " Indent Guides:
 let g:indentLine_char = '¦'
 let g:indentLine_enabled = 0  " disabled until I patch the font
+
+" Emmet:
+"let g:user_emmet_expandabbr_key='<Tab>'
+"imap <expr> <Tab> emmet#expandAbbrIntelligent("\<Tab>")
 
 " EasyMotion:
 nnoremap ? /
