@@ -374,7 +374,7 @@ nnoremap # *
 nnoremap * #
 
 " ,ws clears whitespace
-map <leader>ws :FixWhitespace
+map <leader>ws :FixWhitespace<CR>
 
 " Easier window navigation
 " Using this weirdo block will stop vim-latex from remapping C-j
