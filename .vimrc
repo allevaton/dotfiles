@@ -274,9 +274,12 @@ let g:user_emmet_leader_key = '<C-z>'
 "let g:user_emmet_expandabbr_key='<Tab>'
 "imap <expr> <Tab> emmet#expandAbbrIntelligent("\<Tab>")
 
-" Session:
+" Sessions: sessions.vim
 let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
+
+" Startify: make it work with sessions.vim
+let g:startify_session_dir = '~/.vim/sessions'
 
 " EasyMotion:
 nnoremap ? /
