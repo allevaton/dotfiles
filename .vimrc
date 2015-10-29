@@ -73,6 +73,11 @@ Plugin 'Lokaltog/vim-easymotion'
 " Python:
 Plugin 'hdima/python-syntax'
 "Plugin 'davidhalter/jedi-vim'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'alfredodeza/pytest.vim'
+Plugin 'fisadev/vim-isort'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'heavenshell/vim-pydocstring'
 
 " JavaScript:
 Plugin 'jelera/vim-javascript-syntax'
