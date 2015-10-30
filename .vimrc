@@ -51,6 +51,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'chrisbra/csv.vim'
 Plugin 'tpope/vim-afterimage'
 Plugin 'gerw/vim-latex-suite'
+"Plugin 'Raimondi/delimitMate'
 Plugin 'jiangmiao/auto-pairs'
 
 " Utility:
@@ -68,7 +69,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tmhedberg/matchit'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 
 " Python:
 Plugin 'hdima/python-syntax'
@@ -93,7 +94,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'docunext/closetag.vim'
 Plugin 'mattn/emmet-vim'
 
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 if has('win32')
 
@@ -191,6 +192,12 @@ let g:rainbow_guifgs = [
 let g:ycm_key_invoke_completion = '<C-x><C-o>'
 let g:ycm_key_detailed_diagnostics = '<leader>D'
 let g:ycm_auto_trigger = 1
+
+" restart ycm server when changing venv's
+command -nargs=+ -complete=custom,ReturnVirtualEnvs Venv :VirtualEnvActivate <args> | YcmRestartServer
+
+" UltiSnips:
+let g:UltiSnipsExpandTrigger = "<C-x><C-j>"
 
 "nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
 "nnoremap <leader>DTreeFindpleter GoToDefinition<CR>
@@ -375,6 +382,7 @@ endfunction
 
 " Better pasting
 xnoremap p "_dP
+nnoremap p p=`]
 
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
