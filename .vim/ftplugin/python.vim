@@ -11,7 +11,7 @@ set omnifunc=pythoncomplete#Complete
 
 map <leader>i :YcmCompleter GoToInclude<CR>
 map <leader>d :YcmCompleter GoTo<CR>
-map <C-q> :GetDoc<CR>
+map <C-q> :YcmCompleter GetDoc<CR>
 
 "let g:jedi#usages_command = "<C-u>"
 "let g:jedi#goto_command = "<leader>d"

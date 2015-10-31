@@ -152,8 +152,8 @@ set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which comments trigger auto-unfold
 
 set formatoptions=tcroqn " see :help fo-table
-set wildmenu        " make tab completion work like bash
-set wildmode=list:full " show a list when pressing tab complete
+set wildmode=longest,list,full
+set wildmenu
 set modeline
 
 " wildcard ignores
@@ -204,6 +204,9 @@ let g:UltiSnipsExpandTrigger = "<C-x><C-j>"
 
 " Bufexplorer:
 let g:bufExplorerShowNoName = 1
+
+" Pydocstrings:
+nmap <silent> <nop> <Plug>(pydocstring)
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
