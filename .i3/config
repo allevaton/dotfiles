@@ -14,16 +14,6 @@ set $alt Mod1
 
 set $TERMINAL termite
 
-# TODO: Clean this up
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -192,10 +182,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You hit the wrong shortcut, 
 mode "resize"
 {
     # These bindings trigger as soon as you enter the resize mode
-    bindsym h resize grow width 10 px or 10 ppt
-    bindsym j resize shrink height 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink width 10 px or 10 ppt
+    bindsym h resize grow width 10 px
+    bindsym j resize shrink height 10 px
+    bindsym k resize grow height 10 px
+    bindsym l resize shrink width 10 px
 
     # Back to normal: Enter or Escape
     bindsym Return mode "default"
