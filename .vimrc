@@ -88,8 +88,10 @@ Plugin 'nono/jquery.vim'
 
 " CSS:
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'ap/vim-css-color'
 
 " HTML:
+Plugin 'gregsexton/MatchTag'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'docunext/closetag.vim'
 Plugin 'mattn/emmet-vim'
