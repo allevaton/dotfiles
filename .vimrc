@@ -570,6 +570,8 @@ if has("gui_running")
   set guioptions-=r
   set guioptions-=R
   set guioptions-=M
+else
+  colorscheme luna-term
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
