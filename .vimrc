@@ -387,7 +387,6 @@ endfunction
 
 " Better pasting
 xnoremap p "_dP
-nnoremap p p=`]
 
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -510,6 +509,8 @@ if has('autocmd')
 
   " Probably using NASM in Vim
   au BufRead,BufNewFile *.asm set filetype=nasm
+
+  au FileType python,vim,javascript,java,ruby,sh,c,cpp,nasm,masm,asm nnoremap p p=`]
 
   " Close the preview window when we move
   au CursorMovedI * if pumvisible() == 0|silent! pclose|endif

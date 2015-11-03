@@ -76,6 +76,9 @@ key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
 
 # setup key accordingly
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 [[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
 [[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
 [[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
@@ -197,9 +200,9 @@ alias df='df -h'
 alias rn='mv'
 
 # Good stuff
-alias vim='vim'
+#alias vim='vim'
 alias vimrc='pushd ~/.vim >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
-alias gvim='gvim'
+#alias gvim='gvim'
 alias gvimrc='pushd ~/.vim >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
 
 # Better way to type `clear`
