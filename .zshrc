@@ -108,7 +108,7 @@ fi
 
 # aliases {{{
 
-#alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
+#alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=always "${opts[@]}"'
 if [[ $(uname) == 'Linux' ]]
 then
   alias ls='ls -vh --color=auto'

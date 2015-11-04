@@ -220,6 +220,7 @@ let g:UltiSnipsExpandTrigger = "<C-x><C-j>"
 let g:bufExplorerShowNoName = 1
 
 " Pydocstrings:
+" Unmap the n<C-L> binding pydocstring sets
 nmap <silent> <nop> <Plug>(pydocstring)
 
 " Column Color Change:
@@ -403,9 +404,6 @@ xnoremap p "_dP
 
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-" Quickfix
-nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
 
 " Better cursor searching
 nnoremap # *
