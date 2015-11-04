@@ -158,6 +158,9 @@ set wildmode=longest,list,full
 set wildmenu
 set modeline
 
+set number
+set relativenumber " Relative numbers
+
 " wildcard ignores
 set wildignore=*.pyc,*.pyo,*.so,*.swp,*/tmp/*
 
@@ -534,18 +537,6 @@ endif
 if has("gui_running")
   " Line highlight
   set cul
-  set nu
-  set rnu " Relative numbers
-
-  "if has('autocmd')
-  "au BufLeave,WinLeave,FocusLost * set norelativenumber
-  "au BufEnter,WinEnter,FocusGained * set relativenumber
-
-  "au InsertEnter * set norelativenumber
-  "au InsertLeave * set relativenumber
-
-  "au BufEnter,WinEnter,FocusGained,FileType nerdtree set norelativenumber
-  "endif
 
   if has('mac')
     set linespace=2

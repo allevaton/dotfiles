@@ -111,7 +111,7 @@ fi
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=auto "${opts[@]}"'
 if [[ $(uname) == 'Linux' ]]
 then
-  alias ls='ls -vh --color=auto'
+  alias ls='ls -vh --color=always'
 else
   alias ls='ls -vhG'
 fi
