@@ -111,7 +111,7 @@ fi
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=always "${opts[@]}"'
 if [[ $(uname) == 'Linux' ]]
 then
-  alias ls='ls -vh --color=auto'
+  alias ls='ls -vh --color=always'
 else
   alias ls='ls -vhG'
 fi
@@ -232,13 +232,13 @@ alias pd='pushd'
 alias dp='popd'
 
 # No one really likes case sensitivity sometimes...
-alias grep='grep --color=auto'
+alias grep='grep --color=always'
 alias igrep='grep -i'
 
-alias fgrep='fgrep --color=auto'
+alias fgrep='fgrep --color=always'
 alias ifgrep='fgrep -i'
 
-alias egrep='egrep --color=auto'
+alias egrep='egrep --color=always'
 alias iegrep='egrep -i'
 
 # So annoying...
@@ -248,7 +248,8 @@ alias find='sudo find'
 alias cdwo='cd $HOME/work*'
 
 # Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color auto'
+alias pacman='sudo pacman --color always'
+#alias yaourt='yaourt --color always'
 
 # Hardly ever used, but still nice.
 #alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"

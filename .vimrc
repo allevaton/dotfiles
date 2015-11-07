@@ -223,6 +223,9 @@ let g:bufExplorerShowNoName = 1
 " Unmap the n<C-L> binding pydocstring sets
 nmap <silent> <nop> <Plug>(pydocstring)
 
+" Autoformat:
+nnoremap ,lf :Autoformat<CR>
+
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
 

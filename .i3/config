@@ -103,7 +103,7 @@ bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggl
 set $qs_dmenu --dmenu "dmenu -i -b -l 20 -fn 'DejaVu Sans Mono-12' -x 40 -y 40 -w 512 -h 24 -p
 bindsym $mod+Shift+w exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
 bindsym $mod+Shift+o exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
-bindsym $mod+m exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
+bindsym $mod+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
 bindsym $mod+Shift+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
 
 # Brightness
@@ -182,14 +182,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You hit the wrong shortcut, 
 mode "resize"
 {
     # These bindings trigger as soon as you enter the resize mode
-    bindsym h resize grow width 10 px
-    bindsym j resize shrink height 10 px
-    bindsym k resize grow height 10 px
-    bindsym l resize shrink width 10 px
+    bindsym h resize grow width 4 px or 4 ppt
+    bindsym j resize shrink height 4 px or 4 ppt
+    bindsym k resize grow height 4 px or 4 ppt
+    bindsym l resize shrink width 4 px or 4 ppt
 
     # Back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym q mode "default"
+    bindsym Q mode "default"
 }
 
 # Resize mode is nice
@@ -222,12 +224,15 @@ for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
 
 # Games and Steam
+assign [class="[s|S]team"] $WS8
 for_window [class="[s|S]team"] border none
 for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
 
+# if you want titlebar-less terminal windows
+#for_window [class="[t|T]ermite"] border pixel 2
+
 assign [class="[H|h]exchat"] $WS6
 
-assign [class="[s|S]team"] $WS8
 assign [class="^dota"] $WSgame
 assign [class="^csgo"] $WSgame
 assign [class="^hl2_linux"] $WSgame
