@@ -228,6 +228,7 @@ alias duh='du -hsc'
 
 # cd's into the parent directory
 alias cdd='cd ..'
+alias cdp="cd $OLDPWD"
 alias pd='pushd'
 alias dp='popd'
 
