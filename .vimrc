@@ -40,6 +40,7 @@ NeoBundle 'mhinz/vim-startify'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " DVCS:
 NeoBundle 'jtratner/vim-flavored-markdown'
@@ -232,6 +233,7 @@ nnoremap ,lf :Autoformat<CR>
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -263,6 +265,7 @@ let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
 
 let g:airline_symbols = {}
 let g:airline_left_sep = "\u2b80" "use double quotes here
