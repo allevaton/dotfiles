@@ -472,7 +472,7 @@ nnoremap <S-k> <C-u>
 nnoremap <S-j> <C-d>
 
 " Deleting words easily
-inoremap <C-backspace> <C-w>
+imap <C-BS> <C-W>
 
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
@@ -572,9 +572,9 @@ if has("gui_running")
   if has("win32")
     set guifont=Consolas\ for\ Powerline:h14
   elseif has("mac")
-    set guifont=Consolas\ for\ Powerline:h14
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h13
   else
-    set guifont=Consolas\ for\ Powerline\ 12
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h13
   endif
 
   " Colorscheme:
