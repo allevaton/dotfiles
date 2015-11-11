@@ -162,7 +162,8 @@ set smartcase       " ignore case if pattern is all lower
 " Folding:
 set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
-set foldmethod=marker " user markers for folding
+"set foldmethod=marker " user markers for folding
+set foldmethod=manual " manual folding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which comments trigger auto-unfold
 
@@ -267,14 +268,15 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 
-let g:airline_symbols = {}
-let g:airline_left_sep = "\u2b80" "use double quotes here
-let g:airline_left_alt_sep = "\u2b81"
-let g:airline_right_sep = "\u2b82"
-let g:airline_right_alt_sep = "\u2b83"
-let g:airline_symbols.branch = "\u2b60"
-let g:airline_symbols.readonly = "\u2b64"
-let g:airline_symbols.linenr = "\u2b61"
+" Might need these for some fonts, like Consolas
+"let g:airline_symbols = {}
+"let g:airline_left_sep = "\u2b80" "use double quotes here
+"let g:airline_left_alt_sep = "\u2b81"
+"let g:airline_right_sep = "\u2b82"
+"let g:airline_right_alt_sep = "\u2b83"
+"let g:airline_symbols.branch = "\u2b60"
+"let g:airline_symbols.readonly = "\u2b64"
+"let g:airline_symbols.linenr = "\u2b61"
 
 
 " Tagbar:
@@ -565,7 +567,7 @@ if has("gui_running")
   "endif
 
   if has('mac')
-    set linespace=2
+    "set linespace=2
   endif
 
   " GUI Font
