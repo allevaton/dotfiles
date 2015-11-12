@@ -48,12 +48,12 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 
 " Syntax And Linters:
-NeoBundleLazy 'dbakker/vim-lint', NeoFileType('vim')
+NeoBundleLazy 'dbakker/vim-lint', NeoFileType(['vim'])
 NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'scrooloose/syntastic'
 
 " Generic Language:
-NeoBundleLazy 'chrisbra/csv.vim', NeoFileType('csv')
+NeoBundleLazy 'chrisbra/csv.vim', NeoFileType(['csv'])
 NeoBundle 'tpope/vim-afterimage'
 NeoBundle 'gerw/vim-latex-suite'
 "NeoBundle 'Raimondi/delimitMate'
@@ -70,7 +70,7 @@ NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
 
 " Navigation:
-NeoBundleLazy 'scrooloose/nerdtree', {'augroup' : 'NERDTree'}
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs', {'depends': 'scrooloose/nerdtree'}
 NeoBundle 'jlanzarotta/bufexplorer'
 NeoBundle 'tmhedberg/matchit'
@@ -79,13 +79,13 @@ NeoBundleLazy 'easymotion/vim-easymotion', {'autoload':
       \ }
 
 " Python:
-"NeoBundle 'davidhalter/jedi-vim', NeoFileType('python')
-NeoBundleLazy 'hdima/python-syntax', NeoFileType('python')
-NeoBundleLazy 'jmcantrell/vim-virtualenv', NeoFileType('python')
-NeoBundleLazy 'alfredodeza/pytest.vim', NeoFileType('python')
-NeoBundleLazy 'fisadev/vim-isort', NeoFileType('python')
-NeoBundleLazy 'vim-scripts/indentpython.vim', NeoFileType('python')
-NeoBundleLazy 'heavenshell/vim-pydocstring', NeoFileType('python')
+"NeoBundle 'davidhalter/jedi-vim', NeoFileType(['python'])
+NeoBundleLazy 'hdima/python-syntax', NeoFileType(['python'])
+NeoBundleLazy 'jmcantrell/vim-virtualenv', NeoFileType(['python'])
+NeoBundleLazy 'alfredodeza/pytest.vim', NeoFileType(['python'])
+NeoBundleLazy 'fisadev/vim-isort', NeoFileType(['python'])
+NeoBundleLazy 'vim-scripts/indentpython.vim', NeoFileType(['python'])
+NeoBundleLazy 'heavenshell/vim-pydocstring', NeoFileType(['python'])
 
 " JavaScript:
 NeoBundleLazy 'jelera/vim-javascript-syntax', NeoFileType(['javascript', 'html'])
