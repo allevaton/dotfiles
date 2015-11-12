@@ -13,6 +13,8 @@ map <leader>i :YcmCompleter GoToInclude<CR>
 map <leader>d :YcmCompleter GoTo<CR>
 map <C-q> :YcmCompleter GetDoc<CR>
 
+nnoremap <silent> ,lf :Isort<CR>:Autoformat<CR>:w<CR>:SyntasticCheck<CR>
+
 "let g:jedi#usages_command = "<C-u>"
 "let g:jedi#goto_command = "<leader>d"
 "let g:jedi#rename_command = "<leader>r"

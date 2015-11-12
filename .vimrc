@@ -15,101 +15,114 @@ set nocompatible
 filetype off
 
 set rtp=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-set rtp+=$HOME/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/neobundle.vim
 
 " In case we're on Windows
 let $MYVIMRC='$HOME/.vimrc'
 
+function! NeoFileType(ftypes)
+  return {'autoload': {'filetypes': a:ftypes}}
+endfunction
+
 """""""""""""""""" PLUGINS: """"""""""""""""""
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+call neobundle#begin(expand('$HOME/.vim/bundle'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+"Plugin 'gmarik/Vundle.vim'
 
 " General And Visual:
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-Plugin 'bling/vim-airline'
-Plugin 'allevaton/vim-luna'
-Plugin 'b3niup/numbers.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'mhinz/vim-startify'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'tpope/vim-endwise'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-session'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'allevaton/vim-luna'
+NeoBundle 'b3niup/numbers.vim'
+NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'mhinz/vim-startify'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " DVCS:
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tfnico/vim-gradle'
-Plugin 'airblade/vim-gitgutter'
+NeoBundle 'jtratner/vim-flavored-markdown'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 
 " Syntax And Linters:
-Plugin 'dbakker/vim-lint'
-Plugin 'scrooloose/syntastic'
-Plugin 'Chiel92/vim-autoformat'
+NeoBundleLazy 'dbakker/vim-lint', NeoFileType('vim')
+NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'scrooloose/syntastic'
 
 " Generic Language:
-Plugin 'chrisbra/csv.vim'
-Plugin 'tpope/vim-afterimage'
-Plugin 'gerw/vim-latex-suite'
-"Plugin 'Raimondi/delimitMate'
-Plugin 'jiangmiao/auto-pairs'
+NeoBundleLazy 'chrisbra/csv.vim', NeoFileType('csv')
+NeoBundle 'tpope/vim-afterimage'
+NeoBundle 'gerw/vim-latex-suite'
+"NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'jiangmiao/auto-pairs'
 
 " Utility:
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'oblitum/rainbow'
-Plugin 'rking/ag.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'oblitum/rainbow'
+NeoBundle 'rking/ag.vim'
+NeoBundleLazy 'majutsushi/tagbar', {'autoload': {'commands': 'TagbarToggle'}}
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 
 " Navigation:
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'tmhedberg/matchit'
-Plugin 'easymotion/vim-easymotion'
+NeoBundleLazy 'scrooloose/nerdtree', {'augroup' : 'NERDTree'}
+NeoBundle 'jistr/vim-nerdtree-tabs', {'depends': 'scrooloose/nerdtree'}
+NeoBundle 'jlanzarotta/bufexplorer'
+NeoBundle 'tmhedberg/matchit'
+NeoBundleLazy 'easymotion/vim-easymotion', {'autoload':
+      \   {'mappings': '<Plug>(easymotion-prefix)'}
+      \ }
 
 " Python:
-Plugin 'hdima/python-syntax'
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'alfredodeza/pytest.vim'
-Plugin 'fisadev/vim-isort'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'heavenshell/vim-pydocstring'
+"NeoBundle 'davidhalter/jedi-vim', NeoFileType('python')
+NeoBundleLazy 'hdima/python-syntax', NeoFileType('python')
+NeoBundleLazy 'jmcantrell/vim-virtualenv', NeoFileType('python')
+NeoBundleLazy 'alfredodeza/pytest.vim', NeoFileType('python')
+NeoBundleLazy 'fisadev/vim-isort', NeoFileType('python')
+NeoBundleLazy 'vim-scripts/indentpython.vim', NeoFileType('python')
+NeoBundleLazy 'heavenshell/vim-pydocstring', NeoFileType('python')
 
 " JavaScript:
-Plugin 'jelera/vim-javascript-syntax'
-"Plugin 'pangloss/vim-javascript'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'nono/jquery.vim'
+NeoBundleLazy 'jelera/vim-javascript-syntax', NeoFileType(['javascript', 'html'])
+"NeoBundle 'pangloss/vim-javascript'
+NeoBundleLazy 'marijnh/tern_for_vim', NeoFileType(['javascript', 'html'])
+NeoBundleLazy 'nono/jquery.vim', NeoFileType(['javascript', 'html'])
 
 " CSS:
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'ap/vim-css-color'
+NeoBundleLazy 'hail2u/vim-css3-syntax', NeoFileType(['css', 'html'])
+NeoBundleLazy 'ap/vim-css-color', NeoFileType(['css', 'html'])
 
 " HTML:
-Plugin 'gregsexton/MatchTag'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'docunext/closetag.vim'
-Plugin 'mattn/emmet-vim'
+NeoBundle 'gregsexton/MatchTag'
+NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundle 'docunext/closetag.vim'
+NeoBundle 'mattn/emmet-vim'
 
-Plugin 'Valloric/YouCompleteMe'
+" Other Languages:
+NeoBundle 'Matt-Stevens/vim-systemd-syntax'
+NeoBundleLazy 'tkztmk/vim-vala', NeoFileType(['vala'])
+NeoBundleLazy 'tfnico/vim-gradle', NeoFileType(['gradle'])
 
-if has('win32')
+NeoBundle 'Valloric/YouCompleteMe', {
+      \   'build': 'python install.py',
+      \   'disabled': !has('python'),
+      \ }
 
-elseif has('mac')
-
-elseif has('linux')
-  Plugin 'Matt-Stevens/vim-systemd-syntax'
-  Plugin 'tkztmk/vim-vala'
-endif
-
-call vundle#end()
+call neobundle#end()
 filetype plugin indent on
 syntax on
+
+NeoBundleCheck
+
+if !has('vim_starting')
+  " Call on_source hook when reloading .vimrc.
+  call neobundle#call_hook('on_source')
+endif
 
 " Handle for fish
 "set shell=bash\ --norc
@@ -149,7 +162,8 @@ set smartcase       " ignore case if pattern is all lower
 " Folding:
 set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
-set foldmethod=marker " user markers for folding
+"set foldmethod=marker " user markers for folding
+set foldmethod=manual " manual folding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which comments trigger auto-unfold
 
@@ -211,7 +225,11 @@ let g:UltiSnipsExpandTrigger = "<C-x><C-j>"
 let g:bufExplorerShowNoName = 1
 
 " Pydocstrings:
+" Unmap the n<C-L> binding pydocstring sets
 nmap <silent> <nop> <Plug>(pydocstring)
+
+" Autoformat:
+nnoremap ,lf :Autoformat<CR>
 
 " Column Color Change:
 "let &colorcolumn=join(range(80, 255 ), ',')
@@ -219,6 +237,7 @@ nmap <silent> <nop> <Plug>(pydocstring)
 " Syntastic Config:
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
@@ -249,15 +268,18 @@ let g:Tex_ViewRuleComplete_pdf = "evince \"$*.pdf\" \&"
 let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
 
-let g:airline_symbols = {}
-let g:airline_left_sep = "\u2b80" "use double quotes here
-let g:airline_left_alt_sep = "\u2b81"
-let g:airline_right_sep = "\u2b82"
-let g:airline_right_alt_sep = "\u2b83"
-let g:airline_symbols.branch = "\u2b60"
-let g:airline_symbols.readonly = "\u2b64"
-let g:airline_symbols.linenr = "\u2b61"
+" Might need these for some fonts, like Consolas
+"let g:airline_symbols = {}
+"let g:airline_left_sep = "\u2b80" "use double quotes here
+"let g:airline_left_alt_sep = "\u2b81"
+"let g:airline_right_sep = "\u2b82"
+"let g:airline_right_alt_sep = "\u2b83"
+"let g:airline_symbols.branch = "\u2b60"
+"let g:airline_symbols.readonly = "\u2b64"
+"let g:airline_symbols.linenr = "\u2b61"
 
 
 " Tagbar:
@@ -394,9 +416,6 @@ xnoremap p "_dP
 " Generate implicit tags (NOT RECOMMENDED)
 nnoremap <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-" Quickfix
-nnoremap <leader>1 :call <SID>QuickfixToggle()<cr>
-
 " Better cursor searching
 nnoremap # *
 nnoremap * #
@@ -458,7 +477,7 @@ nnoremap <S-k> <C-u>
 nnoremap <S-j> <C-d>
 
 " Deleting words easily
-inoremap <C-backspace> <C-w>
+imap <C-BS> <C-W>
 
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
@@ -539,16 +558,16 @@ if has("gui_running")
   set cul
 
   if has('mac')
-    set linespace=2
+    "set linespace=2
   endif
 
   " GUI Font
   if has("win32")
     set guifont=Consolas\ for\ Powerline:h14
   elseif has("mac")
-    set guifont=Consolas\ for\ Powerline:h14
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h13
   else
-    set guifont=Consolas\ for\ Powerline\ 12
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h13
   endif
 
   " Colorscheme:
