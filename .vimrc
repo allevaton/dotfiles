@@ -467,11 +467,6 @@ nnoremap <C-S-tab> :bp<CR>
 inoremap <C-tab> <esc>:bn<CR>
 inoremap <C-S-tab> <esc>:bp<CR>
 
-"nnoremap <Tab> <C-6>
-
-" Allow switching windows in edit mode
-inoremap <C-w> <esc><C-w>
-
 " And some nice page up and down remakes
 nnoremap <S-k> <C-u>
 nnoremap <S-j> <C-d>
