@@ -246,7 +246,7 @@ alias iegrep='egrep -i'
 alias find='sudo find'
 
 # Much better
-alias cdwo='cd $HOME/work*'
+alias cdwo='cd $HOME/work 2> /dev/null || cd $HOME/workspace 2> /dev/null'
 
 # Colored and automatically elevated pacman? Hell yes.
 alias pacman='sudo pacman --color always'
