@@ -13,7 +13,8 @@ urgent_on_bell = true
 clickable_url = false
 #font = Deja Vu Sans Mono for Powerline 12
 font = Consolas for Powerline 13
-scrollback_lines = 1000
+#font = Source Code Pro,Medium 11
+scrollback_lines = 8000
 search_wrap = true
 transparency = 0.90
 
