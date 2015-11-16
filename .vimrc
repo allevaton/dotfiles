@@ -86,6 +86,7 @@ NeoBundleLazy 'alfredodeza/pytest.vim', NeoFileType(['python'])
 NeoBundleLazy 'fisadev/vim-isort', NeoFileType(['python'])
 NeoBundleLazy 'vim-scripts/indentpython.vim', NeoFileType(['python'])
 NeoBundleLazy 'heavenshell/vim-pydocstring', NeoFileType(['python'])
+NeoBundleLazy 'ivanov/vim-ipython', NeoFileType(['python'])
 
 " JavaScript:
 NeoBundleLazy 'jelera/vim-javascript-syntax', NeoFileType(['javascript', 'html'])
@@ -579,7 +580,9 @@ if has("gui_running")
   set guioptions-=R
   set guioptions-=M
 else
-  colorscheme luna-term
+  if &t_Co == 256
+    colorscheme luna-term
+  endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

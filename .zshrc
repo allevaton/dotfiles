@@ -149,8 +149,15 @@ alias gtl='git stash list'
 
 # git reset soft (resets 1 commit), also shows the commit it just reset
 grs () {
+  num=1
+  if [ -n "$1" ]
+  then
+    num=$1
+    shift
+  fi
+
   git show
-  git reset --soft @~1
+  git reset --soft @~$1
 }
 
 # git stash apply, takes one number, which automatically configures it into
@@ -185,6 +192,12 @@ gtd () {
 
 gtp () {
   gitstash_base pop $@
+}
+
+gbh () {
+  for k in $(git branch | sed s/^..//); do
+    echo -e $(git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k --)\\t"$k"
+  done | sort
 }
 
 # Sudo fix
