@@ -163,8 +163,8 @@ set smartcase       " ignore case if pattern is all lower
 " Folding:
 set foldenable      " enable folding
 set foldlevelstart=99 " start with everything folded
-"set foldmethod=marker " user markers for folding
-set foldmethod=manual " manual folding
+set foldmethod=marker " user markers for folding
+"set foldmethod=manual " manual folding
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which comments trigger auto-unfold
 
@@ -382,7 +382,7 @@ function! s:QuickfixToggle()
 endfunction
 " }}}
 
-" Highlight all instances of word under cursor, when idle.
+" Highlight all instances of word under cursor, when idle. {{{
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
@@ -404,6 +404,7 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+" }}}
 
 " ---------------
 
@@ -463,6 +464,9 @@ nnoremap <leader>h :noh<CR>
 inoremap <C-a> <esc>ggVG
 
 " Switching tabs
+nnoremap } :bn<CR>
+nnoremap { :bp<CR>
+
 nnoremap <C-tab> :bn<CR>
 nnoremap <C-S-tab> :bp<CR>
 inoremap <C-tab> <esc>:bn<CR>
