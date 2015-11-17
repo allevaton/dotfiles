@@ -300,6 +300,7 @@ let g:python_highlight_string_templates = 1
 let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', '__init__\.py']
 map <leader>n :NERDTreeTabsToggle<CR>
 map <leader>f :NERDTreeFind<cr><C-w><C-p>
 

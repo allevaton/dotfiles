@@ -87,11 +87,11 @@ bindsym XF86AudioMute exec --no-startup-id amixer -qD pulse set Master toggle &&
 bindsym XF86AudioMicMute exec --no-startup-id amixer -qD pulse set Capture toggle
 
 # quickswitch.py
-set $qs_dmenu --dmenu "dmenu -i -b -l 20 -fn 'DejaVu Sans Mono-12' -x 40 -y 40 -w 512 -h 24 -p
-bindsym $mod+Shift+w exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
-bindsym $mod+Shift+o exec --no-startup-id quickswitch.py $qs_dmenu 'windows'"
-bindsym $mod+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
-bindsym $mod+Shift+m exec --no-startup-id quickswitch.py $qs_dmenu 'move here'" -m
+set $dmenu dmenu -i -b -l 20 -fn 'DejaVu Sans Mono-12' -x 40 -y 40 -w 512 -h 24 -p
+bindsym $mod+Shift+w exec --no-startup-id quickswitch.py --dmenu="$dmenu 'windows'"
+bindsym $mod+Shift+o exec --no-startup-id quickswitch.py --dmenu "$dmenu 'windows'"
+bindsym $mod+m exec --no-startup-id quickswitch.py --dmenu "$dmenu 'move here'" -m
+bindsym $mod+Shift+m exec --no-startup-id quickswitch.py --dmenu "$dmenu 'move here'" -m
 
 # Brightness
 bindsym $mod+XF86MonBrightnessDown exec sudo _brightness
@@ -209,6 +209,8 @@ assign [class="[s|S]team"] $WS8
 for_window [class="[s|S]team"] border none
 for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
 
+assign [class="[H|h]exchat"] $WS6
+
 assign [class="^dota"] $WSgame
 assign [class="^csgo"] $WSgame
 assign [class="^hl2_linux"] $WSgame
@@ -218,6 +220,7 @@ assign [title="World of Warcraft"] $WSgame
 
 assign [class="[s|S]kype"] $WS7
 assign [class="[G|g]nome-system-monitor"] "10:"
+
 assign [class="[C|c]hromium"] $WS1
 assign [class="google-chrome"] $WS1
 
@@ -241,4 +244,6 @@ bar
     mode dock
 }
 
+# Optionally start compton (check ~/.local/bin/_check_compton)
 exec --no-startup-id _check_compton
+
