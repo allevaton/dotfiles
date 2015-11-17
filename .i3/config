@@ -147,19 +147,18 @@ bindsym $mod+Shift+r restart
 bindsym $mod+r mode "resize"
 
 # Resize window (you can also use the mouse for that)
-mode "resize"
-{
-    # These bindings trigger as soon as you enter the resize mode
-    bindsym h resize grow width 4 px or 4 ppt
-    bindsym j resize shrink height 4 px or 4 ppt
-    bindsym k resize grow height 4 px or 4 ppt
-    bindsym l resize shrink width 4 px or 4 ppt
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+  bindsym h resize grow width 4 px or 4 ppt
+  bindsym j resize shrink height 4 px or 4 ppt
+  bindsym k resize grow height 4 px or 4 ppt
+  bindsym l resize shrink width 4 px or 4 ppt
 
-    # Back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym q mode "default"
-    bindsym Q mode "default"
+  # Back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym q mode "default"
+  bindsym Q mode "default"
 }
 
 # General styling here. Colors, fonts, etc.
@@ -198,17 +197,16 @@ for_window [class="google-chrome" title="Google Chrome$"] border none
 
 for_window [class="[q|Q]alculate"] floating enable
 for_window [class="[s|S]kype" title="Options"] floating enable
+for_window [class="[s|S]kype" title="File Transfers"] floating enable
+
+for_window [class="[s|S]team"] border none
+for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
 
 # if you want titlebar-less terminal windows
 for_window [class="[t|T]ermite"] border pixel 2
 
 assign [class="[H|h]exchat"] $WS6
-
-# Games and Steam
 assign [class="[s|S]team"] $WS8
-for_window [class="[s|S]team"] border none
-for_window [title="Friends|Chat$" class="[S|s]team"] floating enable
-
 assign [class="[H|h]exchat"] $WS6
 
 assign [class="^dota"] $WSgame
@@ -232,16 +230,26 @@ for_window [window_role="task_dialog"] floating enable
 ###
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar
-{
-    font pango:DejaVu Sans Mono, Icons 10
+bar {
+  font pango:DejaVu Sans Mono, Icons 10
 
-    strip_workspace_numbers yes
-    position top
-    workspace_buttons yes
-    #status_command i3status -c ~/.i3/status
-    status_command i3conky
-    mode dock
+  strip_workspace_numbers yes
+  position top
+  workspace_buttons yes
+#status_command i3status -c ~/.i3/status
+  status_command i3conky
+  mode dock
+  colors {
+    background #000000
+      statusline #ffffff
+      separator #666666
+
+      focused_workspace  #4c7899 #285577 #ffffff
+      active_workspace   #333333 #5f676a #ffffff
+      inactive_workspace #333333 #222222 #888888
+      urgent_workspace   #2f343a #900000 #ffffff
+      binding_mode       #2f343a #900000 #ffffff
+  }
 }
 
 # Optionally start compton (check ~/.local/bin/_check_compton)
