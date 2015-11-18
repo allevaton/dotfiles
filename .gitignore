@@ -26,3 +26,7 @@ workbench.*
 /fix.py
 /AppData
 /Application Data
+
+.weechat/*log*
+.weechat/weechat_fifo*
+.weechat/sec*
