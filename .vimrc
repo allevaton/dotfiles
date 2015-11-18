@@ -41,6 +41,7 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'christoomey/vim-tmux-navigator'
+NeoBundle 'vim-scripts/ZoomWin'
 
 " DVCS:
 NeoBundle 'jtratner/vim-flavored-markdown'
@@ -295,6 +296,14 @@ let g:python_highlight_exceptions = 1
 let g:python_highlight_string_format = 1
 let g:python_highlight_string_formatting = 1
 let g:python_highlight_string_templates = 1
+
+" Pytest:
+map <leader>TP :Pytest project
+map <leader>Tp :Pytest project
+map <leader>TF :Pytest file
+map <leader>Tf :Pytest file
+map <leader>TC :Pytest class
+map <leader>Tc :Pytest class
 
 " NERDTree:
 let g:nerdtree_tabs_focus_on_files = 1
