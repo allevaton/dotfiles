@@ -588,6 +588,7 @@ if has("gui_running")
   set guioptions-=M
 else
   if &t_Co == 256
+    set cul
     colorscheme luna-term
   endif
 endif
