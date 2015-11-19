@@ -64,7 +64,8 @@ NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'oblitum/rainbow'
+"NeoBundle 'oblitum/rainbow'
+NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundleLazy 'majutsushi/tagbar', {'autoload': {'commands': 'TagbarToggle'}}
 NeoBundle 'SirVer/ultisnips'
@@ -193,20 +194,6 @@ let g:ctrlp_extensions = ['tag', 'line']
 
 " Dictionary:
 "set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
-
-" Rainbow Parentheses:
-let g:rainbow_active = 1
-" 458748 was cc241d
-let g:rainbow_guifgs = [
-      \ '#458588',
-      \ '#b16286',
-      \ '#d65d0e',
-      \ '#458748',
-      \ '#458588',
-      \ '#b16286',
-      \ '#d65d0e',
-      \ '#458748'
-      \ ]
 
 " YCM YouCompleteMe Configuration:
 "let g:ycm_collect_identifiers_from_tags_files = 1
@@ -533,6 +520,12 @@ if has('autocmd')
           \   exe "normal! g`\"" |
           \ endif
   augroup END
+
+  " Rainbow Parentheses:
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
 
   " Go to the first line of a diff
   "if &diff == 1
