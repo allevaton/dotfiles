@@ -44,7 +44,7 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'vim-scripts/ZoomWin'
 
 " DVCS:
-NeoBundle 'jtratner/vim-flavored-markdown'
+"NeoBundle 'jtratner/vim-flavored-markdown'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 
@@ -59,6 +59,8 @@ NeoBundle 'tpope/vim-afterimage'
 NeoBundle 'gerw/vim-latex-suite'
 "NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'suan/vim-instant-markdown'
 
 " Utility:
 NeoBundle 'kien/ctrlp.vim'
