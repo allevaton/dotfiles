@@ -12,7 +12,7 @@ export WORKSPACE="$HOME/workspace"
 export WS="$WORKSPACE"
 
 export EDITOR="vim"
-export BROWSER="chromium"
+export BROWSER="google-chrome-stable"
 
 eval $(dircolors ~/.dircolors)
 

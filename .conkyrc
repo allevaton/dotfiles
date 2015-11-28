@@ -6,6 +6,10 @@ update_interval 1
 TEXT
 ,[
 
+# TODO: Here are some good ideas:
+# - Detect if headphones are in and use the FontAwesome headphones icon
+# -
+
 # If you're wondering how this actually works, check ~/.local/bin/i3conky
 # I call a python script that actually strips the whitespace from
 # the beginning and end of each line after TEXT. So conky will actually
@@ -21,7 +25,7 @@ ${if_match "$gw_iface" == "(null)"}
 ${endif}
 
 ${if_match "$gw_iface" == "wlp4s0"}
-    " (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
+    " (${wireless_link_qual_perc wlp4s0}% ${wireless_essid wlp4s0}) ${addr wlp4s0}"
     ,"color":"
     ${if_match ${wireless_link_qual_perc wlp4s0} > 70}
         \#00FF00"}
