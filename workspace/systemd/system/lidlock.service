@@ -1,3 +1,11 @@
+# Nick's notes:
+# You need to put this repo in /usr/local/bin
+#   https://github.com/meskarune/i3lock-fancy/
+#
+# Instead of the normal i3lock, you need:
+#   https://github.com/eBrnd/i3lock-color
+#   (AUR available as i3lock-color-git)
+
 [Unit]
 Description=i3lock at suspend time
 Before=sleep.target
@@ -6,8 +14,9 @@ Before=sleep.target
 User=%I
 Type=forking
 Environment=DISPLAY=:0
-ExecStartPre=xset -b
-ExecStart=/home/nick/.local/bin/_lock
+WorkingDirectory=/usr/local/bin/i3lock-fancy
+ExecStart=/usr/local/bin/i3lock-fancy/lock
 
 [Install]
 WantedBy=sleep.target
+WantedBy=graphical.target

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-#
-
-scrot /tmp/_lockscreen.png
-convert /tmp/_lockscreen.png -blur 0x5 /tmp/_lockscreen.png
-i3lock -i /tmp/_lockscreen.png
