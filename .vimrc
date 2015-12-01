@@ -42,6 +42,7 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'vim-scripts/ZoomWin'
+NeoBundle 'gcmt/taboo.vim'
 
 " DVCS:
 "NeoBundle 'jtratner/vim-flavored-markdown'
@@ -78,9 +79,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs', {'depends': 'scrooloose/nerdtree'}
 NeoBundle 'jlanzarotta/bufexplorer'
 NeoBundle 'tmhedberg/matchit'
-NeoBundleLazy 'easymotion/vim-easymotion', {'autoload':
-      \   {'mappings': '<Plug>(easymotion-prefix)'}
-      \ }
+NeoBundle 'easymotion/vim-easymotion'
 
 " Python:
 "NeoBundle 'davidhalter/jedi-vim', NeoFileType(['python'])
@@ -312,6 +311,8 @@ let g:user_emmet_leader_key = '<C-z>'
 "imap <expr> <Tab> emmet#expandAbbrIntelligent("\<Tab>")
 
 " Sessions: sessions.vim
+" let Taboo save tab names
+set sessionoptions+=tabpages,globals
 let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
 
