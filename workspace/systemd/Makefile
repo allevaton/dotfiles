@@ -1,12 +1,14 @@
 # Makefile
 #
 
-DEST=/etc/systemd
-
 all:
-	@echo Nothing to do
+	@#
+	$(MAKE) -C user
+	sudo $(MAKE) -C system
+
+help:
+	@echo "Run 'make' to install user systemd scripts"
+	@echo "Run 'sudo make install' to run root systemd scripts"
 
 install:
-	@# Copy everything but the makefile
-	ls -I Makefile | xargs cp -rt $(DEST)
-	systemctl daemon-reload
+	# Copy everything but the makefile
