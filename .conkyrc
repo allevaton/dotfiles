@@ -69,7 +69,9 @@ ${endif}
 
 ## DISK SPACE REMAINING ##
 #
-{"full_text": "home: ${fs_free /home} free"},
+${if_match ${fs_free_perc /home} <= 20}
+  {"full_text": "home: ${fs_free /home} free"},
+${endif}
 
 
 ## VOLUME ##
