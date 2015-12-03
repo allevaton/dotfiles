@@ -8,7 +8,6 @@
 
 [Unit]
 Description=i3lock at suspend time
-After=graphial.target
 Before=sleep.target
 
 [Service]
