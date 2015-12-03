@@ -111,7 +111,7 @@ fi
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=always "${opts[@]}"'
 if [[ $(uname) == 'Linux' ]]
 then
-  alias ls='ls -vh --color=always'
+  alias ls='ls -vh --color=auto'
 else
   alias ls='ls -vhG'
 fi
@@ -125,6 +125,84 @@ alias la='ls -lha'
 
 # Ranger is nice, so shortcut it.
 alias ra='. ranger'
+
+# Sudo fix
+#alias sudo="sudo $@"
+
+# Always love colors
+alias tree='tree -C'
+
+# Human readable
+alias df='df -h'
+
+# Just in case you forgot...
+alias rn='mv'
+
+# Good stuff
+#alias vim='vim'
+alias vimrc='pushd ~/.vim >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
+#alias gvim='gvim'
+alias gvimrc='pushd ~/.vim >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
+
+# Better way to type `clear`
+#alias c='clear'
+
+# Getting annoying...
+alias cp='cp -r'
+
+# My useful trash command
+alias rm='rm -i'
+alias mv='mv -i'
+
+# chmod u+x got annoying to type
+alias x='chmod u+x'
+
+# Easy stuff.
+alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
+alias n='netctl'
+alias ns='netctl start'
+
+# Heh, duh... but really, it's better and easier
+alias duh='du -hsc'
+
+# cd's into the parent directory
+alias cdd='cd ..'
+alias cdp="cd $OLDPWD"
+alias pd='pushd'
+alias dp='popd'
+
+# No one really likes case sensitivity sometimes...
+alias grep='grep --color=auto'
+alias igrep='grep -i'
+
+alias fgrep='fgrep --color=auto'
+alias ifgrep='fgrep -i'
+
+alias egrep='egrep --color=auto'
+alias iegrep='egrep -i'
+
+# So annoying...
+alias find='sudo find'
+
+# Much better
+alias cdwo='cd $HOME/work 2> /dev/null || cd $HOME/workspace 2> /dev/null'
+
+# Colored and automatically elevated pacman? Hell yes.
+alias pacman='sudo pacman --color auto'
+#alias yaourt='yaourt --color always'
+
+# Hardly ever used, but still nice.
+#alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
+
+# A lot nicer
+alias journal='journalctl'
+alias j='journal'
+
+# Goes with the pattern
+alias sys='systemctl'
+
+# Use vim as a pager
+alias less='less -R'
 
 # Git shortcuts
 alias g='git'
@@ -200,90 +278,8 @@ gbh () {
   done | sort
 }
 
-# Sudo fix
-#alias sudo="sudo $@"
-
-# Always love colors
-alias tree='tree -C'
-
-# Human readable
-alias df='df -h'
-
-# Just in case you forgot...
-alias rn='mv'
-
-# Good stuff
-#alias vim='vim'
-alias vimrc='pushd ~/.vim >> /dev/null && vim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
-#alias gvim='gvim'
-alias gvimrc='pushd ~/.vim >> /dev/null && gvim ~/.vimrc -c "NERDTree" -c "NERDTreeFocusToggle" && popd >> /dev/null'
-
-# Better way to type `clear`
-#alias c='clear'
-
-# Getting annoying...
-alias cp='cp -r'
-
-# My useful trash command
-alias rm='rm -i'
-alias mv='mv -i'
-
-# chmod u+x got annoying to type
-alias x='chmod u+x'
-
-# Easy stuff.
-alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
-alias n='netctl'
-alias ns='netctl start'
-
-# Heh, duh... but really, it's better and easier
-alias duh='du -hsc'
-
-# cd's into the parent directory
-alias cdd='cd ..'
-alias cdp="cd $OLDPWD"
-alias pd='pushd'
-alias dp='popd'
-
-# No one really likes case sensitivity sometimes...
-alias grep='grep --color=always'
-alias igrep='grep -i'
-
-alias fgrep='fgrep --color=always'
-alias ifgrep='fgrep -i'
-
-alias egrep='egrep --color=always'
-alias iegrep='egrep -i'
-
-# So annoying...
-alias find='sudo find'
-
-# Much better
-alias cdwo='cd $HOME/work 2> /dev/null || cd $HOME/workspace 2> /dev/null'
-
-# Colored and automatically elevated pacman? Hell yes.
-alias pacman='sudo pacman --color always'
-#alias yaourt='yaourt --color always'
-
-# Hardly ever used, but still nice.
-#alias grub-mkconfig="grub-mkconfig -o /boot/grub/grub.cfg"
-
-# A lot nicer
-alias journal='journalctl'
-alias j='journal'
-
-# Goes with the pattern
-alias sys='systemctl'
-
-# Use vim as a pager
-alias less='less -R'
-
 # }}}
 ##
-#
-# Function redefinitions go here.
-#
-# I like colored manual pages.
 #
 # Colored man pages
 export LESS_TERMCAP_mb=$'\e[01;31m'
@@ -293,6 +289,3 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[38;33;246m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[04;38;5;146m'
-
-
-
