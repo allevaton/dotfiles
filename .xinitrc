@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # ~/.xinitrc
 #
@@ -39,19 +39,19 @@ done
 # Don't like being blinded all the time
 # Sometimes f.lux isn't enough, y'know?
 # XXX: This may not work in some instances.
-xbacklight -set 60
+xbacklight -set 60 &
 
 # We like Ctrl+Alt+Backspace, right?
-setxkbmap -option terminate:ctrl_alt_bksp
+setxkbmap -option terminate:ctrl_alt_bksp &
 
 # Load the general X configuration
-xrdb $HOME/.Xresources
+xrdb $HOME/.Xresources &
 
 ###########################################################
 # Startup programs and start the WM
 ###########################################################
 
-# Start f.lux for my eyes unconditionally.
+# Start f.lux for my eyes unconditionally (auto-forks)
 xflux -z 02038
 
 # TODO why is this here...
@@ -70,24 +70,23 @@ case "$1" in
   gnome)
     exec gnome-session;;
 
+  # i3
   *)
-    # i3wm
+    # notification daemon
+    (dunst || i3-nagbar -m 'dunst (notification daemon) not found') &
 
     skype &
     hexchat --minimize=2 &
     steam -silent &
 
-    # notification daemon
-    dunst &
-
     # This fixes some problems with odd sound drivers
     start-pulseaudio-x11 &
 
     # wallpapers
-    nitrogen --restore &
+    (nitrogen --restore || notify-send -u critical 'nitrogen not found, wallpapers will not load') &
 
     # Launch i3
     exec i3 --shmlog-size=26214400 > /tmp/i3log-$(date +'%F-%k-%M-%S') 2>&1;;
 esac
 
-# vim:ts=4
+# vim:ts=2

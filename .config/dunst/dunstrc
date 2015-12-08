@@ -1,5 +1,5 @@
 [global]
-    font = DejaVu Sans Mono 11
+    font = Source Code Pro 11
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -21,7 +21,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n\n%b"
+    format = "%p <b>%s</b>\n%b"
 
     # Sort messages by urgency.
     sort = yes
@@ -64,7 +64,7 @@
     # the top and down respectevly.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x100-42+21"
+    geometry = "300x5-42+21"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -78,7 +78,7 @@
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
     # Set to 0 to disable.
-    idle_threshold = 120
+    idle_threshold = 60
 
     # Which monitor should the notifications be displayed on.
     monitor = 0
@@ -104,7 +104,7 @@
     history_length = 20
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     # The height of a single line.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -114,13 +114,13 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 6
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 8
+    padding = 6
 
     # Horizontal padding.
-    horizontal_padding = 8
+    horizontal_padding = 6
 
     # Define a color for the separator.
     # possible values are:
@@ -128,7 +128,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
@@ -139,17 +139,17 @@
     dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/chromium
+    browser = /usr/bin/google-chrome-stable
 
     # Align icons left/right/off
-    icon_position = left
+    icon_position = off
 
     # Paths to default icons.
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 2
-    color = "#4c7899"
+    width = 1
+    color = "#aaaaaa"
 
 [shortcuts]
 
@@ -172,21 +172,34 @@
     # Context menu.
     context = ctrl+shift+period
 
+#[urgency_low]
+    #background = "#2e9ef4"
+    #foreground = "#eeeeee"
+    #timeout = 5
+
+#[urgency_normal]
+    #background = "#ffa800"
+    #foreground = "#444444"
+    #timeout = 30
+
+#[urgency_critical]
+    #background = "#900000"
+    #foreground = "#eeeeee"
+    #timeout = 0
+
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#2e9ef4"
-    foreground = "#eeeeee"
-    timeout = 5
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 10
 
 [urgency_normal]
-    background = "#ffa800"
-    foreground = "#444444"
-    timeout = 30
+    background = "#00611C"
+    foreground = "#ffffff"
+    timeout = 0
 
 [urgency_critical]
     background = "#900000"
-    foreground = "#eeeeee"
+    foreground = "#ffffff"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to

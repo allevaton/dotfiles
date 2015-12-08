@@ -121,7 +121,7 @@ alias l='ls'
 alias ll='ls -l'
 
 # An easier more detailed list command
-alias la='ls -lha'
+alias la='ls -lha --group-directories-first'
 
 # Ranger is nice, so shortcut it.
 alias ra='. ranger'
