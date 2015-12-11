@@ -80,6 +80,7 @@ NeoBundle 'jistr/vim-nerdtree-tabs', {'depends': 'scrooloose/nerdtree'}
 NeoBundle 'jlanzarotta/bufexplorer'
 NeoBundle 'tmhedberg/matchit'
 NeoBundle 'easymotion/vim-easymotion'
+NeoBundle 'kien/tabman.vim'
 
 " Python:
 "NeoBundle 'davidhalter/jedi-vim', NeoFileType(['python'])
@@ -355,13 +356,12 @@ map [h <Plug>GitGutterPrevHunk
 " Git Keys:
 let g:gitgutter_realtime = 1
 map <leader>gd :Gvdiff<CR>
-map <leader>ghd :Gdiff<CR>
 map <leader>gs :Gstatus<CR>
 map <leader>go :Gcommit<CR>
 map <leader>gu :Gpull<CR>
-map <leader>gap <Plug>GitGutterPreviewHunk
-map <leader>gah <Plug>GitGutterStageHunk
-map <leader>grh <Plug>GitGutterRevertHunk
+map <leader>ghd <Plug>GitGutterPreviewHunk
+map <leader>gha <Plug>GitGutterStageHunk
+map <leader>ghr <Plug>GitGutterRevertHunk
 
 " QuickFix Window:
 let g:quickfix_is_open = 0
@@ -466,6 +466,8 @@ inoremap <C-a> <esc>ggVG
 " Switching tabs
 nnoremap } :bn<CR>
 nnoremap { :bp<CR>
+"nmap <C-S-]> :tabn<CR>
+"nnoremap <C-S-[> :tabp<CR>
 
 nnoremap <C-tab> :bn<CR>
 nnoremap <C-S-tab> :bp<CR>

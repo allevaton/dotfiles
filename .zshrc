@@ -278,6 +278,13 @@ gbh () {
   done | sort
 }
 
+psgrep () {
+  out=$(ps aux)
+  head -n1 <<< $out
+  grep $@ <<< $out
+}
+
+
 # }}}
 ##
 #
