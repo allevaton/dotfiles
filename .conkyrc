@@ -70,7 +70,7 @@ ${endif}
 ## DISK SPACE REMAINING ##
 #
 ${if_match ${fs_free_perc /home} <= 20}
-  {"full_text": "home: ${fs_free /home} free"},
+  {"full_text": "home: ${fs_free /home} free","color":"\#BFED6F"},
 ${endif}
 
 
@@ -88,37 +88,112 @@ ${endif}
 # Only if the battery exists as a power supply.
 # If the location is different for your setup, change it.
 ${if_existing /sys/class/power_supply/BAT0}
-    ${if_match ${battery_percent} <= 10}
-        {"color": "\#FF0000", "full_text":
+    ${if_match "${exec acpi | grep -oP 'Charging'}" == "Charging"}
+        ${if_match ${battery_percent} < 96}
+            {"color":"\#B0ED55","full_text":"","separator":false,
+            "separator_block_width":6},
+            {"color":"\#B0ED55","full_text":"
+        ${else}
+            {"color":"\#55ED9F","full_text":"","separator":false,
+            "separator_block_width":6},
+            {"color":"\#55ED9F","full_text":"
+        ${endif}
     ${else}
-        {"full_text":
+        ${if_match ${battery_percent} >= 85}
+            #{"color": "\#CAB0F7","full_text":"
+
+            {"color":"\#CAB0F7","full_text":"","separator":false,
+            "separator_block_width":6},
+            {"color":"\#CAB0F7","full_text":"
+        ${endif}
+
+        ${if_match ${battery_percent} >= 75}
+            ${if_match ${battery_percent} < 85}
+                #{"color": "\#CAB0F7","full_text":"
+
+                {"color":"\#CAB0F7","full_text":"","separator":false,
+                "separator_block_width":6},
+                {"color":"\#CAB0F7","full_text":"
+            ${endif}
+        ${endif}
+
+        ${if_match ${battery_percent} >= 50}
+            ${if_match ${battery_percent} < 75}
+                #{"color": "\#CAB0F7","full_text":"
+
+                {"color":"\#CAB0F7","full_text":"","separator":false,
+                "separator_block_width":6},
+                {"color":"\#CAB0F7","full_text":"
+            ${endif}
+        ${endif}
+
+        ${if_match ${battery_percent} >= 25}
+            ${if_match ${battery_percent} < 50}
+                #{"color": "\#CAB0F7","full_text":"
+
+                {"color":"\#CAB0F7","full_text":"","separator":false,
+                "separator_block_width":6},
+                {"color":"\#CAB0F7","full_text":"
+            ${endif}
+        ${endif}
+
+        ${if_match ${battery_percent} < 25}
+            ${if_match ${battery_percent} > 10}
+                #{"color": "\#D2ED87","full_text":"
+
+                {"color":"\#D2ED87","full_text":"","separator":false,
+                "separator_block_width":6},
+                {"color":"\#D2ED87","full_text":"
+            ${endif}
+        ${endif}
+
+        ${if_match ${battery_percent} <= 10}
+            #{"color": "\#F75454","full_text":"
+
+            {"color":"\#F75454","full_text":"","separator":false,
+            "separator_block_width":6},
+            {"color":"\#F75454","full_text":"
+        ${endif}
     ${endif}
 
     ${if_empty ${battery_time}}
-        "${battery_short}"}
+        ${battery_percent}%"}
     ${else}
-        "${battery_short} ${battery_time}"}
+        ${battery_percent}% ${battery_time}"}
     ${endif}
     ,
+
+    #${if_match ${battery_percent} <= 10}
+    #    {"color": "\#FF0000", "full_text":
+    #${else}
+    #    {"full_text":
+    #${endif}
 ${endif}
 
 ## CPU FREQUENCY, TEMPERATURE, PERCENT ##
 #
-{"full_text":"CPU","separator":false},
-{"full_text":"${freq_g} GHz","separator":false,
-"separator_block_width":9},
+
+{"full_text": "CPU","separator":false,"separator_block_width":8,
+"color":"\#6FCEED"},
+{"full_text":"${freq_g}GHz","separator":false,"separator_block_width":9,
+"color":"\#6FCEED"},
 
 ${if_match "${acpitemp}" != "0"}
     {"full_text":"${acpitemp}°C","separator":false
     ${if_match ${acpitemp} >= 70}
         ,"color":"\#FF0000"
+    ${else}
+        ,"color":"\#6FCEED"
     ${endif}
+
     },
 ${endif}
 
 {"full_text": "${cpu 0}%"
 ${if_match ${cpu 0} > 50}
     ,"color":"\#FFFF00"
+${else}
+    ,"color":"\#6FCEED"
 ${endif}
 ${if_match ${cpu 0} > 70}
     ,"color":"\#FF0000"

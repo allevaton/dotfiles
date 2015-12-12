@@ -17,7 +17,7 @@ font = Consolas for Powerline 13
 #font = Source Code Pro,Medium 11
 scrollback_lines = 8000
 search_wrap = true
-transparency = 0.90
+transparency = 0.95
 
 #icon_name = terminal
 #geometry = 640x480

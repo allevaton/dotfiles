@@ -3,7 +3,12 @@
 #
 #
 
-if [[ `hostname` == archdesktop ]]
+# Make sure compton exists
+if [[ `hostname` != 'archdesktop' ]]
+  exit 1
+fi
+
+if [[ -e `which compton` ]]
 then
   file="$HOME/.compton.conf"
 
@@ -14,4 +19,6 @@ then
   else
     DISPLAY=:0 notify-send 'Compton' 'Could not find config file'
   fi
+else
+  DISPLAY=:0 notify-send 'Compton is not installed'
 fi
