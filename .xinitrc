@@ -70,13 +70,17 @@ case "$1" in
   gnome)
     exec gnome-session;;
 
+  bspwm)
+    sxhkd &
+    exec bspwm;;
+
   # i3
   *)
     # notification daemon
     (dunst || i3-nagbar -m 'dunst (notification daemon) not found') &
 
     skype &
-    hexchat --minimize=2 &
+    #hexchat --minimize=2 &
     steam -silent &
 
     # This fixes some problems with odd sound drivers
