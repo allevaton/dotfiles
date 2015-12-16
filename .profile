@@ -1,8 +1,6 @@
-export PATH="/usr/bin:/usr/local/bin"
 
-# As much as I don't like perl, they're fancy enough to have their own bin
-# folders... of course. *sigh*
-export PATH="$PATH:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+
+export PATH="/usr/bin:/usr/local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 
 if [ -d "$HOME/.local/bin" ]
 then
@@ -13,6 +11,10 @@ export WS="$WORKSPACE"
 
 export EDITOR="vim"
 export BROWSER="google-chrome-stable"
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
 
 eval $(dircolors ~/.dircolors)
 
