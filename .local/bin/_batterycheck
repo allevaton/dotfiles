@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #
 #
 #
@@ -6,25 +6,15 @@
 # In terms of battery percent
 THRESHOLD=10
 
-dir=/sys/class/power_supply/BAT0
+batteryout="$(conky -i1 -t '${battery_short}')"
+batstatus=$(cut -d' ' -f1 <<< $batteryout)
+percent=$(cut -d' ' -f2 <<< $batteryout)
 
-if [[ ! -d "$dir" ]]
+if [[ $batstatus == "D" ]]
 then
-    exit 0
-fi
-
-batstat=`cat $dir/status`
-
-max=`cat $dir/energy_full_design`
-cur=`cat $dir/energy_now`
-
-percent=`echo "$cur / $max * 100" | bc -l | sed 's/\..*//'`
-
-if [[ $batstat == "Discharging" ]]
-then
-    if [[ $percent -le $THRESHOLD ]]
+  if [[ $(sed 's/%//' <<< $percent) -le $THRESHOLD ]]
     then
-        notify-send -u critical "Battery Low" "Your battery is at $percent%"
+        notify-send -u critical "Battery Low" "Your battery is at $percent"
     fi
 fi
 
