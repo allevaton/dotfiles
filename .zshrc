@@ -90,7 +90,7 @@ bindkey "^[[1;5D" backward-word
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
 
-bindkey "${terminfo[kent]}" accept-line
+#bindkey "${terminfo[kent]}" accept-line
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
@@ -111,7 +111,7 @@ fi
 #alias ls='if [[ -f .hidden ]]; then while read l; do opts+=(--hide="$l"); done < .hidden; fi; ls --color=always "${opts[@]}"'
 if [[ $(uname) == 'Linux' ]]
 then
-  alias ls='ls -vh --color=auto'
+  alias ls='ls -vh --color=auto --group-directories-first'
 else
   alias ls='ls -vhG'
 fi
@@ -158,15 +158,23 @@ alias mv='mv -i'
 alias x='chmod u+x'
 
 # Easy stuff.
-alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
+#alias ifwd='ifconfig wlp4s0 down && netctl stop-all'
 alias n='netctl'
 alias ns='netctl start'
 
 # Heh, duh... but really, it's better and easier
 alias duh='du -hsc'
 
+cdd () {
+  cd ..
+
+  if [ -n "$1" ]
+  then
+    cd $1
+  fi
+}
+
 # cd's into the parent directory
-alias cdd='cd ..'
 alias cdp="cd $OLDPWD"
 alias pd='pushd'
 alias dp='popd'
