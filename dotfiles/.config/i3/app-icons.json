@@ -1,0 +1,27 @@
+{
+  "fa_gallery": "https://fontawesome.com/icons?d=gallery&m=free",
+
+  "firefox": "firefox",
+  "chromium-browser": "chrome",
+  "Microsoft-edge-dev": "chrome",
+  "chrome": "chrome",
+  "chromium": "chrome",
+  "terminator": "terminal",
+  "thunderbird": "envelope",
+  "code-oss": "code",
+  "jetbrains-idea-ce": "edit",
+  "jetbrains-webstorm": "edit",
+  "nautilus": "folder-open",
+  "dolphin": "folder-open",
+  "clementine": "music",
+  "vlc": "play",
+  "slack": "slack",
+  "signal": "comment",
+  "spotify": "spotify",
+  "steam": "steam",
+  "discord": "discord",
+  "gitkraken": "gitkraken",
+  "pavucontrol": "volume",
+  "postman": "postman",
+  "_no_match": "question"
+}

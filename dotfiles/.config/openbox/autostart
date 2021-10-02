@@ -1,0 +1,38 @@
+(\
+  nitrogen --restore && \
+  picom --start & \
+) &
+
+(\
+  sleep 2s && \
+  tint2 \
+) &
+
+# xfce4-settings daemon
+xfsettingsd &
+
+# polkit agent
+/usr/lib/xfce-polkit/xfce-polkit &
+
+# Launch Polybar
+sh ~/.config/polybar/launch.sh
+
+#exec jgmenu --hide-on-startup &
+
+# Start Music Player Daemon
+exec mpd &
+
+# Notification Daemon
+exec dunst &
+
+# Thunar Daemon
+exec thunar --daemon &
+
+# Enable Super Keys For Menu
+#xcape -e 'Super_L=Control_L|Escape'
+
+# Enable power management
+xfce4-power-manager &
+
+# Clipboard history manager. Use W-v to view them
+xfce4-clipman &

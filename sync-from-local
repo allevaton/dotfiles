@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+rsync -avh \
+  --delete \
+  --prune-empty-dirs \
+  --filter="merge ./filter.txt" \
+  $HOME/ \
+  ./dotfiles/

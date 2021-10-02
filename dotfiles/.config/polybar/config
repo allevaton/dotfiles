@@ -1,0 +1,317 @@
+# vim:ft=dosini
+
+;--------------------------------------------
+; colors                                    ;
+;--------------------------------------------
+
+[colors]
+; Dark
+nord0  = #2E3440
+nord1  = #3B4252
+nord2  = #434C5E
+nord3  = #4C566A
+
+; White
+nord4  = #D8DEE9
+nord5  = #E5E9F0
+nord6  = #ECEFF4
+
+; Blue
+nord7  = #8FBCBB
+nord8  = #88C0D0
+nord9  = #81A1C1
+nord10 = #5E81AC
+
+; Accent
+nord11 = #BF616A
+nord12 = #D08770
+nord13 = #EBCB8B
+nord14 = #A3BE8C
+nord15 = #B48EAD
+
+foreground = ${colors.nord4}
+background = ${colors.nord0}
+
+modules_bg = ${xrdb:color7}
+modules_fg = ${xrdb:color0}
+
+;--------------------------------------------
+; bars                                      ;
+;--------------------------------------------
+
+[bar/top]
+dpi      = ${xrdb:Xft.dpi:-1}
+width    = 100%
+height   = 64
+
+bottom = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; radius = 4.0
+module-radius = 32.0
+
+; border-bottom-color = #000f0f0f
+; border-top-color    = #000f0f0f
+
+; border-left-color  = #000f0f0f
+; border-right-color = #000f0f0f
+
+spacing = 1
+padding = 1
+module-margin = 1
+
+;font-N = <fontconfig pattern>;<vertical offset>
+font-0 = "JetBrains Mono:size=8;4"
+font-1 = "Font Awesome:style=Solid:pixelsize=8;4"
+; font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=8;4"
+
+modules-left   = openbox
+; modules-center = xwindow
+modules-right  = bluetooth battery cpu ram volume
+
+; tray-position = right
+; tray-maxsize = 56
+
+fixed-center = true
+
+
+;--------------------------------------------
+; modules                                   ;
+;--------------------------------------------
+
+[module/network]
+type          = internal/network
+interface     = wlp107s0
+ping-interval = 8
+
+[module/xwindow]
+# y-offset      = 10
+type          = internal/xwindow
+format        = <label>
+label         = %title:0:50:%
+label-padding = 3
+
+[module/date]
+type     = internal/date
+interval = 1.0
+time     = "%a %h %d %I:%M %p"
+label    = "%time%"
+
+format = <label>
+format-padding = 0
+
+label-background = ${colors.nord9}
+label-foreground = ${colors.nord0}
+label-padding    = 2
+
+[module/playerctl]
+type = custom/script
+exec = ~/.config/polybar/playerctl.sh
+interval = 3
+label-background = ${colors.nord14}
+label-foreground = ${colors.nord0}
+label-padding = 2
+click-left = playerctl play-pause &
+click-right = playerctl next &
+click-middle = playerctl play-pause &
+
+[module/battery]
+type          = internal/battery
+full-at       = 98
+battery       = BAT1
+adapter       = ADP1
+poll-interval = 5
+
+format-charging = <ramp-capacity><label-charging>
+label-charging = " %percentage%%"
+
+format-discharging = <ramp-capacity><label-discharging>
+label-discharging = "%percentage%%"
+
+format-full = <ramp-capacity><label-full>
+label-full = "%percentage%%"
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/volume]
+type          = internal/pulseaudio
+format-volume = <label-volume>
+
+mapped = true
+
+label-volume            = "V %percentage%%"
+label-volume-padding    = 1
+
+format-muted = <label-muted>
+
+label-muted            = "V (muted)"
+label-muted-background = ${colors.nord11}
+label-muted-foreground = ${colors.nord0}
+label-muted-padding    = 1
+
+format-volume-padding = 0
+format-muted-padding  = 0
+
+ramp-headphones-0 = 
+
+[module/cpu]
+type             = internal/cpu
+interval         = 5
+format           = <label>
+label            =  %percentage%%
+label-padding    = 1
+
+[module/ram]
+type     = internal/memory
+interval = 3
+
+format           = <label>
+label            = " %percentage_used%%"
+#label-background = ${colors.modules_bg}
+#label-foreground = ${colors.modules_fg}
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+label-padding    = 1
+
+#format-prefix = 
+
+format-prefix-padding    = 1
+
+
+[module/essid]
+inherit = module/network
+
+format-connected = <label-connected>
+
+format-connected-prefix              = ""
+format-connected-prefix-padding      = 1
+format-connected-prefix-padding-left = 1
+format-connected-prefix-background   = ${xrdb:color0}
+format-connected-prefix-foreground   = ${xrdb:color5}
+
+label-connected               = %essid% %downspeed:9%
+label-connected-background    = ${xrdb:color0}
+label-connected-foreground    = ${xrdb:color5}
+label-connected-padding       = 1
+label-connected-padding-right = 1
+
+ramp-signal-background    = ${xrdb:color0}
+ramp-signal-foreground    = ${xrdb:color5}
+ramp-connected-foreground = ${xrdb:color5}
+ramp-signal-padding       = 1
+
+format-disconnected = <label-disconnected>
+
+format-disconnected-prefix              = ""
+format-disconnected-prefix-padding      = 1
+format-disconnected-prefix-padding-left = 1
+format-disconnected-prefix-background   = ${xrdb:color0}
+format-disconnected-prefix-foreground   = ${xrdb:color7}
+
+label-disconnected               = DISCONNECTED
+label-disconnected-background    = ${xrdb:color0}
+label-disconnected-foreground    = ${xrdb:color7}
+label-disconnected-padding       = 1
+label-disconnected-padding-right = 1
+
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+[module/workspaces]
+type            = internal/i3
+; format          = <label-state><label-mode>
+index-sort      = true
+wrapping-scroll = false
+strip-wsnumbers = false
+enable-click    = true
+pin-workspaces  = true
+
+label-mode-background = ${colors.nord2}
+label-mode-foreground = ${colors.nord3}
+label-mode-padding    = 1
+
+label-focused            = %name%
+label-focused-background = ${colors.nord10}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding    = 1
+
+label-unfocused            = %name%
+label-unfocused-background = ${colors.nord1}
+label-unfocused-foreground = ${colors.nord4}
+label-unfocused-padding    = 1
+
+label-visible            = %name%
+label-visible-background = ${xrdb:color9}
+label-visible-foreground = ${xrdb:color7}
+label-visible-padding    = 1
+
+label-urgent            = %name%
+label-urgent-background = ${colors.nord11}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-padding    = 1
+
+[module/bluetooth]
+type = custom/script
+exec = ~/.config/polybar/bluetooth.sh
+interval = 2
+click-left = exec blueman-manager
+click-right = exec ~/.config/polybar/toggle_bluetooth.sh
+format-padding = 2
+; format-background = #000000
+format-foreground = #ffffff
+
+[module/openbox]
+type = internal/xworkspaces
+
+pin-workspaces = false
+
+format = <label-state>
+; label-monitor = %icon%
+
+label-active = 
+label-active-foreground = ${colors.nord8}
+; label-active-background = #3f3f3f
+; label-active-underline = #fba922
+
+label-active-padding = 1
+label-occupied-padding = 1
+label-urgent-padding = 1
+label-empty-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-occupied = 
+label-occupied-foreground = ${colors.nord3}
+; label-occupied-underline = #555555
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-urgent = 
+label-urgent-foreground = ${colors.nord11}
+label-urgent-background = #bd2c40
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-empty = 
+label-empty-foreground = ${colors.nord3}

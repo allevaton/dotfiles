@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+id=92857198
+sink=$(pactl get-default-sink)
+
+function get_volume() {
+  echo $(pactl get-sink-volume $sink | awk '{ print substr($5, 1, length($5) - 1) }')
+}
+
+if [[ "$1" == "mute" ]]; then
+  pactl set-sink-mute $sink toggle
+
+  if [[ "$(pactl get-sink-mute $sink | awk '{ print $2 }')" == "no" ]]; then
+    dunstify -u low -r $id "Volume: " -i audio-volume-high -h "int:value:$(get_volume)"
+  else
+    dunstify -u low -r $id "Volume: muted" -i audio-volume-muted
+  fi
+else
+  pactl set-sink-volume $sink $1
+  dunstify -u low -r $id "Volume: " -i audio-volume-high -h "int:value:$(get_volume)"
+fi

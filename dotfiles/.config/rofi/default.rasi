@@ -1,0 +1,44 @@
+/*******************************************************************************
+ * ROFI VERTICAL THEME USING THE NORD COLOR PALETTE
+ * User                 : LR-Tech
+ * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
+ * Nord Project Repo    : https://github.com/arcticicestudio/nord
+ *******************************************************************************/
+
+configuration {
+    font            : "JetBrains Mono 28";
+    display-ssh     : "";
+    display-run     : "";
+    display-drun    : "";
+    display-window  : "";
+    display-combi   : "";
+    icon-theme      : "Papirus";
+    show-icons      : true;
+
+}
+* {
+    nord0   : #2e3440;
+    nord1   : #3b4252;
+    nord2   : #434c5e;
+    nord3   : #4c566a;
+
+    nord4   : #d8dee9;
+    nord5   : #e5e9f0;
+    nord6   : #eceff4;
+
+    nord7   : #8fbcbb;
+    nord8   : #88c0d0;
+    nord9   : #81a1c1;
+    nord10  : #5e81ac;
+    nord11  : #bf616a;
+
+    nord12  : #d08770;
+    nord13  : #ebcb8b;
+    nord14  : #a3be8c;
+    nord15  : #b48ead;
+
+    background-color    : @nord1;
+    text-color          : @nord4;
+
+    margin              : 0;
+}

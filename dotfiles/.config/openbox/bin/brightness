@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+id=121214
+
+function get_brightness() {
+  echo "scale=1; $(brightnessctl get) / $(brightnessctl max) * 100" | bc
+}
+
+brightnessctl set $1
+dunstify -u low -r $id "Brightness: " -i high-brightness -h "int:value:$(get_brightness)"

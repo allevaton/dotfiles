@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pkill ssh-agent
+eval $(ssh-agent)
+export SSH_ASKPASS=/usr/bin/lxqt-openssh-askpass

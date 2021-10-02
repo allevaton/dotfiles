@@ -1,0 +1,53 @@
+[global_config]
+  title_transmit_fg_color = "#2E3440"
+  title_transmit_bg_color = "#88C0D0"
+  title_receive_fg_color = "#2E3440"
+  title_receive_bg_color = "#8FBCBB"
+  title_inactive_fg_color = "#D8DEE9"
+  title_inactive_bg_color = "#4C566A"
+[keybindings]
+  cycle_next = ""
+  cycle_prev = ""
+  rotate_cw = <Primary><Shift>g
+  rotate_ccw = <Primary><Shift>r
+  next_tab = <Primary>Tab
+  prev_tab = <Primary><Shift>Tab
+  reset = ""
+  reset_clear = ""
+[profiles]
+  [[default]]
+    background_color = "#2e3440"
+    background_darkness = 0.98
+    background_type = transparent
+    cursor_color = "#D8DEE9"
+    font = JetBrains Mono 11
+    foreground_color = "#d8dee9"
+    show_titlebar = False
+    scrollback_lines = 50000
+    palette = "#3b4252:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#88c0d0:#e5e9f0:#4c566a:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#8fbcbb:#eceff4"
+    use_system_font = False
+  [[light]]
+    background_color = "#ffffff"
+    cursor_color = "#aaaaaa"
+    foreground_color = "#000000"
+  [[nord]]
+    background_color = "#2E3440"
+    background_darkness = 0.9
+    cursor_color = "#D8DEE9"
+    font = JetBrains Mono 9
+    foreground_color = "#D8DEE9"
+    show_titlebar = False
+    scrollback_lines = 10000
+    scrollback_infinite = True
+    palette = "#3b4252:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#88c0d0:#e5e9f0:#4c566a:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#8fbcbb:#eceff4"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = nord
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]

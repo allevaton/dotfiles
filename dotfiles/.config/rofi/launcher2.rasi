@@ -1,0 +1,85 @@
+@import "default.rasi"
+
+#window {
+    location            : center;
+    y-offset            : -200;
+    // width               : 480;
+    background-color    : @nord0;
+    border              : 2;
+    border-color        : @nord8;
+    text-color          : @nord4;
+}
+#mainbox {
+    spacing             : 0;
+}
+#inputbar {
+    background-color    : @nord0;
+    spacing             : 0;
+    text-color          : @nord4;
+}
+#prompt {
+    padding             : 12 12 0;
+    background-color    : @nord0;
+    vertical-align      : 0;
+    text-color          : @nord4;
+}
+#entry {
+    padding             : 8 0;
+    background-color    : @nord0;
+    text-color          : @nord4;
+}
+#case-indicator {
+    padding             : 8;
+    background-color    : @nord0;
+}
+#message {
+    padding             : 0;
+}
+#textbox {
+    padding             : 8;
+    background-color    : @nord8;
+    text-color          : @nord0;
+}
+#listview {
+    lines               : 8;
+    columns             : 1;
+    fixed-height        : false;
+    spacing             : 0;
+}
+#element {
+    padding             : 8;
+    spacing             : 8;
+}
+#element alternate normal {
+    background-color    : @nord3;
+    text-color          : @nord4;
+}
+#element normal normal {
+    background-color    : @nord2;
+    text-color          : @nord4;
+}
+#element normal urgent {
+    text-color          : @nord13;
+}
+#element normal active {
+    text-color          : @nord8;
+}
+#element selected normal {
+    background-color    : @nord8;
+    text-color          : @nord0;
+}
+#element selected urgent {
+    background-color    : @nord13;
+    text-color          : @nord0;
+}
+#element selected active {
+    background-color    : @nord8;
+    text-color          : @nord0;
+}
+#element-icon {
+    size                : 0.8em;
+}
+#mode-switcher {
+    padding             : 0;
+}
+
