@@ -1,6 +1,7 @@
 + /.vimrc
 + /.zshrc
 + /.profile
++ /.tmux.conf
 
 # Required for config dirs
 + /.config
