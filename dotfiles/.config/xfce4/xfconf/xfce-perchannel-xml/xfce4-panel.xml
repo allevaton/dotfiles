@@ -108,7 +108,7 @@
     </property>
     <property name="plugin-17" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="firefox.instance18987;firefox.instance6508;firefox.instance841;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="firefox.instance16809;firefox.instance18987;firefox.instance6508;firefox.instance841;firefox.instance846;spotify;vlc"/>
     </property>
     <property name="plugin-2" type="string" value="datetime"/>
   </property>

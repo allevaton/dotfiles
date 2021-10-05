@@ -6,6 +6,7 @@
       <value type="string" value="blueman"/>
       <value type="string" value="chromium"/>
       <value type="string" value="Firefox"/>
+      <value type="string" value="jetbrains-toolbox.desktop"/>
       <value type="string" value="notify-send"/>
       <value type="string" value="org.kde.yakuake"/>
       <value type="string" value="signal"/>

@@ -2,7 +2,6 @@
 
 rsync -avh \
   --dry-run \
-  --delete \
   --prune-empty-dirs \
   --filter="merge ./filter.txt" \
   ./dotfiles/ \

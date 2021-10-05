@@ -14,6 +14,7 @@
   prev_tab = <Primary><Shift>Tab
   reset = ""
   reset_clear = ""
+  layout_launcher = ""
 [profiles]
   [[default]]
     background_color = "#2e3440"
