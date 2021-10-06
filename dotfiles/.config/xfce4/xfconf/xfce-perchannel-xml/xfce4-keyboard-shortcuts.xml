@@ -38,10 +38,10 @@
         <property name="startup-notify" type="bool" value="true"/>
       </property>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;Return" type="string" value="terminator -p nord"/>
       <property name="&lt;Super&gt;r" type="string" value="rofi -no-lazy-grab -show drun -config ~/.config/rofi/launcher2.rasi"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;s" type="string" value="xfce4-screenshooter --clipboard --region"/>
       <property name="Print" type="string" value="xfce4-screenshooter"/>
+      <property name="&lt;Super&gt;Return" type="string" value="alacritty"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
