@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+mkdir -p _local-backup
+
+rsync -avh \
+  --prune-empty-dirs \
+  --filter="merge ./filter.txt" \
+  _local-backup/ \
+  $HOME/
+
 rsync -avh \
   --dry-run \
   --prune-empty-dirs \
