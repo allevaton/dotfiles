@@ -30,5 +30,8 @@
 + /.config/dunst
 + /.config/dunst/**
 
++ /.config/alacritty/
++ /.config/alacritty/**
+
 # Required
 - /**

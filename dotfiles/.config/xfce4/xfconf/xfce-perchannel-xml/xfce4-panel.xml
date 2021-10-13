@@ -70,6 +70,7 @@
         <value type="string" value="bluetooth enabled"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="TelegramDesktop"/>
         <value type="string" value="1Password1"/>
         <value type="string" value="vlc"/>
         <value type="string" value="toolbox"/>
@@ -91,16 +92,16 @@
     <property name="plugin-16" type="string" value="systemload">
       <property name="cpu" type="empty">
         <property name="enabled" type="bool" value="true"/>
-        <property name="label" type="string" value=""/>
+        <property name="label" type="string" value="C"/>
       </property>
       <property name="memory" type="empty">
-        <property name="label" type="string" value=""/>
+        <property name="label" type="string" value="M"/>
       </property>
       <property name="network" type="empty">
-        <property name="label" type="string" value=""/>
+        <property name="label" type="string" value="N"/>
       </property>
       <property name="swap" type="empty">
-        <property name="label" type="string" value=""/>
+        <property name="label" type="string" value="S"/>
       </property>
       <property name="uptime" type="empty">
         <property name="enabled" type="bool" value="false"/>
@@ -108,7 +109,7 @@
     </property>
     <property name="plugin-17" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="firefox.instance16809;firefox.instance18987;firefox.instance6508;firefox.instance841;firefox.instance846;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="firefox.instance16809;firefox.instance18987;firefox.instance306241;firefox.instance40459;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;spotify;vlc"/>
     </property>
     <property name="plugin-2" type="string" value="datetime"/>
   </property>

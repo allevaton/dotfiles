@@ -68,7 +68,7 @@
     <property name="title_shadow_inactive" type="string" value="false"/>
     <property name="title_vertical_offset_active" type="int" value="0"/>
     <property name="title_vertical_offset_inactive" type="int" value="0"/>
-    <property name="toggle_workspaces" type="bool" value="false"/>
+    <property name="toggle_workspaces" type="bool" value="true"/>
     <property name="unredirect_overlays" type="bool" value="true"/>
     <property name="urgent_blink" type="bool" value="true"/>
     <property name="use_compositing" type="bool" value="true"/>
