@@ -16,6 +16,7 @@
         <value type="int" value="10"/>
         <value type="int" value="12"/>
         <value type="int" value="16"/>
+        <value type="int" value="1"/>
         <value type="int" value="14"/>
         <value type="int" value="17"/>
         <value type="int" value="11"/>
@@ -70,6 +71,7 @@
         <value type="string" value="bluetooth enabled"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="chrome_status_icon_1"/>
         <value type="string" value="TelegramDesktop"/>
         <value type="string" value="1Password1"/>
         <value type="string" value="vlc"/>
@@ -109,8 +111,46 @@
     </property>
     <property name="plugin-17" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="firefox.instance16809;firefox.instance18987;firefox.instance306241;firefox.instance40459;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="chromium.instance108989;chromium.instance79604;chromium.instance85322;firefox.instance1001;firefox.instance113261;firefox.instance1137;firefox.instance16809;firefox.instance18987;firefox.instance306241;firefox.instance40459;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;firefox.instance85646;spotify;vlc"/>
     </property>
     <property name="plugin-2" type="string" value="datetime"/>
+    <property name="plugin-1" type="string" value="weather">
+      <property name="location" type="empty">
+        <property name="name" type="string" value="Reading, Massachusetts"/>
+        <property name="latitude" type="string" value="42.527800"/>
+        <property name="longitude" type="string" value="-71.104000"/>
+      </property>
+      <property name="msl" type="int" value="51"/>
+      <property name="timezone" type="string" value="America/New_York"/>
+      <property name="offset" type="string" value="-04:00"/>
+      <property name="cache-max-age" type="int" value="172800"/>
+      <property name="power-saving" type="bool" value="true"/>
+      <property name="units" type="empty">
+        <property name="temperature" type="int" value="1"/>
+        <property name="pressure" type="int" value="2"/>
+        <property name="windspeed" type="int" value="1"/>
+        <property name="precipitation" type="int" value="1"/>
+        <property name="altitude" type="int" value="1"/>
+        <property name="apparent-temperature" type="int" value="0"/>
+      </property>
+      <property name="round" type="bool" value="true"/>
+      <property name="single-row" type="bool" value="true"/>
+      <property name="tooltip-style" type="int" value="1"/>
+      <property name="forecast" type="empty">
+        <property name="layout" type="int" value="0"/>
+        <property name="days" type="int" value="5"/>
+      </property>
+      <property name="theme-dir" type="string" value="/usr/share/xfce4/weather/icons/liquid"/>
+      <property name="scrollbox" type="empty">
+        <property name="show" type="bool" value="true"/>
+        <property name="animate" type="bool" value="true"/>
+        <property name="lines" type="int" value="1"/>
+        <property name="color" type="string" value="rgba(0,0,0,0)"/>
+        <property name="use-color" type="bool" value="false"/>
+      </property>
+      <property name="labels" type="empty">
+        <property name="label0" type="int" value="3"/>
+      </property>
+    </property>
   </property>
 </channel>
