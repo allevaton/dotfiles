@@ -1,4 +1,9 @@
-export ZSH=/usr/share/oh-my-zsh/
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  export ZSH=~/.oh-my-zsh/
+else
+  export ZSH=/usr/share/oh-my-zsh/
+fi
+
 export ZSH_THEME=""
 
 export EDITOR=vim
@@ -42,9 +47,9 @@ zstyle :omz:plugins:ssh-agent identities id_ed25519
 
 source $ZSH/oh-my-zsh.sh
 
-alias ls='ls --color=auto --group-directories-first'
+alias ls='ls -h --color=auto --group-directories-first'
 alias l='ls'
-alias ll='ls -al'
+alias ll='ls -hal'
 
 bindkey  "^[[H"    beginning-of-line
 bindkey  "^[[F"    end-of-line
@@ -53,7 +58,10 @@ bindkey  "^[[1;5C" forward-word
 bindkey  "^[[1;5D" backward-word
 
 # Must be at the bottom:
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
