@@ -1,8 +1,21 @@
 if [ -d "$HOME/.oh-my-zsh" ]; then
-  export ZSH=~/.oh-my-zsh/
+  export ZSH=~/.oh-my-zsh
 else
-  export ZSH=/usr/share/oh-my-zsh/
+  export ZSH=/usr/share/oh-my-zsh
 fi
+
+#if [ ! -e "~/.antigen.zsh" ]; then
+# curl -L git.io/antigen > ~/.antigen.zsh
+#fi
+#
+#source ~/.antigen.zsh
+#
+#antigen use oh-my-zsh
+#
+#antigen bundle zsh-users/zsh-completions
+#antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen bundle indresorhus/pure
 
 export ZSH_THEME=""
 
@@ -57,11 +70,6 @@ bindkey  "^[[3~"   delete-char
 bindkey  "^[[1;5C" forward-word
 bindkey  "^[[1;5D" backward-word
 
-# Must be at the bottom:
-if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
-  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+#antigen apply
 
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

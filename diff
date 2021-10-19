@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+
+awk '
+$0 !~ "^(#|-)" && NF { 
+  print substr($2, 2) 
+}' < filter.txt \
+  | xargs -I '{}' diff -aurw --color=always ./dotfiles/{} $HOME/'{}' 2> /dev/null \
+  | sed '/Only in/d'
+
