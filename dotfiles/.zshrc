@@ -1,24 +1,22 @@
 if [ -d "$HOME/.oh-my-zsh" ]; then
-  export ZSH=~/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 else
   export ZSH=/usr/share/oh-my-zsh
 fi
 
-#if [ ! -e "~/.antigen.zsh" ]; then
-# curl -L git.io/antigen > ~/.antigen.zsh
-#fi
-#
-#source ~/.antigen.zsh
-#
-#antigen use oh-my-zsh
-#
-#antigen bundle zsh-users/zsh-completions
-#antigen bundle zsh-users/zsh-autosuggestions
-#antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen bundle indresorhus/pure
+if [ ! -e "$HOME/.zplug/init.zsh" ]; then
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
+source ~/.zplug/init.zsh
+
+#zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "sindresorhus/pure"
+#zplug "Aloxaf/fzf-tab"
 
 export ZSH_THEME=""
-
 export EDITOR=vim
 
 autoload -Uz compinit
@@ -29,7 +27,7 @@ promptinit
 
 prompt pure
 
-#NVM_LAZY=1
+NVM_LAZY=1
 
 # Full list of Oh My Zsh plugins:
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
@@ -64,12 +62,12 @@ alias ls='ls -h --color=auto --group-directories-first'
 alias l='ls'
 alias ll='ls -hal'
 
-bindkey  "^[[H"    beginning-of-line
-bindkey  "^[[F"    end-of-line
-bindkey  "^[[3~"   delete-char
-bindkey  "^[[1;5C" forward-word
-bindkey  "^[[1;5D" backward-word
+bindkey "^[[H"    beginning-of-line
+bindkey "^[[F"    end-of-line
+bindkey "^[[3~"   delete-char
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
-#antigen apply
+zplug load
 
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
