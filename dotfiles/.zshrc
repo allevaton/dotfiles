@@ -13,8 +13,8 @@ source ~/.zplug/init.zsh
 #zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "sindresorhus/pure"
-#zplug "Aloxaf/fzf-tab"
+zplug mafredri/zsh-async
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 export ZSH_THEME=""
 export EDITOR=vim
