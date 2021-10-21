@@ -18,8 +18,8 @@
 + /.config/i3
 + /.config/i3/**
 
++ /.config/nvim
 + /.config/nvim/init.vim
-+ /.config/nvim/autoload/**
 
 + /.config/polybar
 + /.config/polybar/**
