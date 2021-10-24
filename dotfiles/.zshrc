@@ -17,7 +17,12 @@ zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 export ZSH_THEME=""
-export EDITOR=vim
+
+if command -v nvim > /dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
 
 autoload -Uz compinit
 compinit
