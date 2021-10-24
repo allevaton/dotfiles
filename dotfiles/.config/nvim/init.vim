@@ -258,7 +258,6 @@ map <leader>n :NERDTreeToggle<CR>
 
 " Functions {{{
 " trailing whitespace
-match ErrorMsg '\s\+$'
 function! TrimWhiteSpace()
     %s/\s\+$//e
 endfunction
