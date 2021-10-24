@@ -13,8 +13,8 @@ source ~/.zplug/init.zsh
 #zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug mafredri/zsh-async
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 export ZSH_THEME=""
 export EDITOR=vim
@@ -61,6 +61,9 @@ source $ZSH/oh-my-zsh.sh
 alias ls='ls -h --color=auto --group-directories-first'
 alias l='ls'
 alias ll='ls -hal'
+
+alias vim='nvim'
+alias vimrc='nvim ~/.config/nvim/init.vim'
 
 bindkey "^[[H"    beginning-of-line
 bindkey "^[[F"    end-of-line
