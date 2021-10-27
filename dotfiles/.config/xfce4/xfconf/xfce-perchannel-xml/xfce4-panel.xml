@@ -71,6 +71,7 @@
         <value type="string" value="bluetooth enabled"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="steam"/>
         <value type="string" value="chrome_status_icon_1"/>
         <value type="string" value="TelegramDesktop"/>
         <value type="string" value="1Password1"/>
@@ -111,7 +112,7 @@
     </property>
     <property name="plugin-17" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chromium.instance108989;chromium.instance298671;chromium.instance79604;chromium.instance85322;firefox.instance1001;firefox.instance113261;firefox.instance1137;firefox.instance16809;firefox.instance18987;firefox.instance231487;firefox.instance306241;firefox.instance40459;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;firefox.instance85646;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="chromium.instance108989;chromium.instance298671;chromium.instance79604;chromium.instance85322;firefox.instance1001;firefox.instance113261;firefox.instance1137;firefox.instance16809;firefox.instance18987;firefox.instance231487;firefox.instance306241;firefox.instance40459;firefox.instance52612;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;firefox.instance85646;spotify;vlc"/>
     </property>
     <property name="plugin-2" type="string" value="datetime"/>
     <property name="plugin-1" type="string" value="weather">

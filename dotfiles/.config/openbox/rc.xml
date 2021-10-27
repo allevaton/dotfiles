@@ -102,6 +102,12 @@
   <!-- ******************* KEYBINDINGS ******************* -->
   <keyboard>
     <chainQuitKey/>
+    <keybind key="A-Insert">
+      <action name="AddDesktop" />
+    </keybind>
+    <keybind key="A-Delete">
+      <action name="RemoveDesktop" />
+    </keybind>
     <!-- Change Workspace/Desktop -->
     <keybind key="W-1">
       <action name="GoToDesktop">

@@ -3,9 +3,11 @@
 
 cat filter.txt |
   awk '
-  # Remove blank lines, comments, and lines starting with "-" 
-  $0 !~ "^(#|-)" && NF { 
-    print substr($2, 2) 
+  # Remove blank lines, comments, and lines starting with "-"
+  $0 !~ "^(#|-)" && NF {
+    print substr($2, 2)
   }' \
-  | xargs -I '{}' diff -aurw --color=always ./dotfiles/{} $HOME/'{}' 2> /dev/null
+  | xargs -I '{}' diff -aurw --color=always ./dotfiles/{} $HOME/'{}' 2> /dev/null \
+  | grep -v '^Only in' \
+  | less
 

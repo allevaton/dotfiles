@@ -17,6 +17,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+
 call plug#end()
 
 filetype plugin indent on
