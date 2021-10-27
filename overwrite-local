@@ -5,8 +5,8 @@ mkdir -p _local-backup
 rsync -avh \
   --prune-empty-dirs \
   --filter="merge ./filter.txt" \
-  _local-backup/ \
-  $HOME/
+  $HOME/ \
+  ./_local-backup/
 
 rsync -avh \
   --prune-empty-dirs \
