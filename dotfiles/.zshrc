@@ -30,8 +30,6 @@ compinit
 autoload -Uz promptinit
 promptinit
 
-prompt pure
-
 NVM_LAZY=1
 
 # Full list of Oh My Zsh plugins:

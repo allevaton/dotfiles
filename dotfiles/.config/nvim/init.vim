@@ -5,7 +5,8 @@ Plug 'junegunn/fzf'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'
 
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
@@ -73,7 +74,7 @@ if has("autocmd")
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " Significantly better navigation
 nnoremap j gj

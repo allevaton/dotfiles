@@ -16,5 +16,5 @@
     </property>
   </property>
   <property name="DisableTouchpadWhileTyping" type="bool" value="true"/>
-  <property name="DisableTouchpadDuration" type="double" value="0.200000"/>
+  <property name="DisableTouchpadDuration" type="double" value="0.100000"/>
 </channel>
