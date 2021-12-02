@@ -30,7 +30,7 @@ compinit
 autoload -Uz promptinit
 promptinit
 
-NVM_LAZY=1
+#NVM_LAZY=1
 
 # Full list of Oh My Zsh plugins:
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
