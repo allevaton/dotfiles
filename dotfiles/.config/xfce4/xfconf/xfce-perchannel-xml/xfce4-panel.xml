@@ -65,12 +65,14 @@
     </property>
     <property name="plugin-11" type="string" value="systray">
       <property name="known-legacy-items" type="array">
+        <value type="string" value="javaembeddedframe"/>
         <value type="string" value="clipman"/>
         <value type="string" value="jetbrains-toolbox"/>
         <value type="string" value="slack"/>
         <value type="string" value="bluetooth enabled"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="KwikDisk"/>
         <value type="string" value="Todoist1"/>
         <value type="string" value="discord1"/>
         <value type="string" value="steam"/>
@@ -114,7 +116,7 @@
     </property>
     <property name="plugin-17" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chromium.instance108989;chromium.instance11550;chromium.instance170978;chromium.instance298671;chromium.instance45198;chromium.instance79604;chromium.instance85322;firefox.instance1001;firefox.instance113261;firefox.instance1137;firefox.instance140817;firefox.instance148673;firefox.instance16809;firefox.instance184641;firefox.instance18987;firefox.instance231487;firefox.instance291611;firefox.instance306241;firefox.instance35901;firefox.instance40459;firefox.instance47747;firefox.instance52612;firefox.instance6508;firefox.instance841;firefox.instance846;firefox.instance847;firefox.instance85646;firefox.instance868;firefox.instance9022;firefox.instance988293;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="chromium.instance108989;chromium.instance11550;chromium.instance170978;chromium.instance2216;chromium.instance29711;chromium.instance298671;chromium.instance39555;chromium.instance45198;chromium.instance46113;chromium.instance79604;chromium.instance85322;firefox.instance1001;firefox.instance113261;firefox.instance1137;firefox.instance140817;firefox.instance148673;firefox.instance15070;firefox.instance16809;firefox.instance1757;firefox.instance184641;firefox.instance18987;firefox.instance231487;firefox.instance2437;firefox.instance2523;firefox.instance291611;firefox.instance306241;firefox.instance35901;firefox.instance40459;firefox.instance421261;firefox.instance47747;firefox.instance52612;firefox.instance6508;firefox.instance79035;firefox.instance841;firefox.instance846;firefox.instance847;firefox.instance85646;firefox.instance868;firefox.instance9022;firefox.instance946;firefox.instance960;firefox.instance963;firefox.instance96796;firefox.instance988293;firefox.instance989;plasma-browser-integration;spotify;vlc"/>
     </property>
     <property name="plugin-2" type="string" value="datetime"/>
     <property name="plugin-1" type="string" value="weather">
@@ -153,6 +155,11 @@
       </property>
       <property name="labels" type="empty">
         <property name="label0" type="int" value="3"/>
+      </property>
+    </property>
+    <property name="clipman" type="empty">
+      <property name="settings" type="empty">
+        <property name="show-qr-code" type="bool" value="true"/>
       </property>
     </property>
   </property>

@@ -9,13 +9,16 @@
       <value type="string" value="Firefox"/>
       <value type="string" value="jetbrains-toolbox.desktop"/>
       <value type="string" value="notify-send"/>
+      <value type="string" value="org.gnome.baobab"/>
       <value type="string" value="org.kde.kget"/>
       <value type="string" value="org.kde.yakuake"/>
       <value type="string" value="signal"/>
       <value type="string" value="Slack"/>
+      <value type="string" value="Studio"/>
       <value type="string" value="thunar-volman"/>
       <value type="string" value="Todoist"/>
       <value type="string" value="vlc"/>
+      <value type="string" value="WebStorm"/>
       <value type="string" value="Xfce volume control"/>
       <value type="string" value="Xfce4-notifyd settings"/>
       <value type="string" value="xfce4-power-manager"/>

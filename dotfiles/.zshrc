@@ -47,7 +47,7 @@ plugins=(
   sudo
   aws
   colored-man-pages
-  safe-paste
+  #safe-paste
   z
   fzf
 )
@@ -60,6 +60,8 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities id_ed25519
 
 source $ZSH/oh-my-zsh.sh
+
+alias lg='lazygit'
 
 alias ls='ls -h --color=auto --group-directories-first'
 alias l='ls'

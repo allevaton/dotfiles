@@ -254,6 +254,8 @@ map <silent> J <C-d>
 map <silent> K <C-u>
 imap jj <Esc>
 
+imap <C-BS> <C-W>
+
 nnoremap } :bn<CR>
 nnoremap { :bp<CR>
 
