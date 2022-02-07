@@ -6,32 +6,32 @@
 # Required for config dirs
 + /.config
 
-+ /.config/openbox
-+ /.config/openbox/**
+#+ /.config/openbox
+#+ /.config/openbox/**
 
-+ /.config/xfce4
-+ /.config/xfce4/**
+#+ /.config/xfce4
+#+ /.config/xfce4/**
 
-+ /.config/terminator
-+ /.config/terminator/**
+#+ /.config/terminator
+#+ /.config/terminator/**
 
-+ /.config/i3
-+ /.config/i3/**
+#+ /.config/i3
+#+ /.config/i3/**
 
 + /.config/nvim
 + /.config/nvim/init.vim
 
-+ /.config/polybar
-+ /.config/polybar/**
+#+ /.config/polybar
+#+ /.config/polybar/**
 
-+ /.config/rofi
-+ /.config/rofi/**
+#+ /.config/rofi
+#+ /.config/rofi/**
 
-+ /.config/tint2
-+ /.config/tint2/**
+#+ /.config/tint2
+#+ /.config/tint2/**
 
-+ /.config/dunst
-+ /.config/dunst/**
+#+ /.config/dunst
+#+ /.config/dunst/**
 
 + /.config/alacritty/
 + /.config/alacritty/**
