@@ -41,7 +41,6 @@ plugins=(
   archlinux
   common-aliases
   rust
-  cargo
   nvm
   yarn
   sudo
