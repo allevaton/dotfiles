@@ -1,8 +1,9 @@
-if [ -d "$HOME/.oh-my-zsh" ]; then
-  export ZSH=$HOME/.oh-my-zsh
-else
-  export ZSH=/usr/share/oh-my-zsh
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  git clone git@github.com:ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 fi
+
+export ZSH=$HOME/.oh-my-zsh
 
 if [ ! -e "$HOME/.zplug/init.zsh" ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -10,19 +11,23 @@ fi
 
 source ~/.zplug/init.zsh
 
-#zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "mafredri/zsh-async"
+if ! zplug check; then
+  zplug install
+fi
+
+if [[ -z "$WSLENV" ]]; then
+  # Load these when you're not in WSL
+  zplug "zsh-users/zsh-completions"
+  zplug "zsh-users/zsh-autosuggestions"
+else
+  # LOad these when you ARE in WSL
+fi
+
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 export ZSH_THEME=""
-
-if command -v nvim > /dev/null; then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
 
 autoload -Uz compinit
 compinit
@@ -30,7 +35,7 @@ compinit
 autoload -Uz promptinit
 promptinit
 
-#NVM_LAZY=1
+zstyle ':omz:plugins:nvm' lazy yes
 
 # Full list of Oh My Zsh plugins:
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
@@ -38,9 +43,9 @@ plugins=(
   #ssh-agent
   git
   #dotenv
-  archlinux
+  #archlinux
   common-aliases
-  rust
+  #rust
   nvm
   yarn
   sudo
@@ -66,8 +71,18 @@ alias ls='ls -h --color=auto --group-directories-first'
 alias l='ls'
 alias ll='ls -hal'
 
-alias vim='nvim'
-alias vimrc='nvim ~/.config/nvim/init.vim'
+if command -v nvim &> /dev/null; then
+  export EDITOR=nvim
+
+  alias vim='nvim'
+  alias vimrc='nvim ~/.config/nvim/init.vim'
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+else
+  export EDITOR=vim
+fi
 
 bindkey "^[[H"    beginning-of-line
 bindkey "^[[F"    end-of-line
