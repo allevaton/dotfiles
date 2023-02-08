@@ -9,6 +9,11 @@ if [ ! -e "$HOME/.zplug/init.zsh" ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
+if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
+  mkdir -p ~/.tmux/plugins
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 source ~/.zplug/init.zsh
 
 if ! zplug check; then
@@ -16,11 +21,14 @@ if ! zplug check; then
 fi
 
 if [[ -z "$WSLENV" ]]; then
-  # Load these when you're not in WSL
+  # Load this when you're not in WSL
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-autosuggestions"
 else
-  # LOad these when you ARE in WSL
+  # Load this when you ARE in WSL
+
+  export OLD_PATH=$PATH
+  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
