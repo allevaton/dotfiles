@@ -1,12 +1,13 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'
 
-"Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'leafgarland/typescript-vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
@@ -20,6 +21,8 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+
+Plug 'wfxr/minimap.vim', { 'do': ':!cargo install --locked code-minimap' }
 
 call plug#end()
 
@@ -101,7 +104,7 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-nnoremap <leader>h :noh<CR>
+nnoremap <leader>h :nohl<CR>
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -115,11 +118,11 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
+" inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -166,7 +169,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-rename)
 
 " Formatting selected code.
 " Add `:Format` command to format current buffer.
@@ -267,7 +270,7 @@ map <leader>n :NERDTreeToggle<CR>
 function! TrimWhiteSpace()
     %s/\s\+$//e
 endfunction
-autocmd BufWritePre * :call TrimWhiteSpace()
+"autocmd BufWritePre * :call TrimWhiteSpace()
 " }}}
 
 let g:airline#extensions#tabline#enabled = 1

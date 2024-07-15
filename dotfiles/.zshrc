@@ -14,6 +14,11 @@ if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+if [ ! -e "$HOME/.fzf" ]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+
 source ~/.zplug/init.zsh
 
 if ! zplug check; then
@@ -53,7 +58,7 @@ plugins=(
   #dotenv
   #archlinux
   common-aliases
-  #rust
+  rust
   nvm
   yarn
   sudo
@@ -85,6 +90,11 @@ if command -v nvim &> /dev/null; then
   alias vim='nvim'
   alias vimrc='nvim ~/.config/nvim/init.vim'
 
+  if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]; then
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  fi
+
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -97,6 +107,8 @@ bindkey "^[[F"    end-of-line
 bindkey "^[[3~"   delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+. "$HOME/.cargo/env"
 
 zplug load
 
