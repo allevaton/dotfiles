@@ -7,6 +7,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'github/copilot.vim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 
 Plug 'lewis6991/gitsigns.nvim'
 
@@ -28,9 +29,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
-Plug 'leafgarland/typescript-vim'
-" Plug 'HerringtonDarkholme/yats.vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -42,6 +40,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 " Official nord theme has some major issues with Treesitter
 Plug 'shaunsingh/nord.nvim'
 " Plug 'nordtheme/vim'
+" Plug 'kunzaatko/nord.nvim'
 
 " Plug 'easymotion/vim-easymotion'
 " Plug 'tpope/vim-fugitive'
@@ -160,6 +159,12 @@ require('nvim-treesitter.configs').setup {
     'typescript',
     'tsx'
   },
+  indent = {
+    enable = true
+  },
+  autotag = {
+    enable = true
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -181,7 +186,8 @@ require('nvim-treesitter.configs').setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { 'c', 'rust' },
+    -- disable = { 'c', 'rust' },
+
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
@@ -240,6 +246,12 @@ lspconfig.tsserver.setup {
         or lspconfig.util.root_pattern('turbo.json', 'package.json', 'tsconfig.json', 'jsconfig.json')(fname)
         or lspconfig.util.path.dirname(fname)
   end,
+}
+
+require('CopilotChat').setup {
+  debug = true,
+
+  -- See Configuration section for rest: https://github.com/CopilotC-Nvim/CopilotChat.nvim?tab=readme-ov-file#default-configuration
 }
 
 EOF
@@ -370,6 +382,8 @@ function! TrimWhiteSpace()
 endfunction
 autocmd BufWritePre * :call TrimWhiteSpace()
 " }}}
+
+nnoremap <leader>c :CopilotChatToggle<CR>
 
 let g:nord_contrast = v:false                " default false
 let g:nord_borders = v:false                 " default false
