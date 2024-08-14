@@ -19,7 +19,8 @@
 #+ /.config/i3/**
 
 + /.config/nvim
-+ /.config/nvim/init.vim
++ /.config/nvim/init*
++ /.config/nvim/lua/**
 
 #+ /.config/polybar
 #+ /.config/polybar/**
