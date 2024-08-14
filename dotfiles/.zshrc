@@ -33,7 +33,7 @@ else
   # Load this when you ARE in WSL
 
   export OLD_PATH=$PATH
-  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin
+  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -88,7 +88,7 @@ if command -v nvim &> /dev/null; then
   export EDITOR=nvim
 
   alias vim='nvim'
-  alias vimrc='nvim ~/.config/nvim/init.vim'
+  alias vimrc='nvim ~/.config/nvim/init.lua'
 
   if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
