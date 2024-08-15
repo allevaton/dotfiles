@@ -21,6 +21,10 @@ fi
 
 source ~/.zplug/init.zsh
 
+if [ -f ~/.zsh_functions ]; then
+  source ~/.zsh_functions
+fi
+
 if ! zplug check; then
   zplug install
 fi
@@ -34,6 +38,11 @@ else
 
   export OLD_PATH=$PATH
   export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
+fi
+
+if ! command -v pygmentize &> /dev/null; then
+  echo "pygmentize not found. Installing..."
+  install_package python3-pygments
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -89,6 +98,7 @@ if command -v nvim &> /dev/null; then
 
   alias vim='nvim'
   alias vimrc='nvim ~/.config/nvim/init.lua'
+  alias vimrcp='nvim ~/.config/nvim/lua/plugins.lua'
 
   if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -111,5 +121,3 @@ bindkey "^[[1;5D" backward-word
 . "$HOME/.cargo/env"
 
 zplug load
-
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

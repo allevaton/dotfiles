@@ -2,6 +2,7 @@
 
 + /.vimrc
 + /.zshrc
++ /.zsh_functions
 + /.profile
 + /.tmux.conf
 
@@ -37,7 +38,7 @@
 #+ /.config/dunst
 #+ /.config/dunst/**
 
-+ /.config/alacritty/
++ /.config/alacritty
 + /.config/alacritty/**
 
 # Required
