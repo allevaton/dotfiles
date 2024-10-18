@@ -9,6 +9,7 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'petertriho/cmp-git',
+      'ray-x/lsp_signature.nvim',
     },
   },
 
@@ -24,10 +25,10 @@ return {
       'github/copilot.vim',
     },
     config = function()
-      require('CopilotChat').setup({
+      require('CopilotChat').setup {
         debug = true,
         -- Add other configuration options here
-      })
+      }
     end,
   },
 
@@ -35,7 +36,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup{}
+      require('gitsigns').setup {}
     end,
   },
 
@@ -45,7 +46,30 @@ return {
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('telescope').setup{}
+      local pickerOpts = {
+        theme = 'dropdown',
+        layout_config = {
+          width = 0.5,
+          height = 0.5,
+        },
+      }
+
+      require('telescope').setup {
+        defaults = {
+          cache_picker = {
+            num_pickers = 8,
+          },
+        },
+        pickers = {
+          find_files = pickerOpts,
+          git_files = pickerOpts,
+          live_grep = pickerOpts,
+          buffers = pickerOpts,
+          help_tags = pickerOpts,
+          lsp_workspace_symbols = pickerOpts,
+          lsp_references = pickerOpts,
+        }
+      }
     end,
   },
 
@@ -74,6 +98,8 @@ return {
           'javascript',
           'typescript',
           'tsx',
+          'bash',
+          'json',
         },
         highlight = {
           enable = true,
@@ -126,7 +152,7 @@ return {
         smart_rename = {
           enable = true,
           keymaps = {
-            smart_rename = 'grr',
+            smart_rename = 'gR',
           },
         },
         navigation = {
@@ -178,8 +204,13 @@ return {
       indent = {
         char = '▏',
         tab_char = '▏',
+        --highlight = { 'IblIndent' }
+        --highlight = { 'LineNr' }
+        highlight = { 'NonText' }
       },
-      scope = { enabled = false },
+      scope = {
+        enabled = true
+      },
       exclude = {
         filetypes = {
           'help',
@@ -195,14 +226,9 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require('ibl').setup(opts)
-
-      local hooks = require 'ibl.hooks'
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, 'IBLWhitespace', { nocombine = true })
-      end)
-    end,
+    -- config = function(_, opts)
+    --   require('ibl').setup(opts)
+    -- end,
   },
 
   -- Editing plugins
@@ -271,6 +297,13 @@ return {
     end,
   },
 
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    flavour = 'mocha',
+  },
+
   -- Minimap
   {
     'wfxr/minimap.vim',
@@ -310,5 +343,19 @@ return {
       -- vim.cmd [[autocmd BufWritePost * lua vim.lsp.buf.format()]]
       -- vim.cmd [[augroup END]]
     end,
+  },
+
+  {
+    'ray-x/lsp_signature.nvim',
+    event = 'VeryLazy',
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = 'rounded',
+      },
+      hint_enable = false,
+      toggle_key = '<C-S-Space>',
+    },
+    config = function(_, opts) require'lsp_signature'.setup(opts) end
   }
 }

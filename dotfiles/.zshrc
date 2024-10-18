@@ -99,6 +99,7 @@ if command -v nvim &> /dev/null; then
   alias vim='nvim'
   alias vimrc='nvim ~/.config/nvim/init.lua'
   alias vimrcp='nvim ~/.config/nvim/lua/plugins.lua'
+  alias vimrcl='nvim ~/.config/nvim/lua/lsp.lua'
 
   if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
