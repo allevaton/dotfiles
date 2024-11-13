@@ -67,6 +67,7 @@ vim.keymap.set('n', '<leader>h', ':nohl<CR>')
 vim.keymap.set('n', 'J', '<C-d>')
 vim.keymap.set('n', 'K', '<C-u>')
 vim.keymap.set('i', 'jj', '<Esc>')
+vim.keymap.set('i', '<C-a>', '<Esc>ggVG') -- Select all
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { silent = true })
 vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { silent = true })
 vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { silent = true })
@@ -89,13 +90,20 @@ vim.keymap.set('n', '<leader>fg', telescope.live_grep, { noremap = true, silent 
 vim.keymap.set('n', '<leader>fb', telescope.buffers, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fs', telescope.lsp_workspace_symbols, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>fd', telescope.lsp_document_symbols, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fS', telescope.lsp_document_symbols, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fa', function()
   telescope.find_files({
     find_command = {'rg', '--files', '--hidden', '-g', '!.git'},
     previewer = false
   })
 end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>fd', function()
+  vim.lsp.buf.format({ async = true })
+end, { silent = true })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { silent = true })
 
 local cmp = require('cmp')
 cmp.setup({

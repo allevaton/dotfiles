@@ -76,6 +76,7 @@ plugins=(
   #safe-paste
   z
   fzf
+  virtualenv
 )
 
 function psgrep() {
@@ -118,6 +119,12 @@ bindkey "^[[F"    end-of-line
 bindkey "^[[3~"   delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# TODO: Is this necessary?
+export CUDA_HOME=/usr/local/cuda-12.3
 
 . "$HOME/.cargo/env"
 
