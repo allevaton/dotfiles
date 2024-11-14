@@ -10,7 +10,48 @@ return {
       'hrsh7th/cmp-cmdline',
       'petertriho/cmp-git',
       'ray-x/lsp_signature.nvim',
+      {
+        'kevinhwang91/nvim-ufo',
+        dependencies = 'kevinhwang91/promise-async',
+        config = function()
+          require('ufo').setup {
+            provider_selector = function(bufnr, filetype, buftype)
+              return { 'treesitter', 'indent' }
+            end,
+            preview = {
+              win_config = {
+                border = 'rounded',
+                winblend = 0,
+                winhighlight = 'Normal:Normal',
+                maxheight = 20,
+              },
+            },
+          }
+
+          -- Using ufo provider need remap `zR` and `zM`
+          vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+          vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+          vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+          vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith)
+        end,
+      },
     },
+  },
+
+  -- Mason for LSP, DAP, linter, and formatter management
+  {
+    'williamboman/mason.nvim',
+    build = ':MasonUpdate',
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim',
+      'jay-babu/mason-null-ls.nvim',
+    },
+  },
+
+  -- Null-ls for formatting and linting
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- Copilot
@@ -27,7 +68,6 @@ return {
     config = function()
       require('CopilotChat').setup {
         debug = true,
-        -- Add other configuration options here
       }
     end,
   },
@@ -68,7 +108,7 @@ return {
           help_tags = pickerOpts,
           lsp_workspace_symbols = pickerOpts,
           lsp_references = pickerOpts,
-        }
+        },
       }
     end,
   },
@@ -111,92 +151,78 @@ return {
             end
           end,
         },
-
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              [']m'] = '@function.outer',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']M'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[m'] = '@function.outer',
+              ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[M'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
           },
         },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            [']m'] = '@function.outer',
-            [']]'] = '@class.outer',
+        refactor = {
+          highlight_definitions = { enable = true },
+          highlight_current_scope = { enable = false },
+          smart_rename = {
+            enable = true,
+            keymaps = {
+              smart_rename = 'gR',
+            },
           },
-          goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
-          },
-          goto_previous_start = {
-            ['[m'] = '@function.outer',
-            ['[['] = '@class.outer',
-          },
-          goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
+          navigation = {
+            enable = true,
+            keymaps = {},
           },
         },
-      },
-
-      -- nvim-treesitter-refactor
-      refactor = {
-        highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = false },
-        smart_rename = {
+        autotag = {
           enable = true,
-          keymaps = {
-            smart_rename = 'gR',
-          },
         },
-        navigation = {
+        autopairs = {
           enable = true,
-          keymaps = {
-            -- goto_definition = 'gnd',
-            -- list_definitions = 'gnD',
-            -- list_definitions_toc = 'gO',
-            -- goto_next_usage = '<a-*>',
-            -- goto_previous_usage = '<a-#>',
-          },
         },
-      },
-
-      -- Autotagging (e.g. in HTML, XML)
-      autotag = {
-        enable = true,
-      },
-
-      -- Autoclosing of tags
-      autopairs = {
-        enable = true,
-      },
-
-      indent = {
-        enable = false,
-      },
-
-      yati = {
-        enable = true,
-        default_lazy = true,
-        default_fallback = 'auto'
-      },
-    }
+        indent = {
+          enable = false,
+        },
+        yati = {
+          enable = true,
+          default_lazy = true,
+          default_fallback = 'auto',
+        },
+      }
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-refactor',
       'windwp/nvim-ts-autotag',
       'windwp/nvim-autopairs',
-      'yioneko/nvim-yati'
+      'yioneko/nvim-yati',
     },
   },
 
+  -- Rest of your existing plugins...
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
@@ -204,12 +230,10 @@ return {
       indent = {
         char = '▏',
         tab_char = '▏',
-        --highlight = { 'IblIndent' }
-        --highlight = { 'LineNr' }
-        highlight = { 'NonText' }
+        highlight = { 'NonText' },
       },
       scope = {
-        enabled = true
+        enabled = true,
       },
       exclude = {
         filetypes = {
@@ -226,33 +250,11 @@ return {
         },
       },
     },
-    -- config = function(_, opts)
-    --   require('ibl').setup(opts)
-    -- end,
   },
 
   -- Editing plugins
   'tpope/vim-surround',
   'tpope/vim-repeat',
-
-  -- Prettier
-  {
-    'prettier/vim-prettier',
-    build = 'yarn install',
-    ft = {
-      'javascript',
-      'typescript',
-      'css',
-      'less',
-      'scss',
-      'json',
-      'graphql',
-      'markdown',
-      'vue',
-      'yaml',
-      'html'
-    },
-  },
 
   -- Tmux integration
   'christoomey/vim-tmux-navigator',
@@ -278,8 +280,8 @@ return {
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'nord'
-        }
+          theme = 'nord',
+        },
       }
     end,
   },
@@ -288,12 +290,12 @@ return {
   {
     'shaunsingh/nord.nvim',
     config = function()
-      vim.g.nord_contrast                = false
-      vim.g.nord_borders                 = false
-      vim.g.nord_disable_background      = true
-      vim.g.nord_italic                  = false
+      vim.g.nord_contrast = false
+      vim.g.nord_borders = false
+      vim.g.nord_disable_background = true
+      vim.g.nord_italic = false
       vim.g.nord_uniform_diff_background = false
-      vim.g.nord_bold                    = false
+      vim.g.nord_bold = false
     end,
   },
 
@@ -308,40 +310,12 @@ return {
   {
     'wfxr/minimap.vim',
     build = ':!cargo install --locked code-minimap',
-  },
-
-  {
-    'nvimtools/none-ls.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local null_ls = require('null-ls')
-      local formatting = null_ls.builtins.formatting
-
-      null_ls.setup({
-        sources = {
-          formatting.prettier.with({
-            filetypes = {
-              'javascript',
-              'typescript',
-              'css',
-              'scss',
-              'html',
-              'json',
-              'yaml',
-              'markdown',
-              'graphql',
-              'md',
-              'txt',
-            },
-          }),
-        },
-      })
-
-      -- Set up format on save
-      -- vim.cmd [[augroup FormatAutogroup]]
-      -- vim.cmd [[autocmd!]]
-      -- vim.cmd [[autocmd BufWritePost * lua vim.lsp.buf.format()]]
-      -- vim.cmd [[augroup END]]
+    lazy = false,
+    cmd = { 'Minimap', 'MinimapClose', 'MinimapToggle', 'MinimapRefresh', 'MinimapUpdateHighlight' },
+    init = function()
+      vim.cmd 'let g:minimap_width = 10'
+      vim.cmd 'let g:minimap_auto_start = 1'
+      vim.cmd 'let g:minimap_auto_start_win_enter = 1'
     end,
   },
 
@@ -356,6 +330,8 @@ return {
       hint_enable = false,
       toggle_key = '<C-S-Space>',
     },
-    config = function(_, opts) require'lsp_signature'.setup(opts) end
-  }
+    config = function(_, opts)
+      require('lsp_signature').setup(opts)
+    end,
+  },
 }

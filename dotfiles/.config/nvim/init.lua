@@ -2,21 +2,21 @@
 vim.g.mapleader = ','
 
 -- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+  vim.fn.system {
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable',
     lazypath,
-  })
+  }
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set up lazy.nvim
-require('lazy').setup('plugins')
+require('lazy').setup 'plugins'
 
 -- Setup LSP configuration
 require('lsp').setup()
@@ -50,10 +50,10 @@ vim.opt.foldnestmax = 10
 vim.opt.foldmethod = 'syntax'
 
 -- Set up grep
-if vim.fn.executable('rg') == 1 then
+if vim.fn.executable 'rg' == 1 then
   vim.opt.grepprg = 'rg --vimgrep --smart-case --hidden --follow'
   vim.opt.grepformat = '%f:%l:%c%m'
-elseif vim.fn.executable('ag') == 1 then
+elseif vim.fn.executable 'ag' == 1 then
   vim.opt.grepprg = 'ag --nogroup --nocolor --column'
   vim.opt.grepformat = '%f:%l:%c%m'
 end
@@ -79,37 +79,57 @@ vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>c', ':CopilotChatToggle<CR>')
 
 -- Telescope binds
-local telescope = require('telescope.builtin')
-vim.keymap.set('n', 'gr', telescope.lsp_references, { noremap = true, silent = true, nowait = true })
-vim.keymap.set('n', 'gd', telescope.lsp_definitions, { noremap = true, silent = true, nowait = true })
-vim.keymap.set('n', 'gi', telescope.lsp_implementations, { noremap = true, silent = true, nowait = true })
+local telescope = require 'telescope.builtin'
+vim.keymap.set(
+  'n',
+  'gr',
+  telescope.lsp_references,
+  { noremap = true, silent = true, nowait = true }
+)
+vim.keymap.set(
+  'n',
+  'gd',
+  telescope.lsp_definitions,
+  { noremap = true, silent = true, nowait = true }
+)
+vim.keymap.set(
+  'n',
+  'gi',
+  telescope.lsp_implementations,
+  { noremap = true, silent = true, nowait = true }
+)
 
 vim.keymap.set('n', '<leader>ff', telescope.find_files, { noremap = true, silent = true })
 vim.keymap.set('n', '<c-p>', telescope.find_files, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fg', telescope.live_grep, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fb', telescope.buffers, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>fs', telescope.lsp_workspace_symbols, { noremap = true, silent = true })
+vim.keymap.set(
+  'n',
+  '<leader>fs',
+  telescope.lsp_workspace_symbols,
+  { noremap = true, silent = true }
+)
 vim.keymap.set('n', '<leader>fS', telescope.lsp_document_symbols, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fa', function()
-  telescope.find_files({
-    find_command = {'rg', '--files', '--hidden', '-g', '!.git'},
-    previewer = false
-  })
+  telescope.find_files {
+    find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+    previewer = false,
+  }
 end, { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>fd', function()
-  vim.lsp.buf.format({ async = true })
+  vim.lsp.buf.format { async = true }
 end, { silent = true })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { silent = true })
 
-local cmp = require('cmp')
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
+local cmp = require 'cmp'
+cmp.setup {
+  mapping = cmp.mapping.preset.insert {
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm { select = true },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -124,19 +144,19 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-  }),
-  sources = cmp.config.sources({
+  },
+  sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
-  }),
-})
+  },
+}
 
 -- Code actions
-vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 
 -- Hide quickfix window
 vim.keymap.set('n', '<leader>q', function()
-  vim.cmd('cclose')
+  vim.cmd 'cclose'
 end, { noremap = true, silent = true })
 
 -- Fix odd behavior of tab sometimes not working in command mode
@@ -146,8 +166,8 @@ vim.keymap.set('c', '<Tab>', '<C-z>', { silent = true })
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
   callback = function()
-    local save_cursor = vim.fn.getpos('.')
-    vim.cmd([[%s/\s\+$//e]])
+    local save_cursor = vim.fn.getpos '.'
+    vim.cmd [[%s/\s\+$//e]]
     vim.fn.setpos('.', save_cursor)
   end,
 })
@@ -155,8 +175,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = '*',
   callback = function()
-    if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line('$') then
-      vim.cmd('normal! g`"')
+    if vim.fn.line '\'"' > 1 and vim.fn.line '\'"' <= vim.fn.line '$' then
+      vim.cmd 'normal! g`"'
     end
   end,
 })
@@ -165,15 +185,17 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 vim.opt.clipboard = 'unnamed,unnamedplus'
 
 -- Remap copy to system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
-vim.keymap.set({'n', 'v'}, '<leader>Y', '"+Y')
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y')
 
 -- Remap paste from system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>p', '"+p')
-vim.keymap.set({'n', 'v'}, '<leader>P', '"+P')
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p')
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P')
+
+vim.g.minimap_auto_start = 1
+vim.g.minimap_auto_start_win_enter = 1
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd('colorscheme catppuccin')
+vim.cmd 'colorscheme catppuccin'
 --vim.cmd('colorscheme nord')
-
