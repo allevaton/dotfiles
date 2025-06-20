@@ -14,7 +14,7 @@ return {
         'kevinhwang91/nvim-ufo',
         dependencies = 'kevinhwang91/promise-async',
         config = function()
-          require('ufo').setup {
+          require('ufo').setup({
             provider_selector = function(bufnr, filetype, buftype)
               return { 'treesitter', 'indent' }
             end,
@@ -26,7 +26,7 @@ return {
                 maxheight = 20,
               },
             },
-          }
+          })
 
           -- Using ufo provider need remap `zR` and `zM`
           vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
@@ -54,29 +54,36 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    keys = {
+      {
+        '<leader>?',
+        function()
+          require('which-key').show({ global = false })
+        end,
+        desc = 'Buffer Local Keymaps (which-key)',
+      },
+    },
+  },
+
   -- Copilot
   {
     'github/copilot.vim',
     event = 'InsertEnter',
-  },
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
-    dependencies = {
-      'github/copilot.vim',
-    },
-    config = function()
-      require('CopilotChat').setup {
-        debug = true,
-      }
-    end,
   },
 
   -- Git integration
   {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup {}
+      require('gitsigns').setup({})
     end,
   },
 
@@ -94,7 +101,7 @@ return {
         },
       }
 
-      require('telescope').setup {
+      require('telescope').setup({
         defaults = {
           cache_picker = {
             num_pickers = 8,
@@ -109,7 +116,7 @@ return {
           lsp_workspace_symbols = pickerOpts,
           lsp_references = pickerOpts,
         },
-      }
+      })
     end,
   },
 
@@ -126,7 +133,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.configs').setup({
         ensure_installed = {
           'lua',
           'vim',
@@ -211,7 +218,7 @@ return {
           default_lazy = true,
           default_fallback = 'auto',
         },
-      }
+      })
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -231,6 +238,7 @@ return {
         char = '▏',
         tab_char = '▏',
         highlight = { 'NonText' },
+        --highlight = { 'CursorColumn' },
       },
       scope = {
         enabled = true,
@@ -264,12 +272,12 @@ return {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('nvim-tree').setup {
+      require('nvim-tree').setup({
         sort = { sorter = 'case_sensitive' },
         view = { width = 40 },
         renderer = { group_empty = true },
         filters = { dotfiles = true },
-      }
+      })
     end,
   },
 
@@ -278,11 +286,11 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('lualine').setup {
+      require('lualine').setup({
         options = {
           theme = 'nord',
         },
-      }
+      })
     end,
   },
 
@@ -303,21 +311,24 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    flavour = 'mocha',
+    flavour = 'auto',
+    opts = {
+      flavour = 'frappe',
+    },
   },
 
   -- Minimap
-  {
-    'wfxr/minimap.vim',
-    build = ':!cargo install --locked code-minimap',
-    lazy = false,
-    cmd = { 'Minimap', 'MinimapClose', 'MinimapToggle', 'MinimapRefresh', 'MinimapUpdateHighlight' },
-    init = function()
-      vim.cmd 'let g:minimap_width = 10'
-      vim.cmd 'let g:minimap_auto_start = 1'
-      vim.cmd 'let g:minimap_auto_start_win_enter = 1'
-    end,
-  },
+  -- {
+  -- 	"wfxr/minimap.vim",
+  -- 	build = ":!cargo install --locked code-minimap",
+  -- 	lazy = false,
+  -- 	cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
+  -- 	init = function()
+  -- 		vim.cmd("let g:minimap_width = 10")
+  -- 		vim.cmd("let g:minimap_auto_start = 1")
+  -- 		vim.cmd("let g:minimap_auto_start_win_enter = 1")
+  -- 	end,
+  -- },
 
   {
     'ray-x/lsp_signature.nvim',
@@ -333,5 +344,32 @@ return {
     config = function(_, opts)
       require('lsp_signature').setup(opts)
     end,
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua', -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
+  {
+    'folke/trouble.nvim',
+    opts = {},
+    cmd = 'Trouble',
+  },
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy', -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+    end,
+    preset = 'classic',
+    options = {},
   },
 }

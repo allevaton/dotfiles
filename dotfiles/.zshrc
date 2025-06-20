@@ -1,6 +1,6 @@
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  git clone git@github.com:ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
+  git clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 fi
 
 export ZSH=$HOME/.oh-my-zsh
@@ -14,15 +14,14 @@ if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-if [ ! -e "$HOME/.fzf" ]; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
-fi
-
 source ~/.zplug/init.zsh
 
 if [ -f ~/.zsh_functions ]; then
   source ~/.zsh_functions
+fi
+
+if ! command -v fzf &> /dev/null; then
+  install_package fzf
 fi
 
 if ! zplug check; then
@@ -36,13 +35,15 @@ if [[ -z "$WSLENV" ]]; then
 else
   # Load this when you ARE in WSL
 
+  eval "$(/usr/sbin/wsl2-ssh-agent)"
+
   export OLD_PATH=$PATH
   export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
 fi
 
 if ! command -v pygmentize &> /dev/null; then
   echo "pygmentize not found. Installing..."
-  install_package python3-pygments
+  install_package python-pygments
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -123,9 +124,6 @@ bindkey "^[[1;5D" backward-word
 export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-# TODO: Is this necessary?
-export CUDA_HOME=/usr/local/cuda-12.3
-
-. "$HOME/.cargo/env"
-
 zplug load
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

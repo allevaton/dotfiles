@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
   -- Mason setup
-  require('mason').setup {
+  require('mason').setup({
     ui = {
       icons = {
         package_installed = '✓',
@@ -10,46 +10,41 @@ M.setup = function()
         package_uninstalled = '✗',
       },
     },
-  }
+  })
 
-  require('mason-lspconfig').setup {
-    ensure_installed = {
-      'tsserver',
-      'pyright',
-      'lua_ls',
-      'rust_analyzer',
-    },
+  require('mason-lspconfig').setup({
+    ensure_installed = {},
     automatic_installation = true,
-  }
+  })
 
   -- Configure formatters and linters
-  require('mason-null-ls').setup {
+  require('mason-null-ls').setup({
     ensure_installed = {
       'prettier', -- For JavaScript/TypeScript/CSS/JSON/etc.
-      'black',    -- For Python
-      'stylua',   -- For Lua
+      'black', -- For Python
+      'stylua', -- For Lua
     },
     automatic_installation = true,
     handlers = {},
-  }
+  })
 
-  local null_ls = require 'null-ls'
+  local null_ls = require('null-ls')
   local formatting = null_ls.builtins.formatting
 
   -- Default formatting options
   local default_prettier_config = {
-    singleQuote = true,    -- Use single quotes
-    semi = true,           -- Add semicolons
-    tabWidth = 2,          -- 2 spaces for indentation
-    printWidth = 100,      -- Line length
+    singleQuote = true, -- Use single quotes
+    semi = true, -- Add semicolons
+    tabWidth = 2, -- 2 spaces for indentation
+    printWidth = 100, -- Line length
     trailingComma = 'es5', -- ES5 trailing commas
     arrowParens = 'avoid', -- Avoid parentheses in arrow functions when possible
   }
 
   local default_stylua_config = {
-    column_width = 100,               -- Line length
-    indent_type = 'Spaces',           -- Use spaces
-    indent_width = 2,                 -- 2 spaces for indentation
+    column_width = 100, -- Line length
+    indent_type = 'Spaces', -- Use spaces
+    indent_width = 2, -- 2 spaces for indentation
     quote_style = 'AutoPreferSingle', -- Prefer single quotes
   }
 
@@ -72,16 +67,13 @@ M.setup = function()
     end
 
     -- Log which config file is being used
-    vim.notify(
-      'Using local ' .. formatter_name .. ' config: ' .. configs_found[1],
-      vim.log.levels.INFO
-    )
+    vim.notify('Using local ' .. formatter_name .. ' config: ' .. configs_found[1], vim.log.levels.INFO)
     return nil -- Return nil to let the formatter use the local config
   end
 
-  null_ls.setup {
+  null_ls.setup({
     sources = {
-      formatting.prettier.with {
+      formatting.prettier.with({
         filetypes = {
           'javascript',
           'typescript',
@@ -107,8 +99,8 @@ M.setup = function()
             'prettier.config.js',
           }, 'Prettier')
         end,
-      },
-      formatting.black.with {
+      }),
+      formatting.black.with({
         filetypes = { 'python' },
         extra_args = function()
           return merge_with_local_config(
@@ -117,35 +109,36 @@ M.setup = function()
             'Black'
           )
         end,
-      },
-      formatting.stylua.with {
+      }),
+      formatting.stylua.with({
         filetypes = { 'lua' },
         extra_args = function()
           return merge_with_local_config({
             '--config-path',
-            vim.fn.stdpath 'config' .. '/stylua.toml',
+            vim.fn.stdpath('config') .. '/stylua.toml',
           }, { 'stylua.toml', '.stylua.toml' }, 'StyLua')
         end,
-      },
+      }),
     },
     -- Format on save
     on_attach = function(client, bufnr)
-      if client.supports_method 'textDocument/formatting' then
+      if client.supports_method('textDocument/formatting') then
         vim.api.nvim_create_autocmd('BufWritePre', {
           buffer = bufnr,
           callback = function()
-            vim.lsp.buf.format {
+            vim.lsp.buf.format({
               bufnr = bufnr,
               timeout_ms = 5000,
-            }
+              async = true,
+            })
           end,
         })
       end
     end,
-  }
+  })
 
   -- LSP setup
-  local lspconfig = require 'lspconfig'
+  local lspconfig = require('lspconfig')
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   -- Default LSP on_attach function
@@ -165,24 +158,14 @@ M.setup = function()
     end, { buffer = bufnr, desc = 'Show hover information' })
 
     -- Type definition (especially useful for TypeScript)
-    vim.keymap.set(
-      'n',
-      'gt',
-      vim.lsp.buf.type_definition,
-      { buffer = bufnr, desc = 'Go to type definition' }
-    )
+    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'Go to type definition' })
 
     -- Signature help (show function parameters)
-    vim.keymap.set(
-      'i',
-      '<C-k>',
-      vim.lsp.buf.signature_help,
-      { buffer = bufnr, desc = 'Show signature help' }
-    )
+    vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Show signature help' })
   end
 
   -- Configure LSP servers
-  require('mason-lspconfig').setup_handlers {
+  require('mason-lspconfig').setup({
     function(server_name)
       local opts = {
         capabilities = capabilities,
@@ -202,9 +185,9 @@ M.setup = function()
 
       if server_name == 'tsserver' then
         opts.root_dir = function(fname)
-          local util = require 'lspconfig.util'
+          local util = require('lspconfig.util')
           return util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git')(fname)
-              or util.path.dirname(fname)
+            or util.path.dirname(fname)
         end
       end
 
@@ -222,7 +205,7 @@ M.setup = function()
 
       lspconfig[server_name].setup(opts)
     end,
-  }
+  })
 end
 
 return M
