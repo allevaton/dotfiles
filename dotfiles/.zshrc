@@ -16,12 +16,8 @@ fi
 
 source ~/.zplug/init.zsh
 
-if [ -f ~/.zsh_functions ]; then
-  source ~/.zsh_functions
-fi
-
 if ! command -v fzf &> /dev/null; then
-  install_package fzf
+  sudo pacman -S fzf
 fi
 
 if ! zplug check; then
@@ -37,13 +33,13 @@ else
 
   eval "$(/usr/sbin/wsl2-ssh-agent)"
 
-  export OLD_PATH=$PATH
-  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
+  #export OLD_PATH=$PATH
+  #export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
 fi
 
 if ! command -v pygmentize &> /dev/null; then
   echo "pygmentize not found. Installing..."
-  install_package python-pygments
+  sudo pacman -S python-pygments
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -99,18 +95,9 @@ if command -v nvim &> /dev/null; then
   export EDITOR=nvim
 
   alias vim='nvim'
-  alias vimrc='nvim ~/.config/nvim/init.lua'
+  alias vimrc='nvim ~/.config/nvim'
   alias vimrcp='nvim ~/.config/nvim/lua/plugins.lua'
   alias vimrcl='nvim ~/.config/nvim/lua/lsp.lua'
-
-  if [ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]; then
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  fi
-
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 else
   export EDITOR=vim
 fi
