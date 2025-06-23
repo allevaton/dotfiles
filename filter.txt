@@ -22,8 +22,8 @@
 #+ /.config/i3/**
 
 + /.config/nvim
-+ /.config/nvim/**.lua
-+ /.config/nvim/**.toml
+- /.config/nvim/lazy-lock.json
++ /.config/nvim/**
 
 #+ /.config/polybar
 #+ /.config/polybar/**

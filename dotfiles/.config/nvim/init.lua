@@ -101,9 +101,24 @@ end, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fd', function()
   vim.lsp.buf.format({ async = true })
 end, { silent = true })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { silent = true })
+
+vim.diagnostic.config({ jump = { float = true } })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+
+-- Format on save
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp', { clear = true }),
+  callback = function(args)
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = args.buf,
+      callback = function()
+        vim.lsp.buf.format({ async = false, id = args.data.client_id })
+      end,
+    })
+  end,
+})
 
 local cmp = require('cmp')
 cmp.setup({

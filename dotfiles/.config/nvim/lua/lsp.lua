@@ -21,8 +21,8 @@ M.setup = function()
   require('mason-null-ls').setup({
     ensure_installed = {
       'prettier', -- For JavaScript/TypeScript/CSS/JSON/etc.
-      'black', -- For Python
-      'stylua', -- For Lua
+      'black',    -- For Python
+      'stylua',   -- For Lua
     },
     automatic_installation = true,
     handlers = {},
@@ -33,18 +33,18 @@ M.setup = function()
 
   -- Default formatting options
   local default_prettier_config = {
-    singleQuote = true, -- Use single quotes
-    semi = true, -- Add semicolons
-    tabWidth = 2, -- 2 spaces for indentation
-    printWidth = 100, -- Line length
+    singleQuote = true,    -- Use single quotes
+    semi = true,           -- Add semicolons
+    tabWidth = 2,          -- 2 spaces for indentation
+    printWidth = 100,      -- Line length
     trailingComma = 'es5', -- ES5 trailing commas
     arrowParens = 'avoid', -- Avoid parentheses in arrow functions when possible
   }
 
   local default_stylua_config = {
-    column_width = 100, -- Line length
-    indent_type = 'Spaces', -- Use spaces
-    indent_width = 2, -- 2 spaces for indentation
+    column_width = 100,               -- Line length
+    indent_type = 'Spaces',           -- Use spaces
+    indent_width = 2,                 -- 2 spaces for indentation
     quote_style = 'AutoPreferSingle', -- Prefer single quotes
   }
 
@@ -120,21 +120,6 @@ M.setup = function()
         end,
       }),
     },
-    -- Format on save
-    on_attach = function(client, bufnr)
-      if client.supports_method('textDocument/formatting') then
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format({
-              bufnr = bufnr,
-              timeout_ms = 5000,
-              async = true,
-            })
-          end,
-        })
-      end
-    end,
   })
 
   -- LSP setup
@@ -187,7 +172,7 @@ M.setup = function()
         opts.root_dir = function(fname)
           local util = require('lspconfig.util')
           return util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git')(fname)
-            or util.path.dirname(fname)
+              or util.path.dirname(fname)
         end
       end
 
