@@ -1,4 +1,3 @@
-
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 fi
@@ -29,12 +28,14 @@ if [[ -z "$WSLENV" ]]; then
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-autosuggestions"
 else
-  # Load this when you ARE in WSL
+  zplug "zsh-users/zsh-completions"
+  zplug "zsh-users/zsh-autosuggestions"
 
+  # Load this when you ARE in WSL
   eval "$(/usr/sbin/wsl2-ssh-agent)"
 
-  #export OLD_PATH=$PATH
-  #export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/nick/.oh-my-posh:/mnt/c/Users/nick/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
+  export OLD_PATH=$PATH
+  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/allev/.oh-my-posh:/mnt/c/Users/allev/AppData/Local/Programs/Microsoft\ VS\ Code/bin:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/
 fi
 
 if ! command -v pygmentize &> /dev/null; then
@@ -54,7 +55,13 @@ compinit
 autoload -Uz promptinit
 promptinit
 
-zstyle ':omz:plugins:nvm' lazy yes
+# fnm plugin is garbage
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh --corepack-enabled)"
+  eval "$(fnm completions --shell zsh)"
+else
+  echo "\`fnm\` not found, install for node manager"
+fi
 
 # Full list of Oh My Zsh plugins:
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
@@ -62,13 +69,12 @@ plugins=(
   #ssh-agent
   git
   #dotenv
-  #archlinux
+  archlinux
   common-aliases
-  rust
-  nvm
+  #rust
   yarn
   sudo
-  aws
+  #aws
   colored-man-pages
   #safe-paste
   z
@@ -113,4 +119,3 @@ export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRAR
 
 zplug load
 
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
