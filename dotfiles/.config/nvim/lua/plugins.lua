@@ -323,7 +323,7 @@ return {
     priority = 1000,
     flavour = 'auto',
     opts = {
-      flavour = 'frappe',
+      flavour = 'macchiato', -- latte, frappe, macchiato, mocha
     },
   },
 
