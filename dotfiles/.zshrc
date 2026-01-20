@@ -19,7 +19,7 @@ if ! command -v fzf &> /dev/null; then
   sudo pacman -S fzf
 fi
 
-if [[ -z "$WSLENV" ]]; then
+if [[ -z "$WSL_DISTRO_NAME" ]]; then
   # Load this when you're not in WSL
 else
   # Load this when you ARE in WSL
@@ -40,14 +40,7 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "catppuccin/zsh-syntax-highlighting", at:main
 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:3
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, at:main
-
 zplug load
-
-autoload -Uz promptinit
-promptinit
-
-zstyle :prompt:pure:git:stash show yes
 
 export ZSH_THEME=""
 
@@ -99,3 +92,5 @@ bindkey "^[[1;5D" backward-word
 
 export PATH=~/.local/bin:/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+eval "$(starship init zsh)"
