@@ -97,15 +97,18 @@ return {
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    branch = 'master',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local pickerOpts = {
         theme = 'dropdown',
         layout_config = {
-          width = 0.5,
+          width = function(_, cols, _)
+            return math.max(100, math.floor(cols * 0.5))
+          end,
           height = 0.5,
         },
+        path_display = { 'truncate' },
       }
 
       require('telescope').setup({

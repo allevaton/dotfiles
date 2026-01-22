@@ -72,6 +72,7 @@ M.setup = function()
   end
 
   null_ls.setup({
+    default_timeout = 10000, -- 10 seconds (default is 5000)
     sources = {
       formatting.prettier.with({
         filetypes = {
@@ -122,7 +123,7 @@ M.setup = function()
     },
     -- Format on save
     on_attach = function(client, bufnr)
-      if client.supports_method('textDocument/formatting') then
+      if client:supports_method('textDocument/formatting') then
       end
     end,
   })
