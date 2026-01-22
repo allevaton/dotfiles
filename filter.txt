@@ -21,6 +21,9 @@
 #+ /.config/i3
 #+ /.config/i3/**
 
++ /.config/lazygit
++ /.config/lazygit/**
+
 + /.config/nvim
 - /.config/nvim/lazy-lock.json
 + /.config/nvim/**
