@@ -1,0 +1,78 @@
+gui:
+  # Show file icons (requires nerd font)
+  showIcons: true
+  # Catppuccin Macchiato Theme
+  theme:
+    activeBorderColor:
+      - "#c6a0f6" # Mauve
+      - bold
+    inactiveBorderColor:
+      - "#6e738d" # Overlay0
+    optionsTextColor:
+      - "#8aadf4" # Blue
+    selectedLineBgColor:
+      - "#363a4f" # Surface0
+    cherryPickedCommitBgColor:
+      - "#f5a97f" # Peach
+    cherryPickedCommitFgColor:
+      - "#181926" # Crust
+    unstagedChangesColor:
+      - "#ed8796" # Red
+    defaultFgColor:
+      - "#cad3f5" # Text
+    searchingActiveBorderColor:
+      - "#eed49f" # Yellow
+  # Show random tip on startup
+  showRandomTip: false
+  # Mouse support
+  mouseEvents: true
+git:
+  # Automatically fetch from remote
+  autoFetch: true
+  autoFetchInterval: 120
+  # Commit settings
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never || echo 'Install git-delta for better git diff view'
+  # Parse emoji in commit messages
+  parseEmoji: true
+os:
+  # Editor for editing files
+  editPreset: nvim
+keybinding:
+  universal:
+    quit: q
+    quit-alt1: <c-c>
+    return: <esc>
+    scrollUpMain: <pgup>
+    scrollDownMain: <pgdown>
+refresher:
+  refreshInterval: 10
+confirmOnQuit: false
+customCommands:
+  # Create worktree from existing branch
+  - key: "W"
+    context: "localBranches"
+    description: "Create worktree from branch"
+    prompts:
+      - type: "input"
+        title: "Worktree path"
+        key: "path"
+        initialValue: "../{{runCommand \"sh -c 'basename $(pwd)'\"}}.worktrees/{{.SelectedLocalBranch.Name}}"
+    command: "git worktree add {{.Form.path | quote}} {{.SelectedLocalBranch.Name | quote}}"
+    loadingText: "Creating worktree..."
+  # Create worktree with new branch from remote
+  - key: "W"
+    context: "remoteBranches"
+    description: "Create worktree from remote branch"
+    prompts:
+      - type: "input"
+        title: "Worktree path"
+        key: "path"
+        initialValue: "../{{runCommand \"sh -c 'basename $(pwd)'\"}}.worktrees/{{.SelectedRemoteBranch.Name}}"
+      - type: "input"
+        title: "New branch name"
+        key: "branch"
+        initialValue: "{{.SelectedRemoteBranch.Name}}"
+    command: "git worktree add -b {{.Form.branch | quote}} {{.Form.path | quote}} {{.SelectedRemoteBranch.RemoteName}}/{{.SelectedRemoteBranch.Name}}"
+    loadingText: "Creating worktree..."
