@@ -143,103 +143,75 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup({
-        ensure_installed = {
-          'lua',
-          'vim',
-          'vimdoc',
-          'query',
-          'markdown',
-          'markdown_inline',
-          'html',
-          'javascript',
-          'typescript',
-          'python',
-          'tsx',
-          'bash',
-          'json',
-        },
-        auto_install = true,
-        highlight = {
-          enable = true,
-          disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end,
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
+      -- Install parsers
+      require('nvim-treesitter').install({
+        'lua',
+        'vim',
+        'vimdoc',
+        'query',
+        'markdown',
+        'markdown_inline',
+        'html',
+        'javascript',
+        'typescript',
+        'python',
+        'tsx',
+        'bash',
+        'json',
+      })
+
+      -- Enable highlighting for all buffers
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
+  },
+
+  -- Treesitter textobjects (separate plugin)
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('nvim-treesitter-textobjects').setup({
+        select = {
+          lookahead = true,
+          keymaps = {
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
           },
         },
-        refactor = {
-          highlight_definitions = { enable = true },
-          highlight_current_scope = { enable = false },
-          smart_rename = {
-            enable = true,
-            keymaps = {
-              smart_rename = 'gR',
-            },
+        move = {
+          set_jumps = true,
+          goto_next_start = {
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
           },
-          navigation = {
-            enable = true,
-            keymaps = {},
+          goto_next_end = {
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
           },
-        },
-        autotag = {
-          enable = true,
-        },
-        autopairs = {
-          enable = true,
-        },
-        indent = {
-          enable = false,
-        },
-        yati = {
-          enable = true,
-          default_lazy = true,
-          default_fallback = 'auto',
+          goto_previous_start = {
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
         },
       })
     end,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-refactor',
-      'windwp/nvim-ts-autotag',
-      'windwp/nvim-autopairs',
-      'yioneko/nvim-yati',
-    },
+  },
+
+  -- Auto close/rename HTML tags
+  {
+    'windwp/nvim-ts-autotag',
+    event = { 'InsertEnter' },
+    opts = {},
   },
 
   -- Rest of your existing plugins...

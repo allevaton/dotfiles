@@ -83,6 +83,7 @@ local telescope = require('telescope.builtin')
 vim.keymap.set('n', 'gr', telescope.lsp_references, { noremap = true, silent = true, nowait = true })
 vim.keymap.set('n', 'gd', telescope.lsp_definitions, { noremap = true, silent = true, nowait = true })
 vim.keymap.set('n', 'gi', telescope.lsp_implementations, { noremap = true, silent = true, nowait = true })
+vim.keymap.set('n', 'gR', vim.lsp.buf.rename, { noremap = true, silent = true, desc = 'LSP rename' })
 
 vim.keymap.set('n', '<leader>ff', telescope.find_files, { noremap = true, silent = true })
 vim.keymap.set('n', '<c-p>', telescope.find_files, { noremap = true, silent = true })

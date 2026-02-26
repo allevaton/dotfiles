@@ -16,7 +16,11 @@ fi
 source ~/.zplug/init.zsh
 
 if ! command -v fzf &> /dev/null; then
-  sudo pacman -S fzf
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew install fzf
+  else
+    sudo pacman -S fzf
+  fi
 fi
 
 if [[ -z "$WSL_DISTRO_NAME" ]]; then
@@ -32,15 +36,25 @@ fi
 
 if ! command -v pygmentize &> /dev/null; then
   echo "pygmentize not found. Installing..."
-  sudo pacman -S python-pygments
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew install pygments
+  else
+    sudo pacman -S python-pygments
+  fi
 fi
 
 zplug "mafredri/zsh-async", from:github, defer:0, at:main
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "catppuccin/zsh-syntax-highlighting", at:main
+#zplug "catppuccin/zsh-syntax-highlighting", at:main
 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:3
 zplug load
+
+# Disabled: theme colors path separators red
+#source ~/.zplug/repos/catppuccin/zsh-syntax-highlighting/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+
+#ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=#cad3f5,underline'
+#ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg=#cad3f5,underline'
 
 export ZSH_THEME=""
 
@@ -58,20 +72,28 @@ plugins=(
   uv
 )
 
-function psgrep() {
-  ps aux | { head -1; grep "$@"; }
-}
-
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
 #zstyle :omz:plugins:ssh-agent identities id_ed25519
 
+zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 
 alias lg='lazygit'
 
-alias ls='ls -h --color=auto --group-directories-first'
+# Override oh-my-zsh's cyan directories with Catppuccin blue (ANSI 34)
+export LSCOLORS="Exfxcxdxbxegedabagacad"
+export LS_COLORS="di=1;34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+export EZA_IGNORE_GLOB=".DS_Store|Thumbs.db|__pycache__|*.pyc|.mypy_cache"
+
+alias ls='eza --group-directories-first'
+alias ll='eza -la --group-directories-first --git'
+alias lt='eza --tree --level=2 --group-directories-first -I="node_modules|.git|.idea|.vscode|.next|.cache"'
 alias l='ls'
-alias ll='ls -hal'
+
+function psgrep() {
+  ps aux | { head -1; grep "$@"; }
+}
 
 if command -v nvim &> /dev/null; then
   export EDITOR=nvim
@@ -90,7 +112,14 @@ bindkey "^[[3~"   delete-char
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-export PATH=~/.local/bin:/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=~/.local/bin${PATH:+:${PATH}}
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+  alias python='python3'
+  alias pip='pip3'
+else
+  export PATH=/usr/local/cuda-12.3/bin${PATH:+:${PATH}}
+  export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
 
 eval "$(starship init zsh)"

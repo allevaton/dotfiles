@@ -43,5 +43,9 @@
 + /.config/alacritty
 + /.config/alacritty/**
 
++ /.config/fish
+- /.config/fish/fish_variables
++ /.config/fish/**
+
 # Required
 - /**
