@@ -18,6 +18,7 @@ fish_add_path ~/.local/bin
 
 # ── Platform-specific ─────────────────────────────────────────────────────────
 if test (uname) = Darwin
+    fish_add_path /opt/homebrew/bin
     fish_add_path /opt/homebrew/opt/openjdk/bin
     alias python='python3'
     alias pip='pip3'
@@ -62,3 +63,7 @@ alias lg='lazygit'
 
 # ── Starship prompt ───────────────────────────────────────────────────────────
 starship init fish | source
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
