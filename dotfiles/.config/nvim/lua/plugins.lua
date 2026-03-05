@@ -143,23 +143,6 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      -- Install parsers
-      require('nvim-treesitter').install({
-        'lua',
-        'vim',
-        'vimdoc',
-        'query',
-        'markdown',
-        'markdown_inline',
-        'html',
-        'javascript',
-        'typescript',
-        'python',
-        'tsx',
-        'bash',
-        'json',
-      })
-
       -- Enable highlighting for all buffers
       vim.api.nvim_create_autocmd('FileType', {
         callback = function()
