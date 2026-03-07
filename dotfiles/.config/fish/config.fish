@@ -19,7 +19,8 @@ fish_add_path ~/.local/bin
 # ── Platform-specific ─────────────────────────────────────────────────────────
 if test (uname) = Darwin
     fish_add_path /opt/homebrew/bin
-    fish_add_path /opt/homebrew/opt/openjdk/bin
+    fish_add_path /opt/homebrew/opt/openjdk@21/bin
+    set -gx JAVA_HOME /opt/homebrew/opt/openjdk@21
     alias python='python3'
     alias pip='pip3'
 else if set -q WSL_DISTRO_NAME
