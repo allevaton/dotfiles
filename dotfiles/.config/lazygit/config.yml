@@ -1,6 +1,7 @@
 gui:
   # Show file icons (requires nerd font)
   showIcons: true
+  nerdFontsVersion: "3"
   # Catppuccin Macchiato Theme
   theme:
     activeBorderColor:
@@ -33,7 +34,7 @@ git:
   # Commit settings
   pagers:
     - colorArg: always
-      pager: delta --dark --paging=never || echo 'Install git-delta for better git diff view'
+      pager: moor
   # Parse emoji in commit messages
   parseEmoji: true
 os:
@@ -58,7 +59,7 @@ customCommands:
       - type: "input"
         title: "Worktree path"
         key: "path"
-        initialValue: "../{{runCommand \"sh -c 'basename $(pwd)'\"}}.worktrees/{{.SelectedLocalBranch.Name}}"
+        initialValue: '../{{runCommand "sh -c ''basename $(pwd)''"}}.worktrees/{{.SelectedLocalBranch.Name}}'
     command: "git worktree add {{.Form.path | quote}} {{.SelectedLocalBranch.Name | quote}}"
     loadingText: "Creating worktree..."
   # Create worktree with new branch from remote
@@ -69,7 +70,7 @@ customCommands:
       - type: "input"
         title: "Worktree path"
         key: "path"
-        initialValue: "../{{runCommand \"sh -c 'basename $(pwd)'\"}}.worktrees/{{.SelectedRemoteBranch.Name}}"
+        initialValue: '../{{runCommand "sh -c ''basename $(pwd)''"}}.worktrees/{{.SelectedRemoteBranch.Name}}'
       - type: "input"
         title: "New branch name"
         key: "branch"

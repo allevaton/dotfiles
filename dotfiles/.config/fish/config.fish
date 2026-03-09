@@ -13,6 +13,10 @@ else
     set -gx EDITOR vim
 end
 
+# ── Pager ─────────────────────────────────────────────────────────────────────
+set -gx PAGER moor
+set -gx MANPAGER moor
+
 # ── PATH ──────────────────────────────────────────────────────────────────────
 fish_add_path ~/.local/bin
 
@@ -21,6 +25,7 @@ if test (uname) = Darwin
     fish_add_path /opt/homebrew/bin
     fish_add_path /opt/homebrew/opt/openjdk@21/bin
     set -gx JAVA_HOME /opt/homebrew/opt/openjdk@21
+
     alias python='python3'
     alias pip='pip3'
 else if set -q WSL_DISTRO_NAME
@@ -50,6 +55,9 @@ else
     set -gx LD_LIBRARY_PATH /usr/local/cuda-12.3/lib64 $LD_LIBRARY_PATH
 end
 
+# ── cat replacement ───────────────────────────────────────────────────────────
+alias cat='bat --theme=Catppuccin\ Macchiato --style=plain'
+
 # ── eza / ls ──────────────────────────────────────────────────────────────────
 set -gx EZA_IGNORE_GLOB ".DS_Store|Thumbs.db|__pycache__|*.pyc|.mypy_cache"
 set -gx LS_COLORS "di=1;34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
@@ -61,6 +69,14 @@ alias l='ls'
 
 # ── Git ───────────────────────────────────────────────────────────────────────
 alias lg='lazygit'
+alias gst='git status'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gpr='git pull --rebase'
+alias gp='git push'
+alias gd='git diff'
+alias gb='git branch'
+alias gcm='git commit -m'
 
 # ── Starship prompt ───────────────────────────────────────────────────────────
 starship init fish | source

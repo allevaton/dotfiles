@@ -351,4 +351,12 @@ return {
       layout = 'left_bottom',
     },
   },
+  {
+    'karb94/neoscroll.nvim',
+    event = 'VeryLazy',
+    opts = {
+      duration_multiplier = 0.3,
+      easing = 'sine',
+    },
+  },
 }

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "lazygit-config",
+  "owner": "wcygan",
+  "repo": "dotfiles",
+  "path": ".claude/skills/lazygit-config",
+  "branch": "main",
+  "sha": "1d584c969ba41ee87e125269f09896a7e8d00be2",
+  "source": "manual"
+}
