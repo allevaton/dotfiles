@@ -353,6 +353,7 @@ return {
   },
   {
     'karb94/neoscroll.nvim',
+    enabled = vim.fn.has('win32') == 0, -- poor performance on Windows
     event = 'VeryLazy',
     opts = {
       duration_multiplier = 0.3,

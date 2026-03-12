@@ -47,5 +47,9 @@
 - /.config/fish/fish_variables
 + /.config/fish/**
 
++ /.claude
++ /.claude/skills
++ /.claude/skills/**
+
 # Required
 - /**

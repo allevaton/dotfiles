@@ -4,12 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Structure
 
-This is a personal dotfiles repository managed with rsync. The actual config files live under `dotfiles/` mirroring the `$HOME` directory layout. Three scripts manage syncing:
+This is a personal dotfiles repository managed with rsync. The actual config files live under `dotfiles/` mirroring the `$HOME` directory layout.
+
+### Unix (bash/zsh) scripts
+
+These use rsync with `filter.txt` to sync all tracked files:
 
 - `sync-from-local` — copies tracked files from `$HOME` into `dotfiles/` (use before committing)
 - `overwrite-local` — applies `dotfiles/` onto `$HOME` (backs up first to `_local-backup/`)
 - `diff` — shows a colored diff between `dotfiles/` and `$HOME`
 - `filter.txt` — rsync filter rules controlling which files are tracked
+
+### Windows PowerShell scripts
+
+These sync a hardcoded list of files (no rsync/filter.txt) between Windows-native config paths and `dotfiles/`:
+
+- `sync-from-local.ps1` — copies tracked config files from the live system into `dotfiles/`
+- `overwrite-local.ps1` — backs up live config to `_local-backup/`, then copies `dotfiles/` onto the live system
 
 ## Tracked Configs
 
