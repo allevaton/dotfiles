@@ -13,6 +13,7 @@ else
     set -gx EDITOR vim
 end
 
+
 # ── Pager ─────────────────────────────────────────────────────────────────────
 set -gx PAGER moor
 set -gx MANPAGER moor
@@ -77,6 +78,9 @@ alias gp='git push'
 alias gd='git diff'
 alias gb='git branch'
 alias gcm='git commit -m'
+
+# ── Prompt stuff ──────────────────────────────────────────────────────────────
+#alias rm='trash'
 
 # ── Starship prompt ───────────────────────────────────────────────────────────
 starship init fish | source

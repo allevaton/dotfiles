@@ -32,9 +32,9 @@ git:
   autoFetch: true
   autoFetchInterval: 120
   # Commit settings
-  pagers:
-    - colorArg: always
-      pager: moor
+  # pagers:
+  #   - colorArg: always
+  #     pager: moor
   # Parse emoji in commit messages
   parseEmoji: true
 os:

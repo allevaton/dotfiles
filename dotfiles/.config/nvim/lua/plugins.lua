@@ -118,7 +118,7 @@ return {
           },
         },
         pickers = {
-          find_files = pickerOpts,
+          find_files = vim.tbl_extend('force', pickerOpts, { hidden = true }),
           git_files = pickerOpts,
           live_grep = pickerOpts,
           buffers = pickerOpts,
@@ -244,7 +244,7 @@ return {
         sort = { sorter = 'case_sensitive' },
         view = { width = 40 },
         renderer = { group_empty = true },
-        filters = { dotfiles = true },
+        filters = { dotfiles = false },
       })
     end,
   },
@@ -353,7 +353,6 @@ return {
   },
   {
     'karb94/neoscroll.nvim',
-    enabled = vim.fn.has('win32') == 0, -- poor performance on Windows
     event = 'VeryLazy',
     opts = {
       duration_multiplier = 0.3,

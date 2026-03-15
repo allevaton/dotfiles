@@ -45,7 +45,11 @@
 
 + /.config/fish
 - /.config/fish/fish_variables
+- /.config/fish/secrets
 + /.config/fish/**
+
++ /.config/linearmouse
++ /.config/linearmouse/**
 
 + /.claude
 + /.claude/skills

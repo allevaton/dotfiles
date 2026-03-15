@@ -1,0 +1,101 @@
+{
+  "$schema": "https:\/\/schema.linearmouse.app\/0.10.2",
+  "schemes": [
+    {
+      "if": {
+        "device": {
+          "category": "mouse",
+          "productID": "0x33",
+          "productName": "Wired Gaming Mouse",
+          "vendorID": "0x258a"
+        }
+      },
+      "pointer": {
+        "acceleration": 0.5,
+        "disableAcceleration": false,
+        "redirectsToScroll": false,
+        "speed": 0.12
+      },
+      "scrolling": {
+        "acceleration": 1,
+        "distance": {
+          "horizontal": 2,
+          "vertical": "80.8px"
+        },
+        "speed": 0
+      }
+    },
+    {
+      "if": {
+        "app": "com.jetbrains.WebStorm-EAP",
+        "device": {
+          "category": "mouse",
+          "productID": "0x33",
+          "productName": "Wired Gaming Mouse",
+          "vendorID": "0x258a"
+        }
+      },
+      "scrolling": {
+        "acceleration": {
+          "vertical": 1
+        },
+        "distance": {
+          "vertical": 6
+        },
+        "speed": {
+          "vertical": 0
+        }
+      }
+    },
+    {
+      "if": {
+        "app": "com.microsoft.VSCode",
+        "device": {
+          "category": "mouse",
+          "productID": "0x33",
+          "productName": "Wired Gaming Mouse",
+          "vendorID": "0x258a"
+        }
+      },
+      "scrolling": {
+        "distance": {
+          "vertical": 2
+        }
+      }
+    },
+    {
+      "buttons": {
+        "mappings": [],
+        "universalBackForward": true
+      },
+      "if": {
+        "app": "com.apple.finder",
+        "device": {
+          "category": "mouse",
+          "productID": "0x33",
+          "productName": "Wired Gaming Mouse",
+          "vendorID": "0x258a"
+        }
+      },
+      "scrolling": {
+        "distance": {
+          "vertical": "80.8px"
+        }
+      }
+    },
+    {
+      "if": {
+        "app": "com.moonlight-stream.Moonlight",
+        "device": {
+          "category": "mouse",
+          "productID": "0x33",
+          "productName": "Wired Gaming Mouse",
+          "vendorID": "0x258a"
+        }
+      },
+      "pointer": {
+        "speed": 0.17
+      }
+    }
+  ]
+}
