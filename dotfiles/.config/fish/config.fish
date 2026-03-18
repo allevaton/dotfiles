@@ -78,6 +78,8 @@ alias gp='git push'
 alias gd='git diff'
 alias gb='git branch'
 alias gcm='git commit -m'
+alias grhh='git reset --hard HEAD'
+alias gfa='git fetch --all --prune'
 
 # ── Prompt stuff ──────────────────────────────────────────────────────────────
 #alias rm='trash'
