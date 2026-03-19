@@ -19,15 +19,18 @@ Before creating or managing tickets, confirm these values. They may change per p
 | Project Key | **Confirm per project** | Query with `getVisibleJiraProjects` if unknown |
 | Issue Types | **Confirm per project** | Query with `getJiraProjectIssueTypesMetadata` |
 | Workflow Statuses | To Do → In Progress → Committed → Staged | See Lifecycle section |
+| Default Assignee | **Current user (me)** | All tickets are assigned — see Assignment section |
+| Story Points | **Fibonacci scale** | All tickets get story point estimates — see Estimation section |
 
 When starting work on a new project, always run discovery first:
 
 1. `getVisibleJiraProjects` — find the project key
-2. `getJiraProjectIssueTypesMetadata` — confirm available issue types (Epic, Story, Task, Sub-task, Bug, etc.)
+2. `getJiraProjectIssueTypesMetadata` — confirm available issue types and fields (especially the story points field name — it varies by instance, commonly `story_points` or `customfield_XXXXX`)
 3. `searchJiraIssuesUsingJql` — check for existing tickets in the project related to this work
 4. `getTransitionsForJiraIssue` — on any existing ticket, confirm the transition IDs for the workflow
+5. `atlassianUserInfo` — resolve the current user's account ID for default ticket assignment
 
-Cache these values mentally for the session. The transition IDs are especially important — you need the numeric ID, not just the status name, to call `transitionJiraIssue`.
+Cache these values mentally for the session. The transition IDs are especially important — you need the numeric ID, not just the status name, to call `transitionJiraIssue`. The current user's account ID is needed for assignment on every ticket created.
 
 ## Information Architecture
 
@@ -201,6 +204,37 @@ To transition a ticket:
 
 Transition IDs are instance-specific — always query them rather than hardcoding.
 
+## Assignment
+
+**Every ticket must have an assignee.** When creating or updating tickets, always set the assignee field.
+
+- If the user specifies an assignee by name, use `lookupJiraAccountId` to resolve their name to an account ID, then assign the ticket to that account.
+- If no assignee is specified, assign the ticket to the current user (me). Use `atlassianUserInfo` to get the current user's account ID during discovery, and use that ID as the default assignee for all tickets created in the session.
+
+Set the assignee in the `createJiraIssue` call via the `assignee` field (`{ "accountId": "<id>" }`). For existing tickets that are unassigned, use `editJiraIssue` to set the assignee when picking them up.
+
+## Estimation (Story Points)
+
+**Every ticket must have a story point estimate.** Use Fibonacci values: 1, 2, 3, 5, 8, 13, 21.
+
+Estimate liberally — round up, not down. Software work consistently takes longer than expected, and generous estimates create breathing room for edge cases, testing, and iteration. When in doubt, go one Fibonacci number higher.
+
+### Estimation Guidelines
+
+| Points | Scope | Example |
+| --- | --- | --- |
+| 1 | Trivial change, single file, < 30 min | Fix a typo, update a config value |
+| 2 | Small, well-scoped change across 1-2 files | Add a new field to an existing form |
+| 3 | Moderate work, clear path, a few files | Add a new API endpoint with basic CRUD |
+| 5 | Meaningful feature slice, multiple files, some unknowns | Build a new page with data loading and components |
+| 8 | Substantial feature work, cross-cutting concerns | Full search experience with filters and pagination |
+| 13 | Large feature, significant complexity or integration work | New multi-step workflow with state management |
+| 21 | Epic-sized — consider breaking this down further | Full feature area from scratch |
+
+When creating tickets, set story points in the `createJiraIssue` call. The field name varies by Jira instance — discover it during project setup via `getJiraIssueTypeMetaWithFields` and look for the story points or estimation field. Common field names: `story_points`, `story_point_estimate`, or a `customfield_XXXXX`.
+
+For existing tickets without estimates, add story points via `editJiraIssue` when picking them up.
+
 ## Creating Tickets from a Project Plan
 
 When given a project plan (document, spec, PRD, or conversation context) and asked to create tickets:
@@ -210,7 +244,7 @@ When given a project plan (document, spec, PRD, or conversation context) and ask
 3. **Sequence the slices.** Apply the sequencing principles to determine execution order.
 4. **Draft the tickets.** Write each ticket following the authoring guidelines. Start with the orientation, describe the feature behavior, add constraints and acceptance criteria.
 5. **Confirm with the user.** Present the proposed tickets (titles and brief summaries) before creating them in Jira. The user may want to adjust granularity, reorder, or add/remove tickets.
-6. **Create in Jira.** Use `createJiraIssue` for each ticket. Link them to the parent epic. Add sequence labels or title prefixes.
+6. **Create in Jira.** Use `createJiraIssue` for each ticket. Link them to the parent epic. Add sequence labels or title prefixes. **Set the assignee** (specified person or default to current user) and **set story points** (Fibonacci estimate, round up generously) on every ticket.
 7. **Update the epic.** Add the sequencing summary to the epic description.
 
 When creating tickets, the user may provide the plan in different forms — a document attachment, a pasted spec, a conversation where they've been talking through the feature. Adapt to whatever form the context takes, but always produce tickets that follow the authoring structure.
@@ -235,5 +269,5 @@ When asked to implement something with no ticket reference (e.g., "fix the searc
 
 1. **Search for an existing ticket.** Check Jira for tickets matching the described work.
 2. **If found:** run pre-flight (assess completeness, enrich if needed), then execute.
-3. **If not found:** create a standalone ticket following the authoring guidelines, then execute.
-4. **Follow the same execution flow** — transition to In Progress, plan, execute, transition to Committed.
+3. **If not found:** create a standalone ticket following the authoring guidelines — include assignee and story points — then execute.
+4. **Follow the same execution flow** — transition to In Progress, plan, execute, transition to Committed. If the ticket is missing an assignee or story points, set them when picking it up.

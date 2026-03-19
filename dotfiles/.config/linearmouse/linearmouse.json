@@ -1,100 +1,163 @@
 {
-  "$schema": "https:\/\/schema.linearmouse.app\/0.10.2",
-  "schemes": [
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.4",
+  "schemes" : [
     {
-      "if": {
-        "device": {
-          "category": "mouse",
-          "productID": "0x33",
-          "productName": "Wired Gaming Mouse",
-          "vendorID": "0x258a"
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
         }
       },
-      "pointer": {
-        "acceleration": 0.5,
-        "disableAcceleration": false,
-        "redirectsToScroll": false,
-        "speed": 0.12
+      "pointer" : {
+        "acceleration" : 0.5,
+        "disableAcceleration" : false,
+        "redirectsToScroll" : false,
+        "speed" : 0.12
       },
-      "scrolling": {
-        "acceleration": 1,
-        "distance": {
-          "horizontal": 2,
-          "vertical": "80.8px"
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : {
+          "horizontal" : "71.8px",
+          "vertical" : "80.8px"
         },
-        "speed": 0
+        "speed" : 0
       }
     },
     {
-      "if": {
-        "app": "com.jetbrains.WebStorm-EAP",
-        "device": {
-          "category": "mouse",
-          "productID": "0x33",
-          "productName": "Wired Gaming Mouse",
-          "vendorID": "0x258a"
+      "if" : {
+        "app" : "com.jetbrains.WebStorm-EAP",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
         }
       },
-      "scrolling": {
-        "acceleration": {
-          "vertical": 1
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
         },
-        "distance": {
-          "vertical": 6
+        "distance" : {
+          "vertical" : 6
         },
-        "speed": {
-          "vertical": 0
+        "speed" : {
+          "vertical" : 0
         }
       }
     },
     {
-      "if": {
-        "app": "com.microsoft.VSCode",
-        "device": {
-          "category": "mouse",
-          "productID": "0x33",
-          "productName": "Wired Gaming Mouse",
-          "vendorID": "0x258a"
+      "if" : {
+        "app" : "com.microsoft.VSCode",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
         }
       },
-      "scrolling": {
-        "distance": {
-          "vertical": 2
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 2
         }
       }
     },
     {
-      "buttons": {
-        "mappings": [],
-        "universalBackForward": true
+      "buttons" : {
+        "mappings" : [
+
+        ],
+        "universalBackForward" : true
       },
-      "if": {
-        "app": "com.apple.finder",
-        "device": {
-          "category": "mouse",
-          "productID": "0x33",
-          "productName": "Wired Gaming Mouse",
-          "vendorID": "0x258a"
+      "if" : {
+        "app" : "com.apple.finder",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
         }
       },
-      "scrolling": {
-        "distance": {
-          "vertical": "80.8px"
+      "scrolling" : {
+        "distance" : {
+          "vertical" : "80.8px"
         }
       }
     },
     {
-      "if": {
-        "app": "com.moonlight-stream.Moonlight",
-        "device": {
-          "category": "mouse",
-          "productID": "0x33",
-          "productName": "Wired Gaming Mouse",
-          "vendorID": "0x258a"
+      "if" : {
+        "app" : "com.moonlight-stream.Moonlight",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
         }
       },
-      "pointer": {
-        "speed": 0.17
+      "pointer" : {
+        "speed" : 0.17
+      }
+    },
+    {
+      "if" : {
+        "app" : "com.colliderli.iina",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : {
+          "horizontal" : "13.3px",
+          "vertical" : "6.7px"
+        },
+        "reverse" : {
+          "horizontal" : true
+        },
+        "speed" : 0
+      }
+    },
+    {
+      "buttons" : {
+        "universalBackForward" : true
+      },
+      "if" : {
+        "app" : "com.apple.journal",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
+        }
+      }
+    },
+    {
+      "buttons" : {
+
+      },
+      "if" : {
+        "app" : "com.apple.Preview",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x33",
+          "productName" : "Wired Gaming Mouse",
+          "vendorID" : "0x258a"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "horizontal" : 1
+        },
+        "distance" : {
+          "horizontal" : "36px"
+        },
+        "speed" : {
+          "horizontal" : 0
+        }
       }
     }
   ]
