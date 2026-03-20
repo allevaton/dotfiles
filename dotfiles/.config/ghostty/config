@@ -1,0 +1,27 @@
+# Theme (Catppuccin Macchiato to match your tmux)
+theme = catppuccin-macchiato.conf
+
+# Scrollback
+scrollback-limit = 200000
+
+# Cursor
+cursor-color = white
+
+# Splits (Mac-style keybindings)
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Navigate splits with Cmd+Option+Arrows
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+right=goto_split:right
+keybind = cmd+alt+up=goto_split:up
+keybind = cmd+alt+down=goto_split:down
+
+# Shift+Enter for Claude Code
+keybind = shift+enter=text:\x1b\r
+
+shell-integration = fish
+
+# Font
+font-family = JetBrainsMonoNL Nerd Font Mono
+
