@@ -5,7 +5,7 @@ description: Reconciles the latest local backup (created by overwrite-local) aga
 
 # Reconcile Backup
 
-After running `./overwrite-local`, a timestamped backup of the previous `$HOME` state is saved to `_local-backup/`. This skill compares that backup against the current repo dotfiles to surface meaningful differences — files the backup had that the repo doesn't, files the repo has that the backup didn't, and content-level diffs — then helps the user selectively restore changes.
+After running `./overwrite-local`, a timestamped backup of the previous `$HOME` state is saved to `_local-backup/`. This skill compares that backup against the current repo dotfiles to surface meaningful differences — primarily local customizations that the overwrite replaced — and helps the user selectively restore them.
 
 ## Context
 
@@ -16,60 +16,54 @@ After running `./overwrite-local`, a timestamped backup of the previous `$HOME` 
 
 ## Procedure
 
-### Step 1: Identify the backup to compare
+### Step 1: Identify the backup and diff in one pass
 
-List `_local-backup/` and pick the most recent timestamp directory. If multiple backups exist, confirm with the user which one to compare (default to latest).
-
-```bash
-ls -1t _local-backup/ | head -5
-```
-
-### Step 2: Run a recursive diff
-
-Compare the backup against `dotfiles/` to get a file-level summary:
+Find the latest timestamped backup and run the diff. Do this in a **single bash call**:
 
 ```bash
-diff -rq _local-backup/<timestamp>/ dotfiles/
+BACKUP=$(ls -1t _local-backup/ | grep -E '^[0-9]{4}-' | head -1) && diff -rq "_local-backup/$BACKUP/" dotfiles/
 ```
 
-### Step 3: Categorize differences
-
-Organize the diff output into three buckets:
-
-1. **Backup-only files** — files that existed locally but are not in the repo. These are potential gaps where local customizations were lost.
-2. **Repo-only files** — files in the repo but not in the backup. Filter out Linux-only configs (xfce4, i3, openbox, polybar, rofi, tint2, dunst, terminator) unless the user is on Linux. These are usually fine — they're configs that were added to the repo from another machine.
-3. **Content differences** — files present in both but with different content. Run `diff` on each to show what changed.
-
-### Step 4: Analyze content diffs
-
-For each file with content differences, run a standard diff and characterize the change:
+If the user asked about a **specific config** (e.g. "check the fish config"), scope the diff to that subtree only — don't diff everything:
 
 ```bash
-diff _local-backup/<timestamp>/<file> dotfiles/<file>
+BACKUP=$(ls -1t _local-backup/ | grep -E '^[0-9]{4}-' | head -1) && diff -rq "_local-backup/$BACKUP/.config/fish/" dotfiles/.config/fish/
 ```
 
-Classify each diff as one of:
-- **Local was newer** — backup has additions/changes not in the repo (user likely wants to bring these in)
-- **Repo was newer** — repo has additions/changes not in the backup (usually fine, repo is authoritative)
-- **Platform divergence** — differences due to OS-specific settings (e.g., `pbcopy` vs `clip.exe`, macOS vs Linux paths). Flag these for the user to decide.
+If multiple timestamped backups exist, default to the latest. Only ask the user if context suggests they want an older one.
+
+### Step 2: Analyze differences
+
+For each file that differs, run a content diff. If there are multiple files, diff them all in a **single bash call** using `for` or `;`:
+
+```bash
+diff _local-backup/<timestamp>/<file1> dotfiles/<file1>; echo '---'; diff _local-backup/<timestamp>/<file2> dotfiles/<file2>
+```
+
+The repo is the source of truth. Only report changes where the **backup had something the repo doesn't** — local customizations that were overwritten. Classify each as:
+- **Local addition lost** — backup has lines/files not in the repo (user likely wants to bring these in)
+- **Platform divergence** — differences due to OS-specific settings (e.g., `pbcopy` vs `clip.exe`, macOS vs Linux paths). Flag for the user to decide.
 - **Formatting only** — whitespace, JSON spacing, schema version bumps with no semantic change. Note but deprioritize.
 
-### Step 5: Present findings
+Silently skip:
+- **Repo-only files/content** — the repo added these intentionally; the overwrite applied them. Not actionable.
+- Linux-only configs (xfce4, i3, openbox, polybar, rofi, tint2, dunst, terminator) unless the user is on Linux.
 
-Show the user a summary table like:
+### Step 3: Present findings
+
+Show the user a summary table of only the actionable differences — things the backup had that the repo doesn't:
 
 ```
-| File | Status | Recommendation |
-|------|--------|----------------|
-| .tmux.conf | Local had macOS config, repo had WSL | Restore from backup |
-| .config/fish/config.fish | Backup had 2 extra aliases | Restore from backup |
-| .config/fish/CLAUDE.md | Only in backup | Copy to repo |
-| .config/linearmouse/... | Repo is newer | Keep repo version |
+| File | What was lost | Recommendation |
+|------|---------------|----------------|
+| .tmux.conf | Local had macOS-specific bindings | Restore from backup |
+| .config/fish/config.fish | Backup had rbenv init block | Ask user if needed |
+| .config/fish/CLAUDE.md | Only in backup, not tracked in repo | Copy to repo |
 ```
 
-For each file, clearly state what was in the backup vs what's in the repo and give a recommendation.
+Only list files where the user lost something. Don't include files where the repo was simply newer — those are working as intended.
 
-### Step 6: Apply restorations
+### Step 4: Apply restorations
 
 After the user confirms which changes to bring in, copy from the backup to `dotfiles/`:
 
@@ -81,7 +75,7 @@ Use `command cp` to bypass any shell aliases that add `-i` (interactive) prompts
 
 **Do not touch files where the repo version is newer or more complete unless the user explicitly asks.**
 
-### Step 7: Verify
+### Step 5: Verify
 
 Run `git diff --stat` to confirm only the expected files changed in the repo, and show a brief summary of what was restored.
 

@@ -15,4 +15,5 @@ rsync -avh \
   ./dotfiles/ \
   $HOME/
 
-echo "\nIf you're unsure about how this sync went, run /reconcile-backup in Claude Code"
+echo
+echo "If you're unsure about how this sync went, run /reconcile-backup in Claude Code"
