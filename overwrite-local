@@ -14,3 +14,5 @@ rsync -avh \
   --filter="merge ./filter.txt" \
   ./dotfiles/ \
   $HOME/
+
+echo "\nIf you're unsure about how this sync went, run /reconcile-backup in Claude Code"
