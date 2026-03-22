@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+#
+
+./overwrite-local
+
+brew install sleepwatcher
+
+brew services start sleepwatcher
+chmod +x ~/.sleep ~/.wakeup
+

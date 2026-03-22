@@ -6,6 +6,9 @@
 + /.profile
 + /.tmux.conf
 
++ /.sleep
++ /.wakeup
+
 # Required for config dirs
 + /.config
 

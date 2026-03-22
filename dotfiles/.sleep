@@ -1,0 +1,4 @@
+
+cd ~/workspace/dotfiles && git status --porcelain && ./sync-from-local && git add . && git commit -m "auto: $(hostname) $(date)" && git push || \
+  touch ~/.dotfiles-sync-failed
+

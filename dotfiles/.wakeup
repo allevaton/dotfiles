@@ -1,0 +1,7 @@
+if [ -f ~/.dotfiles-sync-failed ]; then
+  rm ~/.dotfiles-sync-failed
+  osascript -e 'display notification "Failed to push dotfiles on last sleep" with title "Dotfiles Sync Error"'
+fi
+
+cd ~/workspace/dotfiles && git pull --rebase || \
+  osascript -e 'display notification "Failed to pull dotfiles on wakeup" with title "Dotfiles Sync Error"'
